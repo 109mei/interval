@@ -5,3 +5,8 @@ test-results/
 .work-ledger/
 
 delivery/
+
+.sites-runtime/
+.env
+.env.*
+*.tgz

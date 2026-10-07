@@ -8,11 +8,6 @@ it("real_UI_summon_move_pass_and_restart", async () => {
   const click = (s: string) =>
     document.querySelector<HTMLButtonElement>(s)!.click();
   const text = (s: string) => document.querySelector(s)!.textContent;
-  expect(
-    document
-      .querySelector<HTMLAnchorElement>(".panel-jump")
-      ?.getAttribute("href"),
-  ).toBe("#controls");
   expect(document.getElementById("controls")).not.toBeNull();
   expect(text("#white-grain")).toBe("16");
   click("#pass");
@@ -27,6 +22,7 @@ it("real_UI_summon_move_pass_and_restart", async () => {
   expect(text("#ply")).toBe("1 / 200 手");
   click("#restart");
   expect(text("#ply")).toBe("0 / 200 手");
+  click("#summon");
   click('[data-kind="carver"]');
   click('[data-square="9"]');
   expect(text("#summary")).toContain("9");

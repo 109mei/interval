@@ -48,6 +48,12 @@ export function createBoard2D(
     render(s, selection, preview) {
       const targets = new Set<number>();
       for (const a of legalActions(s)) {
+        if (
+          a.type === "summon" &&
+          selection.summon?.kind === a.kind &&
+          selection.summon.duration === a.duration
+        )
+          targets.add(a.to);
         if (a.type === "move" && a.pieceId === selection.pieceId)
           targets.add(a.to);
         if (a.type === "swap" && a.pieceId === selection.pieceId)

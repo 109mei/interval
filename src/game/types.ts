@@ -45,4 +45,8 @@ export type Preview = {
   targets: readonly Square[];
   paths: readonly (readonly Square[])[];
 };
-export type Selection = { pieceId: string | null; candidate: Action | null };
+export type Selection = {
+  pieceId: string | null;
+  candidate: Action | null;
+  summon?: { kind: Kind; duration: number } | null;
+};

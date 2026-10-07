@@ -46,3 +46,22 @@ it("selected_route_is_visible", () => {
   ).toBe(true);
   b.dispose();
 });
+it("summoning lights only legal cells with selected cost and duration", () => {
+  const h = document.createElement("div"),
+    b = createBoard2D(h, () => {});
+  b.render(
+    createGame(),
+    { pieceId: null, candidate: null, summon: { kind: "carver", duration: 3 } },
+    null,
+  );
+  expect(
+    h.querySelector('[data-square="9"]')?.classList.contains("target"),
+  ).toBe(true);
+  expect(
+    h.querySelector('[data-square="38"]')?.classList.contains("target"),
+  ).toBe(false);
+  expect(
+    h.querySelector('[data-square="10"]')?.classList.contains("target"),
+  ).toBe(false);
+  b.dispose();
+});

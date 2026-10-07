@@ -1,37 +1,23 @@
-# 実装版の確認結果
+# Verification record
 
-2026-10-07。INTERVALは仮タイトルです。
+2026-10-07. INTERVAL friend multiplayer release candidate.
 
-## 実装した機能
-糧の保有上限なし、毎手番の収入、単価×期間の前払い、敵単価×残り期間の捕獲報酬、期限切れ退場、独自4駒、コア捕獲、引き分け、基本CPU、同じ端末の2人対戦、3D/2D表示切替、再戦を実装しました。
+## Executed checks
+- 90 Vitest unit/integration tests passed across eight files.
+- TypeScript check and production client/Worker build passed.
+- SQLite-backed API tests run the generated D1 SQL migration and exercise separate host/guest credentials, join races, both-ready start, same-version competing commands, duplicate/replayed commands, altered command rejection, stale state, authoritative rule validation, expiry before cleanup, leave, result preservation, CSRF, malformed/oversized bodies, and unavailable storage.
+- Browser-client tests cover monotonic polling versions, hidden-tab polling pause, reconnection, retry with the exact same command ID, and create-response-loss recovery.
+- UI DOM tests cover summon, spend, move, pass confirmation, draw, restart, legal placement highlights, and state-preserving 3D-to-2D fallback.
 
-## 確認できたこと
-- 65件の単体・結合テストが成功。
-- TypeScript型検査と製品ビルドが成功。
-- DOM上で召喚、費用控除、移動、パス、期限切れ、引き分け、再戦を確認。
-- 独立コードレビューで、パスの連打が相手の手番まで消費する不具合を発見。パスを選択してから確定する方式に修正し、40ms間隔の連打を再現するテストの失敗→成功と、全65件の成功を確認。
-- レビュー時に10局・合計2,000手のランダム/CPU混合対局を検証。違法遷移や入力状態の破壊を検出せず、全局が規定の上限内に終了。
-- 単体HTMLは同じビルドを内包し、外部JavaScript/CSSを要求しません。DOM環境で起動・49マス・召喚・支払い・手番交代を確認。
+These are executable integration tests, not a substitute for deployed D1/browser tests. The SQLite adapter models D1 batch transactions but is not the production D1 service.
 
-## 未確認・残る課題
-実ブラウザーの新規起動はクラウドのOS制限で失敗し、既存のクラウドブラウザーでも作業用URLへのアクセスが拒否されました。このため、390×844の実レイアウト、スマホ実機のタッチ、立体の見やすさ、WebGL描画と実際の復旧、実機性能、完全なキーボード操作は未確認です。スクリーンショットはありません。
+## Browser limitations
+The earlier local Chromium launch was denied by the cloud OS socket restriction; the existing cloud browser also rejected the local development URL. Those denied routes were not retried or bypassed. At this checkpoint, real 390×844 layout, touch, GPU rendering and two isolated production browser sessions are not claimed as verified. Any deployed verification is recorded separately in the release handoff.
 
-自動テストでの3D検査は形状構造と表示切替のロジックを対象とし、実GPU描画を証明するものではありません。CPUは基本的な一手読みです。先手後手の公平性や戦略的な深さは、今後の対戦による調整が必要です。
-
-初期JavaScriptは約588KB、gzip約153KBです。分割読み込みは今後の改善項目です。
-
-## 実装上の判断
-- 既存の制作物と分離した新規プロジェクトで実装しました。
-- 計算部分を先に型・ルール検査し、操作画面追加後に全体ビルドを検証しました。
-- 複数の合法経路がある移動は、そのうち一つを盤に表示します。
-- パスにも確定操作を設け、意図しない連続手番消費を防ぎます。
-- 実画面の検証不能を隠さず、今回の成果物は「実装済み・視覚検証未完了の試作版」として渡します。
-
-## 成果物
-INTERVAL-play.html: 単体実行用。デスクトップの対応ブラウザーで開く形式です。iOSの添付プレビュー内での実行は確認できていません。
-INTERVAL-source.zip: ソース、ルール、実行手順、検証コード。npm ci / npm run dev で開発実行できます。
-公開サイトへの配備はしていません。
-
-## スマホ縦画面の追補
-390×844を基準とした縦配置を維持し、盤の下の操作欄へ移動するリンクを追加しました。狭い画面の見出し折り返しと横はみ出しへの防御も追加しています。盤を縮小して無理に一画面へ収めず、通常の縦スクロールを使います。
-DOM回帰テストを含む65件とビルドが再度成功しています。実ブラウザ用テストのパス確定位置を修正し、タッチ入力のテスト定義も追加しましたが、前述のアクセス制限のため実行成功とは扱いません。3Dのタップ精度も未確認です。
+## Remaining limits
+- CPU is a basic one-ply opponent; game balance is not certified.
+- Initial client JavaScript includes Three.js (~602 KB, ~158 KB gzip before final build).
+- Rooms expire after 24 hours. Clearing the browser cookie loses the seat. Expired database rows are removed in bounded batches as API traffic arrives; there is no scheduled cleanup contract.
+- Polling is 1.2–2.5 seconds while visible with backoff; it is not continuous push networking.
+- Application rate and room caps mitigate ordinary abuse but do not replace platform-level traffic controls or guarantee unlimited included capacity.
+- No names, accounts, chat, directory, third-party analytics, paid API or purchased asset is added.

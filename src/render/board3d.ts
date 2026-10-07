@@ -126,11 +126,12 @@ export function createBoard3D(
     const size = Math.max(1, host.clientWidth);
     renderer.setSize(size, size, false);
     renderer.setPixelRatio(
-      document.body.classList.contains("no-motion")
+      document.body.classList.contains("low-quality")
         ? 1
         : Math.min(devicePixelRatio, 1.75),
     );
-    renderer.shadowMap.enabled = !document.body.classList.contains("no-motion");
+    renderer.shadowMap.enabled =
+      !document.body.classList.contains("low-quality");
     camera.updateMatrixWorld();
     for (const [q, b] of buttons) {
       const v = project((q % 7) - 3, 0.05, 3 - Math.floor(q / 7));
@@ -190,11 +191,15 @@ export function createBoard3D(
       }
       const targets = new Set(
         legalActions(s).flatMap((a) =>
-          a.type === "move" && a.pieceId === sel.pieceId
+          a.type === "summon" &&
+          sel.summon?.kind === a.kind &&
+          sel.summon.duration === a.duration
             ? [a.to]
-            : a.type === "swap" && a.pieceId === sel.pieceId
-              ? [s.pieces.find((p) => p.id === a.allyId)!.square]
-              : [],
+            : a.type === "move" && a.pieceId === sel.pieceId
+              ? [a.to]
+              : a.type === "swap" && a.pieceId === sel.pieceId
+                ? [s.pieces.find((p) => p.id === a.allyId)!.square]
+                : [],
         ),
       );
       for (let q = 0; q < 49; q++) {
