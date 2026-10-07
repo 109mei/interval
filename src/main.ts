@@ -25,6 +25,7 @@ let selection: Selection = { pieceId: null, candidate: null },
   board: BoardView | undefined,
   mode: "local" | "cpu" | "online" = "local",
   renderKey = "",
+  renderedSession = "",
   initializing = true;
 const c = createController(() => {
   if (!initializing) render();
@@ -98,6 +99,18 @@ function render() {
     key = room
       ? `${room.id}:${room.version}`
       : `${c.getToken().session}:${c.getToken().revision}`;
+  const sessionKey = room
+    ? `room:${room.id}`
+    : `${mode}:${c.getToken().session}`;
+  if (sessionKey !== renderedSession) {
+    const emptyHistory =
+      room && s.ply > 0
+        ? "現在の盤面から再開しました。"
+        : "まだ指されていません。";
+    $("log").textContent = emptyHistory;
+    $("history").textContent = emptyHistory;
+    renderedSession = sessionKey;
+  }
   if (key !== renderKey) {
     clear();
     renderKey = key;

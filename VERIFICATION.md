@@ -3,7 +3,7 @@
 2026-10-07. INTERVAL friend multiplayer release candidate.
 
 ## Executed checks
-- 90 Vitest unit/integration tests passed across eight files.
+- 93 Vitest unit/integration tests passed across eight files.
 - TypeScript check and production client/Worker build passed.
 - SQLite-backed API tests run the generated D1 SQL migration and exercise separate host/guest credentials, join races, both-ready start, same-version competing commands, duplicate/replayed commands, altered command rejection, stale state, authoritative rule validation, expiry before cleanup, leave, result preservation, CSRF, malformed/oversized bodies, and unavailable storage.
 - Browser-client tests cover monotonic polling versions, hidden-tab polling pause, reconnection, retry with the exact same command ID, and create-response-loss recovery.
@@ -21,3 +21,6 @@ The earlier local Chromium launch was denied by the cloud OS socket restriction;
 - Polling is 1.2–2.5 seconds while visible with backoff; it is not continuous push networking.
 - Application rate and room caps mitigate ordinary abuse but do not replace platform-level traffic controls or guarantee unlimited included capacity.
 - No names, accounts, chat, directory, third-party analytics, paid API or purchased asset is added.
+
+## Version 2: session history reset
+Three regression tests first failed with the previous local match text still present after restart, local/CPU mode changes, and entering a new friend room. A session-scoped display reset fixes those paths while preserving text through same-room polling, including a changed room version. Full 93-test suite and production build pass. The game rules and multiplayer API are unchanged.
