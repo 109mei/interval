@@ -27,11 +27,14 @@ export function createAdaptiveBoard(
     fail();
   }
   return {
-    render(s, sel, p) {
+    cancelMotion() {
+      view?.cancelMotion?.();
+    },
+    render(s, sel, p, transition) {
       if (dead) return;
       latest = [s, sel, p];
       try {
-        view?.render(s, sel, p);
+        view?.render(s, sel, p, transition);
       } catch {
         fail();
       }

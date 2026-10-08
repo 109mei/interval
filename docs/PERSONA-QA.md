@@ -68,3 +68,14 @@ Evidence: six new real-main UI regressions failed for the intended gaps before c
 - Ren/Mika: corrected strategic and interrupted-flow checks above remain passing. Code-backed checks cannot establish human enjoyment, physical-thumb comfort or GPU fidelity.
 
 The project retains the critical scenarios in tests/ui-personas.test.ts, tests/ui-social-persona.test.ts, tests/strategy-persona.test.ts and tests/online.test.ts. Original engine rules, prices, reward formula, no-cap grain, CPU weights and multiplayer API/schema are unchanged. Publication will use the same public Site and GitHub-first exact-tree verification.
+
+## Cycle 4: action motion and effects
+
+2026-10-08. Baseline inspection found that gameplay actions were instantaneous in both renderers. Motion now communicates the committed action rather than selection: Carvers follow a legal bend from the pre-action board, Leapers lift over the unchanged pad, and Links move both identities. Capture precedes expiry at the committed destination. A final-life core capture keeps its winner alive and removes the losing core.
+
+- Nao: summon with simultaneous retirement, canceled previews, and pre-expiry path geometry are retained as regressions. Newborn duration is unchanged.
+- Ren: all one/both-expiring Link combinations, last-life capture reward, Leaper pad behavior, and ply200 core-win precedence are checked against the real engine.
+- Mika: frames are bounded to580ms; interruption at0/140/300/420/550ms, reset, page hiding, disposal, display fallback and reduced motion are tested. Badges travel with pieces; static final-state labels remain available with reduced motion.
+- Sora: identical state deliveries cannot replay motion. Online movement is reconstructed only for a unique engine-consistent action. A life1 Carver can have12 destinations producing the same snapshot; those ambiguous cases and skipped plies settle directly instead of fabricating a route. A provable one-survivor Link exchange is now named as an exchange in history.
+
+Independent review found and reproduced intermediate implementation defects: overlong feedback, missing moving life badges, simultaneous capture/expiry, asynchronous renderer failure escaping fallback, reduced-motion duplicate renders hiding the committed summon, and post-disposal timer creation. Focused failing tests preceded their fixes. Real Three scene tests use a mocked WebGLRenderer, so they verify model identity, losing-core removal, frame/fallback lifecycle and owned resource cleanup, not GPU fidelity or frame rate. Fresh cloud-browser rendered evidence is recorded separately after publication.

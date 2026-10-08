@@ -67,3 +67,12 @@ That pass found two further UI issues. Choosing again with the keyboard now retu
 - Fail-first regressions reproduce old candidate retention, silent deselection, misleading expiry/Link/draw/inspection, zero-target guidance, and guest warm-up resurrection. The full suite, TypeScript and production client/Worker builds are run against the final source. Pre-fix defects were observed in the live cloud browser; post-publication browser evidence is recorded in the release handoff.
 
 No rule/pricing/CPU-weight/API/schema/audience changes. Physical phone touch, exact390×844, GPU and two independent production profiles remain unverified. Previously denied direct API/DevTools routes were not retried.
+
+## Version 7: meaningful action feedback
+2026-10-08. Commit-time summon, legal-path movement, jump, exchange, capture, expiry and core-capture cues are implemented in both board renderers. The game state stays authoritative and inputs are not delayed by animation. Newer commits cancel earlier visual generations. JS frame loops settle within580ms, stop on hidden pages/reduced motion/disposal, and do not run when idle.
+
+Regression coverage includes destination expiry, capture-before-expiry, three Link lifetime combinations, preserved newborn lifetime, pre-expiry legal paths, ambiguous online state recovery, duplicate delivery, reset during multiple phases, CPU-speed supersession, static reduced-motion rerenders, core visibility, retained Three model identity, shadow disposal and asynchronous rendering fallback. Independent reviewer-authored scene tests reproduced two additional lifecycle defects before the fixes. The same public audience, game rules, prices, grain behavior, CPU strategy, API and schema are preserved. No audio feature or external asset/service is introduced.
+
+Scene tests use real Three geometry with mocked WebGL rendering. They are not GPU/performance verification. Public cloud browser uses2D fallback; physical touch, exact390×844 and independent production friend profiles remain unverified. Denied browser/API routes and the existing room cap are not bypassed. QA screenshots remain local-only and excluded from publication.
+
+Final pre-publication checks:192 Vitest tests across19 files passed, including10 independent reviewer-authored Three scene/lifecycle checks. TypeScript and both production builds passed. The pre-existing >500KB client bundle warning remains; no GPU frame-rate claim is made.

@@ -1376,3 +1376,81 @@ dialog p {
   background: transparent;
   border: 0;
 }
+
+/* Commit feedback is bounded and never owns hit testing or the game state. */
+.board-effects {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 5;
+  border-radius: inherit;
+}
+.board-effects .moving-piece {
+  position: absolute;
+  width: 10.3%;
+  height: 12%;
+  margin: 0;
+  will-change: transform, opacity;
+}
+.motion-hidden {
+  visibility: hidden;
+}
+.action-cue {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  padding: 4px 7px;
+  border: 1px solid #e3c580;
+  border-radius: 12px;
+  background: #142b26ed;
+  color: #fff1c7;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.3;
+  white-space: nowrap;
+  z-index: 2;
+  animation: action-cue 300ms var(--cue-delay, 0ms) both;
+}
+.cue-capture {
+  color: #dbffdf;
+  border-color: #9ee6b3;
+  transform: translate(-50%, -120%);
+}
+.cue-expire {
+  color: #ffe0c4;
+  border-style: dashed;
+  border-color: #e4ae82;
+  transform: translate(-50%, 30%);
+}
+.cue-win {
+  color: #16231d;
+  background: #f0d591;
+  border-color: #fff1c7;
+}
+@keyframes action-cue {
+  0% {
+    opacity: 0;
+    scale: 0.86;
+  }
+  18%,
+  78% {
+    opacity: 1;
+    scale: 1;
+  }
+  100% {
+    opacity: 0;
+    scale: 1;
+  }
+}
+.board-effects.reduced .action-cue {
+  animation: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .board-effects .action-cue {
+    animation: none;
+  }
+}
+.no-motion .board-effects .action-cue {
+  animation: none;
+}

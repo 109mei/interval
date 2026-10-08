@@ -1,3 +1,5 @@
+import { createMotionPlayer } from "./motion-player";
+import { trackPose, visibleCoreSides, type MotionPlan } from "./motion";
 import * as THREE from "three";
 import type { BoardView } from "./board-view";
 import type { GameState, Selection, Preview } from "../game/types";
@@ -101,7 +103,6 @@ export function createBoard3D(
   let state: GameState | undefined,
     selection: Selection = { pieceId: null, candidate: null },
     preview: Preview | null = null,
-    key = "",
     disposed = false;
   const ray = new THREE.Raycaster(),
     mouse = new THREE.Vector2();
@@ -143,8 +144,12 @@ export function createBoard3D(
       b.style.top = `${(1 - v.y) * 50}%`;
     }
     labels.replaceChildren();
+    const displayed = new Map(state?.pieces.map((p) => [p.id, p]) ?? []);
+    for (const track of activePlan?.tracks ?? [])
+      if (!displayed.has(track.piece.id))
+        displayed.set(track.piece.id, track.piece);
     if (state)
-      for (const p of state.pieces) {
+      for (const p of displayed.values()) {
         const v = project(
             (p.square % 7) - 3 + 0.3,
             0.12,
@@ -152,6 +157,7 @@ export function createBoard3D(
           ),
           el = document.createElement("span");
         el.className = "projected-life";
+        el.dataset.lifeFor = p.id;
         el.textContent = String(p.remaining);
         el.style.left = `${(v.x + 1) * 50}%`;
         el.style.top = `${(1 - v.y) * 50}%`;
@@ -159,6 +165,7 @@ export function createBoard3D(
         labels.append(el);
         const mark = document.createElement("span");
         mark.className = "projected-mark";
+        mark.dataset.markFor = p.id;
         mark.textContent = PIECE_MARK[p.kind];
         mark.style.left = `${(v.x + 1) * 50 - 5}%`;
         mark.style.top = el.style.top;
@@ -184,31 +191,118 @@ export function createBoard3D(
     }
   });
   ro.observe(host);
+  const pieceModels = new Map<string, THREE.Group>();
+  const coreModels = new Map<string, THREE.Group>();
+  let activePlan: MotionPlan | null = null;
+  function syncModels() {
+    if (!state) return;
+    const pieces = new Map(state.pieces.map((p) => [p.id, p]));
+    for (const track of activePlan?.tracks ?? [])
+      if (!pieces.has(track.piece.id)) pieces.set(track.piece.id, track.piece);
+    for (const [id, model] of pieceModels)
+      if (!pieces.has(id)) {
+        disposeObject(model);
+        models.remove(model);
+        pieceModels.delete(id);
+      }
+    for (const [id, p] of pieces) {
+      let model = pieceModels.get(id);
+      if (!model) {
+        model = createPieceModel(p.kind, p.side);
+        model.name = `piece:${id}`;
+        if (p.side === "black") model.rotation.y = Math.PI;
+        pieceModels.set(id, model);
+        models.add(model);
+      }
+      if (!activePlan) {
+        model.position.set((p.square % 7) - 3, 0, 3 - Math.floor(p.square / 7));
+        model.scale.setScalar(1);
+        model.visible = true;
+      }
+    }
+    const visible = activePlan?.cues.some((c) => c.kind === "win")
+      ? (["white", "black"] as const)
+      : visibleCoreSides(state);
+    for (const [side, model] of coreModels)
+      if (!visible.some((s) => s === side)) {
+        disposeObject(model);
+        models.remove(model);
+        coreModels.delete(side);
+      }
+    for (const side of visible)
+      if (!coreModels.has(side)) {
+        const model = createCoreModel(side),
+          q = state.cores[side];
+        model.name = `core:${side}`;
+        model.position.set((q % 7) - 3, 0, 3 - Math.floor(q / 7));
+        coreModels.set(side, model);
+        models.add(model);
+      }
+  }
+  const motion = createMotionPlayer(
+    host,
+    (x, y) => {
+      const p = project(x - 3, 0.15, 3 - y);
+      return { x: (p.x + 1) * 50, y: (1 - p.y) * 50 };
+    },
+    (plan, elapsed) => {
+      if (disposed) return;
+      try {
+        if (plan !== activePlan || !plan) {
+          activePlan = plan;
+          syncModels();
+          if (state) draw();
+        }
+        for (const track of plan?.tracks ?? []) {
+          const model = pieceModels.get(track.piece.id);
+          if (!model) continue;
+          const pose = trackPose(track, elapsed);
+          model.position.set(pose.x - 3, pose.lift, 3 - pose.y);
+          model.scale.setScalar(
+            pose.scale * (track.leave ? Math.max(0.01, pose.opacity) : 1),
+          );
+          model.visible = pose.opacity > 0.01;
+          const v = project(
+            pose.x - 3 + 0.3,
+            0.12 + pose.lift,
+            3 - pose.y + 0.3,
+          );
+          const remaining =
+            track.leave === "capture" ||
+            elapsed < (track.leave === "expire" ? track.start : track.arrive)
+              ? track.piece.remaining
+              : track.remaining;
+          for (const el of labels.querySelectorAll<HTMLElement>(
+            "[data-life-for], [data-mark-for]",
+          )) {
+            const isLife = el.dataset.lifeFor === track.piece.id;
+            if (!isLife && el.dataset.markFor !== track.piece.id) continue;
+            el.style.left = `${(v.x + 1) * 50 - (isLife ? 0 : 5)}%`;
+            el.style.top = `${(1 - v.y) * 50}%`;
+            el.style.opacity = String(pose.opacity);
+            if (isLife) el.textContent = String(remaining);
+          }
+        }
+        const win = plan?.cues.find((c) => c.kind === "win");
+        if (win && state?.outcome?.kind === "win") {
+          const losingCore = coreModels.get(
+            state.outcome.winner === "white" ? "black" : "white",
+          );
+          if (losingCore) losingCore.visible = elapsed < win.start;
+        }
+        renderer.render(scene, camera);
+      } catch {
+        onFailure();
+      }
+    },
+  );
   return {
-    render(s, sel, pv) {
+    cancelMotion: motion.cancel,
+    render(s, sel, pv, transition) {
       state = s;
       selection = sel;
       preview = pv;
-      const nextKey = JSON.stringify(
-        s.pieces.map((p) => [p.id, p.kind, p.side, p.square]),
-      );
-      if (nextKey !== key) {
-        disposeObject(models);
-        models.clear();
-        for (const p of s.pieces) {
-          const g = createPieceModel(p.kind, p.side);
-          g.position.set((p.square % 7) - 3, 0, 3 - Math.floor(p.square / 7));
-          if (p.side === "black") g.rotation.y = Math.PI;
-          models.add(g);
-        }
-        for (const side of ["white", "black"] as const) {
-          const q = s.cores[side],
-            g = createCoreModel(side);
-          g.position.set((q % 7) - 3, 0, 3 - Math.floor(q / 7));
-          models.add(g);
-        }
-        key = nextKey;
-      }
+      syncModels();
       const { targets, inspectOnly } = boardTargets(s, sel);
       for (let q = 0; q < 49; q++) {
         const piece = s.pieces.find((p) => p.square === q);
@@ -245,11 +339,14 @@ export function createBoard3D(
           );
       }
       draw();
+      motion.update(s, transition);
     },
     dispose() {
       if (disposed) return;
       disposed = true;
+      motion.dispose();
       ro.disconnect();
+      light.shadow.dispose();
       renderer.domElement.removeEventListener("pointerup", click);
       renderer.domElement.removeEventListener("webglcontextlost", lost);
       disposeObject(scene);

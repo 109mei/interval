@@ -1,3 +1,4 @@
+import { recoverTransition } from "../render/motion";
 import type { Action, GameState, Side, Piece, Outcome } from "../game/types";
 import { movePaths, opposite, PRICES } from "../game/rules";
 import { INFO, squareName } from "./piece-info";
@@ -34,15 +35,18 @@ export function transitionText(previous: GameState, next: GameState): string {
     .filter((p) => p.side !== side)
     .reduce((n, p) => n + PRICES[p.kind] * p.remaining, 0);
   const expired = lost.filter((p) => p.side === side).length;
-  let label = added
-    ? `${squareName(added.square)}に${INFO[added.kind].name}を召喚`
-    : moved.length === 2
-      ? "位置交換"
-      : moved.length
-        ? `${squareName(previous.pieces.find((p) => p.id === moved[0].id)!.square)} → ${squareName(moved[0].square)}`
-        : next.consecutivePasses > 0
-          ? "パス"
-          : "行動完了";
+  const recovered = recoverTransition(previous, next);
+  let label = recovered?.events.some((e) => e.type === "swap")
+    ? "位置交換"
+    : added
+      ? `${squareName(added.square)}に${INFO[added.kind].name}を召喚`
+      : moved.length === 2
+        ? "位置交換"
+        : moved.length
+          ? `${squareName(previous.pieces.find((p) => p.id === moved[0].id)!.square)} → ${squareName(moved[0].square)}`
+          : next.consecutivePasses > 0
+            ? "パス"
+            : "行動完了";
   // A last-life mover can disappear at the destination; name its capture even without a survivor.
   if (capture) label += ` · 捕獲 +${capture}糧`;
   if (expired) label += ` · ${expired}体が退場`;

@@ -5,6 +5,7 @@ import { createBoard2D } from "./render/board2d";
 import { createBoard3D } from "./render/board3d";
 import { createAdaptiveBoard } from "./render/adaptive";
 import type { BoardView } from "./render/board-view";
+import { recoverTransition, type BoardTransition } from "./render/motion";
 import { legalActions, pieceActions, PRICES, KINDS } from "./game/rules";
 import { previewAction, applyAction } from "./game/engine";
 import type { Action, Kind, Selection, GameState } from "./game/types";
@@ -35,6 +36,7 @@ let selection: Selection = { pieceId: null, candidate: null },
   renderedSession = "",
   initializing = true;
 let lastRoomState: GameState | null = null;
+let lastBoardState: GameState | null = null;
 let invalidPick = "";
 let copyAttempt = 0;
 const c = createController(() => {
@@ -148,6 +150,8 @@ function render() {
     ? `room:${room.id}`
     : `${mode}:${c.getToken().session}`;
   if (sessionKey !== renderedSession) {
+    board?.cancelMotion?.();
+    lastBoardState = null;
     copyAttempt++;
     $("copy").textContent = "招待リンクをコピー";
     ($("invite-link") as HTMLInputElement).value = "";
@@ -395,7 +399,14 @@ function render() {
   }
   selection.summon = kind ? { kind, duration } : null;
   selection.inspectOnly = !!selected && (selected.side !== s.turn || busy());
-  board?.render(s, selection, pv);
+  const transition: BoardTransition | null =
+    lastBoardState && s.ply === lastBoardState.ply + 1
+      ? room
+        ? recoverTransition(lastBoardState, s)
+        : { before: lastBoardState, events: c.getLastEvents() }
+      : null;
+  board?.render(s, selection, pv, transition);
+  lastBoardState = s;
 }
 setupBoard();
 initializing = false;
@@ -538,6 +549,7 @@ $("motion").onclick = () => {
     "aria-pressed",
     String(document.body.classList.toggle("no-motion")),
   );
+  if (document.body.classList.contains("no-motion")) board?.cancelMotion?.();
 };
 function allowFriendEntry() {
   return (
