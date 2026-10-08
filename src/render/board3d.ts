@@ -167,7 +167,7 @@ export function createBoard3D(
         mark.className = "projected-mark";
         mark.dataset.markFor = p.id;
         mark.textContent = PIECE_MARK[p.kind];
-        mark.style.left = `${(v.x + 1) * 50 - 5}%`;
+        mark.style.left = el.style.left;
         mark.style.top = el.style.top;
         labels.append(mark);
       }
@@ -207,9 +207,17 @@ export function createBoard3D(
       }
     for (const [id, p] of pieces) {
       let model = pieceModels.get(id);
+      const identity = `${p.kind}:${p.side}`;
+      if (model && model.userData.identity !== identity) {
+        disposeObject(model);
+        models.remove(model);
+        pieceModels.delete(id);
+        model = undefined;
+      }
       if (!model) {
         model = createPieceModel(p.kind, p.side);
         model.name = `piece:${id}`;
+        model.userData.identity = identity;
         if (p.side === "black") model.rotation.y = Math.PI;
         pieceModels.set(id, model);
         models.add(model);
@@ -277,7 +285,7 @@ export function createBoard3D(
           )) {
             const isLife = el.dataset.lifeFor === track.piece.id;
             if (!isLife && el.dataset.markFor !== track.piece.id) continue;
-            el.style.left = `${(v.x + 1) * 50 - (isLife ? 0 : 5)}%`;
+            el.style.left = `${(v.x + 1) * 50}%`;
             el.style.top = `${(1 - v.y) * 50}%`;
             el.style.opacity = String(pose.opacity);
             if (isLife) el.textContent = String(remaining);

@@ -522,3 +522,117 @@ it("reset and immediate recommit with the same piece ID rejects callbacks from t
   expect(frames.size).toBe(0);
   expect(vi.getTimerCount()).toBe(0);
 });
+it("a fresh session cannot reuse another piece kind's geometry under the same generated id", () => {
+  const element = host(),
+    board = createBoard3D(
+      element,
+      () => {},
+      () => {},
+    );
+  boards.push(board);
+  const start = createGame();
+  const first = applyAction(start, {
+    type: "summon",
+    kind: "carver",
+    duration: 3,
+    to: 9,
+  });
+  const second = applyAction(start, {
+    type: "summon",
+    kind: "leaper",
+    duration: 3,
+    to: 9,
+  });
+  if (!first.ok || !second.ok) throw Error();
+  board.render(first.state, selection, null);
+  const old = model("piece:white-0-9"),
+    disposed = vi.fn();
+  (old.children[0] as THREE.Mesh).geometry.addEventListener(
+    "dispose",
+    disposed,
+  );
+  board.cancelMotion?.();
+  board.render(second.state, selection, null);
+  expect(model("piece:white-0-9")).not.toBe(old);
+  expect(model("piece:white-0-9").getObjectByName("arched-body")).toBeDefined();
+  expect(
+    model("piece:white-0-9").getObjectByName("curved-blade"),
+  ).toBeUndefined();
+  expect(disposed).toHaveBeenCalledOnce();
+});
+it("3D role marks share the lifetime projection anchor so pixel spacing cannot collapse on a narrow board", () => {
+  const element = host(),
+    board = createBoard3D(
+      element,
+      () => {},
+      () => {},
+    );
+  boards.push(board);
+  const state = movingState();
+  board.render(state, selection, null);
+  const sameAnchor = () =>
+    expect(
+      element.querySelector<HTMLElement>('[data-mark-for="mover"]')!.style.left,
+    ).toBe(
+      element.querySelector<HTMLElement>('[data-life-for="mover"]')!.style.left,
+    );
+  sameAnchor();
+  commitMove(board, state);
+  advanceFrame(140);
+  sameAnchor();
+});
+
+it("Sora returning invite participant can switch local carver directly to online leaper", async () => {
+  vi.resetModules();
+  const id = "a".repeat(32),
+    invite = "b".repeat(64);
+  document.body.innerHTML = '<div id="app"></div>';
+  history.replaceState(null, "", `/#room=${id}&invite=${invite}`);
+  vi.spyOn(window, "confirm").mockReturnValue(true);
+  const online = applyAction(createGame(), {
+    type: "summon",
+    kind: "leaper",
+    duration: 3,
+    to: 9,
+  });
+  if (!online.ok) throw Error("fixture");
+  const room = {
+    id,
+    seat: "black",
+    version: 3,
+    status: "playing",
+    expiresAt: Date.now() + 86400000,
+    joined: true,
+    ready: { white: true, black: true },
+    state: online.state,
+  };
+  vi.stubGlobal(
+    "fetch",
+    vi.fn(
+      async (path: string) =>
+        new Response(
+          JSON.stringify(path === "/api/session" ? { ok: true } : room),
+          { status: 200 },
+        ),
+    ),
+  );
+  await import("../src/main");
+  const click = (s: string) =>
+    document.querySelector<HTMLButtonElement>(s)!.click();
+  click("#close-friend");
+  click("#summon");
+  click('[data-kind="carver"]');
+  click('[data-square="9"]');
+  click("#confirm");
+  for (let i = 0; i < 10; i++) await Promise.resolve();
+  const old = model("piece:white-0-9");
+  expect(old.getObjectByName("carver-foot")).toBeDefined();
+  click("#friend");
+  click("#join-room");
+  await vi.waitFor(() =>
+    expect(document.getElementById("mode-label")?.textContent).toBe(
+      "あなたは黒",
+    ),
+  );
+  expect(model("piece:white-0-9").getObjectByName("leaper-foot")).toBeDefined();
+});
