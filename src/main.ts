@@ -408,6 +408,45 @@ function render() {
   board?.render(s, selection, pv, transition);
   lastBoardState = s;
 }
+const displayPreferenceKey = "interval-display-preferences";
+const displaySettings = [
+  { id: "quality", className: "low-quality" },
+  { id: "motion", className: "no-motion" },
+] as const;
+let savedDisplay: unknown;
+try {
+  savedDisplay = JSON.parse(
+    localStorage.getItem(displayPreferenceKey) ?? "null",
+  );
+} catch {
+  // Blocked or malformed storage must not prevent the game from starting.
+}
+for (const { id, className } of displaySettings) {
+  const enabled =
+    !!savedDisplay &&
+    typeof savedDisplay === "object" &&
+    !Array.isArray(savedDisplay) &&
+    (savedDisplay as Record<string, unknown>)[id] === true;
+  document.body.classList.toggle(className, enabled);
+  $(id).setAttribute("aria-pressed", String(enabled));
+}
+function saveDisplayPreferences() {
+  try {
+    localStorage.setItem(
+      displayPreferenceKey,
+      JSON.stringify(
+        Object.fromEntries(
+          displaySettings.map(({ id, className }) => [
+            id,
+            document.body.classList.contains(className),
+          ]),
+        ),
+      ),
+    );
+  } catch {
+    // The selected settings still work for this visit when storage is unavailable.
+  }
+}
 setupBoard();
 initializing = false;
 render();
@@ -542,6 +581,7 @@ $("quality").onclick = () => {
     "aria-pressed",
     String(document.body.classList.toggle("low-quality")),
   );
+  saveDisplayPreferences();
   render();
 };
 $("motion").onclick = () => {
@@ -549,6 +589,7 @@ $("motion").onclick = () => {
     "aria-pressed",
     String(document.body.classList.toggle("no-motion")),
   );
+  saveDisplayPreferences();
   if (document.body.classList.contains("no-motion")) board?.cancelMotion?.();
 };
 function allowFriendEntry() {
@@ -635,14 +676,17 @@ $("leave").onclick = async () => {
     render();
   }
 };
-$("again").onclick = () => {
+$("again").onclick = (event) => {
   if (mode === "online") {
     online.stop();
     mode = "local";
     history.replaceState(null, "", location.pathname);
     openFriendDialog();
     render();
-  } else reset(mode);
+  } else {
+    reset(mode);
+    keyboardFocus(event, '#board [tabindex="0"]');
+  }
 };
 const fragment = new URLSearchParams(location.hash.slice(1)),
   joinId = fragment.get("room"),
@@ -690,8 +734,21 @@ if (pendingInvite && pendingRoom) {
 }
 document.addEventListener("keydown", (e) => {
   if (e.key === "Escape" && !document.querySelector("dialog[open]")) {
+    const active = document.activeElement;
     clear();
     render();
+    if (
+      active instanceof HTMLElement &&
+      (!active.isConnected ||
+        active.closest("[hidden]") ||
+        active.matches(":disabled"))
+    ) {
+      document
+        .querySelector<HTMLElement>(
+          busy() || state().outcome ? '#board [tabindex="0"]' : "#summon",
+        )
+        ?.focus();
+    }
   }
 });
 const webmcp = (
