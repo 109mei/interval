@@ -123,6 +123,7 @@ function pick(q: number) {
 let use3D = !new URLSearchParams(location.search).has("2d");
 function setupBoard() {
   board?.dispose();
+  const requested3D = use3D;
   board = use3D
     ? createAdaptiveBoard(
         $("board"),
@@ -130,11 +131,14 @@ function setupBoard() {
         (f) => createBoard3D($("board"), pick, f),
         (m) => {
           $("board-status").textContent = m;
-          if (m.startsWith("2D")) use3D = false;
+          if (m.startsWith("2D")) {
+            use3D = false;
+            $("view").textContent = "3Dに切替";
+          }
         },
       )
     : createBoard2D($("board"), pick);
-  if (!use3D) $("board-status").textContent = "2D表示";
+  if (!requested3D) $("board-status").textContent = "2D表示";
   $("view").textContent = use3D ? "2Dに切替" : "3Dに切替";
 }
 function show(id: string, v: boolean) {

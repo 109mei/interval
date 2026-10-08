@@ -25,16 +25,106 @@ afterEach(() => {
   vi.clearAllTimers();
   vi.useRealTimers();
   vi.restoreAllMocks();
+  vi.doUnmock("../src/render/board3d");
   localStorage.clear();
   sessionStorage.clear();
   document.body.className = "";
 });
+
+registerCase(
+  {
+    id: "Q-CLARITY-3D-FALLBACK-REASON",
+    category: "DOM display recovery explanation",
+    inputs: {
+      initialDisplay: "2D",
+      requestedDisplay: "3D",
+      failure: "WebGL creation unavailable",
+      selectedSquare: 10,
+    },
+    assertions: [
+      "Synchronous 3D fallback preserves its explanation instead of replacing it with a generic 2D label",
+      "The same selected board and 49 keyboard squares remain usable",
+      "No move is committed while changing display",
+    ],
+  },
+  async () => {
+    vi.doMock("../src/render/board3d", () => ({
+      createBoard3D() {
+        throw new Error("WebGL unavailable");
+      },
+    }));
+    await boot();
+    click('[data-square="10"]');
+    click("#menu");
+    click("#view");
+    expect(el("board-status").textContent).toContain(
+      "立体表示を利用できないため",
+    );
+    expect(el("view").textContent).toBe("3Dに切替");
+    expect(document.querySelectorAll("[data-square]")).toHaveLength(49);
+    expect(
+      document
+        .querySelector('[data-square="10"]')
+        ?.getAttribute("aria-pressed"),
+    ).toBe("true");
+    expect(el("ply").textContent).toBe("0 / 200 手");
+  },
+);
 async function boot() {
   vi.resetModules();
   document.body.innerHTML = '<div id="app"></div>';
   history.replaceState(null, "", "/?2d");
   await import("../src/main");
 }
+
+registerCase(
+  {
+    id: "Q-CLARITY-ASYNC-FALLBACK-MODE",
+    category: "DOM display recovery explanation",
+    inputs: {
+      initialDisplay: "2D",
+      requestedDisplay: "3D",
+      failure: "later renderer failure callback",
+      selectedSquare: 10,
+    },
+    assertions: [
+      "A later 3D failure preserves its reason and truthfully labels the next toggle as a 3D retry",
+      "The selected board survives recovery",
+      "Retry really creates 3D again without committing a move",
+    ],
+  },
+  async () => {
+    let fail: () => void = () => {
+      throw new Error("No renderer was created");
+    };
+    const create = vi.fn(
+      (_host: HTMLElement, _pick: unknown, onFailure: () => void) => {
+        fail = onFailure;
+        return { render() {}, dispose() {} };
+      },
+    );
+    vi.doMock("../src/render/board3d", () => ({ createBoard3D: create }));
+    await boot();
+    click('[data-square="10"]');
+    click("#menu");
+    click("#view");
+    expect(el("view").textContent).toBe("2Dに切替");
+    fail();
+    expect(el("board-status").textContent).toContain(
+      "立体表示を利用できないため",
+    );
+    expect(el("view").textContent).toBe("3Dに切替");
+    expect(
+      document
+        .querySelector('[data-square="10"]')
+        ?.getAttribute("aria-pressed"),
+    ).toBe("true");
+    click("#view");
+    expect(create).toHaveBeenCalledTimes(2);
+    expect(el("view").textContent).toBe("2Dに切替");
+    expect(el("ply").textContent).toBe("0 / 200 手");
+  },
+);
 for (const [kind, price] of [
   ["bastion", 1],
   ["carver", 3],
