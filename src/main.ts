@@ -157,21 +157,28 @@ function render() {
   $("black-grain").textContent = String(s.grain.black);
   $("white-account").classList.toggle("turn", s.turn === "white" && !s.outcome);
   $("black-account").classList.toggle("turn", s.turn === "black" && !s.outcome);
-  $("turn").textContent = closed
-    ? "対戦終了"
-    : isLobby
-      ? "参加を待機"
-      : s.outcome
-        ? s.outcome.kind === "win"
-          ? `${s.outcome.winner === "white" ? "白" : "黒"}の勝利`
-          : "引き分け"
-        : `${s.turn === "white" ? "白" : "黒"}の手番`;
+  $("turn").textContent =
+    mode === "online" && !room
+      ? online.busy
+        ? "対局を復元中"
+        : "接続を確認"
+      : closed
+        ? "対戦終了"
+        : isLobby
+          ? "参加を待機"
+          : s.outcome
+            ? s.outcome.kind === "win"
+              ? `${s.outcome.winner === "white" ? "白" : "黒"}の勝利`
+              : "引き分け"
+            : `${s.turn === "white" ? "白" : "黒"}の手番`;
   $("turn").classList.toggle("result", !!s.outcome);
   $("mode-label").textContent = room
     ? `あなたは${room.seat === "white" ? "白" : "黒"}`
-    : mode === "cpu"
-      ? "CPU対戦 · あなたは白"
-      : "この端末で2人";
+    : mode === "online"
+      ? "フレンド対戦"
+      : mode === "cpu"
+        ? "CPU対戦 · あなたは白"
+        : "この端末で2人";
   $("ply").textContent = `${s.ply} / 200 手`;
   $("stage-label").textContent = s.outcome
     ? "RESULT"
@@ -204,7 +211,7 @@ function render() {
             ? actionLabel(s, selection.candidate)
             : selected
               ? `${selected.side === "white" ? "白" : "黒"}の${INFO[selected.kind].name} · 残り${selected.remaining}回${selected.kind === "bastion" ? "。この駒は移動できません。" : selected.side === s.turn && !movable ? "。今は行き先がありません。" : ""}`
-              : room && !online.connected
+              : mode === "online" && !online.connected
                 ? "接続を確認しています。復帰後に続けられます。"
                 : locked
                   ? mode === "cpu"
@@ -397,10 +404,14 @@ $("cancel").onclick = (event) => {
   render();
   keyboardFocus(event, busy() ? '#board [tabindex="0"]' : "#summon");
 };
-$("back").onclick = () => {
+$("back").onclick = (event) => {
   invalidPick = "";
   selection.candidate = null;
   render();
+  keyboardFocus(
+    event,
+    kind || selection.pieceId ? '#board [tabindex="0"]' : "#summon",
+  );
 };
 $("pass").onclick = (event) => {
   if (busy() || state().outcome) return;

@@ -283,3 +283,43 @@ it("failed recovery followed by a new room cannot expose the old room's pending 
     expect(el("mode-label").textContent).toBe("この端末で2人"),
   );
 });
+it.each(["pass", "summon"] as const)(
+  "keyboard choosing again from %s restores a visible decision target",
+  async (action) => {
+    await boot();
+    if (action === "pass") click("#pass");
+    else {
+      click("#summon");
+      click('[data-kind="carver"]');
+      click('[data-square="9"]');
+    }
+    el("back").focus();
+    click("#back");
+    if (action === "pass") expect(document.activeElement).toBe(el("summon"));
+    else
+      expect(
+        (document.activeElement as HTMLElement).dataset.square,
+      ).toBeDefined();
+    expect(el("confirm-row").hidden).toBe(true);
+  },
+);
+it("room recovery identifies the online mode before the state request completes", async () => {
+  let finishSession!: (r: Response) => void;
+  vi.stubGlobal(
+    "fetch",
+    vi.fn(async (path: string) =>
+      path === "/api/session"
+        ? new Promise<Response>((resolve) => {
+            finishSession = resolve;
+          })
+        : new Response(JSON.stringify({ error: "NO_SEAT" }), { status: 403 }),
+    ),
+  );
+  await boot(`/?2d&room=${"e".repeat(32)}`);
+  expect(el("mode-label").textContent).toBe("フレンド対戦");
+  expect(el("turn").textContent).toBe("対局を復元中");
+  expect(el("hint").textContent).toContain("接続");
+  finishSession(new Response(JSON.stringify({ ok: true })));
+  await vi.waitFor(() => expect(el("retry").hidden).toBe(false));
+  expect(el("mode-label").textContent).toBe("フレンド対戦");
+});

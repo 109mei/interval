@@ -50,3 +50,8 @@ Three regression tests first failed with the previous local match text still pre
 - Added a lasting CPU regression showing a Link exchange enabling a Leaper's forced core capture. Deterministic self-play can still repeat a 16-ply pattern and reach the existing 200-ply draw limit; no artificial randomness or piece quota was introduced.
 
 Actual browser observations and release IDs are recorded in the release handoff. Physical iPhone touch, exact 390×844 layout, GPU 3D rendering and two independent production browser profiles remain unverified. The previously blocked direct API and DevTools routes were not retried or bypassed.
+
+## Version 5: post-publication experience pass
+2026-10-08. The version 4 public cloud-browser pass verified keyboard-only summon → legal square → preview → commit (white grain 16→7), keyboard pass confirmation, room creation/readiness/reload recovery, and leave → distinct new room → leave. Both browser-created test rooms were explicitly closed. Narrow screenshots showed the board and controls without clipping. This was the cloud browser's 2D fallback, not touch or GPU verification. Native back/forward inspection was blocked at the tab's previous non-HTTP new-tab entry; no bypass was attempted. Exit URL/invitation clearing is covered in the UI regression suite.
+
+That pass found two further UI issues. Choosing again with the keyboard now returns focus to the board or summon control, and a room awaiting recovery identifies itself as friend play rather than local two-player. Three regressions failed before these changes and pass afterward. The full suite now passes 142 tests, with TypeScript and production client/Worker builds passing. Multiplayer state and game rules are unchanged from version 4.
