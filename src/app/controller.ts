@@ -1,5 +1,6 @@
 import { createGame, applyAction } from "../game/engine";
 import { chooseCpuAction } from "../cpu/choose-action";
+import { isLegal } from "../game/rules";
 import type { Action, GameState, GameEvent } from "../game/types";
 export type Token = { session: number; revision: number };
 export type Controller = {
@@ -39,20 +40,22 @@ export function createController(onChange: (s: GameState) => void): Controller {
     timer = setTimeout(() => {
       timer = undefined;
       if (dead || !matches(t) || mode !== "cpu") return;
-      const finish = (a: Action | null) => {
+      const finish = (a: unknown) => {
         if (dead || !matches(t) || mode !== "cpu") return;
         worker?.terminate();
         worker = undefined;
         if (searchTimeout !== undefined) clearTimeout(searchTimeout);
-        if (!dead && matches(t) && mode === "cpu" && a)
-          void perform(a, t, true);
+        // A worker can fail without an error event (empty or stale/malformed
+        // output). Reuse the same local search rather than strand the turn.
+        const action =
+          a && typeof a === "object" && isLegal(state, a as Action)
+            ? (a as Action)
+            : chooseCpuAction(state);
+        if (action) void perform(action, t, true);
       };
       const fallback = () => {
         if (dead || !matches(t) || mode !== "cpu") return;
-        worker?.terminate();
-        worker = undefined;
-        if (!dead && matches(t) && mode === "cpu")
-          finish(chooseCpuAction(state));
+        finish(null);
       };
       if (typeof Worker === "undefined") return fallback();
       try {
