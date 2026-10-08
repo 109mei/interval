@@ -207,3 +207,143 @@ it("finished rooms stop polling and expired rooms become explicitly unavailable"
   expect(c.unavailable).toBe(true);
   c.dispose();
 });
+it("an unresolved command cannot be overwritten by ready or leave", async () => {
+  vi.useFakeTimers();
+  const writes: string[] = [];
+  vi.stubGlobal(
+    "fetch",
+    vi.fn(async (path: string) => {
+      if (/\/(action|ready|leave)$/.test(path)) {
+        writes.push(path);
+        throw new Error("response lost");
+      }
+      return response(
+        path === "/api/session"
+          ? { ok: true }
+          : { ...room(), status: "playing" },
+      );
+    }),
+  );
+  const c = createOnline(() => {});
+  await c.resume("a".repeat(32));
+  await c.submit({ type: "pass" });
+  await c.leave();
+  await c.ready();
+  expect(writes).toHaveLength(1);
+  expect(c.pending).toBe(true);
+  c.dispose();
+});
+it("uncertain command survives a page reload and retries its original receipt", async () => {
+  vi.useFakeTimers();
+  let fail = true;
+  const bodies: string[] = [];
+  vi.stubGlobal(
+    "fetch",
+    vi.fn(async (path: string, init: RequestInit) => {
+      if (path.endsWith("/action")) {
+        bodies.push(String(init.body));
+        if (fail) throw new Error("response lost");
+        return response({ ...room(1), status: "playing" });
+      }
+      return response(
+        path === "/api/session"
+          ? { ok: true }
+          : { ...room(), status: "playing" },
+      );
+    }),
+  );
+  const first = createOnline(() => {});
+  await first.resume("a".repeat(32));
+  await first.submit({ type: "pass" });
+  first.dispose();
+  const reloaded = createOnline(() => {});
+  await reloaded.resume("a".repeat(32));
+  expect(reloaded.pending).toBe(true);
+  fail = false;
+  await reloaded.retry();
+  expect(bodies[1]).toBe(bodies[0]);
+  expect(reloaded.pending).toBe(false);
+  reloaded.dispose();
+});
+it("leaving during room creation prevents a late response from reopening it", async () => {
+  vi.useFakeTimers();
+  let resolveCreate!: (r: Response) => void;
+  vi.stubGlobal(
+    "fetch",
+    vi.fn(async (path: string) =>
+      path === "/api/session"
+        ? response({ ok: true })
+        : new Promise<Response>((r) => {
+            resolveCreate = r;
+          }),
+    ),
+  );
+  const c = createOnline(() => {});
+  const creating = c.create();
+  await vi.advanceTimersByTimeAsync(1);
+  c.stop();
+  resolveCreate(response(room()));
+  await expect(creating).rejects.toThrow();
+  expect(c.room).toBeNull();
+  expect(c.busy).toBe(false);
+  c.dispose();
+});
+it("a successful refresh notifies the UI after clearing a connection error", async () => {
+  vi.useFakeTimers();
+  let fail = false;
+  vi.stubGlobal(
+    "fetch",
+    vi.fn(async (path: string) => {
+      if (fail) throw new Error("offline");
+      return response(path === "/api/session" ? { ok: true } : room());
+    }),
+  );
+  const displayed: string[] = [];
+  const c = createOnline(() => displayed.push(c.error));
+  await c.resume("a".repeat(32));
+  fail = true;
+  await c.retry();
+  expect(c.connected).toBe(false);
+  fail = false;
+  await c.retry();
+  expect(displayed.at(-1)).toBe("");
+  expect(c.connected).toBe(true);
+  c.dispose();
+});
+it("a reloaded pending command can recover even when its first state fetch is offline", async () => {
+  vi.useFakeTimers();
+  const id = "a".repeat(32);
+  sessionStorage.setItem(
+    `interval-pending:${id}`,
+    JSON.stringify({
+      op: "action",
+      body: {
+        commandId: "saved-command",
+        version: 0,
+        action: { type: "pass" },
+      },
+    }),
+  );
+  let offline = true;
+  vi.stubGlobal(
+    "fetch",
+    vi.fn(async (path: string) => {
+      if (offline) throw Error("offline");
+      return response(
+        path === "/api/session"
+          ? { ok: true }
+          : { ...room(path.endsWith("/action") ? 1 : 0), status: "playing" },
+      );
+    }),
+  );
+  const c = createOnline(() => {});
+  await c.resume(id);
+  expect(c.room).toBeNull();
+  expect(c.pending).toBe(true);
+  offline = false;
+  await c.retry();
+  expect(c.room?.id).toBe(id);
+  await c.retry();
+  expect(c.pending).toBe(false);
+  c.dispose();
+});

@@ -1,6 +1,6 @@
 import type { BoardView } from "./board-view";
 import { legalActions } from "../game/rules";
-import { INFO, icon, coreIcon, squareName } from "../ui/piece-info";
+import { INFO, icon, coreIcon, squareName, PIECE_MARK } from "../ui/piece-info";
 export function createBoard2D(
   host: HTMLElement,
   onSquare: (q: number) => void,
@@ -69,11 +69,22 @@ export function createBoard2D(
                 ? "black"
                 : null;
         const label = p
-          ? `${p.side === "white" ? "白" : "黒"} ${INFO[p.kind].name} 残り${p.remaining}`
+          ? `${p.side === "white" ? "白" : "黒"} ${INFO[p.kind].name} 残り${p.remaining}回`
           : core
             ? `${core === "white" ? "白" : "黒"}のコア`
             : "空き";
-        b.setAttribute("aria-label", `${squareName(q)} ${label}`);
+        b.setAttribute(
+          "aria-label",
+          `${squareName(q)} ${label}${targets.has(q) ? (selection.summon ? " · 召喚できます" : " · 行き先に選べます") : ""}`,
+        );
+        b.setAttribute(
+          "aria-pressed",
+          String(!!p && p.id === selection.pieceId),
+        );
+        const ghost =
+          selection.candidate?.type === "summon" && selection.candidate.to === q
+            ? selection.candidate
+            : null;
         b.classList.toggle("selected", !!p && p.id === selection.pieceId);
         b.classList.toggle("target", targets.has(q));
         b.classList.toggle("candidate", !!preview?.targets.includes(q));
@@ -82,7 +93,7 @@ export function createBoard2D(
           !!preview?.paths[0]?.slice(0, -1).includes(q),
         );
         b.classList.toggle("expiring", !!p && expires.has(p.id));
-        b.innerHTML = `${p ? `<span class="piece ${p.side}">${icon(p.kind)}<span class="life ${p.remaining === 1 ? "last" : ""}">${p.remaining}</span></span>` : core ? `<span class="piece core ${core}">${coreIcon}</span>` : ""}<span class="coord">${squareName(q)}</span>`;
+        b.innerHTML = `${p ? `<span class="piece ${p.side}">${icon(p.kind)}<span class="piece-mark">${PIECE_MARK[p.kind]}</span><span class="life ${p.remaining === 1 ? "last" : ""}">${p.remaining}</span></span>` : ghost ? `<span class="piece ghost-piece ${s.turn}">${icon(ghost.kind)}<span class="piece-mark">${PIECE_MARK[ghost.kind]}</span><span class="life">${ghost.duration}</span></span>` : core ? `<span class="piece core ${core}">${coreIcon}</span>` : ""}<span class="coord">${squareName(q)}</span>`;
       }
     },
     dispose() {

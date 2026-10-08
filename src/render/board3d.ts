@@ -3,7 +3,7 @@ import type { BoardView } from "./board-view";
 import type { GameState, Selection, Preview } from "../game/types";
 import { createPieceModel, createCoreModel, disposeObject } from "./pieces";
 import { legalActions } from "../game/rules";
-import { INFO, squareName } from "../ui/piece-info";
+import { INFO, squareName, PIECE_MARK, icon } from "../ui/piece-info";
 export function createBoard3D(
   host: HTMLElement,
   onSquare: (q: number) => void,
@@ -153,7 +153,23 @@ export function createBoard3D(
         el.style.top = `${(1 - v.y) * 50}%`;
         if (p.remaining === 1) el.style.background = "#88512e";
         labels.append(el);
+        const mark = document.createElement("span");
+        mark.className = "projected-mark";
+        mark.textContent = PIECE_MARK[p.kind];
+        mark.style.left = `${(v.x + 1) * 50 - 5}%`;
+        mark.style.top = el.style.top;
+        labels.append(mark);
       }
+    if (selection.candidate?.type === "summon") {
+      const a = selection.candidate,
+        v = project((a.to % 7) - 3, 0.1, 3 - Math.floor(a.to / 7));
+      const ghost = document.createElement("span");
+      ghost.className = "projected-ghost ghost-piece";
+      ghost.innerHTML = icon(a.kind);
+      ghost.style.left = `${(v.x + 1) * 50}%`;
+      ghost.style.top = `${(1 - v.y) * 50}%`;
+      labels.append(ghost);
+    }
     renderer.render(scene, camera);
   }
   const ro = new ResizeObserver(() => {
@@ -225,7 +241,7 @@ export function createBoard3D(
           .get(q)!
           .setAttribute(
             "aria-label",
-            `${squareName(q)} ${piece ? `${piece.side === "white" ? "白" : "黒"} ${INFO[piece.kind].name} 残り${piece.remaining}` : q === 3 ? "白のコア" : q === 45 ? "黒のコア" : "空き"}`,
+            `${squareName(q)} ${piece ? `${piece.side === "white" ? "白" : "黒"} ${INFO[piece.kind].name} 残り${piece.remaining}回` : q === 3 ? "白のコア" : q === 45 ? "黒のコア" : "空き"}${targets.has(q) ? (sel.summon ? " · 召喚できます" : " · 行き先に選べます") : ""}`,
           );
       }
       draw();

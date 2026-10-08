@@ -73,6 +73,32 @@ export function createOnline(onChange: () => void) {
   let pending: { op: string; body: unknown } | null = null;
   let requestedId: string | null = null;
   let unavailable = false;
+  const pendingKey = (id: string) => `interval-pending:${id}`;
+  function savePending(id: string) {
+    try {
+      if (pending)
+        sessionStorage.setItem(pendingKey(id), JSON.stringify(pending));
+      else sessionStorage.removeItem(pendingKey(id));
+    } catch {
+      /* Restricted storage must not prevent a move. */
+    }
+  }
+  function restorePending(id: string) {
+    try {
+      const saved = JSON.parse(
+        sessionStorage.getItem(pendingKey(id)) ?? "null",
+      );
+      pending =
+        saved &&
+        ["action", "ready", "leave"].includes(saved.op) &&
+        typeof saved.body?.commandId === "string" &&
+        Number.isInteger(saved.body?.version)
+          ? saved
+          : null;
+    } catch {
+      pending = null;
+    }
+  }
   function accept(next: RoomView) {
     if (!room || next.id !== room.id || next.version >= room.version)
       room = next;
@@ -116,8 +142,8 @@ export function createOnline(onChange: () => void) {
     try {
       const next = await api<RoomView>(`/api/rooms/${id}/state`);
       if (g !== generation) return;
-      accept(next);
       if (!pending && !preserveError) error = "";
+      accept(next);
     } catch (e) {
       if (g !== generation) return;
       connected = false;
@@ -138,18 +164,20 @@ export function createOnline(onChange: () => void) {
       }
     }
   }
-  async function run(op: string, b: unknown) {
-    if (!room || busy) return false;
+  async function run(op: string, b: unknown, retry = false) {
+    if (!room || busy || (pending && !retry)) return false;
     const g = generation,
       id = room.id;
     busy = true;
     pending = { op, body: b };
+    savePending(id);
     error = "";
     onChange();
     try {
       const next = await api<RoomView>(`/api/rooms/${id}/${op}`, b);
       if (g !== generation) return false;
       pending = null;
+      savePending(id);
       accept(next);
       return true;
     } catch (e) {
@@ -159,8 +187,11 @@ export function createOnline(onChange: () => void) {
         e instanceof NetworkError &&
         e.code !== "NETWORK" &&
         e.code !== "SERVICE_UNAVAILABLE"
-      )
+      ) {
         pending = null;
+        savePending(id);
+      }
+      connected = false;
       await refresh(true);
       return false;
     } finally {
@@ -197,6 +228,7 @@ export function createOnline(onChange: () => void) {
       return !!pending;
     },
     async create() {
+      const g = ++generation;
       busy = true;
       error = "";
       onChange();
@@ -205,43 +237,52 @@ export function createOnline(onChange: () => void) {
         const key = sessionStorage.getItem("interval-create") ?? commandId();
         sessionStorage.setItem("interval-create", key);
         const next = await api<RoomView>("/api/rooms", { commandId: key });
+        if (g !== generation) throw new NetworkError("CANCELLED");
         sessionStorage.removeItem("interval-create");
         active = true;
         accept(next);
         schedule();
         return next;
       } catch (e) {
-        error = (e as Error).message;
+        if (g === generation) error = (e as Error).message;
         throw e;
       } finally {
-        busy = false;
-        onChange();
+        if (g === generation) {
+          busy = false;
+          onChange();
+        }
       }
     },
     async join(id: string, invite: string) {
+      const g = ++generation;
       busy = true;
       error = "";
       onChange();
       try {
         await api("/api/session");
         const next = await api<RoomView>(`/api/rooms/${id}/join`, { invite });
+        if (g !== generation) throw new NetworkError("CANCELLED");
         active = true;
         accept(next);
         schedule();
         return next;
       } catch (e) {
-        error = (e as Error).message;
+        if (g === generation) error = (e as Error).message;
         throw e;
       } finally {
-        busy = false;
-        onChange();
+        if (g === generation) {
+          busy = false;
+          onChange();
+        }
       }
     },
     async resume(id: string) {
       const g = ++generation;
       requestedId = id;
       busy = true;
+      connected = false;
       error = "";
+      restorePending(id);
       onChange();
       try {
         await api("/api/session");
@@ -286,10 +327,10 @@ export function createOnline(onChange: () => void) {
         : Promise.resolve();
     },
     retry() {
-      return pending
-        ? run(pending.op, pending.body)
-        : !room && requestedId
-          ? this.resume(requestedId)
+      return !room && requestedId
+        ? this.resume(requestedId)
+        : pending
+          ? run(pending.op, pending.body, true)
           : refresh();
     },
     stop() {

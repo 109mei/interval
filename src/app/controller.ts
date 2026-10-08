@@ -21,10 +21,15 @@ export function createController(onChange: (s: GameState) => void): Controller {
     mode: "local" | "cpu" = "local",
     events: readonly GameEvent[] = [];
   let timer: ReturnType<typeof setTimeout> | undefined;
+  let worker: Worker | undefined;
+  let searchTimeout: ReturnType<typeof setTimeout> | undefined;
   const token = () => ({ session, revision }),
     matches = (t: Token) => t.session === session && t.revision === revision;
   const clearTimer = () => {
     if (timer !== undefined) clearTimeout(timer);
+    if (searchTimeout !== undefined) clearTimeout(searchTimeout);
+    worker?.terminate();
+    worker = undefined;
     timer = undefined;
   };
   function schedule() {
@@ -34,9 +39,35 @@ export function createController(onChange: (s: GameState) => void): Controller {
     timer = setTimeout(() => {
       timer = undefined;
       if (dead || !matches(t) || mode !== "cpu") return;
-      const a = chooseCpuAction(state);
-      if (a) void perform(a, t, true);
-    }, 120);
+      const finish = (a: Action | null) => {
+        if (dead || !matches(t) || mode !== "cpu") return;
+        worker?.terminate();
+        worker = undefined;
+        if (searchTimeout !== undefined) clearTimeout(searchTimeout);
+        if (!dead && matches(t) && mode === "cpu" && a)
+          void perform(a, t, true);
+      };
+      const fallback = () => {
+        if (dead || !matches(t) || mode !== "cpu") return;
+        worker?.terminate();
+        worker = undefined;
+        if (!dead && matches(t) && mode === "cpu")
+          finish(chooseCpuAction(state));
+      };
+      if (typeof Worker === "undefined") return fallback();
+      try {
+        worker = new Worker(new URL("../cpu/worker.ts", import.meta.url), {
+          type: "module",
+        });
+        worker.onmessage = (event: MessageEvent<Action | null>) =>
+          finish(event.data);
+        worker.onerror = fallback;
+        worker.postMessage(state);
+        searchTimeout = setTimeout(fallback, 6000);
+      } catch {
+        fallback();
+      }
+    }, 300);
   }
   async function perform(
     a: Action,

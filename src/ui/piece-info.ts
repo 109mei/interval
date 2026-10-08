@@ -37,3 +37,10 @@ export const coreIcon =
   '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="m24 7 12 17-12 17L12 24Z" fill="currentColor"/><circle cx="24" cy="24" r="5" fill="#b3a077"/></svg>';
 export const squareName = (q: number) =>
   `${"abcdefg"[q % 7]}${Math.floor(q / 7) + 1}`;
+
+export const PIECE_MARK: Record<Kind, string> = {
+  bastion: "守",
+  carver: "曲",
+  leaper: "跳",
+  link: "換",
+};

@@ -65,3 +65,19 @@ it("summoning lights only legal cells with selected cost and duration", () => {
   ).toBe(false);
   b.dispose();
 });
+it("keyboard descriptions identify legal destinations and lifetime", () => {
+  const h = document.createElement("div"),
+    b = createBoard2D(h, () => {});
+  b.render(
+    createGame(),
+    { pieceId: null, candidate: null, summon: { kind: "carver", duration: 3 } },
+    null,
+  );
+  expect(
+    h.querySelector('[data-square="9"]')?.getAttribute("aria-label"),
+  ).toContain("召喚できます");
+  expect(
+    h.querySelector('[data-square="10"]')?.getAttribute("aria-label"),
+  ).toContain("残り3回");
+  b.dispose();
+});

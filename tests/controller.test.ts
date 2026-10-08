@@ -71,3 +71,90 @@ it("cpu_plays_black", async () => {
   expect(c.getState().turn).toBe("white");
   c.dispose();
 });
+it("CPU search runs in a worker and late results cannot change a restarted game", async () => {
+  const { vi } = await import("vitest");
+  vi.useFakeTimers();
+  let worker: any;
+  class FakeWorker {
+    onmessage: ((e: { data: unknown }) => void) | null = null;
+    onerror: (() => void) | null = null;
+    postMessage = vi.fn();
+    terminate = vi.fn();
+    constructor() {
+      worker = this;
+    }
+  }
+  vi.stubGlobal("Worker", FakeWorker);
+  const c = createController(() => {});
+  c.restart("cpu");
+  await c.submit({ type: "pass" }, c.getToken());
+  await vi.advanceTimersByTimeAsync(400);
+  expect(worker).toBeDefined();
+  expect(worker.postMessage).toHaveBeenCalled();
+  c.restart("local");
+  expect(worker.terminate).toHaveBeenCalled();
+  worker.onmessage?.({ data: { type: "pass" } });
+  await Promise.resolve();
+  expect(c.getState().ply).toBe(0);
+  c.dispose();
+  vi.unstubAllGlobals();
+  vi.useRealTimers();
+});
+it("late old worker output cannot terminate the next match search", async () => {
+  const { vi } = await import("vitest");
+  vi.useFakeTimers();
+  const workers: any[] = [];
+  class FakeWorker {
+    onmessage: ((e: { data: unknown }) => void) | null = null;
+    onerror: (() => void) | null = null;
+    postMessage = vi.fn();
+    terminate = vi.fn();
+    constructor() {
+      workers.push(this);
+    }
+  }
+  vi.stubGlobal("Worker", FakeWorker);
+  const c = createController(() => {});
+  c.restart("cpu");
+  await c.submit({ type: "pass" }, c.getToken());
+  await vi.advanceTimersByTimeAsync(350);
+  const old = workers[0];
+  c.restart("cpu");
+  await c.submit({ type: "pass" }, c.getToken());
+  await vi.advanceTimersByTimeAsync(350);
+  old.onmessage({ data: { type: "pass" } });
+  expect(workers[1].terminate).not.toHaveBeenCalled();
+  workers[1].onmessage({ data: { type: "pass" } });
+  await Promise.resolve();
+  expect(c.getState().ply).toBe(2);
+  c.dispose();
+  vi.unstubAllGlobals();
+  vi.useRealTimers();
+});
+it("worker failure falls back to a legal CPU action instead of leaving the turn stuck", async () => {
+  const { vi } = await import("vitest");
+  vi.useFakeTimers();
+  let worker: any;
+  class FakeWorker {
+    onmessage: any;
+    onerror: any;
+    postMessage = vi.fn();
+    terminate = vi.fn();
+    constructor() {
+      worker = this;
+    }
+  }
+  vi.stubGlobal("Worker", FakeWorker);
+  const c = createController(() => {});
+  c.restart("cpu");
+  await c.submit({ type: "pass" }, c.getToken());
+  await vi.advanceTimersByTimeAsync(350);
+  worker.onerror();
+  await Promise.resolve();
+  await Promise.resolve();
+  expect(c.getState().ply).toBe(2);
+  expect(c.getBusy()).toBe(false);
+  c.dispose();
+  vi.unstubAllGlobals();
+  vi.useRealTimers();
+});

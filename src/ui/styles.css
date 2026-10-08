@@ -1149,3 +1149,198 @@ dialog p {
     overflow: auto;
   }
 }
+/* Legible pieces and a compact, height-aware play surface. */
+#menu {
+  min-width: 44px;
+}
+.piece-mark {
+  position: absolute;
+  left: -7%;
+  top: 0;
+  color: #fff9e9;
+  background: #22382f;
+  border: 1px solid #a9b698;
+  border-radius: 4px;
+  font-size: 10px;
+  line-height: 16px;
+  min-width: 17px;
+  text-align: center;
+}
+.ghost-piece {
+  opacity: 0.65;
+}
+.square.candidate .ghost-piece {
+  opacity: 0.82;
+}
+.piece-explanation {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+.summary .selected-name {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+.choice .piece-name {
+  font-size: 9px;
+  letter-spacing: -0.03em;
+}
+.board-legend {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  color: #aabdad;
+  font-size: 10px;
+  line-height: 1.5;
+  margin: -2px 1px 8px;
+}
+.tactical-note {
+  border-left: 3px solid #d3a46d;
+  padding: 5px 10px;
+  color: #edcf9e;
+  font-size: 12px;
+  margin: 10px 0 0;
+}
+.projected-mark {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  background: #22382f;
+  border: 1px solid #a9b698;
+  border-radius: 3px;
+  color: #fff9e9;
+  font-size: 10px;
+  line-height: 16px;
+  min-width: 17px;
+  text-align: center;
+}
+.projected-ghost {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 10%;
+  height: 10%;
+  color: #fff3cb;
+}
+.projected-ghost svg {
+  width: 100%;
+  height: 100%;
+}
+.board-host {
+  max-height: none;
+}
+.is-lobby .board-shell,
+.is-lobby .underboard,
+.is-lobby .board-legend {
+  display: none;
+}
+.is-lobby .arena {
+  display: block;
+  max-width: 580px;
+  margin: 20px auto;
+}
+.is-lobby .playfield {
+  width: 100%;
+  max-width: none;
+}
+.is-lobby .panel {
+  max-height: none;
+}
+.is-lobby .log {
+  display: none;
+}
+@media (min-width: 761px) {
+  main {
+    padding: 18px 28px 20px;
+  }
+  .mast {
+    margin-bottom: 16px;
+  }
+  .arena {
+    align-items: center;
+    grid-template-columns: minmax(0, 1.65fr) minmax(290px, 1fr);
+    gap: 24px;
+  }
+  .playfield {
+    width: min(100%, calc(100dvh - 220px));
+    max-width: 700px;
+    justify-self: center;
+  }
+  .board-host {
+    height: auto;
+    max-height: none;
+    aspect-ratio: 1;
+  }
+  .panel {
+    max-height: calc(100dvh - 115px);
+  }
+}
+@media (max-width: 760px) {
+  main {
+    padding-top: 8px;
+  }
+  .mast {
+    margin-bottom: 8px;
+  }
+  .board-shell {
+    max-width: min(100%, max(320px, calc(100dvh - 515px)));
+    margin-inline: auto;
+  }
+  .underboard {
+    padding: 6px 1px;
+    font-size: 10px;
+  }
+  .board-legend {
+    font-size: 9px;
+    margin-bottom: 3px;
+  }
+  .panel {
+    padding: 10px 12px;
+  }
+  .hint {
+    font-size: 13px;
+    line-height: 1.55;
+    margin-bottom: 7px;
+  }
+  .pieces {
+    gap: 5px;
+  }
+  .choice {
+    padding: 4px 2px;
+    gap: 1px;
+  }
+  .choice svg {
+    height: 25px;
+  }
+  .choice .piece-name {
+    font-size: 9px;
+  }
+  .summary {
+    font-size: 13px;
+  }
+  .piece-explanation {
+    margin-bottom: 5px;
+    line-height: 1.5;
+  }
+  .expiry-note {
+    font-size: 11px;
+  }
+  .piece-mark {
+    font-size: 9px;
+    min-width: 15px;
+    line-height: 14px;
+  }
+  .log {
+    margin-top: 7px;
+    font-size: 10px;
+  }
+  .control-head {
+    min-height: 22px;
+  }
+}
+@media (max-width: 760px) and (max-height: 680px) {
+  .board-shell {
+    max-width: min(100%, 300px);
+  }
+}
