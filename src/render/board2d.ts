@@ -1,5 +1,10 @@
 import type { BoardView } from "./board-view";
-import { boardTargets } from "./board-targets";
+import {
+  boardTargets,
+  targetDescription,
+  targetMarker,
+  targetState,
+} from "./board-targets";
 import { INFO, icon, coreIcon, squareName, PIECE_MARK } from "../ui/piece-info";
 import { createMotionPlayer } from "./motion-player";
 import { trackPose } from "./motion";
@@ -111,7 +116,7 @@ export function createBoard2D(
   return {
     cancelMotion: motion.cancel,
     render(s, selection, preview, transition) {
-      const { targets, inspectOnly } = boardTargets(s, selection);
+      const { kinds, inspectOnly } = boardTargets(s, selection);
       const expires = new Set(preview?.expires ?? []);
       for (const [q, b] of buttons) {
         const p = s.pieces.find((p) => p.square === q),
@@ -128,7 +133,7 @@ export function createBoard2D(
             : "空き";
         b.setAttribute(
           "aria-label",
-          `${squareName(q)} ${label}${targets.has(q) ? (inspectOnly ? " · 移動・交換先の参考" : selection.summon ? " · 召喚できます" : " · 行き先に選べます") : ""}`,
+          `${squareName(q)} ${label}${targetDescription(kinds.get(q), inspectOnly)}${preview?.targets.includes(q) ? " · 選んだ行き先（確定前）" : ""}`,
         );
         b.setAttribute(
           "aria-pressed",
@@ -138,16 +143,19 @@ export function createBoard2D(
           selection.candidate?.type === "summon" && selection.candidate.to === q
             ? selection.candidate
             : null;
-        b.classList.toggle("selected", !!p && p.id === selection.pieceId);
-        b.classList.toggle("target", targets.has(q) && !inspectOnly);
-        b.classList.toggle("inspect-target", targets.has(q) && inspectOnly);
-        b.classList.toggle("candidate", !!preview?.targets.includes(q));
+        targetState(
+          b,
+          kinds.get(q),
+          inspectOnly,
+          !!p && p.id === selection.pieceId,
+          !!preview?.targets.includes(q),
+        );
         b.classList.toggle(
           "route",
           !!preview?.paths[0]?.slice(0, -1).includes(q),
         );
         b.classList.toggle("expiring", !!p && expires.has(p.id));
-        const content = `${p ? `<span class="piece ${p.side}" data-piece-id="${p.id}">${icon(p.kind)}<span class="piece-mark">${PIECE_MARK[p.kind]}</span><span class="life ${p.remaining === 1 ? "last" : ""}">${p.remaining}</span></span>` : ghost ? `<span class="piece ghost-piece ${s.turn}">${icon(ghost.kind)}<span class="piece-mark">${PIECE_MARK[ghost.kind]}</span><span class="life">${ghost.duration}</span></span>` : core ? `<span class="piece core ${core}">${coreIcon}</span>` : ""}<span class="coord">${squareName(q)}</span>`;
+        const content = `${p ? `<span class="piece ${p.side}" data-piece-id="${p.id}">${icon(p.kind)}<span class="piece-mark">${PIECE_MARK[p.kind]}</span><span class="life ${p.remaining === 1 ? "last" : ""}">${p.remaining}</span></span>` : ghost ? `<span class="piece ghost-piece ${s.turn}">${icon(ghost.kind)}<span class="piece-mark">${PIECE_MARK[ghost.kind]}</span><span class="life">${ghost.duration}</span></span>` : core ? `<span class="piece core ${core}">${coreIcon}</span>` : ""}<span class="coord">${squareName(q)}</span>${targetMarker(kinds.get(q), inspectOnly)}`;
         if (b.dataset.visual !== content) {
           b.innerHTML = content;
           b.dataset.visual = content;

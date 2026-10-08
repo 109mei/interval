@@ -4,7 +4,12 @@ import * as THREE from "three";
 import type { BoardView } from "./board-view";
 import type { GameState, Selection, Preview } from "../game/types";
 import { createPieceModel, createCoreModel, disposeObject } from "./pieces";
-import { boardTargets } from "./board-targets";
+import {
+  boardTargets,
+  targetDescription,
+  targetMarker,
+  targetState,
+} from "./board-targets";
 import { INFO, squareName, PIECE_MARK, icon } from "../ui/piece-info";
 export function createBoard3D(
   host: HTMLElement,
@@ -311,7 +316,7 @@ export function createBoard3D(
       selection = sel;
       preview = pv;
       syncModels();
-      const { targets, inspectOnly } = boardTargets(s, sel);
+      const { targets, kinds, inspectOnly } = boardTargets(s, sel);
       for (let q = 0; q < 49; q++) {
         const piece = s.pieces.find((p) => p.square === q);
         const selected = piece?.id === sel.pieceId && !!piece;
@@ -333,17 +338,20 @@ export function createBoard3D(
                       ? 0x74998c
                       : 0xc3c6ac,
         );
-        buttons.get(q)!.dataset.available = String(
-          targets.has(q) && !inspectOnly,
+        const button = buttons.get(q)!;
+        targetState(
+          button,
+          kinds.get(q),
+          inspectOnly,
+          selected,
+          !!pv?.targets.includes(q),
         );
-        buttons
-          .get(q)!
-          .classList.toggle("inspect-target", targets.has(q) && inspectOnly);
+        button.innerHTML = targetMarker(kinds.get(q), inspectOnly);
         buttons
           .get(q)!
           .setAttribute(
             "aria-label",
-            `${squareName(q)} ${piece ? `${piece.side === "white" ? "白" : "黒"} ${INFO[piece.kind].name} 残り${piece.remaining}回` : q === 3 ? "白のコア" : q === 45 ? "黒のコア" : "空き"}${targets.has(q) ? (inspectOnly ? " · 移動・交換先の参考" : sel.summon ? " · 召喚できます" : " · 行き先に選べます") : ""}`,
+            `${squareName(q)} ${piece ? `${piece.side === "white" ? "白" : "黒"} ${INFO[piece.kind].name} 残り${piece.remaining}回` : q === 3 ? "白のコア" : q === 45 ? "黒のコア" : "空き"}${targetDescription(kinds.get(q), inspectOnly)}${pv?.targets.includes(q) ? " · 選んだ行き先（確定前）" : ""}`,
           );
       }
       draw();

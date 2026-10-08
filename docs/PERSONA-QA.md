@@ -5,6 +5,7 @@ These are deliberately invented review personas, not real participants, intervie
 ## Personas and reusable tasks
 
 ### Nao: new tabletop player
+
 - Experience: turn-taking games, unfamiliar with timed pieces or indirect movement.
 - Attention: will give the opening about 45 seconds before trying an action.
 - Goal: understand the win condition and complete the first five decisions without reading every rule.
@@ -13,6 +14,7 @@ These are deliberately invented review personas, not real participants, intervie
 - Pass criteria: win/next action are visible; invalid input spends nothing and preserves a usable path; the piece's actual last turn is predictable before confirmation.
 
 ### Ren: experienced strategy player
+
 - Experience: chess/puzzles, plans two moves ahead; no assumption of familiar chess-piece rules.
 - Attention: patient if the UI provides trustworthy decision information.
 - Goal: compare purchase cost, capture reward and expiry risk, then deliberately use Link/Leaper support.
@@ -21,6 +23,7 @@ These are deliberately invented review personas, not real participants, intervie
 - Pass criteria: reference geometry cannot become an executable opponent move; actual cost/reward/expiry and terminal result agree with the rules; support choices remain meaningful without changing prices or mechanics.
 
 ### Mika: interrupted one-hand phone player
+
 - Experience: browser games, prefers direct taps.
 - Attention: short interrupted sessions; simulated right-thumb constraints.
 - Goal: select, reselect, inspect rules and confirm without accidentally spending on an old target.
@@ -30,6 +33,7 @@ These are deliberately invented review personas, not real participants, intervie
 - Physical one-hand/touch ergonomics require actual-device testing and are not claimed here.
 
 ### Sora: social friend-play host/guest
+
 - Experience: casual online games; wants to play while chatting remotely.
 - Attention: impatient with unexplained waiting and setup.
 - Goal: start together, understand readiness/turn/role, return after interruption and arrange another match.
@@ -49,6 +53,7 @@ Baseline: v5, Sites source 4719512, matching GitHub tree 5c0d404.
 Evidence: six new real-main UI regressions failed for the intended gaps before changes, then passed; eight new checks including friend readiness/cap paths brought the suite to 150 passing tests. Fresh independent persona re-evaluation and publication checks are recorded below as they complete.
 
 ## Evidence limits
+
 - Browser observations use the supported cloud browser and its 2D fallback. Physical iPhone/touch, exact 390×844 and GPU rendering are not verified.
 - No real human playtest or enjoyment/satisfaction measurements are asserted.
 - Concurrent friend sessions and injected network failures use server/client fixtures unless explicitly recorded as browser evidence.
@@ -98,3 +103,16 @@ Independent review found and reproduced intermediate implementation defects: ove
 - Model review: 400 geometry/material/resource/software-projection contracts passed, then visual inspection of software-projected mesh comparison caught the black Carver's blade collapsing edge-on. Existing projection contracts were strengthened around the distinctive blade and both Link facings, failed on the intermediate version, and passed after correction. GPU shading remains unverified.
 
 - Post-publication continuation: Mika's real2D browser test preserved selection through a normal3D fallback, but the explanatory status was overwritten. A fail-first DOM regression and a small display-mode fix retain the reason. Upfront price is now fully inside the observed510×757 viewport (bottom714.94px); cancellation measures62.02×44px. A second independently reproduced late-failure toggle-label issue is also covered and fixed. These add two contracts, bringing the campaign to 3,039.
+
+## Cycle 7: destination visibility
+
+2026-10-08. The focused request was to make legal destinations easier to see. A fresh public cloud-browser baseline at 510×757 confirmed small green rings and similar amber source/proposal treatments; summons and ordinary moves used the same symbol. Both renderers now share action-derived metadata and silhouettes: filled circle for movement, corner brackets for capture (including the opposing core), paired arrows for friendly exchange, and a boxed plus for summon placement. The source keeps a solid pale frame; the proposed destination gets a double gold frame. A compact legend beside the board names the source/proposed square and counts each available action type. Read-only inspection remains dashed and explicitly non-actionable.
+
+- Nao: the adjacent legend names moves and available counts. An invalid destination tap preserves source, legal markers and the unchanged legend DOM; an immobile selection explicitly has no destinations.
+- Ren: capture and friendly exchange are distinct, including core capture and inspected-side classification. Exact target membership still comes from the original authoritative action generators; no rules or economics changed.
+- Mika: selected source and proposed target coexist, both renderers expose matching selection semantics, and role/lifetime labels are layered above target framing. Independent projected-geometry review found a narrow-board exchange-glyph/lifetime collision. A fail-first overlap regression now covers 278/308/412px board widths and adjacent label rows; the compact projected glyph sits in the gap above them. This is geometry/CSS evidence, not a physical-phone or GPU test.
+- Sora: opponent/busy inspection never carries executable markers or available-action attributes. Unchanged contextual legend content is not reinserted on repeated renders.
+
+Sixteen focused renderer/DOM/geometry tests cover the visible contract, exact target preservation, invalid taps, proposal/source coexistence, stale-marker cleanup, label stacking and compact projected-glyph bounds. Missing metadata/semantics, overlapping label layers, projected arrow overlap and repeated legend insertion each failed before their respective corrections. Independent read-only review additionally checked exact target sets and no state mutation over 10,068 generated selection/reference/summon inputs on 250 valid deterministic boards; those are property checks, not additional human sessions or named suite tests.
+
+The supervised local preview command was absent in this environment. Source/DOM/scene checks and independent review precede the GitHub-first publication; final rendered public-browser verification is reported separately. Existing browser limits remain: cloud 2D fallback only, no GPU/touch/exact iPhone or simultaneous independent friend-browser claims. Local QA images remain excluded from the public source repository.

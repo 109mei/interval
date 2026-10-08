@@ -1484,3 +1484,251 @@ dialog p {
   min-height: 44px;
   min-width: 44px;
 }
+
+/* Action destinations: redundant shape + contrast, shared by both renderers. */
+.board-host {
+  --move-ink: #124d3c;
+  --capture-ink: #872d21;
+  --swap-ink: #273e76;
+  --summon-ink: #17575a;
+  --source-ink: #fffce8;
+  --proposal-ink: #ffd36c;
+}
+.square.target::after {
+  content: none;
+}
+.square.target {
+  background: #a4c7aa;
+}
+.square.target[data-target-kind="capture"] {
+  background: #d6b09a;
+}
+.square.target[data-target-kind="swap"] {
+  background: #b0bcc9;
+}
+.square.target[data-target-kind="summon"] {
+  background: #a4c7bd;
+}
+.square.selected {
+  background: #a5ab78;
+  box-shadow: none;
+}
+.square.selected::before,
+.three-keys button.selected::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border: 3px solid var(--source-ink);
+  box-shadow:
+    inset 0 0 0 1px #344632,
+    0 0 0 1px #344632;
+  pointer-events: none;
+  z-index: 2;
+}
+.square.candidate,
+.three-keys button.candidate {
+  box-shadow: none;
+}
+.square.candidate::before,
+.three-keys button.candidate::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border: 5px double var(--proposal-ink);
+  box-shadow:
+    inset 0 0 0 1px #594419,
+    0 0 0 1px #594419;
+  pointer-events: none;
+  z-index: 2;
+}
+.destination-marker {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.destination-marker svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.marker-move {
+  width: 23px;
+  height: 23px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  color: var(--move-ink, #124d3c);
+}
+.marker-move circle {
+  fill: currentColor;
+  stroke: #fffce8;
+  stroke-width: 2.2;
+  filter: drop-shadow(0 1px 1px #102f24);
+}
+.marker-capture {
+  inset: 4px;
+  color: var(--capture-ink, #872d21);
+  filter: drop-shadow(0 0 1px #fff9d9);
+}
+.marker-capture svg {
+  stroke-width: 2.8;
+}
+.marker-swap {
+  top: 2px;
+  right: 2px;
+  width: 21px;
+  height: 20px;
+  border-radius: 4px;
+  color: #fff;
+  background: var(--swap-ink, #273e76);
+  border: 1px solid #fffce8;
+}
+.marker-swap svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2.4;
+}
+.marker-summon {
+  width: 22px;
+  height: 22px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border: 2px solid var(--summon-ink, #17575a);
+  border-radius: 5px;
+  color: var(--summon-ink, #17575a);
+  background: #edf2d6;
+}
+.candidate .marker-summon {
+  top: 3px;
+  right: 3px;
+  left: auto;
+  transform: none;
+  width: 17px;
+  height: 17px;
+}
+.inspect-target::after {
+  inset: 4px;
+  border: 2px dashed #674423;
+  background: transparent;
+  z-index: 1;
+}
+.three-keys button {
+  width: 11.6%;
+  height: 10.8%;
+  min-width: 0;
+  min-height: 0;
+  border-radius: 0;
+}
+.three-keys button.target,
+.three-keys button.selected,
+.three-keys button.candidate,
+.three-keys button.inspect-target {
+  opacity: 1;
+  background: transparent;
+  border: 0;
+  pointer-events: none;
+}
+.three-keys button:focus-visible {
+  opacity: 1;
+  outline: 2px solid #f6ffff;
+  outline-offset: 2px;
+  background: transparent;
+}
+.target-legend {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px 9px;
+  margin: 1px 1px 8px;
+  color: #e7e8d1;
+  font-size: 12px;
+  line-height: 24px;
+}
+.target-context {
+  white-space: nowrap;
+}
+.target-context b {
+  font-weight: 500;
+  color: #ffd36c;
+}
+.target-key {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.target-key-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+}
+.target-key .destination-marker {
+  position: relative;
+  inset: auto;
+  transform: none;
+  width: 19px;
+  height: 19px;
+  flex: 0 0 19px;
+}
+.target-key .marker-capture {
+  color: #ffb69b;
+  filter: none;
+}
+.target-key .marker-move {
+  color: #8ee0b6;
+}
+.target-key .marker-swap {
+  background: #405e98;
+}
+.target-key .marker-summon {
+  width: 17px;
+  height: 17px;
+  flex-basis: 17px;
+}
+.reference-legend {
+  color: #e5c6a5;
+}
+.reference-swatch {
+  width: 17px;
+  height: 17px;
+  border: 2px dashed currentColor;
+}
+.is-lobby .target-legend {
+  display: none;
+}
+/* The action silhouette frames the target; identity and remaining life stay on top. */
+.square .life,
+.square .piece-mark {
+  z-index: 3;
+}
+.overlay-labels {
+  z-index: 3;
+}
+.three-keys {
+  z-index: 2;
+}
+/* Keep the exchange glyph in the gap above projected identity/lifetime rows. */
+.three-keys .marker-swap {
+  left: 50%;
+  right: auto;
+  top: 25%;
+  transform: translate(-50%, -50%);
+  width: 22px;
+  height: 10px;
+  border: 0;
+  z-index: 3;
+}
+.three-keys .marker-swap svg {
+  width: 20px;
+  height: 10px;
+}
