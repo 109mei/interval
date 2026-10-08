@@ -23,7 +23,8 @@ const messages: Record<string, string> = {
   STALE_VERSION: "盤面が更新されました。最新の盤面で選び直してください。",
   ROOM_CLOSED: "この部屋は終了しました。",
   RATE_LIMIT: "少し時間をおいて、もう一度お試しください。",
-  ROOM_LIMIT: "部屋は24時間に5つまでです。既存の部屋で遊んでください。",
+  ROOM_LIMIT:
+    "このブラウザで作れる部屋は24時間に5つまでです。終了・退出した部屋も含まれます。フレンドに部屋を作って招待してもらうか、作成済みの部屋の期限が切れてからお試しください。",
   CAPACITY: "ただいま部屋が混み合っています。時間をおいてください。",
   SERVICE_UNAVAILABLE: "対戦サーバーに接続できません。再接続をお試しください。",
   ILLEGAL_ACTION: "この操作はできません。選び直してください。",
@@ -205,7 +206,12 @@ export function createOnline(onChange: () => void) {
       return true;
     } catch (e) {
       if (g !== generation) return false;
-      error = (e as Error).message;
+      error =
+        op === "ready" &&
+        e instanceof NetworkError &&
+        e.code === "STALE_VERSION"
+          ? "相手の準備状況が更新されました。まだ準備完了でない場合は、もう一度「準備完了」を押してください。"
+          : (e as Error).message;
       if (
         e instanceof NetworkError &&
         e.code !== "NETWORK" &&

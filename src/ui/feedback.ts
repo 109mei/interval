@@ -1,4 +1,4 @@
-import type { Action, GameState, Side } from "../game/types";
+import type { Action, GameState, Side, Piece, Outcome } from "../game/types";
 import { movePaths, opposite, PRICES } from "../game/rules";
 import { INFO, squareName } from "./piece-info";
 export function coreAttackers(s: GameState, side: Side) {
@@ -47,4 +47,20 @@ export function transitionText(previous: GameState, next: GameState): string {
   if (capture) label += ` · 捕獲 +${capture}糧`;
   if (expired) label += ` · ${expired}体が退場`;
   return `${side === "white" ? "白" : "黒"} · ${label}`;
+}
+
+export function expiryExplanation(s: GameState, piece: Piece): string {
+  const side = piece.side === "white" ? "白" : "黒";
+  return piece.remaining === 1
+    ? `${piece.side === s.turn ? "この" : "次の"}${side}の手番末に退場。動かなくても期間は減ります。`
+    : `${side}の手番末に、動かなくても残り期間が1減ります。`;
+}
+export function outcomeNotice(outcome: Outcome): string {
+  return !outcome
+    ? ""
+    : outcome.kind === "win"
+      ? "この手で相手のコアを捕獲。勝利です。"
+      : outcome.reason === "passes"
+        ? "このパスで6回連続となり、引き分けになります。"
+        : "この手で200手に達し、引き分けになります。";
 }

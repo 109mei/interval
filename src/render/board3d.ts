@@ -2,7 +2,7 @@ import * as THREE from "three";
 import type { BoardView } from "./board-view";
 import type { GameState, Selection, Preview } from "../game/types";
 import { createPieceModel, createCoreModel, disposeObject } from "./pieces";
-import { legalActions } from "../game/rules";
+import { boardTargets } from "./board-targets";
 import { INFO, squareName, PIECE_MARK, icon } from "../ui/piece-info";
 export function createBoard3D(
   host: HTMLElement,
@@ -209,19 +209,7 @@ export function createBoard3D(
         }
         key = nextKey;
       }
-      const targets = new Set(
-        legalActions(s).flatMap((a) =>
-          a.type === "summon" &&
-          sel.summon?.kind === a.kind &&
-          sel.summon.duration === a.duration
-            ? [a.to]
-            : a.type === "move" && a.pieceId === sel.pieceId
-              ? [a.to]
-              : a.type === "swap" && a.pieceId === sel.pieceId
-                ? [s.pieces.find((p) => p.id === a.allyId)!.square]
-                : [],
-        ),
-      );
+      const { targets, inspectOnly } = boardTargets(s, sel);
       for (let q = 0; q < 49; q++) {
         const piece = s.pieces.find((p) => p.square === q);
         const selected = piece?.id === sel.pieceId && !!piece;
@@ -236,17 +224,24 @@ export function createBoard3D(
                 : pv?.paths[0]?.slice(0, -1).includes(q)
                   ? 0x96d7bd
                   : targets.has(q)
-                    ? 0x4ab899
+                    ? inspectOnly
+                      ? 0xcda478
+                      : 0x4ab899
                     : ((q % 7) + Math.floor(q / 7)) % 2
                       ? 0x74998c
                       : 0xc3c6ac,
         );
-        buttons.get(q)!.dataset.available = String(targets.has(q));
+        buttons.get(q)!.dataset.available = String(
+          targets.has(q) && !inspectOnly,
+        );
+        buttons
+          .get(q)!
+          .classList.toggle("inspect-target", targets.has(q) && inspectOnly);
         buttons
           .get(q)!
           .setAttribute(
             "aria-label",
-            `${squareName(q)} ${piece ? `${piece.side === "white" ? "白" : "黒"} ${INFO[piece.kind].name} 残り${piece.remaining}回` : q === 3 ? "白のコア" : q === 45 ? "黒のコア" : "空き"}${targets.has(q) ? (sel.summon ? " · 召喚できます" : " · 行き先に選べます") : ""}`,
+            `${squareName(q)} ${piece ? `${piece.side === "white" ? "白" : "黒"} ${INFO[piece.kind].name} 残り${piece.remaining}回` : q === 3 ? "白のコア" : q === 45 ? "黒のコア" : "空き"}${targets.has(q) ? (inspectOnly ? " · 移動・交換先の参考" : sel.summon ? " · 召喚できます" : " · 行き先に選べます") : ""}`,
           );
       }
       draw();

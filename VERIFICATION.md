@@ -55,3 +55,15 @@ Actual browser observations and release IDs are recorded in the release handoff.
 2026-10-08. The version 4 public cloud-browser pass verified keyboard-only summon → legal square → preview → commit (white grain 16→7), keyboard pass confirmation, room creation/readiness/reload recovery, and leave → distinct new room → leave. Both browser-created test rooms were explicitly closed. Narrow screenshots showed the board and controls without clipping. This was the cloud browser's 2D fallback, not touch or GPU verification. Native back/forward inspection was blocked at the tab's previous non-HTTP new-tab entry; no bypass was attempted. Exit URL/invitation clearing is covered in the UI regression suite.
 
 That pass found two further UI issues. Choosing again with the keyboard now returns focus to the board or summon control, and a room awaiting recovery identifies itself as friend play rather than local two-player. Three regressions failed before these changes and pass afterward. The full suite now passes 142 tests, with TypeScript and production client/Worker builds passing. Multiplayer state and game rules are unchanged from version 4.
+
+## Version 6: differentiated persona cycles
+2026-10-08. Four explicitly synthetic personas and reusable tasks are retained in docs/PERSONA-QA.md. Three evaluation stages included fresh beginner, strategy, interrupted one-hand-layout and friend-session scenarios. They are not real user research.
+
+- Invalid summon retaps remove old actionable purchases; invalid moves retain a usable selected piece and explain the error. Zero-target states distinguish cost shortage from immobility.
+- Expiry wording identifies the owner and this/next turn. Link text explains normal aging. Previews name expiring pieces and disclose immediate draws alongside wins.
+- Read-only opponent inspection displays reference movement/exchange squares without authorizing an action. Both renderers consume the same target helper; 3D outline visibility is CSS-checked, not GPU-verified.
+- Rules keep an accessible close header while scrolling. Ready consequences are visible before commitment; stale-ready and room-cap guidance describe the actual recovery choices.
+- Successful guest joins clear explicitly abandoned local warm-up games; failed/cancelled joins preserve them.
+- Fail-first regressions reproduce old candidate retention, silent deselection, misleading expiry/Link/draw/inspection, zero-target guidance, and guest warm-up resurrection. The full suite, TypeScript and production client/Worker builds are run against the final source. Pre-fix defects were observed in the live cloud browser; post-publication browser evidence is recorded in the release handoff.
+
+No rule/pricing/CPU-weight/API/schema/audience changes. Physical phone touch, exact390×844, GPU and two independent production profiles remain unverified. Previously denied direct API/DevTools routes were not retried.

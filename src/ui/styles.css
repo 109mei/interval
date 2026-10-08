@@ -1344,3 +1344,35 @@ dialog p {
     max-width: min(100%, 300px);
   }
 }
+
+/* Keep the escape route available while reading long rules on a small screen. */
+.drawer-top {
+  position: sticky;
+  top: 0;
+  z-index: 3;
+  background: #1b2e24;
+  margin: 0;
+  padding: 0 0 10px;
+  border-bottom: 1px solid #3c5041;
+}
+.drawer-top button {
+  min-width: 44px;
+  flex-shrink: 0;
+}
+.inspection-note {
+  display: block;
+  margin-top: 8px;
+  color: #e8c598;
+}
+.inspect-target::after {
+  content: "";
+  position: absolute;
+  inset: 5px;
+  border: 2px dashed #684522;
+  pointer-events: none;
+}
+.three-keys button.inspect-target {
+  opacity: 1;
+  background: transparent;
+  border: 0;
+}

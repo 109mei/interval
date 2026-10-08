@@ -529,3 +529,35 @@ it.each(["response", "error"] as const)(
     c.dispose();
   },
 );
+it("Sora receives readiness-specific recovery after simultaneous ready", async () => {
+  let attempts = 0;
+  const waiting = {
+    ...room(1),
+    joined: true,
+    ready: { white: false, black: true },
+  };
+  const fetch = vi.fn(async (p: string) => {
+    if (p.endsWith("/ready"))
+      return ++attempts === 1
+        ? response({ error: "STALE_VERSION" }, 409)
+        : response({
+            ...waiting,
+            version: 2,
+            status: "playing",
+            ready: { white: true, black: true },
+          });
+    return response(p === "/api/session" ? { ok: true } : waiting);
+  });
+  vi.stubGlobal("fetch", fetch);
+  const c = createOnline(() => {});
+  await c.resume("a".repeat(32));
+  await c.ready();
+  expect(c.error).toContain("準備状況");
+  expect(c.error).toContain("もう一度");
+  expect(c.pending).toBe(false);
+  expect(c.connected).toBe(true);
+  await c.ready();
+  expect(c.room?.status).toBe("playing");
+  expect(attempts).toBe(2);
+  c.dispose();
+});

@@ -10,3 +10,6 @@ delivery/
 .env
 .env.*
 *.tgz
+
+# Local-only browser QA images; not part of source publication.
+docs/qa-evidence/

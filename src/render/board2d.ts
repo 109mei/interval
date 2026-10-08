@@ -1,5 +1,5 @@
 import type { BoardView } from "./board-view";
-import { legalActions } from "../game/rules";
+import { boardTargets } from "./board-targets";
 import { INFO, icon, coreIcon, squareName, PIECE_MARK } from "../ui/piece-info";
 export function createBoard2D(
   host: HTMLElement,
@@ -50,19 +50,7 @@ export function createBoard2D(
     }
   return {
     render(s, selection, preview) {
-      const targets = new Set<number>();
-      for (const a of legalActions(s)) {
-        if (
-          a.type === "summon" &&
-          selection.summon?.kind === a.kind &&
-          selection.summon.duration === a.duration
-        )
-          targets.add(a.to);
-        if (a.type === "move" && a.pieceId === selection.pieceId)
-          targets.add(a.to);
-        if (a.type === "swap" && a.pieceId === selection.pieceId)
-          targets.add(s.pieces.find((p) => p.id === a.allyId)!.square);
-      }
+      const { targets, inspectOnly } = boardTargets(s, selection);
       const expires = new Set(preview?.expires ?? []);
       for (const [q, b] of buttons) {
         const p = s.pieces.find((p) => p.square === q),
@@ -79,7 +67,7 @@ export function createBoard2D(
             : "空き";
         b.setAttribute(
           "aria-label",
-          `${squareName(q)} ${label}${targets.has(q) ? (selection.summon ? " · 召喚できます" : " · 行き先に選べます") : ""}`,
+          `${squareName(q)} ${label}${targets.has(q) ? (inspectOnly ? " · 移動・交換先の参考" : selection.summon ? " · 召喚できます" : " · 行き先に選べます") : ""}`,
         );
         b.setAttribute(
           "aria-pressed",
@@ -90,7 +78,8 @@ export function createBoard2D(
             ? selection.candidate
             : null;
         b.classList.toggle("selected", !!p && p.id === selection.pieceId);
-        b.classList.toggle("target", targets.has(q));
+        b.classList.toggle("target", targets.has(q) && !inspectOnly);
+        b.classList.toggle("inspect-target", targets.has(q) && inspectOnly);
         b.classList.toggle("candidate", !!preview?.targets.includes(q));
         b.classList.toggle(
           "route",
