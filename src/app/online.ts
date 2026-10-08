@@ -73,6 +73,29 @@ export function createOnline(onChange: () => void) {
   let pending: { op: string; body: unknown } | null = null;
   let requestedId: string | null = null;
   let unavailable = false;
+  let creationId: string | null = null;
+  let creationLoaded = false;
+  function creationKey() {
+    if (!creationLoaded) {
+      creationLoaded = true;
+      try {
+        creationId = sessionStorage.getItem("interval-create");
+      } catch {
+        /* Keep same-page retries usable when browser storage is restricted. */
+      }
+    }
+    creationId ||= commandId();
+    try {
+      sessionStorage.setItem("interval-create", creationId);
+    } catch {}
+    return creationId;
+  }
+  function clearCreationKey() {
+    creationId = null;
+    try {
+      sessionStorage.removeItem("interval-create");
+    } catch {}
+  }
   const pendingKey = (id: string) => `interval-pending:${id}`;
   function savePending(id: string) {
     try {
@@ -234,17 +257,25 @@ export function createOnline(onChange: () => void) {
       onChange();
       try {
         await api("/api/session");
-        const key = sessionStorage.getItem("interval-create") ?? commandId();
-        sessionStorage.setItem("interval-create", key);
+        if (g !== generation) throw new NetworkError("CANCELLED");
+        const key = creationKey();
         const next = await api<RoomView>("/api/rooms", { commandId: key });
         if (g !== generation) throw new NetworkError("CANCELLED");
-        sessionStorage.removeItem("interval-create");
+        clearCreationKey();
+        requestedId = next.id;
+        restorePending(next.id);
         active = true;
         accept(next);
         schedule();
         return next;
       } catch (e) {
-        if (g === generation) error = (e as Error).message;
+        if (g === generation) {
+          error = (e as Error).message;
+          // An expired receipt conclusively cannot create or recover a room.
+          // Keep the key for uncertain responses so retries never duplicate it.
+          if (e instanceof NetworkError && e.code === "ROOM_EXPIRED")
+            clearCreationKey();
+        }
         throw e;
       } finally {
         if (g === generation) {
@@ -260,8 +291,11 @@ export function createOnline(onChange: () => void) {
       onChange();
       try {
         await api("/api/session");
+        if (g !== generation) throw new NetworkError("CANCELLED");
         const next = await api<RoomView>(`/api/rooms/${id}/join`, { invite });
         if (g !== generation) throw new NetworkError("CANCELLED");
+        requestedId = next.id;
+        restorePending(next.id);
         active = true;
         accept(next);
         schedule();

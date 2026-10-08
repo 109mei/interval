@@ -347,3 +347,185 @@ it("a reloaded pending command can recover even when its first state fetch is of
   expect(c.pending).toBe(false);
   c.dispose();
 });
+it.each(["create", "join"] as const)(
+  "stopping %s during session preparation never sends the room mutation",
+  async (operation) => {
+    let finishSession!: (r: Response) => void;
+    let writes = 0;
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (path: string) => {
+        if (path === "/api/session")
+          return new Promise<Response>((resolve) => {
+            finishSession = resolve;
+          });
+        writes++;
+        return response(room());
+      }),
+    );
+    const c = createOnline(() => {});
+    const pending =
+      operation === "create"
+        ? c.create()
+        : c.join("a".repeat(32), "b".repeat(64));
+    const failed = expect(pending).rejects.toMatchObject({ code: "CANCELLED" });
+    c.stop();
+    finishSession(response({ ok: true }));
+    await failed;
+    expect(writes).toBe(0);
+    expect(c.room).toBeNull();
+    expect(c.busy).toBe(false);
+    c.dispose();
+  },
+);
+it("an expired creation receipt can be replaced after its definitive rejection", async () => {
+  const expiredId = "expired-create-key";
+  sessionStorage.setItem("interval-create", expiredId);
+  vi.stubGlobal(
+    "fetch",
+    vi.fn(async (path: string, init: RequestInit) => {
+      if (path === "/api/session") return response({ ok: true });
+      return JSON.parse(String(init.body)).commandId === expiredId
+        ? response({ error: "ROOM_EXPIRED" }, 410)
+        : response(room());
+    }),
+  );
+  const c = createOnline(() => {});
+  await expect(c.create()).rejects.toMatchObject({ code: "ROOM_EXPIRED" });
+  await expect(c.create()).resolves.toMatchObject({ id: "a".repeat(32) });
+  expect(c.room?.id).toBe("a".repeat(32));
+  c.dispose();
+});
+it.each(["getItem", "setItem", "removeItem"] as const)(
+  "room creation recovers uncertain results when storage %s is blocked",
+  async (method) => {
+    vi.spyOn(Storage.prototype, method).mockImplementation(() => {
+      throw new DOMException("blocked", "SecurityError");
+    });
+    let originalKey: string | null = null;
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (path: string, init: RequestInit) => {
+        if (path === "/api/session") return response({ ok: true });
+        const key = JSON.parse(String(init.body)).commandId;
+        if (!originalKey) {
+          originalKey = key;
+          throw new Error("lost response");
+        }
+        return key === originalKey
+          ? response(room())
+          : response({ error: "BAD_REQUEST" }, 400);
+      }),
+    );
+    const c = createOnline(() => {});
+    await expect(c.create()).rejects.toThrow();
+    await expect(c.create()).resolves.toMatchObject({ id: "a".repeat(32) });
+    expect(c.room?.id).toBe("a".repeat(32));
+    expect(c.error).toBe("");
+    c.dispose();
+  },
+);
+it.each(["create", "join"] as const)(
+  "entering another room via %s never replays the previous room's unresolved receipt",
+  async (operation) => {
+    const old = "a".repeat(32),
+      next = "c".repeat(32);
+    sessionStorage.setItem(
+      `interval-pending:${old}`,
+      JSON.stringify({
+        op: "leave",
+        body: { commandId: "old-leave", version: 0 },
+      }),
+    );
+    const newRoom = { ...room(), id: next };
+    let wrongWrites = 0;
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (path: string) => {
+        if (path === "/api/session") return response({ ok: true });
+        if (path === `/api/rooms/${old}/state`) throw new Error("offline");
+        if (path.endsWith("/leave")) {
+          wrongWrites++;
+          return response({ ...newRoom, status: "closed", version: 1 });
+        }
+        return response(newRoom);
+      }),
+    );
+    const c = createOnline(() => {});
+    await c.resume(old);
+    expect(c.pending).toBe(true);
+    if (operation === "create") await c.create();
+    else await c.join(next, "b".repeat(64));
+    await c.retry();
+    expect(wrongWrites).toBe(0);
+    expect(c.pending).toBe(false);
+    expect(c.room?.id).toBe(next);
+    expect(c.room?.status).toBe("waiting");
+    expect(sessionStorage.getItem(`interval-pending:${old}`)).not.toBeNull();
+    c.dispose();
+  },
+);
+it("a second creation uses a new receipt even if removing the first stored receipt is blocked", async () => {
+  vi.spyOn(Storage.prototype, "removeItem").mockImplementation(() => {
+    throw new DOMException("blocked", "SecurityError");
+  });
+  const rooms = new Map<string, ReturnType<typeof room>>();
+  vi.stubGlobal(
+    "fetch",
+    vi.fn(async (path: string, init: RequestInit) => {
+      if (path === "/api/session") return response({ ok: true });
+      const key = JSON.parse(String(init.body)).commandId;
+      if (!rooms.has(key))
+        rooms.set(key, {
+          ...room(),
+          id: (rooms.size === 0 ? "a" : "c").repeat(32),
+        });
+      return response(rooms.get(key));
+    }),
+  );
+  const c = createOnline(() => {});
+  const first = await c.create();
+  c.stop();
+  const second = await c.create();
+  expect(second.id).not.toBe(first.id);
+  c.dispose();
+});
+it.each(["response", "error"] as const)(
+  "a late old-room poll %s cannot replace the current room or connection state",
+  async (completion) => {
+    const old = "a".repeat(32),
+      next = "c".repeat(32);
+    let pollCount = 0;
+    let resolvePoll!: (r: Response) => void;
+    let rejectPoll!: (e: Error) => void;
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (path: string) => {
+        if (path === "/api/session") return response({ ok: true });
+        if (path === `/api/rooms/${old}/state` && ++pollCount > 1)
+          return new Promise<Response>((resolve, reject) => {
+            resolvePoll = resolve;
+            rejectPoll = reject;
+          });
+        return response(
+          path.includes(next) ? { ...room(3), id: next } : room(),
+        );
+      }),
+    );
+    const c = createOnline(() => {});
+    await c.resume(old);
+    const poll = c.retry();
+    c.stop();
+    await c.resume(next);
+    if (completion === "response")
+      resolvePoll(response({ ...room(10), status: "closed" }));
+    else rejectPoll(new Error("old network failure"));
+    await poll;
+    expect(c.room?.id).toBe(next);
+    expect(c.room?.version).toBe(3);
+    expect(c.room?.status).toBe("waiting");
+    expect(c.connected).toBe(true);
+    expect(c.error).toBe("");
+    c.dispose();
+  },
+);

@@ -30,6 +30,7 @@ let selection: Selection = { pieceId: null, candidate: null },
   initializing = true;
 let lastRoomState: GameState | null = null;
 let invalidPick = "";
+let copyAttempt = 0;
 const c = createController(() => {
   if (!initializing) render();
 });
@@ -120,6 +121,10 @@ function render() {
     ? `room:${room.id}`
     : `${mode}:${c.getToken().session}`;
   if (sessionKey !== renderedSession) {
+    copyAttempt++;
+    $("copy").textContent = "招待リンクをコピー";
+    ($("invite-link") as HTMLInputElement).value = "";
+    show("invite-link", false);
     const emptyHistory =
       room && s.ply > 0
         ? "現在の盤面から再開しました。"
@@ -351,21 +356,30 @@ function render() {
 setupBoard();
 initializing = false;
 render();
-$("summon").onclick = () => {
+function keyboardFocus(event: MouseEvent, selector: string) {
+  if (event.detail === 0)
+    document.querySelector<HTMLElement>(selector)?.focus();
+}
+$("summon").onclick = (event) => {
   clear();
   picking = true;
   selection = { pieceId: null, candidate: null };
   render();
+  keyboardFocus(event, "[data-kind]:not(:disabled)");
 };
 document.querySelectorAll<HTMLButtonElement>("[data-kind]").forEach(
   (b) =>
-    (b.onclick = () => {
+    (b.onclick = (event) => {
       if (busy()) return;
       invalidPick = "";
       picking = true;
       kind = b.dataset.kind as Kind;
       selection = { pieceId: null, candidate: null };
       render();
+      keyboardFocus(
+        event,
+        '#board .target, #board [data-available="true"], #minus:not(:disabled)',
+      );
     }),
 );
 $("minus").onclick = () => {
@@ -378,28 +392,31 @@ $("plus").onclick = () => {
   selection.candidate = null;
   render();
 };
-$("cancel").onclick = () => {
+$("cancel").onclick = (event) => {
   clear();
   render();
+  keyboardFocus(event, busy() ? '#board [tabindex="0"]' : "#summon");
 };
 $("back").onclick = () => {
   invalidPick = "";
   selection.candidate = null;
   render();
 };
-$("pass").onclick = () => {
+$("pass").onclick = (event) => {
   if (busy() || state().outcome) return;
   clear();
   selection.candidate = { type: "pass" };
   render();
+  keyboardFocus(event, "#confirm");
 };
-$("confirm").onclick = async () => {
+$("confirm").onclick = async (event) => {
   const a = selection.candidate;
   if (!a || busy()) return;
   clear();
   if (mode === "online") await online.submit(a);
   else await c.submit(a, c.getToken());
   render();
+  keyboardFocus(event, '#board [tabindex="0"]');
 };
 function dialog(id: string, open: boolean) {
   const d = $(id) as HTMLDialogElement;
@@ -411,8 +428,23 @@ function dialog(id: string, open: boolean) {
 }
 $("menu").onclick = () => dialog("drawer", true);
 $("close-menu").onclick = () => dialog("drawer", false);
-$("friend").onclick = () =>
-  dialog(online.room ? "drawer" : "friend-dialog", true);
+function openFriendDialog() {
+  const invited = !!history.state?.invite && !!history.state?.room;
+  $("friend-title").textContent = invited
+    ? "招待が届いています"
+    : "フレンド対戦";
+  $("friend-description").textContent = invited
+    ? "参加すると黒の席に着きます。準備完了で対戦が始まります。"
+    : "部屋をつくり、招待リンクを1人に送ってください。2人が準備完了すると対戦が始まります。";
+  show("create-room", !invited);
+  show("join-room", invited);
+  show("friend-error", false);
+  dialog("friend-dialog", true);
+}
+$("friend").onclick = () => {
+  if (online.room) dialog("drawer", true);
+  else openFriendDialog();
+};
 $("close-friend").onclick = () => dialog("friend-dialog", false);
 function reset(m: "local" | "cpu") {
   if (mode === "online" && online.room && !online.unavailable) return;
@@ -498,11 +530,16 @@ function inviteLink() {
 $("copy").onclick = async () => {
   const link = inviteLink();
   if (!link) return;
+  const attempt = ++copyAttempt;
   try {
     await navigator.clipboard.writeText(link);
+    if (attempt !== copyAttempt) return;
     $("copy").textContent = "コピーしました ✓";
-    setTimeout(() => ($("copy").textContent = "招待リンクをコピー"), 2000);
+    setTimeout(() => {
+      if (attempt === copyAttempt) $("copy").textContent = "招待リンクをコピー";
+    }, 2000);
   } catch {
+    if (attempt !== copyAttempt) return;
     const input = $("invite-link") as HTMLInputElement;
     input.value = link;
     input.hidden = false;
@@ -541,9 +578,7 @@ $("again").onclick = () => {
     online.stop();
     mode = "local";
     history.replaceState(null, "", location.pathname);
-    show("join-room", false);
-    show("create-room", true);
-    dialog("friend-dialog", true);
+    openFriendDialog();
     render();
   } else reset(mode);
 };
@@ -565,12 +600,7 @@ if (
 const pendingInvite = history.state?.invite,
   pendingRoom = history.state?.room;
 if (pendingInvite && pendingRoom) {
-  $("friend-title").textContent = "招待が届いています";
-  $("friend-description").textContent =
-    "参加すると黒の席に着きます。準備完了で対戦が始まります。";
-  show("create-room", false);
-  show("join-room", true);
-  dialog("friend-dialog", true);
+  openFriendDialog();
   $("join-room").onclick = async () => {
     if (online.busy || !allowFriendEntry()) return;
     ($("join-room") as HTMLButtonElement).disabled = true;

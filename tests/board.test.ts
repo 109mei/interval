@@ -81,3 +81,34 @@ it("keyboard descriptions identify legal destinations and lifetime", () => {
   ).toContain("残り3回");
   b.dispose();
 });
+it("pointer focus preserves one board tab stop when followed by arrow navigation", () => {
+  const h = document.createElement("div");
+  document.body.append(h);
+  const b = createBoard2D(h, () => {});
+  b.render(createGame(), { pieceId: null, candidate: null }, null);
+  const square = h.querySelector<HTMLButtonElement>('[data-square="10"]')!;
+  square.focus();
+  square.dispatchEvent(
+    new KeyboardEvent("keydown", {
+      key: "ArrowRight",
+      bubbles: true,
+      cancelable: true,
+    }),
+  );
+  expect(h.querySelectorAll('[tabindex="0"]')).toHaveLength(1);
+  expect((document.activeElement as HTMLElement).dataset.square).toBe("11");
+  b.dispose();
+  h.remove();
+});
+it("arrow keys at board edges do not scroll the page", () => {
+  const h = document.createElement("div");
+  const b = createBoard2D(h, () => {});
+  const event = new KeyboardEvent("keydown", {
+    key: "ArrowLeft",
+    bubbles: true,
+    cancelable: true,
+  });
+  h.querySelector<HTMLButtonElement>('[data-square="0"]')!.dispatchEvent(event);
+  expect(event.defaultPrevented).toBe(true);
+  b.dispose();
+});

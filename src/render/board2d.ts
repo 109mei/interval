@@ -19,6 +19,10 @@ export function createBoard2D(
       b.dataset.square = String(q);
       b.className = `square ${(row + col) % 2 ? "dark" : "light"}`;
       b.tabIndex = q === 0 ? 0 : -1;
+      b.onfocus = () => {
+        for (const button of buttons.values()) button.tabIndex = -1;
+        b.tabIndex = 0;
+      };
       b.onclick = () => onSquare(q);
       b.addEventListener("keydown", (e) => {
         const shift = (
@@ -28,6 +32,7 @@ export function createBoard2D(
           >
         )[e.key];
         if (!shift) return;
+        e.preventDefault();
         const target = q + shift;
         if (
           target < 0 ||
@@ -35,7 +40,6 @@ export function createBoard2D(
           (Math.abs(shift) === 1 && Math.floor(target / 7) !== row)
         )
           return;
-        e.preventDefault();
         b.tabIndex = -1;
         const next = buttons.get(target)!;
         next.tabIndex = 0;

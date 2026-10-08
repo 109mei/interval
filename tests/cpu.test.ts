@@ -165,3 +165,33 @@ it("CPU takes a terminal draw rather than a move that immediately loses its core
   };
   expect(chooseCpuAction(s)).toEqual({ type: "pass" });
 });
+it("CPU uses a Link exchange to give a Leaper a forced core capture", () => {
+  const s: GameState = {
+    ...createGame(),
+    ply: 20,
+    grain: { white: 16, black: 16 },
+    pieces: [
+      p("link", "link", 31, "white", 2),
+      p("leaper", "leaper", 30, "white", 2),
+      p("bridge", "bastion", 38, "black", 3),
+    ],
+  };
+  const action = chooseCpuAction(s)!;
+  expect(action).toEqual({ type: "swap", pieceId: "link", allyId: "leaper" });
+  const moved = applyAction(s, action);
+  if (!moved.ok) throw Error("illegal CPU exchange");
+  for (const reply of legalActions(moved.state)) {
+    const after = applyAction(moved.state, reply);
+    if (!after.ok) throw Error("illegal reply");
+    expect(
+      legalActions(after.state).some((candidate) => {
+        const result = applyAction(after.state, candidate);
+        return (
+          result.ok &&
+          result.state.outcome?.kind === "win" &&
+          result.state.outcome.winner === "white"
+        );
+      }),
+    ).toBe(true);
+  }
+});

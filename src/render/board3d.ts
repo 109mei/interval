@@ -69,6 +69,10 @@ export function createBoard3D(
     const b = document.createElement("button");
     b.dataset.square = String(q);
     b.tabIndex = q === 0 ? 0 : -1;
+    b.onfocus = () => {
+      for (const button of buttons.values()) button.tabIndex = -1;
+      b.tabIndex = 0;
+    };
     b.onclick = () => onSquare(q);
     b.addEventListener("keydown", (e) => {
       const d = (
@@ -78,6 +82,7 @@ export function createBoard3D(
         >
       )[e.key];
       if (!d) return;
+      e.preventDefault();
       const next = q + d;
       if (
         next < 0 ||
@@ -85,7 +90,6 @@ export function createBoard3D(
         (Math.abs(d) === 1 && Math.floor(q / 7) !== Math.floor(next / 7))
       )
         return;
-      e.preventDefault();
       b.tabIndex = -1;
       buttons.get(next)!.tabIndex = 0;
       buttons.get(next)!.focus();
@@ -237,6 +241,7 @@ export function createBoard3D(
                       ? 0x74998c
                       : 0xc3c6ac,
         );
+        buttons.get(q)!.dataset.available = String(targets.has(q));
         buttons
           .get(q)!
           .setAttribute(
