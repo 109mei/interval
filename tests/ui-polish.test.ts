@@ -10,13 +10,29 @@ async function boot() {
   history.replaceState(null, "", "/?2d");
   vi.spyOn(window, "confirm").mockReturnValue(true);
   await import("../src/main");
+  click("#choose-local");
+  click("#start-game");
+}
+async function confirmAction() {
+  click("#confirm");
+  await Promise.resolve();
+  await Promise.resolve();
+}
+async function summonWall(square: number) {
+  click("#summon");
+  click('[data-kind="bastion"]');
+  click(`[data-square="${square}"]`);
+  await confirmAction();
 }
 afterEach(() => {
   vi.restoreAllMocks();
   vi.unstubAllGlobals();
 });
-it("an immobile starting wall explains its role and keeps summon available", async () => {
+it("an immobile summoned wall explains its role and keeps summon available", async () => {
   await boot();
+  await summonWall(10);
+  click("#pass");
+  await confirmAction();
   click('[data-square="10"]');
   expect(el("hint").textContent).toContain("移動できません");
   expect(el("idle-controls").hidden).toBe(false);
@@ -33,16 +49,21 @@ it("summon choice teaches movement and confirms an exact piece and square", asyn
   expect(
     document.querySelector('[data-square="9"] .ghost-piece'),
   ).not.toBeNull();
-  expect(el("summary").textContent).toContain("期間3回");
+  expect(el("summary").textContent).toContain("期間3ターン");
   click("#back");
   expect(document.querySelector(".ghost-piece")).toBeNull();
 });
 it("pieces have visible identifying labels and a lifetime key", async () => {
   await boot();
+  await summonWall(10);
+  await summonWall(38);
   expect(
     document.querySelector('[data-square="10"] .piece-mark')?.textContent,
   ).toBe("守");
-  expect(el("board-legend").textContent).toContain("残り期間");
+  expect(el("board-legend").textContent).toContain("残りターン数");
+  expect(
+    document.querySelector('[data-square="10"]')?.getAttribute("aria-label"),
+  ).toContain("残り3ターン");
   click('[data-square="38"]');
   expect(el("hint").textContent).toContain("黒");
   expect(el("summary").textContent).toContain("バスティオン");

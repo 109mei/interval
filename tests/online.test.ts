@@ -561,3 +561,32 @@ it("Sora receives readiness-specific recovery after simultaneous ready", async (
   expect(attempts).toBe(2);
   c.dispose();
 });
+it.each(["create", "join", "resume"] as const)(
+  "a failed first %s render notification releases busy for retry",
+  async (op) => {
+    let fail = true;
+    vi.stubGlobal(
+      "fetch",
+      vi.fn(async (p: string) =>
+        response(p === "/api/session" ? { ok: true } : room()),
+      ),
+    );
+    const c = createOnline(() => {
+      if (fail) {
+        fail = false;
+        throw Error("render failed");
+      }
+    });
+    const call = () =>
+      op === "create"
+        ? c.create()
+        : op === "join"
+          ? c.join("a".repeat(32), "b".repeat(64))
+          : c.resume("a".repeat(32));
+    await call().catch(() => {});
+    expect(c.busy).toBe(false);
+    await call();
+    expect(c.room?.id).toBe("a".repeat(32));
+    c.dispose();
+  },
+);

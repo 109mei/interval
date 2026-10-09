@@ -17,7 +17,9 @@ export function createBoard3D(
   onFailure: () => void,
 ): BoardView {
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 1.75));
+  let pixelRatio = Math.min(devicePixelRatio, 1.75),
+    renderSize = 0;
+  renderer.setPixelRatio(pixelRatio);
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   renderer.setClearColor(0x243031, 1);
@@ -28,6 +30,7 @@ export function createBoard3D(
     camera = new THREE.OrthographicCamera(-3.92, 3.92, 3.92, -3.92, 0.1, 80);
   camera.position.set(0, 13, 4.8);
   camera.lookAt(0, 0, 0);
+  camera.updateMatrixWorld();
   scene.add(new THREE.HemisphereLight(0xffffff, 0x3f5a63, 2));
   const light = new THREE.DirectionalLight(0xffebc7, 4);
   light.position.set(-4, 9, 4);
@@ -69,6 +72,10 @@ export function createBoard3D(
   scene.add(models);
   const labels = document.createElement("div");
   labels.className = "overlay-labels";
+  const pieceLabels = new Map<
+    string,
+    { life: HTMLElement; mark: HTMLElement }
+  >();
   const keys = document.createElement("div");
   keys.className = "three-keys";
   const buttons = new Map<number, HTMLButtonElement>();
@@ -134,14 +141,17 @@ export function createBoard3D(
   function draw() {
     if (disposed) return;
     const size = Math.max(1, host.clientWidth);
-    renderer.setSize(size, size, false);
-    renderer.setPixelRatio(
-      document.body.classList.contains("low-quality")
-        ? 1
-        : Math.min(devicePixelRatio, 1.75),
-    );
-    renderer.shadowMap.enabled =
-      !document.body.classList.contains("low-quality");
+    const lowQuality = document.body.classList.contains("low-quality");
+    const nextRatio = lowQuality ? 1 : Math.min(devicePixelRatio, 1.75);
+    if (nextRatio !== pixelRatio) {
+      renderer.setPixelRatio(nextRatio);
+      pixelRatio = nextRatio;
+    }
+    if (size !== renderSize) {
+      renderer.setSize(size, size, false);
+      renderSize = size;
+    }
+    renderer.shadowMap.enabled = !lowQuality;
     camera.updateMatrixWorld();
     for (const [q, b] of buttons) {
       const v = project((q % 7) - 3, 0.05, 3 - Math.floor(q / 7));
@@ -149,6 +159,7 @@ export function createBoard3D(
       b.style.top = `${(1 - v.y) * 50}%`;
     }
     labels.replaceChildren();
+    pieceLabels.clear();
     const displayed = new Map(state?.pieces.map((p) => [p.id, p]) ?? []);
     for (const track of activePlan?.tracks ?? [])
       if (!displayed.has(track.piece.id))
@@ -175,6 +186,7 @@ export function createBoard3D(
         mark.style.left = el.style.left;
         mark.style.top = el.style.top;
         labels.append(mark);
+        pieceLabels.set(p.id, { life: el, mark });
       }
     if (selection.candidate?.type === "summon") {
       const a = selection.candidate,
@@ -186,11 +198,13 @@ export function createBoard3D(
       ghost.style.top = `${(1 - v.y) * 50}%`;
       labels.append(ghost);
     }
-    renderer.render(scene, camera);
   }
   const ro = new ResizeObserver(() => {
+    if (disposed) return;
     try {
       draw();
+      // Reapply the sampled pose after rebuilding labels, without an extra draw.
+      paintFrame(activePlan, sampledElapsed, false);
     } catch {
       onFailure();
     }
@@ -198,7 +212,9 @@ export function createBoard3D(
   ro.observe(host);
   const pieceModels = new Map<string, THREE.Group>();
   const coreModels = new Map<string, THREE.Group>();
-  let activePlan: MotionPlan | null = null;
+  let activePlan: MotionPlan | null = null,
+    sampledElapsed = 0,
+    updating = false;
   function syncModels() {
     if (!state) return;
     const pieces = new Map(state.pieces.map((p) => [p.id, p]));
@@ -227,11 +243,10 @@ export function createBoard3D(
         pieceModels.set(id, model);
         models.add(model);
       }
-      if (!activePlan) {
-        model.position.set((p.square % 7) - 3, 0, 3 - Math.floor(p.square / 7));
-        model.scale.setScalar(1);
-        model.visible = true;
-      }
+      // Restore the authoritative baseline before applying the sampled tracks.
+      model.position.set((p.square % 7) - 3, 0, 3 - Math.floor(p.square / 7));
+      model.scale.setScalar(1);
+      model.visible = true;
     }
     const visible = activePlan?.cues.some((c) => c.kind === "win")
       ? (["white", "black"] as const)
@@ -252,6 +267,56 @@ export function createBoard3D(
         models.add(model);
       }
   }
+  function paintFrame(
+    plan: MotionPlan | null,
+    elapsed: number,
+    refresh = plan !== activePlan || !plan,
+  ) {
+    if (disposed) return;
+    activePlan = plan;
+    sampledElapsed = elapsed;
+    try {
+      if (refresh) {
+        syncModels();
+        if (state) draw();
+      }
+      for (const track of plan?.tracks ?? []) {
+        const model = pieceModels.get(track.piece.id);
+        if (!model) continue;
+        const pose = trackPose(track, elapsed);
+        model.position.set(pose.x - 3, pose.lift, 3 - pose.y);
+        model.scale.setScalar(
+          pose.scale * (track.leave ? Math.max(0.01, pose.opacity) : 1),
+        );
+        model.visible = pose.opacity > 0.01;
+        const v = project(pose.x - 3 + 0.3, 0.12 + pose.lift, 3 - pose.y + 0.3);
+        const remaining =
+          track.leave === "capture" ||
+          elapsed < (track.leave === "expire" ? track.start : track.arrive)
+            ? track.piece.remaining
+            : track.remaining;
+        const projected = pieceLabels.get(track.piece.id);
+        if (projected) {
+          for (const el of [projected.life, projected.mark]) {
+            el.style.left = `${(v.x + 1) * 50}%`;
+            el.style.top = `${(1 - v.y) * 50}%`;
+            el.style.opacity = String(pose.opacity);
+          }
+          projected.life.textContent = String(remaining);
+        }
+      }
+      const win = plan?.cues.find((c) => c.kind === "win");
+      if (win && state?.outcome?.kind === "win") {
+        const losingCore = coreModels.get(
+          state.outcome.winner === "white" ? "black" : "white",
+        );
+        if (losingCore) losingCore.visible = elapsed < win.start;
+      }
+      renderer.render(scene, camera);
+    } catch {
+      onFailure();
+    }
+  }
   const motion = createMotionPlayer(
     host,
     (x, y) => {
@@ -259,63 +324,23 @@ export function createBoard3D(
       return { x: (p.x + 1) * 50, y: (1 - p.y) * 50 };
     },
     (plan, elapsed) => {
-      if (disposed) return;
-      try {
-        if (plan !== activePlan || !plan) {
-          activePlan = plan;
-          syncModels();
-          if (state) draw();
-        }
-        for (const track of plan?.tracks ?? []) {
-          const model = pieceModels.get(track.piece.id);
-          if (!model) continue;
-          const pose = trackPose(track, elapsed);
-          model.position.set(pose.x - 3, pose.lift, 3 - pose.y);
-          model.scale.setScalar(
-            pose.scale * (track.leave ? Math.max(0.01, pose.opacity) : 1),
-          );
-          model.visible = pose.opacity > 0.01;
-          const v = project(
-            pose.x - 3 + 0.3,
-            0.12 + pose.lift,
-            3 - pose.y + 0.3,
-          );
-          const remaining =
-            track.leave === "capture" ||
-            elapsed < (track.leave === "expire" ? track.start : track.arrive)
-              ? track.piece.remaining
-              : track.remaining;
-          for (const el of labels.querySelectorAll<HTMLElement>(
-            "[data-life-for], [data-mark-for]",
-          )) {
-            const isLife = el.dataset.lifeFor === track.piece.id;
-            if (!isLife && el.dataset.markFor !== track.piece.id) continue;
-            el.style.left = `${(v.x + 1) * 50}%`;
-            el.style.top = `${(1 - v.y) * 50}%`;
-            el.style.opacity = String(pose.opacity);
-            if (isLife) el.textContent = String(remaining);
-          }
-        }
-        const win = plan?.cues.find((c) => c.kind === "win");
-        if (win && state?.outcome?.kind === "win") {
-          const losingCore = coreModels.get(
-            state.outcome.winner === "white" ? "black" : "white",
-          );
-          if (losingCore) losingCore.visible = elapsed < win.start;
-        }
-        renderer.render(scene, camera);
-      } catch {
-        onFailure();
+      if (updating) {
+        // update() can synchronously settle an old plan and start its successor.
+        // Only the last sample is visible, so submit that scene once below.
+        activePlan = plan;
+        sampledElapsed = elapsed;
+        return;
       }
+      paintFrame(plan, elapsed);
     },
   );
   return {
     cancelMotion: motion.cancel,
     render(s, sel, pv, transition) {
+      if (disposed) return;
       state = s;
       selection = sel;
       preview = pv;
-      syncModels();
       const { targets, kinds, inspectOnly } = boardTargets(s, sel);
       for (let q = 0; q < 49; q++) {
         const piece = s.pieces.find((p) => p.square === q);
@@ -351,11 +376,18 @@ export function createBoard3D(
           .get(q)!
           .setAttribute(
             "aria-label",
-            `${squareName(q)} ${piece ? `${piece.side === "white" ? "白" : "黒"} ${INFO[piece.kind].name} 残り${piece.remaining}回` : q === 3 ? "白のコア" : q === 45 ? "黒のコア" : "空き"}${targetDescription(kinds.get(q), inspectOnly)}${pv?.targets.includes(q) ? " · 選んだ行き先（確定前）" : ""}`,
+            `${squareName(q)} ${piece ? `${piece.side === "white" ? "白" : "黒"} ${INFO[piece.kind].name} 残り${piece.remaining}ターン` : q === 3 ? "白のコア" : q === 45 ? "黒のコア" : "空き"}${targetDescription(kinds.get(q), inspectOnly)}${pv?.targets.includes(q) ? " · 選んだ行き先（確定前）" : ""}`,
           );
       }
+      updating = true;
+      try {
+        motion.update(s, transition);
+      } finally {
+        updating = false;
+      }
+      syncModels();
       draw();
-      motion.update(s, transition);
+      paintFrame(activePlan, sampledElapsed, false);
     },
     dispose() {
       if (disposed) return;
@@ -368,6 +400,7 @@ export function createBoard3D(
       disposeObject(scene);
       renderer.dispose();
       host.replaceChildren();
+      pieceLabels.clear();
     },
   };
 }

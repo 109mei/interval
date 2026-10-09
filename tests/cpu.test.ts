@@ -16,6 +16,35 @@ it("cpu_legal_and_deterministic", () => {
   expect(isLegal(s, a)).toBe(true);
   expect(chooseCpuAction(s)).toEqual(a);
 });
+it.each(["white", "black"] as const)(
+  "CPU opens from a core-only board on %s's own half",
+  (side) => {
+    let s = createGame();
+    if (side === "black") {
+      const passed = applyAction(s, { type: "pass" });
+      if (!passed.ok) throw Error("invalid opening pass");
+      s = passed.state;
+    }
+    expect(s.pieces).toEqual([]);
+    const before = JSON.stringify(s);
+    const action = chooseCpuAction(s)!;
+    expect(action.type).toBe("summon");
+    expect(chooseCpuAction(s)).toEqual(action);
+    expect(isLegal(s, action)).toBe(true);
+    if (action.type !== "summon")
+      throw Error("CPU must deploy its first piece");
+    expect(side === "white" ? action.to <= 20 : action.to >= 28).toBe(true);
+    const after = applyAction(s, action);
+    expect(after.ok).toBe(true);
+    expect(after.state.pieces).toHaveLength(1);
+    expect(after.state.pieces[0]).toMatchObject({
+      side,
+      square: action.to,
+      kind: action.kind,
+    });
+    expect(JSON.stringify(s)).toBe(before);
+  },
+);
 it("cpu_takes_core", () => {
   const s: GameState = {
     ...createGame(),

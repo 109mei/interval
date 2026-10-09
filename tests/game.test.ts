@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import { createGame, applyAction, previewAction } from "../src/game/engine";
-import { legalActions } from "../src/game/rules";
+import { isLegal, legalActions, PRICES } from "../src/game/rules";
 import type { GameState, Piece, Kind, Action } from "../src/game/types";
 const p = (
   id: string,
@@ -28,6 +28,78 @@ const next = (s: GameState, a: Action) => {
   if (!r.ok) throw Error(r.error);
   return r.state;
 };
+describe("core-only opening and own-half summons", () => {
+  it("starts with only the two fixed cores and unchanged economy", () => {
+    expect(createGame()).toEqual({
+      pieces: [],
+      cores: { white: 3, black: 45 },
+      grain: { white: 16, black: 12 },
+      turn: "white",
+      ply: 0,
+      consecutivePasses: 0,
+      outcome: null,
+    });
+    expect(PRICES).toEqual({ bastion: 1, carver: 3, leaper: 2, link: 1 });
+  });
+  for (const side of ["white", "black"] as const)
+    it.each(Array.from({ length: 49 }, (_, square) => square))(
+      `${side} summons at square %i match only its own three ranks`,
+      (to) => {
+        const s = state([], { turn: side });
+        const expected =
+          to !== 3 && to !== 45 && (side === "white" ? to <= 20 : to >= 28);
+        const before = JSON.stringify(s);
+        const enumerated = legalActions(s);
+        for (const kind of ["bastion", "carver", "leaper", "link"] as const)
+          for (let duration = 1; duration <= 5; duration++) {
+            const action: Action = { type: "summon", kind, duration, to };
+            expect(isLegal(s, action)).toBe(expected);
+            expect(
+              enumerated.some(
+                (a) =>
+                  a.type === "summon" &&
+                  a.kind === kind &&
+                  a.duration === duration &&
+                  a.to === to,
+              ),
+            ).toBe(expected);
+            expect(previewAction(s, action) !== null).toBe(expected);
+            const result = applyAction(s, action);
+            expect(result.ok).toBe(expected);
+            if (result.ok) {
+              expect(result.state.pieces).toHaveLength(1);
+              expect(result.state.pieces[0]).toMatchObject({
+                side,
+                kind,
+                square: to,
+                remaining: duration,
+              });
+            } else expect(result.state).toBe(s);
+          }
+        expect(JSON.stringify(s)).toBe(before);
+      },
+    );
+  it.each(["white", "black"] as const)(
+    "%s cannot summon over either side's piece in its new third rank",
+    (side) => {
+      const to = side === "white" ? 20 : 28;
+      for (const occupant of ["white", "black"] as const) {
+        const s = state([p("occupant", "bastion", to, occupant)], {
+          turn: side,
+        });
+        const action: Action = {
+          type: "summon",
+          kind: "bastion",
+          duration: 1,
+          to,
+        };
+        expect(isLegal(s, action)).toBe(false);
+        expect(legalActions(s)).not.toContainEqual(action);
+        expect(applyAction(s, action).state).toBe(s);
+      }
+    },
+  );
+});
 describe("turn economy", () => {
   it("first_income_once", () => {
     const s = createGame();

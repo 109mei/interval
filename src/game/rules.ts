@@ -120,7 +120,7 @@ export function isLegal(s: GameState, a: Action): boolean {
       a.duration <= 5 &&
       validSquare(a.to) &&
       !occupied(s, a.to) &&
-      (s.turn === "white" ? a.to < 14 : a.to >= 35) &&
+      (s.turn === "white" ? a.to < 21 : a.to >= 28) &&
       s.grain[s.turn] >= PRICES[a.kind] * a.duration
     );
   if (a.type !== "move" && a.type !== "swap") return false;
@@ -139,8 +139,8 @@ export function legalActions(s: GameState): readonly Action[] {
     for (let duration = 1; duration <= 5; duration++) {
       if (PRICES[kind] * duration > s.grain[s.turn]) continue;
       for (
-        let to = s.turn === "white" ? 0 : 35;
-        to < (s.turn === "white" ? 14 : 49);
+        let to = s.turn === "white" ? 0 : 28;
+        to < (s.turn === "white" ? 21 : 49);
         to++
       )
         if (!occupied(s, to)) out.push({ type: "summon", kind, duration, to });

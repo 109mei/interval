@@ -121,7 +121,14 @@ for (const mode of ["2d", "3d"] as const) {
       },
       null,
     );
-    expect(h.querySelectorAll('[data-target-kind="summon"]')).toHaveLength(12);
+    expect(h.querySelectorAll('[data-target-kind="summon"]')).toHaveLength(20);
+    expect(
+      [...h.querySelectorAll<HTMLElement>('[data-target-kind="summon"]')]
+        .map((cell) => Number(cell.dataset.square))
+        .sort((a, b) => a - b),
+    ).toEqual([
+      0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20,
+    ]);
     b.render(createGame(), { pieceId: null, candidate: null }, null);
     expect(h.querySelector(".destination-marker")).toBeNull();
   });
@@ -219,10 +226,12 @@ it("Nao and Mika see an adjacent destination legend without losing exact selecti
   await import("../src/main");
   const click = (q: string) =>
     document.querySelector<HTMLButtonElement>(q)!.click();
+  click("#choose-local");
+  click("#start-game");
   click("#summon");
   click('[data-kind="carver"]');
   expect(document.getElementById("target-legend")?.textContent).toContain(
-    "召喚 12",
+    "召喚 20",
   );
   click('[data-square="9"]');
   expect(document.getElementById("target-legend")?.textContent).toContain("c2");
@@ -253,6 +262,14 @@ it("Nao and Mika see an adjacent destination legend without losing exact selecti
   );
   click("#cancel");
   expect(document.getElementById("target-legend")?.hidden).toBe(true);
+  // This real-main board is not in the fixture's `views` array. Settle its
+  // animation before jsdom removes the window and its RAF globals.
+  vi.spyOn(window, "confirm").mockReturnValue(true);
+  click("#home-button");
+  expect(document.getElementById("home")?.hidden).toBe(false);
+  expect(
+    document.querySelector("[data-moving-piece],[data-effect]"),
+  ).toBeNull();
 });
 it("markers cannot paint over role and lifetime labels in either renderer", async () => {
   const { readFileSync } = await import("node:fs");

@@ -1,0 +1,591 @@
+[
+  {
+    "id": "R200-N001",
+    "category": "network-recovery-notification",
+    "persona": "Snapshot-aware tactician",
+    "task": "Inspect a corrected same-version swap",
+    "precondition": "Playing room v7 has two stable piece IDs",
+    "sequence": [
+      "Swap their squares without changing the version",
+      "repeat the snapshot"
+    ],
+    "expected": "Both positions update in one notification and the duplicate is silent",
+    "assertion": "Both positions update in one notification and the duplicate is silent",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N002",
+    "category": "network-recovery-notification",
+    "persona": "Lifetime-counting player",
+    "task": "Receive a repaired timer without a board move",
+    "precondition": "Two pieces have known lifetime metadata",
+    "sequence": [
+      "Change remaining lifetime and summonedPly at v7",
+      "poll twice"
+    ],
+    "expected": "Lifetime metadata reaches the UI once",
+    "assertion": "Lifetime metadata reaches the UI once",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N003",
+    "category": "network-recovery-notification",
+    "persona": "Draw-reviewing player",
+    "task": "Observe an equal-version terminal correction",
+    "precondition": "Active room v7 has no outcome",
+    "sequence": [
+      "Change to pass draw and finished status at v7",
+      "advance one minute"
+    ],
+    "expected": "Draw becomes visible once and terminal state cancels scheduled polling",
+    "assertion": "Draw becomes visible once and terminal state cancels scheduled polling",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N004",
+    "category": "network-recovery-notification",
+    "persona": "Expiry-checking player",
+    "task": "Remove expired pieces in a corrected snapshot",
+    "precondition": "Room v7 contains two pieces",
+    "sequence": [
+      "Receive an empty pieces array at the same version twice"
+    ],
+    "expected": "All pieces disappear with exactly one notification",
+    "assertion": "All pieces disappear with exactly one notification",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N005",
+    "category": "network-recovery-notification",
+    "persona": "Player with two active views",
+    "task": "Isolate callbacks and polling between clients",
+    "precondition": "Two clients display the same occupied room independently",
+    "sequence": [
+      "Resume both clients",
+      "Receive one equal-version resource correction in each",
+      "Dispose the first client and advance the second timer"
+    ],
+    "expected": "Each view notifies independently; disposing one preserves silent polling in the other",
+    "assertion": "Each client emits one correction callback; disposed client makes no more reads while the other continues at 2500 ms.",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N006",
+    "category": "network-recovery-notification",
+    "persona": "Two-view analyst",
+    "task": "Retain the previous immutable snapshot",
+    "precondition": "The client has decoded a room independent from server fixture",
+    "sequence": [
+      "Mutate the source fixture grain then receive it"
+    ],
+    "expected": "Previous snapshot remains unchanged while new grain notifies once",
+    "assertion": "Previous snapshot remains unchanged while new grain notifies once",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N007",
+    "category": "network-recovery-notification",
+    "persona": "Turn-indicator observer",
+    "task": "Handle repeated equal-version value reversals",
+    "precondition": "White-to-move room v7 is visible",
+    "sequence": [
+      "Alternate black and white turns four times, repeating each response"
+    ],
+    "expected": "Each real reversal notifies and each duplicate stays silent",
+    "assertion": "Each real reversal notifies and each duplicate stays silent",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N008",
+    "category": "network-recovery-notification",
+    "persona": "Backgrounded commuter",
+    "task": "Restore corrected data and its new cadence",
+    "precondition": "Occupied own-turn room is active",
+    "sequence": [
+      "Hide for three minutes",
+      "change turn and resources at v7",
+      "foreground"
+    ],
+    "expected": "One update restores corrected data and uses opponent-turn 1200 ms cadence",
+    "assertion": "One update restores corrected data and uses opponent-turn 1200 ms cadence",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N009",
+    "category": "network-recovery-notification",
+    "persona": "Stale-proxy user",
+    "task": "Distinguish old and current corrected boards",
+    "precondition": "Room v7 displays two pieces",
+    "sequence": [
+      "Receive empty board at v6 then the same board at v7"
+    ],
+    "expected": "Older correction is ignored; equal-version correction updates once",
+    "assertion": "Older correction is ignored; equal-version correction updates once",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N010",
+    "category": "network-recovery-notification",
+    "persona": "Multi-server visitor",
+    "task": "Ignore JSON object property ordering",
+    "precondition": "An occupied authoritative snapshot is displayed",
+    "sequence": [
+      "Reverse room and state object key order and reorder readiness keys",
+      "Reorder nested grain/piece object keys",
+      "Reverse the piece array and repeat that snapshot"
+    ],
+    "expected": "Semantically identical object values do not cause a redundant UI callback",
+    "assertion": "Object-key reordering is UI-silent, while changed array order is exposed and notifies exactly once.",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N011",
+    "category": "network-recovery-notification",
+    "persona": "Long-session lobby host",
+    "task": "Keep a fifteen-minute wait quiet",
+    "precondition": "Waiting room has deterministic 1500 ms polling",
+    "sequence": [
+      "Run 600 polls with five joined-state reversals",
+      "stop and wait another minute"
+    ],
+    "expected": "601 state reads include setup; exactly five updates occur; stop halts all polling",
+    "assertion": "601 state reads include setup; exactly five updates occur; stop halts all polling",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N012",
+    "category": "network-recovery-notification",
+    "persona": "Rate-limited traveler",
+    "task": "See changing recovery guidance without repetition",
+    "precondition": "Valid lobby is already visible",
+    "sequence": [
+      "Alternate paired RATE_LIMIT and CAPACITY replies",
+      "recover"
+    ],
+    "expected": "Only three distinct error transitions and one recovery notify",
+    "assertion": "Only three distinct error transitions and one recovery notify",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N013",
+    "category": "network-recovery-notification",
+    "persona": "Captive-portal commuter",
+    "task": "Progress from transport failure to service recovery",
+    "precondition": "Lobby has been restored",
+    "sequence": [
+      "Drop a request",
+      "return repeated HTML",
+      "return valid snapshot"
+    ],
+    "expected": "Different guidance notifies, repeated guidance is silent, clean recovery notifies",
+    "assertion": "Different guidance notifies, repeated guidance is silent, clean recovery notifies",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N014",
+    "category": "network-recovery-notification",
+    "persona": "Player awaiting action receipt",
+    "task": "See remote progress while a receipt stays uncertain",
+    "precondition": "Pass command reply is lost and receipt retained",
+    "sequence": [
+      "Two scheduled polls receive v9 while command remains pending"
+    ],
+    "expected": "New authoritative version notifies once; receipt and uncertainty guidance remain",
+    "assertion": "New authoritative version notifies once; receipt and uncertainty guidance remain",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N015",
+    "category": "network-recovery-notification",
+    "persona": "Player receiving old acknowledgement",
+    "task": "Resolve receipt without rolling back latest board",
+    "precondition": "Lost action is pending while refresh already reached v10",
+    "sequence": [
+      "Retry original receipt and receive valid acknowledgement at v8"
+    ],
+    "expected": "Receipt clears visibly through busy transitions while board remains v10",
+    "assertion": "Receipt clears visibly through busy transitions while board remains v10",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N016",
+    "category": "network-recovery-notification",
+    "persona": "Leaving player behind proxy",
+    "task": "Recover from malformed leave acknowledgement",
+    "precondition": "Playing room is active",
+    "sequence": [
+      "Leave returns malformed readiness",
+      "retry yields closed v8"
+    ],
+    "expected": "Original leave receipt is reused and successful closure stops polling",
+    "assertion": "Original leave receipt is reused and successful closure stops polling",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N017",
+    "category": "network-recovery-notification",
+    "persona": "Invitee on unstable Wi-Fi",
+    "task": "Retry one readiness decision through mixed failures",
+    "precondition": "Lobby readiness is not committed locally",
+    "sequence": [
+      "Abort ready",
+      "receive non-JSON 502",
+      "receive JSON 503",
+      "finally succeed"
+    ],
+    "expected": "Four attempts retain exactly one command body and eventually clear the receipt",
+    "assertion": "Four attempts retain exactly one command body and eventually clear the receipt",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N018",
+    "category": "network-recovery-notification",
+    "persona": "Storage-restricted player",
+    "task": "Recover same-page action without browser storage",
+    "precondition": "All sessionStorage reads and writes throw SecurityError",
+    "sequence": [
+      "Lose pass reply and retry successfully"
+    ],
+    "expected": "In-memory exact receipt still works and successful recovery clears pending",
+    "assertion": "In-memory exact receipt still works and successful recovery clears pending",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N019",
+    "category": "network-recovery-notification",
+    "persona": "Backgrounded pending player",
+    "task": "Retry without unwanted hidden-tab polls",
+    "precondition": "Room is active before tab hides",
+    "sequence": [
+      "Submit lost pass while hidden",
+      "retry successfully",
+      "wait then foreground"
+    ],
+    "expected": "Mutation retry succeeds without hidden state reads; foreground refreshes once",
+    "assertion": "Mutation retry succeeds without hidden state reads; foreground refreshes once",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N020",
+    "category": "network-recovery-notification",
+    "persona": "Rate-limited invitee",
+    "task": "Distinguish reconnect from a new readiness decision",
+    "precondition": "Lobby v7 has an uncommitted readiness command",
+    "sequence": [
+      "Ready receives definitive RATE_LIMIT while refreshed lobby reaches v8",
+      "Retry connection",
+      "Explicitly ready again"
+    ],
+    "expected": "Reconnect never resends the rejected receipt; explicit ready uses a fresh ID at v8",
+    "assertion": "Rate-limit error clears pending/storage; retry only reads; next ready has new ID and current version.",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N021",
+    "category": "network-recovery-notification",
+    "persona": "Long-outage commuter",
+    "task": "Bound polling and notifications through recovery",
+    "precondition": "Healthy waiting room begins its timer",
+    "sequence": [
+      "Fail six scheduled polls through 20-second cap",
+      "recover",
+      "run one normal poll"
+    ],
+    "expected": "Backoff caps at 20 seconds while identical errors stay quiet; recovery resets cadence",
+    "assertion": "Backoff caps at 20 seconds while identical errors stay quiet; recovery resets cadence",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N022",
+    "category": "network-recovery-notification",
+    "persona": "Tunnel traveler returning to foreground",
+    "task": "Apply same-version correction after an abort",
+    "precondition": "Two-piece playing room is connected",
+    "sequence": [
+      "Abort refresh",
+      "hide for two minutes",
+      "foreground with one corrected piece"
+    ],
+    "expected": "Connection, error and corrected board recover in one notification",
+    "assertion": "Connection, error and corrected board recover in one notification",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N023",
+    "category": "network-recovery-notification",
+    "persona": "Player resetting during action",
+    "task": "Ignore a post-reset successful acknowledgement",
+    "precondition": "Pass command is waiting for a reply",
+    "sequence": [
+      "Stop client",
+      "resolve command with v8"
+    ],
+    "expected": "No room resurrection or callbacks; stored uncertain receipt is retained",
+    "assertion": "No room resurrection or callbacks; stored uncertain receipt is retained",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N024",
+    "category": "network-recovery-notification",
+    "persona": "Player resetting during leave",
+    "task": "Ignore post-reset abort and avoid refresh",
+    "precondition": "Leave is in flight from active match",
+    "sequence": [
+      "Stop then reject leave with AbortError"
+    ],
+    "expected": "Stopped state and error remain unchanged and no recovery fetch runs",
+    "assertion": "Stopped state and error remain unchanged and no recovery fetch runs",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N025",
+    "category": "network-recovery-notification",
+    "persona": "Player switching active rooms",
+    "task": "Continue refreshing after replacing an in-flight poll",
+    "precondition": "Room A has a deferred refresh",
+    "sequence": [
+      "Start deferred room A poll",
+      "Begin room B resume with deferred session preparation",
+      "Fire previous timer and visibility while preparation waits",
+      "Finish new resume then old poll",
+      "Request current-room refresh"
+    ],
+    "expected": "Old snapshot is ignored and B can issue subsequent state reads",
+    "assertion": "No old-room reads during replacement preparation; old reply cannot replace B; current B refresh is issued after completion.",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N026",
+    "category": "network-recovery-notification",
+    "persona": "Player reconnecting same room",
+    "task": "Release obsolete refresh gate across resume",
+    "precondition": "A deferred poll exists on the current room",
+    "sequence": [
+      "Start deferred current-room poll",
+      "Begin replacement resume with deferred session preparation",
+      "Reject old poll then fire visibility and timer",
+      "Complete session preparation and advance normal timer",
+      "Fail a later same-room session preparation",
+      "Restore the fake connection and retry"
+    ],
+    "expected": "Old failure is ignored and the new generation keeps polling",
+    "assertion": "Obsolete reads remain blocked during preparation; normal polling restarts; a later failed replacement session can recover through retry.",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N027",
+    "category": "network-recovery-notification",
+    "persona": "Fast room switcher",
+    "task": "Keep current request gate isolated from old finalization",
+    "precondition": "Old A poll is deferred",
+    "sequence": [
+      "Stop",
+      "resume B",
+      "start deferred B poll",
+      "finish A",
+      "tap retry",
+      "finish B"
+    ],
+    "expected": "Finishing A cannot unlock B and create overlapping B state reads",
+    "assertion": "Finishing A cannot unlock B and create overlapping B state reads",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N028",
+    "category": "network-recovery-notification",
+    "persona": "Invitee choosing newest invitation",
+    "task": "Accept only the latest overlapping join",
+    "precondition": "Two valid invitations target different rooms",
+    "sequence": [
+      "Start A join then B",
+      "finish B then A"
+    ],
+    "expected": "B owns the client and late A produces no callback or busy-state regression",
+    "assertion": "B owns the client and late A produces no callback or busy-state regression",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N029",
+    "category": "network-recovery-notification",
+    "persona": "Host becoming an invitee",
+    "task": "Retain uncertain creation receipt after joining elsewhere",
+    "precondition": "Host creation reply is deferred after its key was saved",
+    "sequence": [
+      "Join room B successfully",
+      "then resolve old host creation"
+    ],
+    "expected": "Room B remains current, late creation stays cancelled and its key is retained",
+    "assertion": "Room B remains current, late creation stays cancelled and its key is retained",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N030",
+    "category": "network-recovery-notification",
+    "persona": "Host retrying corrupt responses",
+    "task": "Keep creation identity across two uncertainty classes",
+    "precondition": "No active room and no previous creation key",
+    "sequence": [
+      "Receive JSON 503, malformed success, then valid creation"
+    ],
+    "expected": "All three attempts share a body; retry state remains visible and final success clears key",
+    "assertion": "All three attempts share a body; retry state remains visible and final success clears key",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N031",
+    "category": "network-recovery-notification",
+    "persona": "Player cancelling during UI update",
+    "task": "Cancel before dispatch after a synchronous reset",
+    "precondition": "Active client callback can synchronously stop the client",
+    "sequence": [
+      "Stop synchronously from action busy/pending notification",
+      "Repeat synchronous stop from create, join and resume initial notifications",
+      "Resume and retry after cancelling the definitely-unsent action",
+      "Cancel retry of an already-uncertain saved command"
+    ],
+    "expected": "Cancellation leaves home state and sends no action request",
+    "assertion": "Cancelled unsent action has no stored receipt and never replays; cancelled uncertain retry retains its old receipt; all synchronous session cancellations dispatch nothing.",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N032",
+    "category": "network-recovery-notification",
+    "persona": "Player after transient renderer failure",
+    "task": "Retry accepted snapshot after callback exception",
+    "precondition": "Healthy room has a working callback",
+    "sequence": [
+      "Change readiness",
+      "callback throws once",
+      "retry same snapshot twice"
+    ],
+    "expected": "Recovery flags notify once and duplicate healthy snapshot remains suppressed",
+    "assertion": "Recovery flags notify once and duplicate healthy snapshot remains suppressed",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N033",
+    "category": "network-recovery-notification",
+    "persona": "Player closing a detached renderer",
+    "task": "Preserve nested stopped notification after outer failure",
+    "precondition": "Callback can reset while handling v8",
+    "sequence": [
+      "Accept v8",
+      "callback stops client then throws",
+      "stop again"
+    ],
+    "expected": "Nested reset wins and subsequent identical stop emits no duplicate callback",
+    "assertion": "Nested reset wins and subsequent identical stop emits no duplicate callback",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N034",
+    "category": "network-recovery-notification",
+    "persona": "Impatient tab-switcher",
+    "task": "Prevent retry storms during a slow read",
+    "precondition": "One refresh response is deferred",
+    "sequence": [
+      "Send 20 visibility and retry signals",
+      "wait one minute",
+      "finish response"
+    ],
+    "expected": "No overlapping requests occur and exactly one normal timer resumes",
+    "assertion": "No overlapping requests occur and exactly one normal timer resumes",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N035",
+    "category": "network-recovery-notification",
+    "persona": "Player restoring a background tab",
+    "task": "Avoid timers and duplicate notification while initially hidden",
+    "precondition": "Document is hidden before initial resume",
+    "sequence": [
+      "Resume",
+      "wait one minute",
+      "foreground with unchanged snapshot"
+    ],
+    "expected": "Initial state is accepted without background reads and foreground fetch is UI-silent",
+    "assertion": "Initial state is accepted without background reads and foreground fetch is UI-silent",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N036",
+    "category": "network-recovery-notification",
+    "persona": "Player leaving during an old poll",
+    "task": "Keep closure authoritative against late playing data",
+    "precondition": "Playing v7 poll is deferred",
+    "sequence": [
+      "Leave succeeds with closed v8 then old playing poll resolves"
+    ],
+    "expected": "Closure remains visible, older poll is UI-silent and terminal polling stays stopped",
+    "assertion": "Closure remains visible, older poll is UI-silent and terminal polling stays stopped",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N037",
+    "category": "network-recovery-notification",
+    "persona": "Player whose opponent progresses quickly",
+    "task": "Clear command receipt after a newer scheduled snapshot",
+    "precondition": "Action acknowledgement is deferred",
+    "sequence": [
+      "Scheduled poll reaches v10",
+      "then original command acknowledges v8"
+    ],
+    "expected": "Only pending/busy state changes notify and v10 is never rolled back",
+    "assertion": "Only pending/busy state changes notify and v10 is never rolled back",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N038",
+    "category": "network-recovery-notification",
+    "persona": "Frequent resetter",
+    "task": "Avoid polling/listener buildup across twenty restarts",
+    "precondition": "One reusable client starts stopped",
+    "sequence": [
+      "Resume and stop twice in 20 cycles",
+      "resume once",
+      "dispose",
+      "signal visibility"
+    ],
+    "expected": "Each cycle has one initial read, resumed timer fires once and disposal remains quiet",
+    "assertion": "Each cycle has one initial read, resumed timer fires once and disposal remains quiet",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N039",
+    "category": "network-recovery-notification",
+    "persona": "Player returning to an uncertain room",
+    "task": "Isolate saved receipts across rooms",
+    "precondition": "Room A has an uncertain pass receipt",
+    "sequence": [
+      "Stop",
+      "resume B and refresh",
+      "stop",
+      "resume A and retry",
+      "Store a distinct receipt for B",
+      "Fail B resume while A is still present",
+      "Retry B session before replaying B receipt",
+      "Fail create and join preparation while B remains known",
+      "Try normal action before recovery",
+      "Explicitly retry B and verify polling resumes"
+    ],
+    "expected": "B never replays A receipt; returning to A replays the original exact body",
+    "assertion": "Cross-room recovery never sends B receipt to A; a failed replacement resume must first recover B, then replay its exact saved body. Failed create/join handover marks retained B disconnected and blocks mutation until explicit session recovery, after which normal polling resumes.",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  },
+  {
+    "id": "R200-N040",
+    "category": "network-recovery-notification",
+    "persona": "Home-screen observer",
+    "task": "Resume a same-version board correction without losing home focus",
+    "precondition": "Main UI shows an online two-piece match",
+    "sequence": [
+      "Go home",
+      "receive identical polls",
+      "remove one piece at v7",
+      "resume"
+    ],
+    "expected": "Home stays visible/focused; resumed board reflects correction and no mutation is sent",
+    "assertion": "Home stays visible/focused; resumed board reflects correction and no mutation is sent",
+    "limitations": "Deterministic jsdom with fake time, mocked fetch and synthetic room snapshots. No real API, rooms, browser route, visual rendering, mobile latency or deployed service exercised."
+  }
+]

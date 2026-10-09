@@ -1,0 +1,697 @@
+[
+  {
+    "id": "N001",
+    "category": "api-request",
+    "persona": "Privacy-aware host",
+    "sequence": [
+      "Issue a GET through api",
+      "Inspect the captured mocked request"
+    ],
+    "expected": "GET recovery requests use same-origin cookies and no-store caching",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N002",
+    "category": "api-request",
+    "persona": "Low-bandwidth player",
+    "sequence": [
+      "Issue a command through api",
+      "Inspect captured method, headers and JSON"
+    ],
+    "expected": "Command requests preserve the JSON body and identify the client",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N003",
+    "category": "api-abort",
+    "persona": "Player in a tunnel",
+    "sequence": [
+      "Have mocked fetch reject with AbortError",
+      "Observe api rejection"
+    ],
+    "expected": "An aborted request becomes actionable NETWORK guidance with a timeout signal",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N004",
+    "category": "api-response",
+    "persona": "Captive-portal user",
+    "sequence": [
+      "Return HTML with HTTP 200",
+      "Decode through api"
+    ],
+    "expected": "A captive portal HTML success response becomes SERVICE_UNAVAILABLE",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N005",
+    "category": "response-integrity",
+    "persona": "Player receiving corrupted readiness",
+    "sequence": [
+      "Resume a room",
+      "Receive ready.white as the string false"
+    ],
+    "expected": "Nonboolean readiness is rejected before it can claim a player is ready",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N006",
+    "category": "response-integrity",
+    "persona": "Player receiving corrupted seat",
+    "sequence": [
+      "Resume a room",
+      "Receive an unknown spectator seat"
+    ],
+    "expected": "An unknown seat is rejected rather than assigning unusable player controls",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N007",
+    "category": "api-response",
+    "persona": "Future-version user",
+    "sequence": [
+      "Return an unrecognized error code",
+      "Decode through api"
+    ],
+    "expected": "Unknown error codes retain a safe generic retry message",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N008",
+    "category": "api-response",
+    "persona": "Returning invitee",
+    "sequence": [
+      "Return ROOM_EXPIRED with HTTP 410",
+      "Decode through api"
+    ],
+    "expected": "Expired-room errors explain that a new invitation is needed",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N009",
+    "category": "response-integrity",
+    "persona": "Player receiving corrupted turn",
+    "sequence": [
+      "Resume a room",
+      "Receive an unknown turn side"
+    ],
+    "expected": "An invalid turn side is rejected with safe reconnect guidance",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N010",
+    "category": "response-integrity",
+    "persona": "Player receiving corrupted piece",
+    "sequence": [
+      "Resume a room",
+      "Receive a piece at off-board square 999"
+    ],
+    "expected": "An off-board piece is rejected before it can corrupt authoritative board state",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N011",
+    "category": "response-integrity",
+    "persona": "Returning player",
+    "sequence": [
+      "Resume a room",
+      "Return null with HTTP 200"
+    ],
+    "expected": "A null successful room response is rejected with recovery guidance and no connected room",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N012",
+    "category": "response-integrity",
+    "persona": "Returning keyboard player",
+    "sequence": [
+      "Resume valid playing room at version 3",
+      "Return room metadata without game state on refresh"
+    ],
+    "expected": "A malformed state refresh preserves the known board and exposes recovery guidance",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N013",
+    "category": "response-integrity",
+    "persona": "Player with two invitations",
+    "sequence": [
+      "Resume room A at version 4",
+      "Refresh returns room B at version 5"
+    ],
+    "expected": "A response for another room cannot silently switch the known session",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N014",
+    "category": "response-integrity",
+    "persona": "Player behind stale proxy",
+    "sequence": [
+      "Resume a valid playing room",
+      "Submit pass and return a negative response version",
+      "Refresh remains valid",
+      "Retry original action receipt"
+    ],
+    "expected": "A malformed action success preserves the known board and exact uncertain receipt",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N015",
+    "category": "receipt-recovery",
+    "persona": "Player with corrupted storage",
+    "sequence": [
+      "Store syntactically invalid pending JSON",
+      "Resume valid room",
+      "Retry"
+    ],
+    "expected": "Corrupted receipt JSON cannot trigger a mutation",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N016",
+    "category": "receipt-recovery",
+    "persona": "Player with obsolete storage",
+    "sequence": [
+      "Store pending receipt with unknown operation",
+      "Resume valid room",
+      "Retry"
+    ],
+    "expected": "An unrecognized saved operation cannot be replayed",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N017",
+    "category": "receipt-recovery",
+    "persona": "Player with partial storage",
+    "sequence": [
+      "Store pending receipt with fractional version",
+      "Resume valid room",
+      "Retry"
+    ],
+    "expected": "A saved receipt with a noninteger version cannot be replayed",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N018",
+    "category": "receipt-recovery",
+    "persona": "Player with incomplete storage",
+    "sequence": [
+      "Store pending receipt without command ID",
+      "Resume valid room",
+      "Retry"
+    ],
+    "expected": "A saved receipt without a command ID cannot be replayed",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N019",
+    "category": "poll-version",
+    "persona": "Player crossing networks",
+    "sequence": [
+      "Resume at version 6",
+      "Fail a state request",
+      "Recover with version 5"
+    ],
+    "expected": "Recovery cannot roll the board back to an older room version",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N020",
+    "category": "poll-cadence",
+    "persona": "Own-turn player",
+    "sequence": [
+      "Resume playing on own turn",
+      "Advance deterministic fake time"
+    ],
+    "expected": "Own-turn polling waits 2500 ms before the next state request",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N021",
+    "category": "poll-cadence",
+    "persona": "Waiting host",
+    "sequence": [
+      "Resume a joined waiting lobby",
+      "Advance deterministic fake time"
+    ],
+    "expected": "Waiting-room polling waits 1500 ms before the next request",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N022",
+    "category": "poll-cadence",
+    "persona": "Opponent-turn player",
+    "sequence": [
+      "Resume playing on opponent turn",
+      "Advance deterministic fake time"
+    ],
+    "expected": "Opponent-turn polling waits 1200 ms before the next request",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N023",
+    "category": "poll-backoff",
+    "persona": "Intermittent commuter",
+    "sequence": [
+      "Resume waiting room",
+      "Fail two polls",
+      "Advance fake time to each boundary"
+    ],
+    "expected": "Repeated failed polls back off from 4000 ms to 8000 ms",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N024",
+    "category": "poll-backoff",
+    "persona": "Reconnected commuter",
+    "sequence": [
+      "Fail one scheduled poll",
+      "Recover at backed-off poll",
+      "Advance normal lobby interval"
+    ],
+    "expected": "A successful recovery resets polling to the normal lobby cadence",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N025",
+    "category": "request-race",
+    "persona": "Impatient reconnecting player",
+    "sequence": [
+      "Resume room",
+      "Start a deferred refresh",
+      "Tap retry again before completion"
+    ],
+    "expected": "Concurrent reconnect taps cannot create overlapping state requests",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N026",
+    "category": "visibility",
+    "persona": "Tab-switching player",
+    "sequence": [
+      "Resume room",
+      "Hide document for one minute",
+      "Show document"
+    ],
+    "expected": "Backgrounding stops polling and foregrounding performs one refresh",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N027",
+    "category": "generation-race",
+    "persona": "Player changing rooms",
+    "sequence": [
+      "Start old-room deferred refresh",
+      "Stop and resume new room",
+      "Reject old request"
+    ],
+    "expected": "A late abandoned poll failure cannot mark the new room disconnected",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N028",
+    "category": "generation-race",
+    "persona": "Player closing the game",
+    "sequence": [
+      "Start deferred initial room load",
+      "Dispose client",
+      "Resolve response"
+    ],
+    "expected": "Disposal during initial resume ignores the late response and notifications",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N029",
+    "category": "generation-race",
+    "persona": "Host cancelling preparation",
+    "sequence": [
+      "Begin create with deferred session preparation",
+      "Stop client",
+      "Resolve preparation"
+    ],
+    "expected": "Cancellation before host preparation finishes cannot start a room write",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N030",
+    "category": "generation-race",
+    "persona": "Invitee cancelling join",
+    "sequence": [
+      "Start deferred join request",
+      "Stop client",
+      "Resolve join"
+    ],
+    "expected": "A late cancelled join cannot reclaim the session",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N031",
+    "category": "generation-race",
+    "persona": "Player switching invitations",
+    "sequence": [
+      "Begin deferred room A resume",
+      "Resume room B",
+      "Reject room A"
+    ],
+    "expected": "An old resume failure cannot replace the new room or its clean error state",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N032",
+    "category": "receipt-retry",
+    "persona": "Player whose move reply was lost",
+    "sequence": [
+      "Submit pass and lose response",
+      "Refresh reports committed version",
+      "Retry receipt"
+    ],
+    "expected": "An uncertain move retries its original version and command ID after newer state arrives",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N033",
+    "category": "receipt-retry",
+    "persona": "Player whose readiness reply was lost",
+    "sequence": [
+      "Receive 503 on ready",
+      "Refresh current lobby",
+      "Retry ready"
+    ],
+    "expected": "A service-unavailable readiness command preserves its exact receipt for retry",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N034",
+    "category": "session-loss",
+    "persona": "Player with removed session",
+    "sequence": [
+      "Submit leave and receive NO_SEAT",
+      "Refresh also reports NO_SEAT"
+    ],
+    "expected": "Definitive seat loss clears uncertain leave state and marks the room unavailable",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N035",
+    "category": "request-race",
+    "persona": "Rapid-tapping invitee",
+    "sequence": [
+      "Start deferred ready command",
+      "Call ready again",
+      "Resolve first command"
+    ],
+    "expected": "Repeated ready requests produce only one in-flight mutation",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N036",
+    "category": "receipt-reload",
+    "persona": "Reloading player after lost reply",
+    "sequence": [
+      "Lose action response",
+      "Dispose first client",
+      "Resume a fresh client",
+      "Retry"
+    ],
+    "expected": "A reload recovers and reuses the stored action receipt exactly",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N037",
+    "category": "receipt-lock",
+    "persona": "Player confused by pending result",
+    "sequence": [
+      "Lose action response",
+      "Try ready, leave and another action"
+    ],
+    "expected": "An unresolved action blocks different commands from replacing its receipt",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N038",
+    "category": "command-rejection",
+    "persona": "Player whose move became invalid",
+    "sequence": [
+      "Submit action",
+      "Receive ILLEGAL_ACTION",
+      "Refresh authoritative room"
+    ],
+    "expected": "A definitive illegal action releases the receipt without fabricating a move",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N039",
+    "category": "terminal-session",
+    "persona": "Player reviewing a winning capture",
+    "sequence": [
+      "Create a legal core capture through applyAction",
+      "Resume finished room containing winner on captured core",
+      "Advance one minute"
+    ],
+    "expected": "A valid terminal core capture is accepted and schedules no background polls",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N040",
+    "category": "terminal-session",
+    "persona": "Player revisiting a closed room",
+    "sequence": [
+      "Resume closed room",
+      "Advance one minute of fake time"
+    ],
+    "expected": "A closed room schedules no background polls",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N041",
+    "category": "url-entry",
+    "persona": "User with mistyped room URL",
+    "sequence": [
+      "Boot with an invalid room query"
+    ],
+    "expected": "Malformed room queries remain on home without any network request",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N042",
+    "category": "url-entry",
+    "persona": "User with truncated invitation",
+    "sequence": [
+      "Boot with valid room ID and short invite token"
+    ],
+    "expected": "An incomplete invitation cannot cause implicit session preparation or join",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N043",
+    "category": "url-privacy",
+    "persona": "Invitee opening a link",
+    "sequence": [
+      "Boot with valid invitation fragment",
+      "Inspect address and history state"
+    ],
+    "expected": "Opening an invitation removes its secret from the visible URL without joining",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N044",
+    "category": "explicit-join",
+    "persona": "Keyboard invitee",
+    "sequence": [
+      "Open invitation",
+      "Activate join twice while response is deferred",
+      "Resolve join"
+    ],
+    "expected": "Explicit repeated join activation submits the intended invite once",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N045",
+    "category": "accessible-error",
+    "persona": "Screen-reader invitee",
+    "sequence": [
+      "Open invitation",
+      "Join returns BAD_INVITE",
+      "Read displayed friend error semantics"
+    ],
+    "expected": "Invitation failure guidance is exposed as an accessible live status",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N046",
+    "category": "accessible-error",
+    "persona": "Screen-reader host",
+    "sequence": [
+      "Choose friend mode",
+      "Create returns ROOM_LIMIT",
+      "Read displayed friend error semantics"
+    ],
+    "expected": "Room-limit guidance is exposed as an accessible live status",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N047",
+    "category": "accessible-progress",
+    "persona": "Keyboard returning player",
+    "sequence": [
+      "Boot room URL with deferred state response",
+      "Inspect progress and controls"
+    ],
+    "expected": "Initial restore announces progress and disables gameplay until state arrives",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N048",
+    "category": "accessible-recovery",
+    "persona": "Screen-reader returning player",
+    "sequence": [
+      "Fail initial room load",
+      "Inspect recovery controls and status"
+    ],
+    "expected": "Initial connection failure exposes a status message and enabled retry action",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N049",
+    "category": "accessible-progress",
+    "persona": "Rapid reconnecting player",
+    "sequence": [
+      "Fail initial load",
+      "Start deferred retry",
+      "Activate retry again"
+    ],
+    "expected": "A pending retry disables the recovery button and avoids duplicate requests",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N050",
+    "category": "connection-lock",
+    "persona": "Own-turn player going offline",
+    "sequence": [
+      "Load own-turn match",
+      "Fail next state poll"
+    ],
+    "expected": "A lost connection locks move controls and announces reconnection state",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N051",
+    "category": "connection-recovery",
+    "persona": "Own-turn player reconnecting",
+    "sequence": [
+      "Lose state poll",
+      "Restore network",
+      "Activate retry"
+    ],
+    "expected": "Recovered own-turn state re-enables gameplay and announces whose turn it is",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N052",
+    "category": "home-recovery",
+    "persona": "Keyboard player checking home",
+    "sequence": [
+      "Enter match",
+      "Go home",
+      "Fail a background state poll"
+    ],
+    "expected": "A background connection failure preserves home visibility and resume focus",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N053",
+    "category": "home-confirmation",
+    "persona": "Player declining interruption",
+    "sequence": [
+      "Enter match",
+      "Decline home confirmation",
+      "Activate home"
+    ],
+    "expected": "Declining home navigation keeps the active match and room URL intact",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N054",
+    "category": "session-recovery",
+    "persona": "Player whose cookie disappeared",
+    "sequence": [
+      "Resume returns NO_SEAT",
+      "Go home",
+      "Start local match"
+    ],
+    "expected": "Missing-seat recovery permits an explicit local match and clears the stale URL",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N055",
+    "category": "url-recovery",
+    "persona": "Player abandoning failed resume",
+    "sequence": [
+      "Resume fails offline",
+      "Open menu",
+      "Choose local mode"
+    ],
+    "expected": "Switching a failed resume to local clears the room URL and unlocks local controls",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N056",
+    "category": "accessible-lobby",
+    "persona": "Ready keyboard invitee",
+    "sequence": [
+      "Resume joined waiting room with own side already ready"
+    ],
+    "expected": "Committed readiness stays disabled and retains its explanatory description",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N057",
+    "category": "accessible-lobby",
+    "persona": "Waiting screen-reader host",
+    "sequence": [
+      "Resume waiting room",
+      "Fail next poll",
+      "Inspect status and retry"
+    ],
+    "expected": "Lobby disconnection announces an error and keeps safe retry available",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N058",
+    "category": "reduced-motion",
+    "persona": "Motion-sensitive remote player",
+    "sequence": [
+      "Enable persisted reduced motion",
+      "Resume match",
+      "Receive remote summon update"
+    ],
+    "expected": "Remote updates with reduced motion expose the final piece without moving overlays",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N059",
+    "category": "motion-recovery",
+    "persona": "Player returning after remote turns",
+    "sequence": [
+      "Enter friend match",
+      "Go home",
+      "Receive two remote actions",
+      "Resume"
+    ],
+    "expected": "Resuming across remote turns shows authoritative positions without invented motion",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  },
+  {
+    "id": "N060",
+    "category": "home-expiry",
+    "persona": "Player whose room expires offscreen",
+    "sequence": [
+      "Enter match",
+      "Go home",
+      "Receive ROOM_EXPIRED",
+      "Choose local"
+    ],
+    "expected": "Offscreen room expiry releases local start without sending a leave command",
+    "limitations": "In-process jsdom/fake-timer/fetch-mock scenario. No real network, deployed service, browser visual rendering, screen-reader audio, STUN or P2P exercised."
+  }
+]

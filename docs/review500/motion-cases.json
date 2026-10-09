@@ -1,0 +1,1682 @@
+[
+  {
+    "id": "M001",
+    "category": "causal.summon",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare causal.summon fixture",
+      "Newborn has a stationary entrance and retains purchased lifetime",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "One entrance at square 9, lifetime 3, opacity rises from zero to one",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M002",
+    "category": "causal.summon",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare causal.summon fixture",
+      "One-life newborn is exempt from same-turn expiry",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "No expiry cue and a live one-turn newborn at settlement",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M003",
+    "category": "causal.summon",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare causal.summon fixture",
+      "Summon alongside an expiring ally keeps separate identities",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Newborn enters while old ally expires at its old square",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M004",
+    "category": "causal.move",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare causal.move fixture",
+      "Carver follows its two-segment bend instead of a diagonal shortcut",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "At midpoint the mover is on square 10, then ends at 17",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M005",
+    "category": "causal.move",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare causal.move fixture",
+      "Carver rejects the blocked first bend before the wall expires",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "The legal route goes through 30 before 31",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M006",
+    "category": "causal.move",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare causal.move fixture",
+      "Long Carver path has equal-duration ordered legs",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Three legs visit each legal intermediate square in order",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M007",
+    "category": "causal.move",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare causal.move fixture",
+      "Travel samples clamp before start and after arrival",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Coordinates stay at source for negative time and destination after arrival",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M008",
+    "category": "causal.leaper",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare causal.leaper fixture",
+      "Leaper clears its midpoint pad without occupying it",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "A direct endpoint path with positive arc height at midpoint",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M009",
+    "category": "causal.leaper",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare causal.leaper fixture",
+      "Diagonal Leaper arc retains correct row and column",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Midpoint is at 24 while ground landing is 32",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M010",
+    "category": "causal.capture",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare causal.capture fixture",
+      "Capture reward waits until mover arrival",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Victim remains opaque before 280ms and capture cue starts at 280ms",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M011",
+    "category": "causal.capture",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare causal.capture fixture",
+      "Captured victim fades over the impact interval",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Victim opacity is one-half at 330ms and zero by 380ms",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M012",
+    "category": "causal.capture",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare causal.capture fixture",
+      "Capturing a five-turn Leaper uses its full purchase value",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Capture cue reports ten grain without decrementing the opponent",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M013",
+    "category": "causal.expiry",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare causal.expiry fixture",
+      "Last-life move expires at its destination after travel",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Expiry begins at 280ms on square 18 and completes at 440ms",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M014",
+    "category": "causal.expiry",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare causal.expiry fixture",
+      "Last-life capture sequences impact before mover expiry",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Victim ends at 380ms, then mover expires through 540ms",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M015",
+    "category": "causal.expiry",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare causal.expiry fixture",
+      "Stationary expiries wait for another mover to arrive",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Both stationary allies remain fully opaque during travel",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M016",
+    "category": "causal.swap",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare causal.swap fixture",
+      "Surviving swap uses opposite destinations with simultaneous arrivals",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Both tracks arrive at 280ms with reciprocal square paths",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M017",
+    "category": "causal.swap",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare causal.swap fixture",
+      "Expiring Link disappears only after reaching its ally square",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Link expiry is at 24 while the ally survives at 23",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M018",
+    "category": "causal.swap",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare causal.swap fixture",
+      "Expiring swap ally disappears at the Link origin",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Ally expiry is at 23 and Link remains at 24",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M019",
+    "category": "causal.swap",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare causal.swap fixture",
+      "Double last-life swap carries two expiry cues at exchanged squares",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Both disappear without leaving any live piece",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M020",
+    "category": "causal.pass",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare causal.pass fixture",
+      "Pass expiry has no fabricated movement",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Stationary expiry starts immediately with a one-square path",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M021",
+    "category": "causal.win",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare causal.win fixture",
+      "Core capture on ply 200 suppresses ordinary lifetime expiry",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Only a win cue; winning one-life mover remains",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M022",
+    "category": "causal.draw",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare causal.draw fixture",
+      "Six-pass draw never emits a core capture cue",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Both cores stay visible and no win effect is fabricated",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M023",
+    "category": "causal.recovery",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare causal.recovery fixture",
+      "Recoverable surviving move reconstructs its actual path",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Exactly one move is recovered without changing snapshots",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M024",
+    "category": "causal.recovery",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare causal.recovery fixture",
+      "Ambiguous expired mover and skipped turns produce no invented animation",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Both ambiguous one-life result and multi-ply result return null",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M025",
+    "category": "causal.recovery",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare causal.recovery fixture",
+      "Piece ordering does not alter recovered unique swap",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Reordered snapshots retain Link and ally event identities",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M026",
+    "category": "2d.summon",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 2d.summon fixture",
+      "Committed summon initially hides only its duplicate authoritative glyph",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "One moving identity, one hidden duplicate, and two visible cores",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M027",
+    "category": "2d.summon",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 2d.summon fixture",
+      "Settled summon restores the permanent glyph with its exact lifetime",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Only one live Carver remains and no frame/timer survives",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M028",
+    "category": "2d.preview",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 2d.preview fixture",
+      "Summon proposal shows a ghost without creating a committed effect",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Ghost duration 3 is shown with no motion nodes or scheduled work",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M029",
+    "category": "2d.preview",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 2d.preview fixture",
+      "Move preview keeps original piece and route without consuming a lifetime",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Source life stays 3, proposal target 18 is marked, and no effects start",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M030",
+    "category": "2d.move",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 2d.move fixture",
+      "Moving Carver follows the legal bend in screen coordinates",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "At one-third time it is above source at square 16, with source column unchanged",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M031",
+    "category": "2d.move",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 2d.move fixture",
+      "A surviving mover shows old life during travel and new life at arrival",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Moving life changes from 3 to 2 precisely at 280ms",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M032",
+    "category": "2d.capture",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 2d.capture fixture",
+      "Captured victim retains its life badge through the impact fade",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Victim badge says 3 at 330ms while its opacity is one-half",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M033",
+    "category": "2d.capture",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 2d.capture fixture",
+      "Capture overlay reports reward at the landing square",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "One +9 grain cue at square 18, delayed until impact",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M034",
+    "category": "2d.expiry",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 2d.expiry fixture",
+      "Last-life capture keeps mover life until capture completes",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Mover life stays 1 at 379ms and becomes 0 at 380ms",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M035",
+    "category": "2d.expiry",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 2d.expiry fixture",
+      "Pass expiration fades the stationary piece without an invented trail",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Expiry ghost stays at square 10 and is gone at final settlement",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M036",
+    "category": "2d.swap",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 2d.swap fixture",
+      "Swap creates exactly two moving identities with reciprocal destinations",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Both tracks reach the exchanged screen anchors at 280ms",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M037",
+    "category": "2d.swap",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 2d.swap fixture",
+      "Double expiry after swap leaves no stationary or moving duplicates",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Both authoritative pieces and all effects are absent after settlement",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M038",
+    "category": "2d.win",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 2d.win fixture",
+      "Losing core ghost persists until the winning mover arrives",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Captured core overlay is visible at 279ms and hidden at 280ms",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M039",
+    "category": "2d.win",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 2d.win fixture",
+      "Victory settles to one core plus the victorious one-life piece",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "No losing core, no ghost, and winning life remains one",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M040",
+    "category": "2d.input",
+    "persona": "Keyboard and pointer player",
+    "sequence": [
+      "Prepare 2d.input fixture",
+      "Board focus survives repeated motion-frame updates",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Focused destination button keeps identity and focus throughout travel",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M041",
+    "category": "2d.input",
+    "persona": "Keyboard and pointer player",
+    "sequence": [
+      "Prepare 2d.input fixture",
+      "Arrow navigation remains available while a move animates",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "ArrowUp moves focus from 18 to 25 without cancelling or duplicating motion",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M042",
+    "category": "2d.input",
+    "persona": "Keyboard and pointer player",
+    "sequence": [
+      "Prepare 2d.input fixture",
+      "Right-edge keyboard input never wraps during capture effects",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Focus stays on square 20 when ArrowRight is pressed",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M043",
+    "category": "2d.input",
+    "persona": "Keyboard and pointer player",
+    "sequence": [
+      "Prepare 2d.input fixture",
+      "Clicking a square during capture dispatches exactly one board action",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Effects create no extra click callbacks",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M044",
+    "category": "2d.accessibility",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 2d.accessibility fixture",
+      "Effect layer is excluded from assistive reading without hiding board controls",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Effects aria-hidden is true and destination aria-label reports authoritative remaining life",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M045",
+    "category": "2d.input",
+    "persona": "Keyboard and pointer player",
+    "sequence": [
+      "Prepare 2d.input fixture",
+      "Effect and moving-piece CSS cannot intercept pointer hit testing",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Computed pointer-events on the overlay and moving glyph are none",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M046",
+    "category": "2d.reduced",
+    "persona": "Motion-sensitive player",
+    "sequence": [
+      "Prepare 2d.reduced fixture",
+      "In-game reduced motion shows summon as a stable final glyph",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "No moving clone or hidden piece; cue is static and final life visible",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M047",
+    "category": "2d.reduced",
+    "persona": "Motion-sensitive player",
+    "sequence": [
+      "Prepare 2d.reduced fixture",
+      "OS reduced motion leaves a captured destination immediately authoritative",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Only the surviving mover is shown with life 2 and no travel loop",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M048",
+    "category": "2d.reduced",
+    "persona": "Motion-sensitive player",
+    "sequence": [
+      "Prepare 2d.reduced fixture",
+      "Reduced capture and expiry cues do not paint over the final board",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Computed cue background and text are transparent with animation disabled",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M049",
+    "category": "2d.reduced",
+    "persona": "Motion-sensitive player",
+    "sequence": [
+      "Prepare 2d.reduced fixture",
+      "Turning reduced motion on during travel immediately restores final lifetime",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Mutation callback clears travel and displays authoritative life 2",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M050",
+    "category": "2d.reduced",
+    "persona": "Motion-sensitive player",
+    "sequence": [
+      "Prepare 2d.reduced fixture",
+      "Turning OS reduced motion on during double expiry removes all ghosts",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "No piece is left hidden or moving after preference cancellation",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M051",
+    "category": "2d.lifecycle",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 2d.lifecycle fixture",
+      "Backgrounding mid-capture cancels effects and restores settled state",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Only the surviving mover remains and no work is pending",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M052",
+    "category": "2d.lifecycle",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 2d.lifecycle fixture",
+      "A commit made in a hidden document never starts travel",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Authoritative state renders without effects or callbacks",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M053",
+    "category": "2d.lifecycle",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 2d.lifecycle fixture",
+      "Restart during expiry rejects the previously queued animation callback",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Fresh empty board remains unchanged after the stale callback",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M054",
+    "category": "2d.lifecycle",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 2d.lifecycle fixture",
+      "Disposal during summon removes overlay and cancels fallback timeout",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Detached host is empty and stale callback cannot recreate children",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M055",
+    "category": "2d.lifecycle",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 2d.lifecycle fixture",
+      "Duplicate settled-state render preserves one current animation generation",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "One moving glyph, one effect, one frame and unchanged mid-pose",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M056",
+    "category": "2d.lifecycle",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 2d.lifecycle fixture",
+      "CPU-speed second summon supersedes the first without stale cleanup",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Only black enters; old callback cannot remove the new summon cue",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M057",
+    "category": "2d.lifecycle",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 2d.lifecycle fixture",
+      "Watchdog clears a throttled animation when animation frames never arrive",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Timeout alone removes hidden state and restores final glyph",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M058",
+    "category": "2d.reduced",
+    "persona": "Motion-sensitive player",
+    "sequence": [
+      "Prepare 2d.reduced fixture",
+      "Absent requestAnimationFrame falls back to static feedback",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "No hidden clone, static cue, and timeout-bounded cleanup",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M059",
+    "category": "2d.lifecycle",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 2d.lifecycle fixture",
+      "Repeated pass-expiry cycles do not accumulate effects or square buttons",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Twenty-four fresh transitions retain exactly 49 controls and one empty effect layer",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M060",
+    "category": "2d.input",
+    "persona": "Keyboard and pointer player",
+    "sequence": [
+      "Prepare 2d.input fixture",
+      "Selection and preview changes during motion never mutate game snapshots",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Serialized before and after states remain byte-identical to their initial values",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M061",
+    "category": "3d.scene",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 3d.scene fixture",
+      "Initial 3D board has one CPU tile collider for every square",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Exactly 49 distinct tile squares and both cores exist without motion",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M062",
+    "category": "3d.summon",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 3d.summon fixture",
+      "Summoned model scales in at its committed board coordinate",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Model starts hidden at square 9, then reaches half opacity-phase scale",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M063",
+    "category": "3d.summon",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 3d.summon fixture",
+      "Completed entrance retains the exact model and geometry identities",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Settlement restores unit scale without replacing live GPU-owned geometry",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M064",
+    "category": "3d.move",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 3d.move fixture",
+      "Moving model visits actual legal Carver intermediates",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "At first and second third it visits squares 16 and 17 in world space",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M065",
+    "category": "3d.move",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 3d.move fixture",
+      "Moving projected lifetime remains old until the exact arrival boundary",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "3D life label changes from 3 to 2 only at 280ms",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M066",
+    "category": "3d.projection",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 3d.projection fixture",
+      "Role mark and life badge use the same moving anchor",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Both projected label anchors agree during a bent path",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M067",
+    "category": "3d.projection",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 3d.projection fixture",
+      "Projected label follows independently calculated moving world coordinates",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "At 140ms the label matches camera projection of world x minus 0.2 and z 1.3",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M068",
+    "category": "3d.leaper",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 3d.leaper fixture",
+      "Leaper model rises over the pad while pad stays grounded",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "At 140ms mover lift is 0.7 and pad remains at y zero",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M069",
+    "category": "3d.leaper",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 3d.leaper fixture",
+      "Leaper role and lifetime labels rise with the animated model",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Label anchor includes the 0.7 lift in its independent CPU projection",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M070",
+    "category": "3d.capture",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 3d.capture fixture",
+      "Captured victim model survives until impact even though absent from authoritative state",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Victim remains visible at 279ms with its purchased life label",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M071",
+    "category": "3d.capture",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 3d.capture fixture",
+      "Captured model shrinks only after arrival and disappears by impact end",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Victim scale is bounded below one at 330ms and visibility is false at 380ms",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M072",
+    "category": "3d.expiry",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 3d.expiry fixture",
+      "Expiring capture mover stays alive until victim removal finishes",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Mover visible at 379ms; life becomes zero at 380ms; disappears by 540ms",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M073",
+    "category": "3d.resources",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 3d.resources fixture",
+      "Capture settlement releases each departed victim geometry exactly once",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "All captured geometry disposals happen once and its label is removed",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M074",
+    "category": "3d.resources",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 3d.resources fixture",
+      "Double expiry after swap retires both geometry sets",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Both swapped models disappear and first geometry of each is released once",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M075",
+    "category": "3d.swap",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 3d.swap fixture",
+      "Swap midpoint puts both models on the same interpolation plane",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Both identities occupy the midpoint at 140ms without swapping geometry",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M076",
+    "category": "3d.win",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 3d.win fixture",
+      "Core capture hides the losing core precisely at arrival",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Black core visible before 280ms, hidden at 280ms, removed at settlement",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M077",
+    "category": "3d.win",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 3d.win fixture",
+      "Black victory removes only the white core",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Black one-life winner settles on white core square and retains black core",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M078",
+    "category": "3d.reduced",
+    "persona": "Motion-sensitive player",
+    "sequence": [
+      "Prepare 3d.reduced fixture",
+      "Reduced summon never samples invisible frame zero",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Summon model is immediately visible at unit scale and no RAF starts",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M079",
+    "category": "3d.reduced",
+    "persona": "Motion-sensitive player",
+    "sequence": [
+      "Prepare 3d.reduced fixture",
+      "Repeated reduced-motion renders retain stable final position and lifetime",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Five redraws preserve final summon model and its life 3",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M080",
+    "category": "3d.reduced",
+    "persona": "Motion-sensitive player",
+    "sequence": [
+      "Prepare 3d.reduced fixture",
+      "Enabling in-game reduced motion mid-Leaper jump lands immediately",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Model lift returns to zero, correct destination life appears, no frames remain",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M081",
+    "category": "3d.reduced",
+    "persona": "Motion-sensitive player",
+    "sequence": [
+      "Prepare 3d.reduced fixture",
+      "OS preference cancellation during capture immediately releases victim",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Victim model and label disappear, survivor remains at destination",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M082",
+    "category": "3d.lifecycle",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 3d.lifecycle fixture",
+      "Hidden-page cancellation settles a double-expiry swap",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Both models and projected badges are removed with all callbacks cancelled",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M083",
+    "category": "3d.lifecycle",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 3d.lifecycle fixture",
+      "Snapshot reset during travel cannot be overwritten by a stale frame",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Reset produces only two cores and old frame cannot issue another render",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M084",
+    "category": "3d.lifecycle",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 3d.lifecycle fixture",
+      "Fast opponent summon cannot reuse a retired capture callback",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "New black model continues its own entrance and old callback does nothing",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M085",
+    "category": "3d.resources",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 3d.resources fixture",
+      "Same generated ID with another role forces fresh geometry ownership",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Reset Carver geometry is released and a Leaper model replaces it",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M086",
+    "category": "3d.resources",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 3d.resources fixture",
+      "Same piece ID changing sides never reuses wrong facing or material",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Replacement black model faces pi radians and old geometry is released",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M087",
+    "category": "3d.projection",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 3d.projection fixture",
+      "Resize during travel preserves in-flight label position and pre-arrival life",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Resize redraw must not jump the moving label to destination or decrement early",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M088",
+    "category": "3d.projection",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 3d.projection fixture",
+      "Resize after victim fade does not resurrect an invisible victim badge",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Victim label remains opacity zero at 400ms even after ResizeObserver redraw",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M089",
+    "category": "3d.input",
+    "persona": "Keyboard and pointer player",
+    "sequence": [
+      "Prepare 3d.input fixture",
+      "Keyboard focus is retained while projected label DOM is replaced",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "The same square control stays focused and there is exactly one tab stop",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M090",
+    "category": "3d.input",
+    "persona": "Keyboard and pointer player",
+    "sequence": [
+      "Prepare 3d.input fixture",
+      "Keyboard activation during arrival dispatches only the selected square",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Target button click sends one square 18 callback",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M091",
+    "category": "3d.input",
+    "persona": "Keyboard and pointer player",
+    "sequence": [
+      "Prepare 3d.input fixture",
+      "Arrow key navigation is independent of the animated model position",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "ArrowLeft from 18 focuses 17 while the model is between squares",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M092",
+    "category": "3d.resources",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 3d.resources fixture",
+      "Disposal releases active motion, geometry, renderer and shadow target once",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "All pending work is cancelled and second disposal is inert",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M093",
+    "category": "3d.resources",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 3d.resources fixture",
+      "Low-quality mode changes pixel ratio and shadows without replacing models",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Pixel ratio becomes one and existing model identity survives redraw",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M094",
+    "category": "3d.resources",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 3d.resources fixture",
+      "Repeated capture-expiry sessions leave no growing model or badge population",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Sixteen complete last-life captures end with only two cores and 49 tile colliders",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M095",
+    "category": "3d.preview",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare 3d.preview fixture",
+      "Summon preview never creates a scene piece or committed animation",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Only projected ghost appears while original scene has no summoned model",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M096",
+    "category": "player.lifecycle",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare player.lifecycle fixture",
+      "Initial state-only rendering never schedules visual work",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "No cue, timer or animation frame without a committed transition",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M097",
+    "category": "player.lifecycle",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare player.lifecycle fixture",
+      "Explicit null transition settles state without fabricating effects",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "A changed snapshot without transition remains static",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M098",
+    "category": "player.lifecycle",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare player.lifecycle fixture",
+      "Repeated identical snapshot with transition cannot replay an entrance",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "After settlement, identical commit data creates no cue or new RAF",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M099",
+    "category": "player.lifecycle",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare player.lifecycle fixture",
+      "Duplicate render reuses the last sampled elapsed time",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "The most recent animated callback remains at 123ms without starting zero again",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M100",
+    "category": "player.lifecycle",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare player.lifecycle fixture",
+      "Frame exactly at duration is cleanup rather than another live sample",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "A 580ms callback invokes only frame null and cancels the watchdog",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M101",
+    "category": "player.lifecycle",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare player.lifecycle fixture",
+      "Very late resumed animation frame immediately settles",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "A 30-second time jump causes no interpolated stale state",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M102",
+    "category": "player.lifecycle",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare player.lifecycle fixture",
+      "Watchdog keeps a stalled frame bounded by 630ms",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Cue survives 629ms timer time and is removed at 630ms",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M103",
+    "category": "player.lifecycle",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare player.lifecycle fixture",
+      "Cancellation clears both watchdog and scheduled frame",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "No callbacks remain and the frame adapter receives final-state reset",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M104",
+    "category": "player.lifecycle",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare player.lifecycle fixture",
+      "A stale callback from a cancelled generation is inert",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Calling previously captured RAF cannot render or reschedule anything",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M105",
+    "category": "player.lifecycle",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare player.lifecycle fixture",
+      "A stale callback cannot interfere with a replacement generation",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Old callback does not invoke adapter or remove the new cue",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M106",
+    "category": "player.lifecycle",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare player.lifecycle fixture",
+      "Disposal during frame zero cannot leave a late-created timer",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Adapter-triggered disposal prevents both scheduling branches",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M107",
+    "category": "player.lifecycle",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare player.lifecycle fixture",
+      "Cancellation from an in-flight adapter cannot reschedule retired RAF",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Adapter cancellation on first nonzero frame removes all visual work",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M108",
+    "category": "player.lifecycle",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare player.lifecycle fixture",
+      "Disposed player ignores later valid commits",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "No effect DOM or scheduled work can be recreated",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M109",
+    "category": "player.reduced",
+    "persona": "Motion-sensitive player",
+    "sequence": [
+      "Prepare player.reduced fixture",
+      "Reduced mode never invokes animated adapter frames",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Only final-state null callbacks occur, even with repeated state renders",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M110",
+    "category": "player.reduced",
+    "persona": "Motion-sensitive player",
+    "sequence": [
+      "Prepare player.reduced fixture",
+      "Static fallback ignores causal delays but preserves cue identities",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Capture and expiry both have zero animation delay in reduced mode",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M111",
+    "category": "player.lifecycle",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare player.lifecycle fixture",
+      "Visibility restoration does not replay a previously cancelled action",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Returning from background and rendering the same state creates no motion",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M112",
+    "category": "player.resources",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare player.resources fixture",
+      "Disposal unregisters media preference listener",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Preference listener set returns to zero and future changes do not invoke adapter",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M113",
+    "category": "player.resources",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare player.resources fixture",
+      "Disposal unregisters visibility listener and disconnects mutation observation",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Subsequent visibility and body-class events produce no adapter calls",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M114",
+    "category": "player.projection",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare player.projection fixture",
+      "Each committed effect uses its own independent board anchor",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Swap cues project squares 23 and 24 separately without sharing coordinates",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M115",
+    "category": "player.resources",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare player.resources fixture",
+      "Long sequence of independent players leaves no observers or queued work",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Thirty create-commit-dispose cycles release all media listeners and timers",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M116",
+    "category": "geometry.projection",
+    "persona": "Small-screen 3D player",
+    "sequence": [
+      "Prepare geometry.projection fixture",
+      "Every tile center has a finite unique screen projection inside the board",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "All 49 keyboard anchors stay inside normalized viewport with unique positions",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M117",
+    "category": "geometry.input",
+    "persona": "Keyboard and pointer player",
+    "sequence": [
+      "Prepare geometry.input fixture",
+      "CPU raycasting selects all 49 tile centers including occupied cores",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Each center returns precisely its own square using actual ray intersections",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M118",
+    "category": "geometry.input",
+    "persona": "Keyboard and pointer player",
+    "sequence": [
+      "Prepare geometry.input fixture",
+      "Moving model cannot intercept the tile-only picking ray",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Pointer at square 18 during arrival returns 18 even with model over it",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M119",
+    "category": "geometry.input",
+    "persona": "Keyboard and pointer player",
+    "sequence": [
+      "Prepare geometry.input fixture",
+      "A projected summon ghost cannot change destination picking",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Pointer at ghost square 9 still selects square 9",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M120",
+    "category": "geometry.input",
+    "persona": "Keyboard and pointer player",
+    "sequence": [
+      "Prepare geometry.input fixture",
+      "Pointer far outside the board produces no invented square",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "A ray beyond camera bounds never calls onSquare",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M121",
+    "category": "geometry.input",
+    "persona": "Keyboard and pointer player",
+    "sequence": [
+      "Prepare geometry.input fixture",
+      "Disposed canvas cannot deliver late pointer input",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "An event on the retained old canvas reference has no board callback",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M122",
+    "category": "geometry.projection",
+    "persona": "Small-screen 3D player",
+    "sequence": [
+      "Prepare geometry.projection fixture",
+      "3D keyboard anchors match independently projected tile centers",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Near, center, and far-row controls align to CPU camera projection",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M123",
+    "category": "geometry.projection",
+    "persona": "Small-screen 3D player",
+    "sequence": [
+      "Prepare geometry.projection fixture",
+      "Resize preserves normalized anchor geometry across narrow and wide boards",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Changing host width changes renderer size while normalized tile anchors stay stable",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M124",
+    "category": "geometry.leaper",
+    "persona": "Small-screen 3D player",
+    "sequence": [
+      "Prepare geometry.leaper fixture",
+      "Leaper arc changes only vertical clearance not its planar footprint",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "At midpoint real world bounds fit within landing-cell horizontal width",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M125",
+    "category": "geometry.expiry",
+    "persona": "Small-screen 3D player",
+    "sequence": [
+      "Prepare geometry.expiry fixture",
+      "Capture-plus-expiry never inverts model scales or creates nonfinite matrices",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "All scene matrices and scales stay finite and nonnegative throughout causal boundaries",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M126",
+    "category": "geometry.resources",
+    "persona": "Small-screen 3D player",
+    "sequence": [
+      "Prepare geometry.resources fixture",
+      "Different roles do not accidentally share disposable geometry or material owners",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Retiring one model never disposes resources belonging to three other roles",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M127",
+    "category": "geometry.resources",
+    "persona": "Small-screen 3D player",
+    "sequence": [
+      "Prepare geometry.resources fixture",
+      "Core and temporary unit resource ownership are independent",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Disposing a core does not dispose any coincident unit resource",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M128",
+    "category": "geometry.input",
+    "persona": "Keyboard and pointer player",
+    "sequence": [
+      "Prepare geometry.input fixture",
+      "Selection color and candidate markers never alter collider coordinates",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "A legal move preview leaves every tile world position unchanged and target still pickable",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M129",
+    "category": "geometry.effects",
+    "persona": "Small-screen 3D player",
+    "sequence": [
+      "Prepare geometry.effects fixture",
+      "Effect overlay clips animated content to board bounds",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Computed overlay overflow is hidden and its layer cannot steal pointer events",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M130",
+    "category": "geometry.team",
+    "persona": "Small-screen 3D player",
+    "sequence": [
+      "Prepare geometry.team fixture",
+      "Black-facing model keeps its orientation throughout a legal move",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Black Carver retains pi rotation while moving and lands without geometry replacement",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M131",
+    "category": "adaptive.constructor",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare adaptive.constructor fixture",
+      "Unavailable WebGL construction falls back to a playable 2D board",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Fallback has 49 controls, latest state, and a clear 2D status",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M132",
+    "category": "adaptive.failure",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare adaptive.failure fixture",
+      "Synchronous renderer failure preserves the latest committed snapshot",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "2D fallback displays moved piece at 18 and contains no replay effects",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M133",
+    "category": "adaptive.context",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare adaptive.context fixture",
+      "Context loss during capture restores final 2D state without victim ghosts",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Latest survivor remains, victim is absent, and WebGL resources are disposed once",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M134",
+    "category": "adaptive.failure",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare adaptive.failure fixture",
+      "Animation-frame renderer failure falls back without throwing to input code",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "A simulated frame exception restores 49 2D controls and cancels every timer",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M135",
+    "category": "adaptive.failure",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare adaptive.failure fixture",
+      "Resize renderer failure preserves a last-life capture result",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Fallback has zero units after authoritative double removal and no active callbacks",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M136",
+    "category": "adaptive.failure",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare adaptive.failure fixture",
+      "Frame-zero failure cannot create a watchdog after disposal",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Hidden entering model triggers fallback with no retained RAF or timeout",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M137",
+    "category": "adaptive.preview",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare adaptive.preview fixture",
+      "Renderer fallback retains the selected piece and proposed destination",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Selection at 9, candidate at 18, and route markers survive the switch",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M138",
+    "category": "adaptive.input",
+    "persona": "Keyboard and pointer player",
+    "sequence": [
+      "Prepare adaptive.input fixture",
+      "Input callback remains connected after switching renderer during motion",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "A 2D square click after fallback delivers one intended square",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M139",
+    "category": "adaptive.lifecycle",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare adaptive.lifecycle fixture",
+      "Repeated context loss on retired canvas cannot rebuild the fallback board",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Second old-canvas loss does not replace controls or repeat status notification",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  },
+  {
+    "id": "M140",
+    "category": "adaptive.lifecycle",
+    "persona": "Returning local-game player",
+    "sequence": [
+      "Prepare adaptive.lifecycle fixture",
+      "Disposed adaptive board ignores late renderer loss and later render requests",
+      "Assert the independently specified visible state and resource boundaries"
+    ],
+    "expected": "Disposal keeps host empty and never recreates a 2D fallback",
+    "limitations": "Local jsdom and real Three.js CPU math/geometry only; mocked WebGLRenderer. GPU screenshots, actual GPU resource allocation, frame rate, physical touch, and screen-reader speech are unverified."
+  }
+]

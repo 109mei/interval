@@ -5,6 +5,13 @@ it("real_UI_summon_move_pass_and_restart", async () => {
   history.replaceState(null, "", "/?2d");
   vi.spyOn(window, "confirm").mockReturnValue(true);
   await import("../src/main");
+  if (
+    !new URLSearchParams(location.search).has("room") &&
+    !history.state?.invite
+  ) {
+    document.getElementById("choose-local")?.click();
+    document.getElementById("start-game")?.click();
+  }
   const click = (s: string) =>
     document.querySelector<HTMLButtonElement>(s)!.click();
   const text = (s: string) => document.querySelector(s)!.textContent;

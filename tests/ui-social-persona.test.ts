@@ -25,6 +25,13 @@ async function boot(path = "/?2d&room=" + "a".repeat(32)) {
   history.replaceState(null, "", path);
   vi.spyOn(window, "confirm").mockReturnValue(true);
   await import("../src/main");
+  if (
+    !new URLSearchParams(location.search).has("room") &&
+    !history.state?.invite
+  ) {
+    document.getElementById("choose-local")?.click();
+    document.getElementById("start-game")?.click();
+  }
   await settle();
 }
 afterEach(() => {
@@ -146,6 +153,9 @@ it("finished match room cap dialog can be closed and fresh local match played", 
   await settle();
   expect(el("friend-error").textContent).toContain("終了・退出した部屋");
   click("close-friend");
+  expect(el("home").hidden).toBe(false);
+  click("choose-local");
+  click("start-game");
   expect(el("mode-label").textContent).toBe("この端末で2人");
   expect(el("ply").textContent).toBe("0 / 200 手");
   click("pass");
@@ -171,10 +181,17 @@ it("guest local warmup is not resurrected after explicitly abandoned for online 
   );
   await boot("/?2d#room=" + "a".repeat(32) + "&invite=" + "b".repeat(64));
   click("close-friend");
+  click("choose-local");
+  click("start-game");
   click("pass");
   click("confirm");
   await settle();
   expect(el("ply").textContent).toBe("1 / 200 手");
+  history.replaceState(
+    { room: "a".repeat(32), invite: "b".repeat(64) },
+    "",
+    "/?room=" + "a".repeat(32),
+  );
   click("friend");
   click("join-room");
   await settle();
@@ -203,5 +220,8 @@ it("guest local warmup is not resurrected after explicitly abandoned for online 
   click("create-room");
   await settle();
   click("close-friend");
+  expect(el("home").hidden).toBe(false);
+  click("choose-local");
+  click("start-game");
   expect(el("ply").textContent).toBe("0 / 200 手");
 });

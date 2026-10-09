@@ -2,6 +2,20 @@
 import { it, expect } from "vitest";
 import { createBoard2D } from "../src/render/board2d";
 import { createGame } from "../src/game/engine";
+function gameWithWall() {
+  const state = createGame();
+  state.pieces = [
+    {
+      id: "wall",
+      side: "white",
+      kind: "bastion",
+      square: 10,
+      remaining: 3,
+      summonedPly: -1,
+    },
+  ];
+  return state;
+}
 it("49_accessible_squares_and_selection", () => {
   const h = document.createElement("div");
   let picked = -1;
@@ -50,7 +64,7 @@ it("summoning lights only legal cells with selected cost and duration", () => {
   const h = document.createElement("div"),
     b = createBoard2D(h, () => {});
   b.render(
-    createGame(),
+    gameWithWall(),
     { pieceId: null, candidate: null, summon: { kind: "carver", duration: 3 } },
     null,
   );
@@ -63,13 +77,25 @@ it("summoning lights only legal cells with selected cost and duration", () => {
   expect(
     h.querySelector('[data-square="10"]')?.classList.contains("target"),
   ).toBe(false);
+  for (const square of [0, 14, 20])
+    expect(
+      h
+        .querySelector(`[data-square="${square}"]`)
+        ?.classList.contains("target"),
+    ).toBe(true);
+  for (const square of [3, 21, 27, 28])
+    expect(
+      h
+        .querySelector(`[data-square="${square}"]`)
+        ?.classList.contains("target"),
+    ).toBe(false);
   b.dispose();
 });
 it("keyboard descriptions identify legal destinations and lifetime", () => {
   const h = document.createElement("div"),
     b = createBoard2D(h, () => {});
   b.render(
-    createGame(),
+    gameWithWall(),
     { pieceId: null, candidate: null, summon: { kind: "carver", duration: 3 } },
     null,
   );
@@ -78,7 +104,7 @@ it("keyboard descriptions identify legal destinations and lifetime", () => {
   ).toContain("召喚できます");
   expect(
     h.querySelector('[data-square="10"]')?.getAttribute("aria-label"),
-  ).toContain("残り3回");
+  ).toContain("残り3ターン");
   b.dispose();
 });
 it("pointer focus preserves one board tab stop when followed by arrow navigation", () => {

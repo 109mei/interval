@@ -26,6 +26,13 @@ async function boot() {
   document.body.className = "";
   history.replaceState(null, "", "/?2d");
   await import("../src/main");
+  if (
+    !new URLSearchParams(location.search).has("room") &&
+    !history.state?.invite
+  ) {
+    document.getElementById("choose-local")?.click();
+    document.getElementById("start-game")?.click();
+  }
 }
 beforeEach(() => {
   listeners = [];

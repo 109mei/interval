@@ -81,6 +81,13 @@ it("real main starts feedback exactly once for a commit and clears it on restart
   history.replaceState(null, "", "/?2d");
   vi.spyOn(window, "confirm").mockReturnValue(true);
   await import("../src/main");
+  if (
+    !new URLSearchParams(location.search).has("room") &&
+    !history.state?.invite
+  ) {
+    document.getElementById("choose-local")?.click();
+    document.getElementById("start-game")?.click();
+  }
   const click = (q: string) =>
     document.querySelector<HTMLButtonElement>(q)!.click();
   click("#summon");

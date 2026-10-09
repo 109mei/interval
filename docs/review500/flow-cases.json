@@ -1,0 +1,1334 @@
+[
+  {
+    "id": "F001",
+    "category": "fresh entry",
+    "persona": "Nao, first visitor",
+    "title": "literal fresh URL keeps WebGL and CPU construction deferred",
+    "sequence": [
+      "Open /",
+      "Advance 10 seconds without Start"
+    ],
+    "expected": "Neutral home, no board/Worker/network; correct display-switch caption",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F002",
+    "category": "fresh entry",
+    "persona": "Nao, first visitor",
+    "title": "2D entry chooses the truthful retry direction without mounting a board",
+    "sequence": [
+      "Open /?2d",
+      "Advance 10 seconds without Start"
+    ],
+    "expected": "Neutral home, no board/Worker/network; correct display-switch caption",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F003",
+    "category": "fresh entry",
+    "persona": "Nao, first visitor",
+    "title": "unrecognized CPU query never grants automatic start",
+    "sequence": [
+      "Open /?2d&cpu=true",
+      "Advance 10 seconds without Start"
+    ],
+    "expected": "Neutral home, no board/Worker/network; correct display-switch caption",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F004",
+    "category": "fresh entry",
+    "persona": "Nao, first visitor",
+    "title": "unrelated fragment never acts as a friend invitation",
+    "sequence": [
+      "Open /?2d#help",
+      "Advance 10 seconds without Start"
+    ],
+    "expected": "Neutral home, no board/Worker/network; correct display-switch caption",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F005",
+    "category": "fresh entry",
+    "persona": "Nao, first visitor",
+    "title": "short invalid room ID cannot start recovery",
+    "sequence": [
+      "Open /?2d&room=abc",
+      "Advance 10 seconds without Start"
+    ],
+    "expected": "Neutral home, no board/Worker/network; correct display-switch caption",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F006",
+    "category": "fresh entry",
+    "persona": "Nao, first visitor",
+    "title": "uppercase noncanonical room ID cannot start recovery",
+    "sequence": [
+      "Open /?2d&room=AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "Advance 10 seconds without Start"
+    ],
+    "expected": "Neutral home, no board/Worker/network; correct display-switch caption",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F007",
+    "category": "fresh preferences",
+    "persona": "Mika, returning visitor",
+    "title": "Cold home with lightweight saved alone",
+    "sequence": [
+      "Seed exact saved display payload",
+      "Open app without choosing game"
+    ],
+    "expected": "Only strict boolean flags restore; gameplay never restores or auto-starts",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F008",
+    "category": "fresh preferences",
+    "persona": "Mika, returning visitor",
+    "title": "Cold home with motion reduction saved alone",
+    "sequence": [
+      "Seed exact saved display payload",
+      "Open app without choosing game"
+    ],
+    "expected": "Only strict boolean flags restore; gameplay never restores or auto-starts",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F009",
+    "category": "fresh preferences",
+    "persona": "Mika, returning visitor",
+    "title": "Cold home with both display accommodations saved",
+    "sequence": [
+      "Seed exact saved display payload",
+      "Open app without choosing game"
+    ],
+    "expected": "Only strict boolean flags restore; gameplay never restores or auto-starts",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F010",
+    "category": "fresh preferences",
+    "persona": "Mika, returning visitor",
+    "title": "Cold home with malformed preferences",
+    "sequence": [
+      "Seed exact saved display payload",
+      "Open app without choosing game"
+    ],
+    "expected": "Only strict boolean flags restore; gameplay never restores or auto-starts",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F011",
+    "category": "fresh preferences",
+    "persona": "Mika, returning visitor",
+    "title": "Cold home with null preferences",
+    "sequence": [
+      "Seed exact saved display payload",
+      "Open app without choosing game"
+    ],
+    "expected": "Only strict boolean flags restore; gameplay never restores or auto-starts",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F012",
+    "category": "fresh preferences",
+    "persona": "Mika, returning visitor",
+    "title": "Cold home with array masquerading as preferences",
+    "sequence": [
+      "Seed exact saved display payload",
+      "Open app without choosing game"
+    ],
+    "expected": "Only strict boolean flags restore; gameplay never restores or auto-starts",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F013",
+    "category": "fresh preferences",
+    "persona": "Mika, returning visitor",
+    "title": "Cold home with string and numeric boolean impostors",
+    "sequence": [
+      "Seed exact saved display payload",
+      "Open app without choosing game"
+    ],
+    "expected": "Only strict boolean flags restore; gameplay never restores or auto-starts",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F014",
+    "category": "storage recovery",
+    "persona": "Mika, privacy-restricted visitor",
+    "title": "Blocked preference reads still permit an explicit local opening",
+    "sequence": [
+      "Deny localStorage getter",
+      "Open home",
+      "Choose local and Start"
+    ],
+    "expected": "No startup exception; two cores, no purchased pieces and usable first turn",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F015",
+    "category": "storage recovery",
+    "persona": "Mika, full-storage visitor",
+    "title": "Failed display persistence does not prevent selected accommodations or Start",
+    "sequence": [
+      "Make setItem throw quota error",
+      "Toggle quality and motion on home",
+      "Start local"
+    ],
+    "expected": "Both current-visit flags work and first turn remains usable",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F016",
+    "category": "choice exploration",
+    "persona": "Nao, indecisive visitor",
+    "title": "Menu opponent choices remain deliberate while mode carousel stays consistent",
+    "sequence": [
+      "Select CPU, friend, local on home",
+      "Open rules; choose CPU",
+      "Wait; choose local; Start"
+    ],
+    "expected": "No early board/network; one pressed mode and explanatory copy agrees with final mode",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F017",
+    "category": "first purchase contract",
+    "persona": "Nao, learning costs",
+    "title": "bastion duration 1: preview agrees with first-turn payment and newborn lifetime",
+    "sequence": [
+      "Start local from fresh home",
+      "Choose bastion for 1 turns",
+      "Select a3, inspect price, confirm"
+    ],
+    "expected": "Spend 1 from16 once; newborn remains1; black starts16; two cores persist",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F018",
+    "category": "first purchase contract",
+    "persona": "Nao, learning costs",
+    "title": "bastion duration 2: preview agrees with first-turn payment and newborn lifetime",
+    "sequence": [
+      "Start local from fresh home",
+      "Choose bastion for 2 turns",
+      "Select a3, inspect price, confirm"
+    ],
+    "expected": "Spend 2 from16 once; newborn remains2; black starts16; two cores persist",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F019",
+    "category": "first purchase contract",
+    "persona": "Nao, learning costs",
+    "title": "bastion duration 3: preview agrees with first-turn payment and newborn lifetime",
+    "sequence": [
+      "Start local from fresh home",
+      "Choose bastion for 3 turns",
+      "Select a3, inspect price, confirm"
+    ],
+    "expected": "Spend 3 from16 once; newborn remains3; black starts16; two cores persist",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F020",
+    "category": "first purchase contract",
+    "persona": "Nao, learning costs",
+    "title": "bastion duration 4: preview agrees with first-turn payment and newborn lifetime",
+    "sequence": [
+      "Start local from fresh home",
+      "Choose bastion for 4 turns",
+      "Select a3, inspect price, confirm"
+    ],
+    "expected": "Spend 4 from16 once; newborn remains4; black starts16; two cores persist",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F021",
+    "category": "first purchase contract",
+    "persona": "Nao, learning costs",
+    "title": "bastion duration 5: preview agrees with first-turn payment and newborn lifetime",
+    "sequence": [
+      "Start local from fresh home",
+      "Choose bastion for 5 turns",
+      "Select a3, inspect price, confirm"
+    ],
+    "expected": "Spend 5 from16 once; newborn remains5; black starts16; two cores persist",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F022",
+    "category": "first purchase contract",
+    "persona": "Nao, learning costs",
+    "title": "carver duration 1: preview agrees with first-turn payment and newborn lifetime",
+    "sequence": [
+      "Start local from fresh home",
+      "Choose carver for 1 turns",
+      "Select a3, inspect price, confirm"
+    ],
+    "expected": "Spend 3 from16 once; newborn remains1; black starts16; two cores persist",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F023",
+    "category": "first purchase contract",
+    "persona": "Nao, learning costs",
+    "title": "carver duration 2: preview agrees with first-turn payment and newborn lifetime",
+    "sequence": [
+      "Start local from fresh home",
+      "Choose carver for 2 turns",
+      "Select a3, inspect price, confirm"
+    ],
+    "expected": "Spend 6 from16 once; newborn remains2; black starts16; two cores persist",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F024",
+    "category": "first purchase contract",
+    "persona": "Nao, learning costs",
+    "title": "carver duration 3: preview agrees with first-turn payment and newborn lifetime",
+    "sequence": [
+      "Start local from fresh home",
+      "Choose carver for 3 turns",
+      "Select a3, inspect price, confirm"
+    ],
+    "expected": "Spend 9 from16 once; newborn remains3; black starts16; two cores persist",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F025",
+    "category": "first purchase contract",
+    "persona": "Nao, learning costs",
+    "title": "carver duration 4: preview agrees with first-turn payment and newborn lifetime",
+    "sequence": [
+      "Start local from fresh home",
+      "Choose carver for 4 turns",
+      "Select a3, inspect price, confirm"
+    ],
+    "expected": "Spend 12 from16 once; newborn remains4; black starts16; two cores persist",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F026",
+    "category": "first purchase contract",
+    "persona": "Nao, learning costs",
+    "title": "carver duration 5: preview agrees with first-turn payment and newborn lifetime",
+    "sequence": [
+      "Start local from fresh home",
+      "Choose carver for 5 turns",
+      "Select a3, inspect price, confirm"
+    ],
+    "expected": "Spend 15 from16 once; newborn remains5; black starts16; two cores persist",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F027",
+    "category": "first purchase contract",
+    "persona": "Nao, learning costs",
+    "title": "leaper duration 1: preview agrees with first-turn payment and newborn lifetime",
+    "sequence": [
+      "Start local from fresh home",
+      "Choose leaper for 1 turns",
+      "Select a3, inspect price, confirm"
+    ],
+    "expected": "Spend 2 from16 once; newborn remains1; black starts16; two cores persist",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F028",
+    "category": "first purchase contract",
+    "persona": "Nao, learning costs",
+    "title": "leaper duration 2: preview agrees with first-turn payment and newborn lifetime",
+    "sequence": [
+      "Start local from fresh home",
+      "Choose leaper for 2 turns",
+      "Select a3, inspect price, confirm"
+    ],
+    "expected": "Spend 4 from16 once; newborn remains2; black starts16; two cores persist",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F029",
+    "category": "first purchase contract",
+    "persona": "Nao, learning costs",
+    "title": "leaper duration 3: preview agrees with first-turn payment and newborn lifetime",
+    "sequence": [
+      "Start local from fresh home",
+      "Choose leaper for 3 turns",
+      "Select a3, inspect price, confirm"
+    ],
+    "expected": "Spend 6 from16 once; newborn remains3; black starts16; two cores persist",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F030",
+    "category": "first purchase contract",
+    "persona": "Nao, learning costs",
+    "title": "leaper duration 4: preview agrees with first-turn payment and newborn lifetime",
+    "sequence": [
+      "Start local from fresh home",
+      "Choose leaper for 4 turns",
+      "Select a3, inspect price, confirm"
+    ],
+    "expected": "Spend 8 from16 once; newborn remains4; black starts16; two cores persist",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F031",
+    "category": "first purchase contract",
+    "persona": "Nao, learning costs",
+    "title": "leaper duration 5: preview agrees with first-turn payment and newborn lifetime",
+    "sequence": [
+      "Start local from fresh home",
+      "Choose leaper for 5 turns",
+      "Select a3, inspect price, confirm"
+    ],
+    "expected": "Spend 10 from16 once; newborn remains5; black starts16; two cores persist",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F032",
+    "category": "first purchase contract",
+    "persona": "Nao, learning costs",
+    "title": "link duration 1: preview agrees with first-turn payment and newborn lifetime",
+    "sequence": [
+      "Start local from fresh home",
+      "Choose link for 1 turns",
+      "Select a3, inspect price, confirm"
+    ],
+    "expected": "Spend 1 from16 once; newborn remains1; black starts16; two cores persist",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F033",
+    "category": "first purchase contract",
+    "persona": "Nao, learning costs",
+    "title": "link duration 2: preview agrees with first-turn payment and newborn lifetime",
+    "sequence": [
+      "Start local from fresh home",
+      "Choose link for 2 turns",
+      "Select a3, inspect price, confirm"
+    ],
+    "expected": "Spend 2 from16 once; newborn remains2; black starts16; two cores persist",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F034",
+    "category": "first purchase contract",
+    "persona": "Nao, learning costs",
+    "title": "link duration 3: preview agrees with first-turn payment and newborn lifetime",
+    "sequence": [
+      "Start local from fresh home",
+      "Choose link for 3 turns",
+      "Select a3, inspect price, confirm"
+    ],
+    "expected": "Spend 3 from16 once; newborn remains3; black starts16; two cores persist",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F035",
+    "category": "first purchase contract",
+    "persona": "Nao, learning costs",
+    "title": "link duration 4: preview agrees with first-turn payment and newborn lifetime",
+    "sequence": [
+      "Start local from fresh home",
+      "Choose link for 4 turns",
+      "Select a3, inspect price, confirm"
+    ],
+    "expected": "Spend 4 from16 once; newborn remains4; black starts16; two cores persist",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F036",
+    "category": "first purchase contract",
+    "persona": "Nao, learning costs",
+    "title": "link duration 5: preview agrees with first-turn payment and newborn lifetime",
+    "sequence": [
+      "Start local from fresh home",
+      "Choose link for 5 turns",
+      "Select a3, inspect price, confirm"
+    ],
+    "expected": "Spend 5 from16 once; newborn remains5; black starts16; two cores persist",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F037",
+    "category": "invalid retap recovery",
+    "persona": "Mika, imprecise tapper",
+    "title": "bastion candidate cannot survive a retap on own fixed core",
+    "sequence": [
+      "Start local",
+      "Propose bastion at a3 for2",
+      "Retap square3",
+      "Choose b3 and confirm"
+    ],
+    "expected": "Invalid square clears actionable ghost; alternative destination spends only once",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F038",
+    "category": "invalid retap recovery",
+    "persona": "Mika, imprecise tapper",
+    "title": "bastion candidate cannot survive a retap on excluded central rank",
+    "sequence": [
+      "Start local",
+      "Propose bastion at a3 for2",
+      "Retap square21",
+      "Choose b3 and confirm"
+    ],
+    "expected": "Invalid square clears actionable ghost; alternative destination spends only once",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F039",
+    "category": "invalid retap recovery",
+    "persona": "Mika, imprecise tapper",
+    "title": "bastion candidate cannot survive a retap on opponent nearest rank",
+    "sequence": [
+      "Start local",
+      "Propose bastion at a3 for2",
+      "Retap square28",
+      "Choose b3 and confirm"
+    ],
+    "expected": "Invalid square clears actionable ghost; alternative destination spends only once",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F040",
+    "category": "invalid retap recovery",
+    "persona": "Mika, imprecise tapper",
+    "title": "bastion candidate cannot survive a retap on opponent fixed core",
+    "sequence": [
+      "Start local",
+      "Propose bastion at a3 for2",
+      "Retap square45",
+      "Choose b3 and confirm"
+    ],
+    "expected": "Invalid square clears actionable ghost; alternative destination spends only once",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F041",
+    "category": "invalid retap recovery",
+    "persona": "Mika, imprecise tapper",
+    "title": "carver candidate cannot survive a retap on own fixed core",
+    "sequence": [
+      "Start local",
+      "Propose carver at a3 for2",
+      "Retap square3",
+      "Choose b3 and confirm"
+    ],
+    "expected": "Invalid square clears actionable ghost; alternative destination spends only once",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F042",
+    "category": "invalid retap recovery",
+    "persona": "Mika, imprecise tapper",
+    "title": "carver candidate cannot survive a retap on excluded central rank",
+    "sequence": [
+      "Start local",
+      "Propose carver at a3 for2",
+      "Retap square21",
+      "Choose b3 and confirm"
+    ],
+    "expected": "Invalid square clears actionable ghost; alternative destination spends only once",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F043",
+    "category": "invalid retap recovery",
+    "persona": "Mika, imprecise tapper",
+    "title": "carver candidate cannot survive a retap on opponent nearest rank",
+    "sequence": [
+      "Start local",
+      "Propose carver at a3 for2",
+      "Retap square28",
+      "Choose b3 and confirm"
+    ],
+    "expected": "Invalid square clears actionable ghost; alternative destination spends only once",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F044",
+    "category": "invalid retap recovery",
+    "persona": "Mika, imprecise tapper",
+    "title": "carver candidate cannot survive a retap on opponent fixed core",
+    "sequence": [
+      "Start local",
+      "Propose carver at a3 for2",
+      "Retap square45",
+      "Choose b3 and confirm"
+    ],
+    "expected": "Invalid square clears actionable ghost; alternative destination spends only once",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F045",
+    "category": "invalid retap recovery",
+    "persona": "Mika, imprecise tapper",
+    "title": "leaper candidate cannot survive a retap on own fixed core",
+    "sequence": [
+      "Start local",
+      "Propose leaper at a3 for2",
+      "Retap square3",
+      "Choose b3 and confirm"
+    ],
+    "expected": "Invalid square clears actionable ghost; alternative destination spends only once",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F046",
+    "category": "invalid retap recovery",
+    "persona": "Mika, imprecise tapper",
+    "title": "leaper candidate cannot survive a retap on excluded central rank",
+    "sequence": [
+      "Start local",
+      "Propose leaper at a3 for2",
+      "Retap square21",
+      "Choose b3 and confirm"
+    ],
+    "expected": "Invalid square clears actionable ghost; alternative destination spends only once",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F047",
+    "category": "invalid retap recovery",
+    "persona": "Mika, imprecise tapper",
+    "title": "leaper candidate cannot survive a retap on opponent nearest rank",
+    "sequence": [
+      "Start local",
+      "Propose leaper at a3 for2",
+      "Retap square28",
+      "Choose b3 and confirm"
+    ],
+    "expected": "Invalid square clears actionable ghost; alternative destination spends only once",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F048",
+    "category": "invalid retap recovery",
+    "persona": "Mika, imprecise tapper",
+    "title": "leaper candidate cannot survive a retap on opponent fixed core",
+    "sequence": [
+      "Start local",
+      "Propose leaper at a3 for2",
+      "Retap square45",
+      "Choose b3 and confirm"
+    ],
+    "expected": "Invalid square clears actionable ghost; alternative destination spends only once",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F049",
+    "category": "invalid retap recovery",
+    "persona": "Mika, imprecise tapper",
+    "title": "link candidate cannot survive a retap on own fixed core",
+    "sequence": [
+      "Start local",
+      "Propose link at a3 for2",
+      "Retap square3",
+      "Choose b3 and confirm"
+    ],
+    "expected": "Invalid square clears actionable ghost; alternative destination spends only once",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F050",
+    "category": "invalid retap recovery",
+    "persona": "Mika, imprecise tapper",
+    "title": "link candidate cannot survive a retap on excluded central rank",
+    "sequence": [
+      "Start local",
+      "Propose link at a3 for2",
+      "Retap square21",
+      "Choose b3 and confirm"
+    ],
+    "expected": "Invalid square clears actionable ghost; alternative destination spends only once",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F051",
+    "category": "invalid retap recovery",
+    "persona": "Mika, imprecise tapper",
+    "title": "link candidate cannot survive a retap on opponent nearest rank",
+    "sequence": [
+      "Start local",
+      "Propose link at a3 for2",
+      "Retap square28",
+      "Choose b3 and confirm"
+    ],
+    "expected": "Invalid square clears actionable ghost; alternative destination spends only once",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F052",
+    "category": "invalid retap recovery",
+    "persona": "Mika, imprecise tapper",
+    "title": "link candidate cannot survive a retap on opponent fixed core",
+    "sequence": [
+      "Start local",
+      "Propose link at a3 for2",
+      "Retap square45",
+      "Choose b3 and confirm"
+    ],
+    "expected": "Invalid square clears actionable ghost; alternative destination spends only once",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F053",
+    "category": "purchase interruption",
+    "persona": "Mika, interrupted play",
+    "title": "bastion purchase across rules interruption",
+    "sequence": [
+      "Start local",
+      "Propose bastion at c3 for4",
+      "Visit rules",
+      "Resume intention and commit"
+    ],
+    "expected": "Settings preserve exact candidate, price and duration; commit remains single",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F054",
+    "category": "purchase interruption",
+    "persona": "Mika, interrupted play",
+    "title": "bastion purchase across quality interruption",
+    "sequence": [
+      "Start local",
+      "Propose bastion at c3 for4",
+      "Visit quality",
+      "Resume intention and commit"
+    ],
+    "expected": "Settings preserve exact candidate, price and duration; commit remains single",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F055",
+    "category": "purchase interruption",
+    "persona": "Mika, interrupted play",
+    "title": "bastion purchase across motion interruption",
+    "sequence": [
+      "Start local",
+      "Propose bastion at c3 for4",
+      "Visit motion",
+      "Resume intention and commit"
+    ],
+    "expected": "Settings preserve exact candidate, price and duration; commit remains single",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F056",
+    "category": "purchase interruption",
+    "persona": "Mika, interrupted play",
+    "title": "bastion purchase across home interruption",
+    "sequence": [
+      "Start local",
+      "Propose bastion at c3 for4",
+      "Visit home",
+      "Resume intention and commit"
+    ],
+    "expected": "Home cancels uncommitted intent; resumed game has same funds and needs fresh destination",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F057",
+    "category": "purchase interruption",
+    "persona": "Mika, interrupted play",
+    "title": "carver purchase across rules interruption",
+    "sequence": [
+      "Start local",
+      "Propose carver at c3 for4",
+      "Visit rules",
+      "Resume intention and commit"
+    ],
+    "expected": "Settings preserve exact candidate, price and duration; commit remains single",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F058",
+    "category": "purchase interruption",
+    "persona": "Mika, interrupted play",
+    "title": "carver purchase across quality interruption",
+    "sequence": [
+      "Start local",
+      "Propose carver at c3 for4",
+      "Visit quality",
+      "Resume intention and commit"
+    ],
+    "expected": "Settings preserve exact candidate, price and duration; commit remains single",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F059",
+    "category": "purchase interruption",
+    "persona": "Mika, interrupted play",
+    "title": "carver purchase across motion interruption",
+    "sequence": [
+      "Start local",
+      "Propose carver at c3 for4",
+      "Visit motion",
+      "Resume intention and commit"
+    ],
+    "expected": "Settings preserve exact candidate, price and duration; commit remains single",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F060",
+    "category": "purchase interruption",
+    "persona": "Mika, interrupted play",
+    "title": "carver purchase across home interruption",
+    "sequence": [
+      "Start local",
+      "Propose carver at c3 for4",
+      "Visit home",
+      "Resume intention and commit"
+    ],
+    "expected": "Home cancels uncommitted intent; resumed game has same funds and needs fresh destination",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F061",
+    "category": "purchase interruption",
+    "persona": "Mika, interrupted play",
+    "title": "leaper purchase across rules interruption",
+    "sequence": [
+      "Start local",
+      "Propose leaper at c3 for4",
+      "Visit rules",
+      "Resume intention and commit"
+    ],
+    "expected": "Settings preserve exact candidate, price and duration; commit remains single",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F062",
+    "category": "purchase interruption",
+    "persona": "Mika, interrupted play",
+    "title": "leaper purchase across quality interruption",
+    "sequence": [
+      "Start local",
+      "Propose leaper at c3 for4",
+      "Visit quality",
+      "Resume intention and commit"
+    ],
+    "expected": "Settings preserve exact candidate, price and duration; commit remains single",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F063",
+    "category": "purchase interruption",
+    "persona": "Mika, interrupted play",
+    "title": "leaper purchase across motion interruption",
+    "sequence": [
+      "Start local",
+      "Propose leaper at c3 for4",
+      "Visit motion",
+      "Resume intention and commit"
+    ],
+    "expected": "Settings preserve exact candidate, price and duration; commit remains single",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F064",
+    "category": "purchase interruption",
+    "persona": "Mika, interrupted play",
+    "title": "leaper purchase across home interruption",
+    "sequence": [
+      "Start local",
+      "Propose leaper at c3 for4",
+      "Visit home",
+      "Resume intention and commit"
+    ],
+    "expected": "Home cancels uncommitted intent; resumed game has same funds and needs fresh destination",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F065",
+    "category": "purchase interruption",
+    "persona": "Mika, interrupted play",
+    "title": "link purchase across rules interruption",
+    "sequence": [
+      "Start local",
+      "Propose link at c3 for4",
+      "Visit rules",
+      "Resume intention and commit"
+    ],
+    "expected": "Settings preserve exact candidate, price and duration; commit remains single",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F066",
+    "category": "purchase interruption",
+    "persona": "Mika, interrupted play",
+    "title": "link purchase across quality interruption",
+    "sequence": [
+      "Start local",
+      "Propose link at c3 for4",
+      "Visit quality",
+      "Resume intention and commit"
+    ],
+    "expected": "Settings preserve exact candidate, price and duration; commit remains single",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F067",
+    "category": "purchase interruption",
+    "persona": "Mika, interrupted play",
+    "title": "link purchase across motion interruption",
+    "sequence": [
+      "Start local",
+      "Propose link at c3 for4",
+      "Visit motion",
+      "Resume intention and commit"
+    ],
+    "expected": "Settings preserve exact candidate, price and duration; commit remains single",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F068",
+    "category": "purchase interruption",
+    "persona": "Mika, interrupted play",
+    "title": "link purchase across home interruption",
+    "sequence": [
+      "Start local",
+      "Propose link at c3 for4",
+      "Visit home",
+      "Resume intention and commit"
+    ],
+    "expected": "Home cancels uncommitted intent; resumed game has same funds and needs fresh destination",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F069",
+    "category": "few-tap resilience",
+    "persona": "Mika, rapid-input visitor",
+    "title": "double Summon remains a selection, not a purchase",
+    "sequence": [
+      "Fresh local Start",
+      "Summon twice"
+    ],
+    "expected": "No cost or ply advances; picker remains available",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F070",
+    "category": "few-tap resilience",
+    "persona": "Mika, rapid-input visitor",
+    "title": "reselecting the same kind removes an older proposed destination",
+    "sequence": [
+      "Fresh local Start",
+      "Propose Carver",
+      "Tap Carver again"
+    ],
+    "expected": "Kind selection is retained but destination needs reconfirmation",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F071",
+    "category": "few-tap resilience",
+    "persona": "Mika, rapid-input visitor",
+    "title": "repeated destination taps never spend before Confirm",
+    "sequence": [
+      "Fresh local Start",
+      "Propose Leaper",
+      "Tap same destination five times"
+    ],
+    "expected": "One ghost and one uncommitted action",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F072",
+    "category": "few-tap resilience",
+    "persona": "Mika, rapid-input visitor",
+    "title": "double Confirm during submission cannot become the opponent's move",
+    "sequence": [
+      "Fresh local Start",
+      "Propose Link",
+      "Confirm twice without awaiting"
+    ],
+    "expected": "Exactly one paid action",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F073",
+    "category": "few-tap resilience",
+    "persona": "Mika, rapid-input visitor",
+    "title": "double Pass only prepares one action",
+    "sequence": [
+      "Fresh local Start",
+      "Pass twice",
+      "Confirm"
+    ],
+    "expected": "Explicit final confirmation remains necessary",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F074",
+    "category": "few-tap resilience",
+    "persona": "Mika, rapid-input visitor",
+    "title": "Summon replaces a prepared pass without quietly passing",
+    "sequence": [
+      "Fresh local Start",
+      "Pass",
+      "Summon"
+    ],
+    "expected": "Picker replaces pass candidate and remains free",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F075",
+    "category": "few-tap resilience",
+    "persona": "Mika, rapid-input visitor",
+    "title": "Pass replaces a paid proposal without buying it",
+    "sequence": [
+      "Fresh local Start",
+      "Propose Carver",
+      "Pass",
+      "Confirm"
+    ],
+    "expected": "Only pass occurs; original square stays empty",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F076",
+    "category": "few-tap resilience",
+    "persona": "Mika, rapid-input visitor",
+    "title": "Choose Again preserves kind and duration but clears destination",
+    "sequence": [
+      "Fresh local Start",
+      "Propose Bastion4",
+      "Choose Again",
+      "Choose b3",
+      "Confirm"
+    ],
+    "expected": "Second destination is the only purchased square",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F077",
+    "category": "few-tap resilience",
+    "persona": "Mika, rapid-input visitor",
+    "title": "Escape after a proposal cancels both ghost and price commitment",
+    "sequence": [
+      "Fresh local Start",
+      "Propose Leaper",
+      "Escape"
+    ],
+    "expected": "Board remains ply0 with all16 grain",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F078",
+    "category": "few-tap resilience",
+    "persona": "Mika, rapid-input visitor",
+    "title": "lengthening an already-selected contract requires destination reconfirmation",
+    "sequence": [
+      "Fresh local Start",
+      "Propose Link3",
+      "Increase duration",
+      "Select new destination",
+      "Confirm"
+    ],
+    "expected": "Old3-turn destination cannot accidentally buy4 turns",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F079",
+    "category": "few-tap resilience",
+    "persona": "Mika, rapid-input visitor",
+    "title": "shortening an already-selected contract requires destination reconfirmation",
+    "sequence": [
+      "Fresh local Start",
+      "Propose Carver3",
+      "Decrease duration",
+      "Retarget",
+      "Confirm"
+    ],
+    "expected": "Only new2-turn candidate commits",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F080",
+    "category": "few-tap resilience",
+    "persona": "Mika, rapid-input visitor",
+    "title": "changing piece kind cannot commit the older cheaper proposal",
+    "sequence": [
+      "Fresh local Start",
+      "Propose Bastion",
+      "Choose Carver",
+      "Retarget",
+      "Confirm"
+    ],
+    "expected": "New kind price and geometry own the candidate",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F081",
+    "category": "few-tap resilience",
+    "persona": "Mika, rapid-input visitor",
+    "title": "repeated lower-limit duration taps do not underflow or change cost",
+    "sequence": [
+      "Fresh local Start",
+      "Choose Carver1",
+      "Press minus five times",
+      "Select/confirm"
+    ],
+    "expected": "One-turn contract remains1 and costs exact unit price",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F082",
+    "category": "few-tap resilience",
+    "persona": "Mika, rapid-input visitor",
+    "title": "repeated upper-limit duration taps do not overrun affordability",
+    "sequence": [
+      "Fresh local Start",
+      "Choose Carver5",
+      "Press plus five times",
+      "Confirm"
+    ],
+    "expected": "Five-turn Carver stays15 and leaves1",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F083",
+    "category": "few-tap resilience",
+    "persona": "Mika, rapid-input visitor",
+    "title": "declining home preserves the current purchase exactly",
+    "sequence": [
+      "Fresh local Start",
+      "Propose Leaper4",
+      "Home; decline",
+      "Confirm"
+    ],
+    "expected": "Candidate, duration, price and match remain available",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F084",
+    "category": "few-tap resilience",
+    "persona": "Mika, rapid-input visitor",
+    "title": "declining restart after one move keeps the next player's pending purchase",
+    "sequence": [
+      "Fresh local Start",
+      "White Bastion2",
+      "Black Leaper2 proposal",
+      "Restart; decline",
+      "Confirm"
+    ],
+    "expected": "Black intended action survives without restoring white funds",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F085",
+    "category": "CPU cancellation timing",
+    "persona": "Nao, first CPU match",
+    "title": "Home at 0ms cancels only the unfinished CPU turn",
+    "sequence": [
+      "Start CPU; human pass",
+      "Advance0ms",
+      "Home; inject old reply; Resume; new reply"
+    ],
+    "expected": "Home freezes ply1; stale reply does not change it; resumed current reply reaches ply2 once",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F086",
+    "category": "CPU cancellation timing",
+    "persona": "Nao, first CPU match",
+    "title": "Home at 299ms cancels only the unfinished CPU turn",
+    "sequence": [
+      "Start CPU; human pass",
+      "Advance299ms",
+      "Home; inject old reply; Resume; new reply"
+    ],
+    "expected": "Home freezes ply1; stale reply does not change it; resumed current reply reaches ply2 once",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F087",
+    "category": "CPU cancellation timing",
+    "persona": "Nao, first CPU match",
+    "title": "Home at 301ms cancels only the unfinished CPU turn",
+    "sequence": [
+      "Start CPU; human pass",
+      "Advance301ms",
+      "Home; inject old reply; Resume; new reply"
+    ],
+    "expected": "Home freezes ply1; stale reply does not change it; resumed current reply reaches ply2 once",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F088",
+    "category": "CPU cancellation timing",
+    "persona": "Mika, interrupted CPU match",
+    "title": "Declining Home does not terminate the active CPU worker",
+    "sequence": [
+      "Human pass; await worker",
+      "Home; decline",
+      "Current worker replies"
+    ],
+    "expected": "No pause; the pending move completes normally",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F089",
+    "category": "CPU resume idempotency",
+    "persona": "Mika, repeated button presses",
+    "title": "Repeated Resume starts one replacement CPU worker",
+    "sequence": [
+      "Human pass; Home before worker",
+      "Resume twice; advance301ms",
+      "Worker replies"
+    ],
+    "expected": "Exactly one replacement search and one CPU move",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F090",
+    "category": "CPU stale error",
+    "persona": "Mika, interrupted CPU match",
+    "title": "Late failure from a paused CPU generation cannot run fallback search",
+    "sequence": [
+      "Start worker",
+      "Home",
+      "Old worker error; advance8s",
+      "Resume"
+    ],
+    "expected": "Paused state staysply1 with no extra worker or action",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F091",
+    "category": "CPU match replacement",
+    "persona": "Ren, changing opponent",
+    "title": "Replacing unfinished CPU game with local rejects the old legal reply",
+    "sequence": [
+      "Start CPU worker",
+      "Menu; select replacement and approve",
+      "Old worker replies"
+    ],
+    "expected": "Fresh match retains ply0/16grain/two cores; stale action cannot affect it",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F092",
+    "category": "CPU match replacement",
+    "persona": "Ren, changing opponent",
+    "title": "Replacing unfinished CPU game with cpu rejects the old legal reply",
+    "sequence": [
+      "Start CPU worker",
+      "Menu; select replacement and approve",
+      "Old worker replies"
+    ],
+    "expected": "Fresh match retains ply0/16grain/two cores; stale action cannot affect it",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F093",
+    "category": "CPU bounded recovery",
+    "persona": "Nao, unreliable worker",
+    "title": "CPU null response recovers with an actual legal local fallback",
+    "sequence": [
+      "Start CPU; human pass",
+      "Wait for worker",
+      "Inject null"
+    ],
+    "expected": "Fallback commits one legal action, releases CPU lock and returns human turn",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F094",
+    "category": "CPU bounded recovery",
+    "persona": "Nao, unreliable worker",
+    "title": "CPU illegal response recovers with an actual legal local fallback",
+    "sequence": [
+      "Start CPU; human pass",
+      "Wait for worker",
+      "Inject illegal"
+    ],
+    "expected": "Fallback commits one legal action, releases CPU lock and returns human turn",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F095",
+    "category": "CPU bounded recovery",
+    "persona": "Nao, unreliable worker",
+    "title": "CPU error response recovers with an actual legal local fallback",
+    "sequence": [
+      "Start CPU; human pass",
+      "Wait for worker",
+      "Inject error"
+    ],
+    "expected": "Fallback commits one legal action, releases CPU lock and returns human turn",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F096",
+    "category": "CPU bounded recovery",
+    "persona": "Nao, unreliable worker",
+    "title": "CPU timeout response recovers with an actual legal local fallback",
+    "sequence": [
+      "Start CPU; human pass",
+      "Wait for worker",
+      "Inject timeout"
+    ],
+    "expected": "Fallback commits one legal action, releases CPU lock and returns human turn",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F097",
+    "category": "long continuation",
+    "persona": "Mika, frequent interruptions",
+    "title": "Forty Home/Resume visits preserve one existing contract and both balances",
+    "sequence": [
+      "Buy white Carver5; black pass",
+      "Home/Resume40times",
+      "White pass"
+    ],
+    "expected": "Navigation grants no income/aging; only real pass ages5to4",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F098",
+    "category": "selection churn",
+    "persona": "Ren, comparing alternatives",
+    "title": "Eighty different proposals followed by one commitment buy only the final Link",
+    "sequence": [
+      "Cycle4kinds and5durations through20rounds of proposal/cancel",
+      "Commit Link2 at b3"
+    ],
+    "expected": "No accumulated ghost/action; exact final cost2 and ply1",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F099",
+    "category": "display churn",
+    "persona": "Mika, adjusting comfort",
+    "title": "Repeated quality/motion settings never duplicate state updates or purchase effects",
+    "sequence": [
+      "Start local; proposalLeaper4",
+      "Toggle each flag20times",
+      "Commit"
+    ],
+    "expected": "Settings return off, one purchase remains, exact8grain and stable accessible piece",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  },
+  {
+    "id": "F100",
+    "category": "fresh rematch",
+    "persona": "Nao, learning through replay",
+    "title": "Six confirmed passes and a rematch restore only the documented opening",
+    "sequence": [
+      "Start local; six passes",
+      "Rematch",
+      "Buy Bastion1"
+    ],
+    "expected": "Draw stops actions; rematch has two cores, no free wall and usable first purchase",
+    "limitations": "Automated real-main jsdom, fake time and injected Worker. No GPU, actual browser layout, phone touch, native dialog or human-study evidence."
+  }
+]

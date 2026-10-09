@@ -57,8 +57,9 @@ export function createMotionPlayer(
       cancel();
       if (!transition || document.hidden) return;
       lastElapsed = 0;
-      plan = motionPlan(state, transition);
-      const current = plan;
+      const current = motionPlan(state, transition);
+      if (!current.tracks.length && !current.cues.length) return;
+      plan = current;
       const simple = reduced() || typeof requestAnimationFrame !== "function";
       animating = !simple;
       layer.classList.toggle("reduced", simple);

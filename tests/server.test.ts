@@ -3,6 +3,7 @@ import { DatabaseSync } from "node:sqlite";
 import { readFileSync, readdirSync } from "node:fs";
 import { handleApi, TTL } from "../src/server/api";
 import type { Database, Statement } from "../src/server/db";
+import type { GameState } from "../src/game/types";
 class SqliteD1 implements Database {
   tail = Promise.resolve();
   sql = new DatabaseSync(":memory:");
@@ -114,6 +115,127 @@ async function playing() {
 beforeEach(() => {
   db = new SqliteD1();
   now = 1_800_000_000_000 + counter * 120000;
+});
+it("new rooms start and become ready with only fixed cores and unchanged grain", async () => {
+  const created = await create();
+  expect(created.state).toEqual({
+    pieces: [],
+    cores: { white: 3, black: 45 },
+    grain: { white: 16, black: 12 },
+    turn: "white",
+    ply: 0,
+    consecutivePasses: 0,
+    outcome: null,
+  });
+  await join(created);
+  await ready(await get(created.id));
+  await ready(await get(created.id, "b"), "b");
+  const started = await get(created.id);
+  expect(started.status).toBe("playing");
+  expect(started.state).toEqual(created.state);
+});
+for (const side of ["white", "black"] as const)
+  it.each(Array.from({ length: 49 }, (_, square) => square))(
+    `server enforces ${side}'s own-half summon at square %i`,
+    async (to) => {
+      let r = await playing();
+      if (side === "black") {
+        const passed = await call(`/api/rooms/${r.id}/action`, "a", {
+          version: r.version,
+          commandId: cmd(),
+          action: { type: "pass" },
+        });
+        expect(passed.status).toBe(200);
+        r = passed.data;
+      }
+      const expected =
+        to !== 3 && to !== 45 && (side === "white" ? to <= 20 : to >= 28);
+      const result = await call(
+        `/api/rooms/${r.id}/action`,
+        side === "white" ? "a" : "b",
+        {
+          version: r.version,
+          commandId: cmd(),
+          action: { type: "summon", kind: "carver", duration: 3, to },
+        },
+      );
+      expect(result.status).toBe(expected ? 200 : 400);
+      const stored = await get(r.id);
+      if (expected) {
+        expect(stored.state.pieces).toHaveLength(1);
+        expect(stored.state.pieces[0]).toMatchObject({
+          side,
+          kind: "carver",
+          square: to,
+          remaining: 3,
+        });
+        expect(stored.state.grain[side]).toBe(r.state.grain[side] - 9);
+        expect(stored.state.grain[side === "white" ? "black" : "white"]).toBe(
+          r.state.grain[side === "white" ? "black" : "white"] + 4,
+        );
+        expect(stored.version).toBe(r.version + 1);
+      } else {
+        expect(stored.state).toEqual(r.state);
+        expect(stored.version).toBe(r.version);
+      }
+    },
+  );
+it("loading a persisted ongoing room preserves its existing pieces and state", async () => {
+  const r = await playing();
+  const persisted: GameState = {
+    ...r.state,
+    ply: 8,
+    grain: { white: 23, black: 19 },
+    pieces: [
+      {
+        id: "old-white",
+        side: "white",
+        kind: "bastion",
+        square: 10,
+        remaining: 3,
+        summonedPly: -1,
+      },
+      {
+        id: "old-black",
+        side: "black",
+        kind: "bastion",
+        square: 38,
+        remaining: 3,
+        summonedPly: -1,
+      },
+      {
+        id: "attacker",
+        side: "white",
+        kind: "carver",
+        square: 29,
+        remaining: 2,
+        summonedPly: 6,
+      },
+    ],
+  };
+  db.sql
+    .prepare("UPDATE rooms SET state = ? WHERE id = ?")
+    .run(JSON.stringify(persisted), r.id);
+  expect((await get(r.id)).state).toEqual(persisted);
+  expect((await get(r.id, "b")).state).toEqual(persisted);
+  expect(
+    JSON.parse(
+      db.sql.prepare("SELECT state FROM rooms WHERE id = ?").get(r.id)!
+        .state as string,
+    ),
+  ).toEqual(persisted);
+  const result = await call(`/api/rooms/${r.id}/action`, "a", {
+    version: r.version,
+    commandId: cmd(),
+    action: { type: "pass" },
+  });
+  expect(result.status).toBe(200);
+  expect(result.data.state.pieces).toEqual(
+    persisted.pieces.map((piece) => ({
+      ...piece,
+      remaining: piece.remaining - (piece.side === "white" ? 1 : 0),
+    })),
+  );
 });
 it("session is secure HttpOnly and never exposes its token in JSON", async () => {
   const r = await handleApi(
@@ -232,7 +354,7 @@ it("illegal shapes and moves never age pieces or spend grain", async () => {
   const r = await playing();
   for (const a of [
     { type: "summon", kind: "carver", duration: 6, to: 0 },
-    { type: "move", pieceId: "guard-black", to: 4 },
+    { type: "move", pieceId: "missing-piece", to: 4 },
     { type: "pass", anything: true },
   ]) {
     expect(

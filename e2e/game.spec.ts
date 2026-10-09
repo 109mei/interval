@@ -4,6 +4,9 @@ test("mobile full match and repeated controls", async ({ page }) => {
   const errors: string[] = [];
   page.on("pageerror", (e) => errors.push(e.message));
   await page.goto("/?2d");
+  await expect(page.locator("#home")).toBeVisible();
+  await page.locator("#choose-local").click();
+  await page.locator("#start-game").click();
   await expect(page.locator("[data-square]")).toHaveCount(49);
   await expect(page.locator("#white-grain")).toHaveText("16");
   await page.locator("#summon").click();
@@ -38,6 +41,9 @@ test("mobile full match and repeated controls", async ({ page }) => {
 });
 test("cpu input and mode restart", async ({ page }) => {
   await page.goto("/?2d");
+  await expect(page.locator("#home")).toBeVisible();
+  await page.locator("#choose-local").click();
+  await page.locator("#start-game").click();
   await page.locator("#menu").click();
   await page.locator("#cpu").click();
   await page.locator("#pass").click();
@@ -53,6 +59,8 @@ test("cpu input and mode restart", async ({ page }) => {
 test("actual 3D or honest automatic fallback", async ({ page }) => {
   await page.setViewportSize({ width: 1280, height: 800 });
   await page.goto("/");
+  await page.locator("#choose-local").click();
+  await page.locator("#start-game").click();
   await expect(page.locator("[data-square]")).toHaveCount(49);
   await page.screenshot({
     path: "test-results/desktop-default.png",
@@ -77,6 +85,9 @@ test.describe("portrait touch", () => {
   });
   test("touch summons with contextual controls", async ({ page }) => {
     await page.goto("/?2d");
+    await expect(page.locator("#home")).toBeVisible();
+    await page.locator("#choose-local").click();
+    await page.locator("#start-game").click();
     await page.locator("#summon").tap();
     await page.locator('[data-kind="carver"]').tap();
     await page.locator('[data-square="9"]').tap();

@@ -41,6 +41,13 @@ async function boot(path = "/?2d") {
   history.replaceState(null, "", path);
   vi.spyOn(window, "confirm").mockReturnValue(true);
   await import("../src/main");
+  if (
+    !new URLSearchParams(location.search).has("room") &&
+    !history.state?.invite
+  ) {
+    click("#choose-local");
+    click("#start-game");
+  }
   await flush();
 }
 async function commit() {
@@ -60,8 +67,9 @@ function choose(kind: Kind, duration: number) {
   while (Number(el("duration").textContent) > duration) click("#minus");
   while (Number(el("duration").textContent) < duration) click("#plus");
 }
-const target = (side: Side) => (side === "white" ? 9 : 39);
-const alternative = (side: Side) => (side === "white" ? 8 : 40);
+// Exercise the newly available third home rank, including its opposite edge.
+const target = (side: Side) => (side === "white" ? 14 : 34);
+const alternative = (side: Side) => (side === "white" ? 20 : 28);
 function numbers() {
   return [...el("summary").querySelectorAll(".preview-numbers b")].map((x) =>
     Number(x.textContent),
@@ -159,7 +167,7 @@ async function purchase(i: InteractionInput) {
     0,
     16 - kindPrices[kind] * duration,
   ]);
-  expect(el("summary").textContent).toContain(`期間${duration}回`);
+  expect(el("summary").textContent).toContain(`期間${duration}ターン`);
   expect(el(`${side}-grain`).textContent).toBe("16");
   expect(el("ply").textContent).toBe(`${side === "white" ? 0 : 1} / 200 手`);
   if (i.flow === "rules-interruption") {
@@ -204,7 +212,7 @@ async function purchase(i: InteractionInput) {
   );
   expect(el("ply").textContent).toBe(`${side === "white" ? 1 : 2} / 200 手`);
   expect(square(finalTarget).getAttribute("aria-label")).toContain(
-    `${owner(side)} ${kindNames[finalKind]} 残り${duration}回`,
+    `${owner(side)} ${kindNames[finalKind]} 残り${duration}ターン`,
   );
   expect(square(finalTarget).querySelector(".life")?.textContent).toBe(
     String(duration),
@@ -218,32 +226,45 @@ async function invalidTarget(i: InteractionInput) {
     duration = i.duration!;
   await boot();
   await turn(side);
+  const occupied = i.invalid === "occupied-wall";
+  if (occupied) {
+    choose("bastion", 5);
+    square(side === "white" ? 10 : 38).click();
+    await commit();
+    await pass();
+    expect(
+      square(side === "white" ? 10 : 38).getAttribute("aria-label"),
+    ).toContain(`${owner(side)} バスティオン 残り5ターン`);
+  }
+  const grainBefore = occupied ? 15 : 16;
+  const plyBefore = (side === "white" ? 0 : 1) + (occupied ? 2 : 0);
   choose(kind, duration);
   square(target(side)).click();
-  const whiteInvalid =
-    i.invalid === "own-core" ? 3 : i.invalid === "occupied-wall" ? 10 : 14;
+  const whiteInvalid = i.invalid === "own-core" ? 3 : occupied ? 10 : 21;
   square(side === "white" ? whiteInvalid : 48 - whiteInvalid).click();
   expect(el("confirm-row").hidden).toBe(true);
   expect(button("confirm").disabled).toBe(true);
   expect(document.querySelector(".ghost-piece")).toBeNull();
   expect(el("duration").textContent).toBe(String(duration));
   expect(el("kind-label").textContent).toBe(kindNames[kind]);
-  expect(el(`${side}-grain`).textContent).toBe("16");
+  expect(el(`${side}-grain`).textContent).toBe(String(grainBefore));
+  expect(el("ply").textContent).toBe(`${plyBefore} / 200 手`);
   expect(el("hint").textContent).toContain("自陣の空きマス");
-  expect(document.querySelectorAll(".target")).toHaveLength(12);
+  expect(document.querySelectorAll(".target")).toHaveLength(occupied ? 19 : 20);
   square(alternative(side)).click();
   expect(numbers()).toEqual([
     kindPrices[kind] * duration,
     0,
-    16 - kindPrices[kind] * duration,
+    grainBefore - kindPrices[kind] * duration,
   ]);
   await commit();
   expect(square(alternative(side)).querySelector(".life")?.textContent).toBe(
     String(duration),
   );
   expect(el(`${side}-grain`).textContent).toBe(
-    String(16 - kindPrices[kind] * duration),
+    String(grainBefore - kindPrices[kind] * duration),
   );
+  expect(el("ply").textContent).toBe(`${plyBefore + 1} / 200 手`);
 }
 async function inspect(i: InteractionInput) {
   const side = i.side!,
@@ -256,7 +277,7 @@ async function inspect(i: InteractionInput) {
   await commit();
   square(target(side)).click();
   expect(el("hint").textContent).toContain(
-    `${owner(side)}の${kindNames[kind]} · 残り${duration}回`,
+    `${owner(side)}の${kindNames[kind]} · 残り${duration}ターン`,
   );
   expect(el("summary").textContent).toContain("参考");
   expect(el("summary").textContent).toContain("今は操作できません");
@@ -272,7 +293,7 @@ async function inspect(i: InteractionInput) {
   click("#cancel");
   await pass();
   square(target(side)).click();
-  expect(el("hint").textContent).toContain(`残り${duration}回`);
+  expect(el("hint").textContent).toContain(`残り${duration}ターン`);
   if (duration === 1)
     expect(el("summary").textContent).toContain(`この${owner(side)}の手番末`);
   expect(el("summary").textContent).not.toContain("今は操作できません");
@@ -325,7 +346,14 @@ async function display(i: InteractionInput) {
     choose("carver", 2);
     if (i.context === "candidate") square(9).click();
   }
-  if (i.context === "piece-info") square(10).click();
+  if (i.context === "piece-info") {
+    choose("bastion", 3);
+    square(10).click();
+    await commit();
+    square(10).click();
+    expect(square(10).getAttribute("aria-pressed")).toBe("true");
+    expect(el("hint").textContent).toContain("白のバスティオン · 残り3ターン");
+  }
   if (i.context === "pass") click("#pass");
   const snapshot = () => [
     el("hint").textContent,
@@ -366,7 +394,7 @@ async function keyboard(i: InteractionInput) {
   expect(el("ply").textContent).toBe("0 / 200 手");
   expect(el("white-grain").textContent).toBe("16");
   expect(el("confirm-row").hidden).toBe(true);
-  expect(document.querySelector('[aria-pressed="true"]')).toBeNull();
+  expect(document.querySelector('#board [aria-pressed="true"]')).toBeNull();
 }
 async function rejection(i: InteractionInput) {
   const initial = room(i.side!, i.op),
@@ -591,7 +619,7 @@ async function cpu(i: InteractionInput) {
     null: null,
     undefined: undefined,
     "unknown-type": { type: "dance" },
-    "illegal-move": { type: "move", pieceId: "guard-black", to: 31 },
+    "illegal-move": { type: "move", pieceId: "missing-black-piece", to: 31 },
     "invalid-summon": { type: "summon", kind: "carver", duration: 5, to: 10 },
     "empty-object": {},
   };

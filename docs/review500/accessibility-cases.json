@@ -1,0 +1,1630 @@
+[
+  {
+    "id": "A001",
+    "category": "keyboard-navigation",
+    "persona": "Keyboard-only spatial learner",
+    "sequence": [
+      "Focus square 24",
+      "Press ArrowUp"
+    ],
+    "expected": "Arrow navigation interior north: Focus is square 31, one tab stop remains, arrow default is prevented, and no action commits.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A002",
+    "category": "keyboard-navigation",
+    "persona": "Keyboard-only spatial learner",
+    "sequence": [
+      "Focus square 24",
+      "Press ArrowDown"
+    ],
+    "expected": "Arrow navigation interior south: Focus is square 17, one tab stop remains, arrow default is prevented, and no action commits.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A003",
+    "category": "keyboard-navigation",
+    "persona": "Keyboard-only spatial learner",
+    "sequence": [
+      "Focus square 24",
+      "Press ArrowLeft"
+    ],
+    "expected": "Arrow navigation interior west: Focus is square 23, one tab stop remains, arrow default is prevented, and no action commits.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A004",
+    "category": "keyboard-navigation",
+    "persona": "Keyboard-only spatial learner",
+    "sequence": [
+      "Focus square 24",
+      "Press ArrowRight"
+    ],
+    "expected": "Arrow navigation interior east: Focus is square 25, one tab stop remains, arrow default is prevented, and no action commits.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A005",
+    "category": "keyboard-navigation",
+    "persona": "Keyboard-only spatial learner",
+    "sequence": [
+      "Focus square 45",
+      "Press ArrowUp"
+    ],
+    "expected": "Arrow navigation north edge: Focus is square 45, one tab stop remains, arrow default is prevented, and no action commits.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A006",
+    "category": "keyboard-navigation",
+    "persona": "Keyboard-only spatial learner",
+    "sequence": [
+      "Focus square 3",
+      "Press ArrowDown"
+    ],
+    "expected": "Arrow navigation south edge: Focus is square 3, one tab stop remains, arrow default is prevented, and no action commits.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A007",
+    "category": "keyboard-navigation",
+    "persona": "Keyboard-only spatial learner",
+    "sequence": [
+      "Focus square 21",
+      "Press ArrowLeft"
+    ],
+    "expected": "Arrow navigation west edge: Focus is square 21, one tab stop remains, arrow default is prevented, and no action commits.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A008",
+    "category": "keyboard-navigation",
+    "persona": "Keyboard-only spatial learner",
+    "sequence": [
+      "Focus square 27",
+      "Press ArrowRight"
+    ],
+    "expected": "Arrow navigation east edge: Focus is square 27, one tab stop remains, arrow default is prevented, and no action commits.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A009",
+    "category": "keyboard-navigation",
+    "persona": "Keyboard-only spatial learner",
+    "sequence": [
+      "Focus square 0",
+      "Press ArrowUp"
+    ],
+    "expected": "Arrow navigation southwest inward: Focus is square 7, one tab stop remains, arrow default is prevented, and no action commits.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A010",
+    "category": "keyboard-navigation",
+    "persona": "Keyboard-only spatial learner",
+    "sequence": [
+      "Focus square 6",
+      "Press ArrowLeft"
+    ],
+    "expected": "Arrow navigation southeast inward: Focus is square 5, one tab stop remains, arrow default is prevented, and no action commits.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A011",
+    "category": "keyboard-navigation",
+    "persona": "Keyboard-only spatial learner",
+    "sequence": [
+      "Focus square 42",
+      "Press ArrowRight"
+    ],
+    "expected": "Arrow navigation northwest inward: Focus is square 43, one tab stop remains, arrow default is prevented, and no action commits.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A012",
+    "category": "keyboard-navigation",
+    "persona": "Keyboard-only spatial learner",
+    "sequence": [
+      "Focus square 48",
+      "Press ArrowDown"
+    ],
+    "expected": "Arrow navigation northeast inward: Focus is square 41, one tab stop remains, arrow default is prevented, and no action commits.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A013",
+    "category": "keyboard-route",
+    "persona": "Keyboard-only explorer",
+    "sequence": [
+      "Focus 0",
+      "Press ArrowRight",
+      "Press ArrowRight",
+      "Press ArrowRight",
+      "Press ArrowRight",
+      "Press ArrowRight",
+      "Press ArrowRight"
+    ],
+    "expected": "Route complete bottom rank: Focus finishes at 6; all intermediate roving states have exactly one tab stop; movement never activates a square.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A014",
+    "category": "keyboard-route",
+    "persona": "Keyboard-only explorer",
+    "sequence": [
+      "Focus 48",
+      "Press ArrowLeft",
+      "Press ArrowLeft",
+      "Press ArrowLeft",
+      "Press ArrowLeft",
+      "Press ArrowLeft",
+      "Press ArrowLeft"
+    ],
+    "expected": "Route complete top rank reversed: Focus finishes at 42; all intermediate roving states have exactly one tab stop; movement never activates a square.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A015",
+    "category": "keyboard-route",
+    "persona": "Keyboard-only explorer",
+    "sequence": [
+      "Focus 0",
+      "Press ArrowUp",
+      "Press ArrowUp",
+      "Press ArrowUp",
+      "Press ArrowUp",
+      "Press ArrowUp",
+      "Press ArrowUp"
+    ],
+    "expected": "Route complete west file: Focus finishes at 42; all intermediate roving states have exactly one tab stop; movement never activates a square.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A016",
+    "category": "keyboard-route",
+    "persona": "Keyboard-only explorer",
+    "sequence": [
+      "Focus 48",
+      "Press ArrowDown",
+      "Press ArrowDown",
+      "Press ArrowDown",
+      "Press ArrowDown",
+      "Press ArrowDown",
+      "Press ArrowDown"
+    ],
+    "expected": "Route complete east file reversed: Focus finishes at 6; all intermediate roving states have exactly one tab stop; movement never activates a square.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A017",
+    "category": "keyboard-route",
+    "persona": "Keyboard-only explorer",
+    "sequence": [
+      "Focus 0",
+      "Press ArrowLeft",
+      "Press ArrowDown",
+      "Press ArrowRight",
+      "Press ArrowUp"
+    ],
+    "expected": "Route southwest blocked corner escape: Focus finishes at 8; all intermediate roving states have exactly one tab stop; movement never activates a square.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A018",
+    "category": "keyboard-route",
+    "persona": "Keyboard-only explorer",
+    "sequence": [
+      "Focus 48",
+      "Press ArrowRight",
+      "Press ArrowUp",
+      "Press ArrowLeft",
+      "Press ArrowDown"
+    ],
+    "expected": "Route northeast blocked corner escape: Focus finishes at 40; all intermediate roving states have exactly one tab stop; movement never activates a square.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A019",
+    "category": "keyboard-route",
+    "persona": "Keyboard-only explorer",
+    "sequence": [
+      "Focus 24",
+      "Press ArrowUp",
+      "Press ArrowRight",
+      "Press ArrowDown",
+      "Press ArrowLeft"
+    ],
+    "expected": "Route closed square route: Focus finishes at 24; all intermediate roving states have exactly one tab stop; movement never activates a square.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A020",
+    "category": "keyboard-route",
+    "persona": "Keyboard-only explorer",
+    "sequence": [
+      "Focus 2",
+      "Press ArrowRight",
+      "Press ArrowRight",
+      "Press ArrowUp",
+      "Press ArrowUp",
+      "Press ArrowLeft"
+    ],
+    "expected": "Route cross core route without accidental choice: Focus finishes at 17; all intermediate roving states have exactly one tab stop; movement never activates a square.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A021",
+    "category": "keyboard-noninterference",
+    "persona": "Keyboard and assistive shortcut user",
+    "sequence": [
+      "Focus center square",
+      "Dispatch Tab"
+    ],
+    "expected": "Board does not swallow Tab: No board navigation or activation occurs and the key remains available to the browser/assistive technology.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A022",
+    "category": "keyboard-noninterference",
+    "persona": "Keyboard and assistive shortcut user",
+    "sequence": [
+      "Focus center square",
+      "Dispatch Home"
+    ],
+    "expected": "Board does not swallow Home: No board navigation or activation occurs and the key remains available to the browser/assistive technology.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A023",
+    "category": "keyboard-noninterference",
+    "persona": "Keyboard and assistive shortcut user",
+    "sequence": [
+      "Focus center square",
+      "Dispatch End"
+    ],
+    "expected": "Board does not swallow End: No board navigation or activation occurs and the key remains available to the browser/assistive technology.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A024",
+    "category": "keyboard-noninterference",
+    "persona": "Keyboard and assistive shortcut user",
+    "sequence": [
+      "Focus center square",
+      "Dispatch x"
+    ],
+    "expected": "Board does not swallow x: No board navigation or activation occurs and the key remains available to the browser/assistive technology.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A025",
+    "category": "focus-render-stability",
+    "persona": "Keyboard player awaiting updates",
+    "sequence": [
+      "Focus square 20",
+      "Render idle",
+      "Press ArrowUp"
+    ],
+    "expected": "Roving focus survives idle render: Existing square identity and focus survive repaint; the next arrow starts from the same square rather than a reset origin. Also checks static inset-focus contrast of both square colours at least 3:1.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests. CSS checks are static author-cascade/opaque-colour calculations; responsive rule presence does not prove rendered mobile layout."
+  },
+  {
+    "id": "A026",
+    "category": "focus-render-stability",
+    "persona": "Keyboard player awaiting updates",
+    "sequence": [
+      "Focus square 20",
+      "Render selected",
+      "Press ArrowUp"
+    ],
+    "expected": "Roving focus survives selected render: Existing square identity and focus survive repaint; the next arrow starts from the same square rather than a reset origin.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A027",
+    "category": "focus-render-stability",
+    "persona": "Keyboard player awaiting updates",
+    "sequence": [
+      "Focus square 20",
+      "Render preview",
+      "Press ArrowUp"
+    ],
+    "expected": "Roving focus survives preview render: Existing square identity and focus survive repaint; the next arrow starts from the same square rather than a reset origin.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A028",
+    "category": "focus-render-stability",
+    "persona": "Keyboard player awaiting updates",
+    "sequence": [
+      "Focus square 20",
+      "Render cleared",
+      "Press ArrowUp"
+    ],
+    "expected": "Roving focus survives cleared render: Existing square identity and focus survive repaint; the next arrow starts from the same square rather than a reset origin.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A029",
+    "category": "focus-render-stability",
+    "persona": "Keyboard player awaiting updates",
+    "sequence": [
+      "Focus square 20",
+      "Render summon",
+      "Press ArrowUp"
+    ],
+    "expected": "Roving focus survives summon render: Existing square identity and focus survive repaint; the next arrow starts from the same square rather than a reset origin.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A030",
+    "category": "focus-render-stability",
+    "persona": "Keyboard player awaiting updates",
+    "sequence": [
+      "Focus square 20",
+      "Render inspection",
+      "Press ArrowUp"
+    ],
+    "expected": "Roving focus survives inspection render: Existing square identity and focus survive repaint; the next arrow starts from the same square rather than a reset origin.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A031",
+    "category": "focus-render-stability",
+    "persona": "Keyboard player awaiting updates",
+    "sequence": [
+      "Focus square 20",
+      "Render transition",
+      "Press ArrowUp"
+    ],
+    "expected": "Roving focus survives transition render: Existing square identity and focus survive repaint; the next arrow starts from the same square rather than a reset origin.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A032",
+    "category": "focus-render-stability",
+    "persona": "Keyboard player awaiting updates",
+    "sequence": [
+      "Focus square 20",
+      "Render cancelled-motion",
+      "Press ArrowUp"
+    ],
+    "expected": "Roving focus survives cancelled-motion render: Existing square identity and focus survive repaint; the next arrow starts from the same square rather than a reset origin.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A033",
+    "category": "piece-colour-independent",
+    "persona": "Colour-vision-deficient lifetime reader",
+    "sequence": [
+      "Render white bastion at c3 with 1 turn(s)"
+    ],
+    "expected": "white bastion lifetime 1: Accessible name contains coordinate, textual side, full piece name and numeric lifetime; visible glyph and numeric badge do not depend on colour. Static author CSS keeps the desktop lifetime badge at least 13px with 4.5:1 text contrast.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests. CSS checks are static author-cascade/opaque-colour calculations; responsive rule presence does not prove rendered mobile layout."
+  },
+  {
+    "id": "A034",
+    "category": "piece-colour-independent",
+    "persona": "Colour-vision-deficient lifetime reader",
+    "sequence": [
+      "Render white bastion at c3 with 5 turn(s)"
+    ],
+    "expected": "white bastion lifetime 5: Accessible name contains coordinate, textual side, full piece name and numeric lifetime; visible glyph and numeric badge do not depend on colour. Static author CSS keeps the desktop lifetime badge at least 13px with 4.5:1 text contrast.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests. CSS checks are static author-cascade/opaque-colour calculations; responsive rule presence does not prove rendered mobile layout."
+  },
+  {
+    "id": "A035",
+    "category": "piece-colour-independent",
+    "persona": "Colour-vision-deficient lifetime reader",
+    "sequence": [
+      "Render black bastion at c3 with 1 turn(s)"
+    ],
+    "expected": "black bastion lifetime 1: Accessible name contains coordinate, textual side, full piece name and numeric lifetime; visible glyph and numeric badge do not depend on colour. Static author CSS keeps the desktop lifetime badge at least 13px with 4.5:1 text contrast.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests. CSS checks are static author-cascade/opaque-colour calculations; responsive rule presence does not prove rendered mobile layout."
+  },
+  {
+    "id": "A036",
+    "category": "piece-colour-independent",
+    "persona": "Colour-vision-deficient lifetime reader",
+    "sequence": [
+      "Render black bastion at c3 with 5 turn(s)"
+    ],
+    "expected": "black bastion lifetime 5: Accessible name contains coordinate, textual side, full piece name and numeric lifetime; visible glyph and numeric badge do not depend on colour. Static author CSS keeps the desktop lifetime badge at least 13px with 4.5:1 text contrast.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests. CSS checks are static author-cascade/opaque-colour calculations; responsive rule presence does not prove rendered mobile layout."
+  },
+  {
+    "id": "A037",
+    "category": "piece-colour-independent",
+    "persona": "Colour-vision-deficient lifetime reader",
+    "sequence": [
+      "Render white carver at c3 with 1 turn(s)"
+    ],
+    "expected": "white carver lifetime 1: Accessible name contains coordinate, textual side, full piece name and numeric lifetime; visible glyph and numeric badge do not depend on colour. Static author CSS keeps the desktop lifetime badge at least 13px with 4.5:1 text contrast.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests. CSS checks are static author-cascade/opaque-colour calculations; responsive rule presence does not prove rendered mobile layout."
+  },
+  {
+    "id": "A038",
+    "category": "piece-colour-independent",
+    "persona": "Colour-vision-deficient lifetime reader",
+    "sequence": [
+      "Render white carver at c3 with 5 turn(s)"
+    ],
+    "expected": "white carver lifetime 5: Accessible name contains coordinate, textual side, full piece name and numeric lifetime; visible glyph and numeric badge do not depend on colour. Static author CSS keeps the desktop lifetime badge at least 13px with 4.5:1 text contrast.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests. CSS checks are static author-cascade/opaque-colour calculations; responsive rule presence does not prove rendered mobile layout."
+  },
+  {
+    "id": "A039",
+    "category": "piece-colour-independent",
+    "persona": "Colour-vision-deficient lifetime reader",
+    "sequence": [
+      "Render black carver at c3 with 1 turn(s)"
+    ],
+    "expected": "black carver lifetime 1: Accessible name contains coordinate, textual side, full piece name and numeric lifetime; visible glyph and numeric badge do not depend on colour. Static author CSS keeps the desktop lifetime badge at least 13px with 4.5:1 text contrast.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests. CSS checks are static author-cascade/opaque-colour calculations; responsive rule presence does not prove rendered mobile layout."
+  },
+  {
+    "id": "A040",
+    "category": "piece-colour-independent",
+    "persona": "Colour-vision-deficient lifetime reader",
+    "sequence": [
+      "Render black carver at c3 with 5 turn(s)"
+    ],
+    "expected": "black carver lifetime 5: Accessible name contains coordinate, textual side, full piece name and numeric lifetime; visible glyph and numeric badge do not depend on colour. Static author CSS keeps the desktop lifetime badge at least 13px with 4.5:1 text contrast.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests. CSS checks are static author-cascade/opaque-colour calculations; responsive rule presence does not prove rendered mobile layout."
+  },
+  {
+    "id": "A041",
+    "category": "piece-colour-independent",
+    "persona": "Colour-vision-deficient lifetime reader",
+    "sequence": [
+      "Render white leaper at c3 with 1 turn(s)"
+    ],
+    "expected": "white leaper lifetime 1: Accessible name contains coordinate, textual side, full piece name and numeric lifetime; visible glyph and numeric badge do not depend on colour. Static author CSS keeps the desktop lifetime badge at least 13px with 4.5:1 text contrast.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests. CSS checks are static author-cascade/opaque-colour calculations; responsive rule presence does not prove rendered mobile layout."
+  },
+  {
+    "id": "A042",
+    "category": "piece-colour-independent",
+    "persona": "Colour-vision-deficient lifetime reader",
+    "sequence": [
+      "Render white leaper at c3 with 5 turn(s)"
+    ],
+    "expected": "white leaper lifetime 5: Accessible name contains coordinate, textual side, full piece name and numeric lifetime; visible glyph and numeric badge do not depend on colour. Static author CSS keeps the desktop lifetime badge at least 13px with 4.5:1 text contrast.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests. CSS checks are static author-cascade/opaque-colour calculations; responsive rule presence does not prove rendered mobile layout."
+  },
+  {
+    "id": "A043",
+    "category": "piece-colour-independent",
+    "persona": "Colour-vision-deficient lifetime reader",
+    "sequence": [
+      "Render black leaper at c3 with 1 turn(s)"
+    ],
+    "expected": "black leaper lifetime 1: Accessible name contains coordinate, textual side, full piece name and numeric lifetime; visible glyph and numeric badge do not depend on colour. Static author CSS keeps the desktop lifetime badge at least 13px with 4.5:1 text contrast.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests. CSS checks are static author-cascade/opaque-colour calculations; responsive rule presence does not prove rendered mobile layout."
+  },
+  {
+    "id": "A044",
+    "category": "piece-colour-independent",
+    "persona": "Colour-vision-deficient lifetime reader",
+    "sequence": [
+      "Render black leaper at c3 with 5 turn(s)"
+    ],
+    "expected": "black leaper lifetime 5: Accessible name contains coordinate, textual side, full piece name and numeric lifetime; visible glyph and numeric badge do not depend on colour. Static author CSS keeps the desktop lifetime badge at least 13px with 4.5:1 text contrast.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests. CSS checks are static author-cascade/opaque-colour calculations; responsive rule presence does not prove rendered mobile layout."
+  },
+  {
+    "id": "A045",
+    "category": "piece-colour-independent",
+    "persona": "Colour-vision-deficient lifetime reader",
+    "sequence": [
+      "Render white link at c3 with 1 turn(s)"
+    ],
+    "expected": "white link lifetime 1: Accessible name contains coordinate, textual side, full piece name and numeric lifetime; visible glyph and numeric badge do not depend on colour. Static author CSS keeps the desktop lifetime badge at least 13px with 4.5:1 text contrast.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests. CSS checks are static author-cascade/opaque-colour calculations; responsive rule presence does not prove rendered mobile layout."
+  },
+  {
+    "id": "A046",
+    "category": "piece-colour-independent",
+    "persona": "Colour-vision-deficient lifetime reader",
+    "sequence": [
+      "Render white link at c3 with 5 turn(s)"
+    ],
+    "expected": "white link lifetime 5: Accessible name contains coordinate, textual side, full piece name and numeric lifetime; visible glyph and numeric badge do not depend on colour. Static author CSS keeps the desktop lifetime badge at least 13px with 4.5:1 text contrast.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests. CSS checks are static author-cascade/opaque-colour calculations; responsive rule presence does not prove rendered mobile layout."
+  },
+  {
+    "id": "A047",
+    "category": "piece-colour-independent",
+    "persona": "Colour-vision-deficient lifetime reader",
+    "sequence": [
+      "Render black link at c3 with 1 turn(s)"
+    ],
+    "expected": "black link lifetime 1: Accessible name contains coordinate, textual side, full piece name and numeric lifetime; visible glyph and numeric badge do not depend on colour. Static author CSS keeps the desktop lifetime badge at least 13px with 4.5:1 text contrast.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests. CSS checks are static author-cascade/opaque-colour calculations; responsive rule presence does not prove rendered mobile layout."
+  },
+  {
+    "id": "A048",
+    "category": "piece-colour-independent",
+    "persona": "Colour-vision-deficient lifetime reader",
+    "sequence": [
+      "Render black link at c3 with 5 turn(s)"
+    ],
+    "expected": "black link lifetime 5: Accessible name contains coordinate, textual side, full piece name and numeric lifetime; visible glyph and numeric badge do not depend on colour. Static author CSS keeps the desktop lifetime badge at least 13px with 4.5:1 text contrast.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests. CSS checks are static author-cascade/opaque-colour calculations; responsive rule presence does not prove rendered mobile layout."
+  },
+  {
+    "id": "A049",
+    "category": "piece-selection-semantics",
+    "persona": "Screen-reader exploration user",
+    "sequence": [
+      "Render unselected piece",
+      "Select piece",
+      "Clear selection"
+    ],
+    "expected": "Selected white bastion toggles pressed state: Exactly the selected square exposes pressed=true; clearing removes pressed state without removing its descriptive name.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A050",
+    "category": "piece-selection-semantics",
+    "persona": "Screen-reader exploration user",
+    "sequence": [
+      "Render unselected piece",
+      "Select piece",
+      "Clear selection"
+    ],
+    "expected": "Selected black bastion toggles pressed state: Exactly the selected square exposes pressed=true; clearing removes pressed state without removing its descriptive name.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A051",
+    "category": "piece-selection-semantics",
+    "persona": "Screen-reader exploration user",
+    "sequence": [
+      "Render unselected piece",
+      "Select piece",
+      "Clear selection"
+    ],
+    "expected": "Selected white carver toggles pressed state: Exactly the selected square exposes pressed=true; clearing removes pressed state without removing its descriptive name.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A052",
+    "category": "piece-selection-semantics",
+    "persona": "Screen-reader exploration user",
+    "sequence": [
+      "Render unselected piece",
+      "Select piece",
+      "Clear selection"
+    ],
+    "expected": "Selected black carver toggles pressed state: Exactly the selected square exposes pressed=true; clearing removes pressed state without removing its descriptive name.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A053",
+    "category": "piece-selection-semantics",
+    "persona": "Screen-reader exploration user",
+    "sequence": [
+      "Render unselected piece",
+      "Select piece",
+      "Clear selection"
+    ],
+    "expected": "Selected white leaper toggles pressed state: Exactly the selected square exposes pressed=true; clearing removes pressed state without removing its descriptive name.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A054",
+    "category": "piece-selection-semantics",
+    "persona": "Screen-reader exploration user",
+    "sequence": [
+      "Render unselected piece",
+      "Select piece",
+      "Clear selection"
+    ],
+    "expected": "Selected black leaper toggles pressed state: Exactly the selected square exposes pressed=true; clearing removes pressed state without removing its descriptive name.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A055",
+    "category": "piece-selection-semantics",
+    "persona": "Screen-reader exploration user",
+    "sequence": [
+      "Render unselected piece",
+      "Select piece",
+      "Clear selection"
+    ],
+    "expected": "Selected white link toggles pressed state: Exactly the selected square exposes pressed=true; clearing removes pressed state without removing its descriptive name.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A056",
+    "category": "piece-selection-semantics",
+    "persona": "Screen-reader exploration user",
+    "sequence": [
+      "Render unselected piece",
+      "Select piece",
+      "Clear selection"
+    ],
+    "expected": "Selected black link toggles pressed state: Exactly the selected square exposes pressed=true; clearing removes pressed state without removing its descriptive name.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A057",
+    "category": "board-orientation",
+    "persona": "Nonvisual board mapper",
+    "sequence": [
+      "Render untouched board",
+      "Inspect square 0"
+    ],
+    "expected": "Square identity a1 空き: Square name matches the stable visible coordinate and identifies empty space or core ownership in text. Static coordinate font is at least 10px and its opacity-composited contrast on the tile is at least 4.5:1.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests. CSS checks are static author-cascade/opaque-colour calculations; responsive rule presence does not prove rendered mobile layout."
+  },
+  {
+    "id": "A058",
+    "category": "board-orientation",
+    "persona": "Nonvisual board mapper",
+    "sequence": [
+      "Render untouched board",
+      "Inspect square 6"
+    ],
+    "expected": "Square identity g1 空き: Square name matches the stable visible coordinate and identifies empty space or core ownership in text. Static coordinate font is at least 10px and its opacity-composited contrast on the tile is at least 4.5:1.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests. CSS checks are static author-cascade/opaque-colour calculations; responsive rule presence does not prove rendered mobile layout."
+  },
+  {
+    "id": "A059",
+    "category": "board-orientation",
+    "persona": "Nonvisual board mapper",
+    "sequence": [
+      "Render untouched board",
+      "Inspect square 42"
+    ],
+    "expected": "Square identity a7 空き: Square name matches the stable visible coordinate and identifies empty space or core ownership in text. Static coordinate font is at least 10px and its opacity-composited contrast on the tile is at least 4.5:1.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests. CSS checks are static author-cascade/opaque-colour calculations; responsive rule presence does not prove rendered mobile layout."
+  },
+  {
+    "id": "A060",
+    "category": "board-orientation",
+    "persona": "Nonvisual board mapper",
+    "sequence": [
+      "Render untouched board",
+      "Inspect square 48"
+    ],
+    "expected": "Square identity g7 空き: Square name matches the stable visible coordinate and identifies empty space or core ownership in text. Static coordinate font is at least 10px and its opacity-composited contrast on the tile is at least 4.5:1.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests. CSS checks are static author-cascade/opaque-colour calculations; responsive rule presence does not prove rendered mobile layout."
+  },
+  {
+    "id": "A061",
+    "category": "board-orientation",
+    "persona": "Nonvisual board mapper",
+    "sequence": [
+      "Render untouched board",
+      "Inspect square 3"
+    ],
+    "expected": "Square identity d1 白のコア: Square name matches the stable visible coordinate and identifies empty space or core ownership in text. Static coordinate font is at least 10px and its opacity-composited contrast on the tile is at least 4.5:1.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests. CSS checks are static author-cascade/opaque-colour calculations; responsive rule presence does not prove rendered mobile layout."
+  },
+  {
+    "id": "A062",
+    "category": "board-orientation",
+    "persona": "Nonvisual board mapper",
+    "sequence": [
+      "Render untouched board",
+      "Inspect square 45"
+    ],
+    "expected": "Square identity d7 黒のコア: Square name matches the stable visible coordinate and identifies empty space or core ownership in text. Static coordinate font is at least 10px and its opacity-composited contrast on the tile is at least 4.5:1.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests. CSS checks are static author-cascade/opaque-colour calculations; responsive rule presence does not prove rendered mobile layout."
+  },
+  {
+    "id": "A063",
+    "category": "target-colour-independent",
+    "persona": "Colour-blind tactical player",
+    "sequence": [
+      "Prepare legal move",
+      "Preview the target",
+      "Clear selection"
+    ],
+    "expected": "move target combines shape and name: Target has a kind-specific non-colour shape, action wording and uncommitted-destination name; stale target data disappears on clear. Static inset keyboard-focus contrast against this target fill is at least 3:1.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests. CSS checks are static author-cascade/opaque-colour calculations; responsive rule presence does not prove rendered mobile layout."
+  },
+  {
+    "id": "A064",
+    "category": "target-colour-independent",
+    "persona": "Colour-blind tactical player",
+    "sequence": [
+      "Prepare legal capture",
+      "Preview the target",
+      "Clear selection"
+    ],
+    "expected": "capture target combines shape and name: Target has a kind-specific non-colour shape, action wording and uncommitted-destination name; stale target data disappears on clear. Static inset keyboard-focus contrast against this target fill is at least 3:1.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests. CSS checks are static author-cascade/opaque-colour calculations; responsive rule presence does not prove rendered mobile layout."
+  },
+  {
+    "id": "A065",
+    "category": "target-colour-independent",
+    "persona": "Colour-blind tactical player",
+    "sequence": [
+      "Prepare legal swap",
+      "Preview the target",
+      "Clear selection"
+    ],
+    "expected": "swap target combines shape and name: Target has a kind-specific non-colour shape, action wording and uncommitted-destination name; stale target data disappears on clear. Static inset keyboard-focus contrast against this target fill is at least 3:1.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests. CSS checks are static author-cascade/opaque-colour calculations; responsive rule presence does not prove rendered mobile layout."
+  },
+  {
+    "id": "A066",
+    "category": "target-colour-independent",
+    "persona": "Colour-blind tactical player",
+    "sequence": [
+      "Prepare legal summon",
+      "Preview the target",
+      "Clear selection"
+    ],
+    "expected": "summon target combines shape and name: Target has a kind-specific non-colour shape, action wording and uncommitted-destination name; stale target data disappears on clear. Static inset keyboard-focus contrast against this target fill is at least 3:1.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests. CSS checks are static author-cascade/opaque-colour calculations; responsive rule presence does not prove rendered mobile layout."
+  },
+  {
+    "id": "A067",
+    "category": "inspection-semantics",
+    "persona": "Novice inspecting opponent",
+    "sequence": [
+      "Select opponent's move piece",
+      "Inspect target"
+    ],
+    "expected": "Opponent move is reference-only: Text explicitly says the target is a reference and cannot be operated; actionable shape markers are absent.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A068",
+    "category": "inspection-semantics",
+    "persona": "Novice inspecting opponent",
+    "sequence": [
+      "Select opponent's capture piece",
+      "Inspect target"
+    ],
+    "expected": "Opponent capture is reference-only: Text explicitly says the target is a reference and cannot be operated; actionable shape markers are absent.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A069",
+    "category": "inspection-semantics",
+    "persona": "Novice inspecting opponent",
+    "sequence": [
+      "Select opponent's swap piece",
+      "Inspect target"
+    ],
+    "expected": "Opponent swap is reference-only: Text explicitly says the target is a reference and cannot be operated; actionable shape markers are absent.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A070",
+    "category": "board-group-semantics",
+    "persona": "Screen-reader landmarks user",
+    "sequence": [
+      "Render board",
+      "Read group and button roles"
+    ],
+    "expected": "Board group has dimensions and no duplicate tab stops: The group is named as a 7×7 battle board and contains 49 native, non-submitting square buttons with one tab stop.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A071",
+    "category": "effects-semantics",
+    "persona": "Screen-reader user during animation",
+    "sequence": [
+      "Render a summon transition"
+    ],
+    "expected": "Decorative motion layer is hidden from accessibility tree: Effect glyphs cannot duplicate authoritative piece/action announcements and are not keyboard-focusable.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A072",
+    "category": "board-name-uniqueness",
+    "persona": "Voice-control square selector",
+    "sequence": [
+      "Render initial board",
+      "Collect square names"
+    ],
+    "expected": "Every initial square has a unique accessible name: All 49 accessible names are nonempty and distinguishable by coordinates rather than colour or position alone.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A073",
+    "category": "focus-start",
+    "persona": "Keyboard-only first-time player",
+    "sequence": [
+      "Choose local",
+      "Focus and activate Start"
+    ],
+    "expected": "Keyboard starts local into playable board: Focus moves from the hidden home to one visible board square; no CPU reply occurs before the user's first move.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A074",
+    "category": "focus-start",
+    "persona": "Keyboard-only first-time player",
+    "sequence": [
+      "Choose cpu",
+      "Focus and activate Start"
+    ],
+    "expected": "Keyboard starts cpu into playable board: Focus moves from the hidden home to one visible board square; no CPU reply occurs before the user's first move.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A075",
+    "category": "focus-home-resume",
+    "persona": "Interrupted keyboard player",
+    "sequence": [
+      "Start local",
+      "Reach idle",
+      "Go home",
+      "Resume"
+    ],
+    "expected": "Home and resume from idle: Home focuses Resume; resuming focuses a visible board square; partial choices are cleared without spending or advancing the turn.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A076",
+    "category": "focus-home-resume",
+    "persona": "Interrupted keyboard player",
+    "sequence": [
+      "Start local",
+      "Reach pass-preview",
+      "Go home",
+      "Resume"
+    ],
+    "expected": "Home and resume from pass-preview: Home focuses Resume; resuming focuses a visible board square; partial choices are cleared without spending or advancing the turn.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A077",
+    "category": "focus-home-resume",
+    "persona": "Interrupted keyboard player",
+    "sequence": [
+      "Start local",
+      "Reach summon-selection",
+      "Go home",
+      "Resume"
+    ],
+    "expected": "Home and resume from summon-selection: Home focuses Resume; resuming focuses a visible board square; partial choices are cleared without spending or advancing the turn.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A078",
+    "category": "focus-home-resume",
+    "persona": "Interrupted keyboard player",
+    "sequence": [
+      "Start local",
+      "Reach summon-preview",
+      "Go home",
+      "Resume"
+    ],
+    "expected": "Home and resume from summon-preview: Home focuses Resume; resuming focuses a visible board square; partial choices are cleared without spending or advancing the turn.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A079",
+    "category": "focus-summon-picker",
+    "persona": "Keyboard-only novice",
+    "sequence": [
+      "Start local",
+      "Keyboard-activate Summon"
+    ],
+    "expected": "Summon opens on first affordable piece: Focus moves into the now-visible picker and the first focus target is enabled and named.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A080",
+    "category": "focus-summon-placement",
+    "persona": "Keyboard-only buyer",
+    "sequence": [
+      "Start local",
+      "Open Summon",
+      "Keyboard-activate bastion"
+    ],
+    "expected": "Choosing bastion focuses an available placement: Focus leaves the piece selector for a visible, named legal summon square; price and duration are shown before a commit.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A081",
+    "category": "focus-summon-placement",
+    "persona": "Keyboard-only buyer",
+    "sequence": [
+      "Start local",
+      "Open Summon",
+      "Keyboard-activate carver"
+    ],
+    "expected": "Choosing carver focuses an available placement: Focus leaves the piece selector for a visible, named legal summon square; price and duration are shown before a commit.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A082",
+    "category": "focus-summon-placement",
+    "persona": "Keyboard-only buyer",
+    "sequence": [
+      "Start local",
+      "Open Summon",
+      "Keyboard-activate leaper"
+    ],
+    "expected": "Choosing leaper focuses an available placement: Focus leaves the piece selector for a visible, named legal summon square; price and duration are shown before a commit.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A083",
+    "category": "focus-summon-placement",
+    "persona": "Keyboard-only buyer",
+    "sequence": [
+      "Start local",
+      "Open Summon",
+      "Keyboard-activate link"
+    ],
+    "expected": "Choosing link focuses an available placement: Focus leaves the piece selector for a visible, named legal summon square; price and duration are shown before a commit.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A084",
+    "category": "focus-pass",
+    "persona": "Cautious keyboard player",
+    "sequence": [
+      "Start local",
+      "Keyboard-activate Pass"
+    ],
+    "expected": "Pass requires focused confirmation: The confirmation button receives focus, names the pass, and no turn changes yet.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A085",
+    "category": "focus-back-pass",
+    "persona": "Indecisive keyboard player",
+    "sequence": [
+      "Preview pass",
+      "Focus and activate Back"
+    ],
+    "expected": "Back from pass returns to Summon: Focus does not remain on the hidden Back control and no pass is committed.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A086",
+    "category": "focus-back-summon",
+    "persona": "Placement-adjusting keyboard player",
+    "sequence": [
+      "Preview summon on a3",
+      "Focus and activate Back"
+    ],
+    "expected": "Back from summon retains board focus target: Focus returns to the existing board tab stop, removes ghost/confirmation and keeps the purchase editable.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A087",
+    "category": "focus-cancel",
+    "persona": "Keyboard player changing their mind",
+    "sequence": [
+      "Select Leaper purchase",
+      "Focus and activate Cancel"
+    ],
+    "expected": "Cancel from purchase returns to an enabled main action: Summon regains visible focus, target/price surfaces clear and state remains unchanged.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A088",
+    "category": "focus-escape",
+    "persona": "Keyboard user escaping an action",
+    "sequence": [
+      "Start a summon selection",
+      "Focus picker",
+      "Press Escape"
+    ],
+    "expected": "Escape from picker keeps visible focus: The draft is canceled; focus remains on the board if it was there, otherwise returns to visible Summon; no purchase occurs.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A089",
+    "category": "focus-escape",
+    "persona": "Keyboard user escaping an action",
+    "sequence": [
+      "Start a summon selection",
+      "Focus board",
+      "Press Escape"
+    ],
+    "expected": "Escape from board keeps visible focus: The draft is canceled; focus remains on the board if it was there, otherwise returns to visible Summon; no purchase occurs.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A090",
+    "category": "focus-escape",
+    "persona": "Keyboard user escaping an action",
+    "sequence": [
+      "Start a summon selection",
+      "Focus confirm",
+      "Press Escape"
+    ],
+    "expected": "Escape from confirm keeps visible focus: The draft is canceled; focus remains on the board if it was there, otherwise returns to visible Summon; no purchase occurs.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A091",
+    "category": "focus-escape",
+    "persona": "Keyboard user escaping an action",
+    "sequence": [
+      "Start a summon selection",
+      "Focus duration",
+      "Press Escape"
+    ],
+    "expected": "Escape from duration keeps visible focus: The draft is canceled; focus remains on the board if it was there, otherwise returns to visible Summon; no purchase occurs.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A092",
+    "category": "focus-after-commit",
+    "persona": "Keyboard player handing device over",
+    "sequence": [
+      "Preview summon",
+      "Focus Confirm",
+      "Confirm and await state"
+    ],
+    "expected": "Committing summon leaves a visible board focus: Focus returns to one board square, confirmation controls disappear, and exactly one turn advances.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A093",
+    "category": "focus-after-commit",
+    "persona": "Keyboard player handing device over",
+    "sequence": [
+      "Preview pass",
+      "Focus Confirm",
+      "Confirm and await state"
+    ],
+    "expected": "Committing pass leaves a visible board focus: Focus returns to one board square, confirmation controls disappear, and exactly one turn advances.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A094",
+    "category": "focus-rematch",
+    "persona": "Keyboard player after a draw",
+    "sequence": [
+      "Play six confirmed passes",
+      "Keyboard-activate Rematch"
+    ],
+    "expected": "Rematch replaces the hidden result button with usable focus: Fresh board receives focus, result actions disappear, and the ply counter resets.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A095",
+    "category": "focus-cancel-home",
+    "persona": "Player declining interruption",
+    "sequence": [
+      "Prepare pass",
+      "Focus Home",
+      "Decline confirmation"
+    ],
+    "expected": "Declining Home preserves focus and exact draft: The arena remains visible and both the pending action and focused Home control are retained.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A096",
+    "category": "focus-pointer-noninterference",
+    "persona": "Mixed pointer and keyboard player",
+    "sequence": [
+      "Focus board c3",
+      "Dispatch pointer-detail Summon click"
+    ],
+    "expected": "Pointer summon does not unexpectedly jump keyboard focus: The pointer interaction opens the picker without the keyboard-only focus helper overriding the existing board focus.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A097",
+    "category": "novice-mode-guidance",
+    "persona": "First-time reader",
+    "sequence": [
+      "Choose cpu from neutral home"
+    ],
+    "expected": "Choosing cpu announces the matching next step: Exactly one mode is pressed; polite home guidance describes the next step and selecting a mode alone does not start the arena.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A098",
+    "category": "novice-mode-guidance",
+    "persona": "First-time reader",
+    "sequence": [
+      "Choose local from neutral home"
+    ],
+    "expected": "Choosing local announces the matching next step: Exactly one mode is pressed; polite home guidance describes the next step and selecting a mode alone does not start the arena.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A099",
+    "category": "novice-mode-guidance",
+    "persona": "First-time reader",
+    "sequence": [
+      "Choose friend from neutral home"
+    ],
+    "expected": "Choosing friend announces the matching next step: Exactly one mode is pressed; polite home guidance describes the next step and selecting a mode alone does not start the arena.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A100",
+    "category": "novice-start-gate",
+    "persona": "First-time keyboard user",
+    "sequence": [
+      "Boot neutral home",
+      "Try Start"
+    ],
+    "expected": "Unchosen mode cannot activate Start: Start is natively disabled and no board or implicit game choice appears.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A101",
+    "category": "home-heading-semantics",
+    "persona": "Screen-reader heading navigator",
+    "sequence": [
+      "Read main home and mode group"
+    ],
+    "expected": "Home sections have meaningful heading names: Both home sections reference existing visible headings and mode group has an explicit name. Static home-choice CSS has 84px default and 78px small-screen minimum heights; this is not viewport layout evidence.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests. CSS checks are static author-cascade/opaque-colour calculations; responsive rule presence does not prove rendered mobile layout."
+  },
+  {
+    "id": "A102",
+    "category": "dialog-naming",
+    "persona": "Screen-reader rules reader",
+    "sequence": [
+      "Open rules from home"
+    ],
+    "expected": "Rules dialog has an explicit heading and close name: Dialog references its visible heading, close button is named, and keyboard instructions are available as text. Static close-control CSS keeps a 44px target and sticky escape header.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests. CSS checks are static author-cascade/opaque-colour calculations; responsive rule presence does not prove rendered mobile layout."
+  },
+  {
+    "id": "A103",
+    "category": "dialog-naming",
+    "persona": "Friend invitation novice",
+    "sequence": [
+      "Choose Friend",
+      "Start friend setup"
+    ],
+    "expected": "Friend setup dialog explains consent and seat readiness: Dialog is named and textual instructions require deliberate room creation and both people ready before play.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A104",
+    "category": "purchase-labels",
+    "persona": "Nonvisual cautious buyer",
+    "sequence": [
+      "Open Summon",
+      "Read bastion choice",
+      "Choose bastion"
+    ],
+    "expected": "bastion choice names full piece and unit price: Button includes full Japanese piece name and per-turn price; selected state is exposed separately from style.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A105",
+    "category": "purchase-labels",
+    "persona": "Nonvisual cautious buyer",
+    "sequence": [
+      "Open Summon",
+      "Read carver choice",
+      "Choose carver"
+    ],
+    "expected": "carver choice names full piece and unit price: Button includes full Japanese piece name and per-turn price; selected state is exposed separately from style.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A106",
+    "category": "purchase-labels",
+    "persona": "Nonvisual cautious buyer",
+    "sequence": [
+      "Open Summon",
+      "Read leaper choice",
+      "Choose leaper"
+    ],
+    "expected": "leaper choice names full piece and unit price: Button includes full Japanese piece name and per-turn price; selected state is exposed separately from style.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A107",
+    "category": "purchase-labels",
+    "persona": "Nonvisual cautious buyer",
+    "sequence": [
+      "Open Summon",
+      "Read link choice",
+      "Choose link"
+    ],
+    "expected": "link choice names full piece and unit price: Button includes full Japanese piece name and per-turn price; selected state is exposed separately from style.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A108",
+    "category": "duration-boundaries",
+    "persona": "Keyboard user at purchase limits",
+    "sequence": [
+      "Select Bastion",
+      "Set duration 1",
+      "Try bounded increment/decrement"
+    ],
+    "expected": "Duration 1 boundary exposes native disabled state: Outward duration control is natively disabled, inward control remains enabled, and repeated boundary activation cannot alter price or duration.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A109",
+    "category": "duration-boundaries",
+    "persona": "Keyboard user at purchase limits",
+    "sequence": [
+      "Select Bastion",
+      "Set duration 5",
+      "Try bounded increment/decrement"
+    ],
+    "expected": "Duration 5 boundary exposes native disabled state: Outward duration control is natively disabled, inward control remains enabled, and repeated boundary activation cannot alter price or duration.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A110",
+    "category": "purchase-live-status",
+    "persona": "Nonvisual price checker",
+    "sequence": [
+      "Select Carver",
+      "Increase duration from three to four"
+    ],
+    "expected": "Changing duration announces total and remaining grain: Atomic polite purchase facts update from 9 to 12 grain and explicitly include four turns and remaining four grain.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A111",
+    "category": "confirmation-live-status",
+    "persona": "Nonvisual purchase checker",
+    "sequence": [
+      "Preview three-turn Carver summon"
+    ],
+    "expected": "Summon confirmation announces cost and lifetime: Visible confirmation summary is live and describes cost nine, remaining seven, and three-turn lifetime before any payment.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A112",
+    "category": "turn-live-status",
+    "persona": "Shared-device nonvisual player",
+    "sequence": [
+      "Confirm White pass"
+    ],
+    "expected": "Confirmed pass names the next side in live text: Polite turn heading changes to Black and novice handoff guidance names the next person.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A113",
+    "category": "history-live-status",
+    "persona": "Player who misses animation",
+    "sequence": [
+      "Confirm Bastion at a3",
+      "Wait until effects end",
+      "Inspect the existing piece without another move"
+    ],
+    "expected": "Summon result is retained as live textual history: History still states a3 summon after decorative motion disappears, both in live log and in menu history. Inspecting a piece without committing another move does not rewrite the unchanged live history.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A114",
+    "category": "invalid-action-announcement",
+    "persona": "Nonvisual novice misplacing a summon",
+    "sequence": [
+      "Choose Carver",
+      "Activate forbidden middle-rank square a4"
+    ],
+    "expected": "Invalid summon placement publishes a live correction: A visible correction states to choose own-side empty squares and is exposed as a live/status update without committing.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A115",
+    "category": "invalid-action-announcement",
+    "persona": "Nonvisual novice misunderstanding movement",
+    "sequence": [
+      "Summon Carver at a3",
+      "Black passes",
+      "Select Carver",
+      "Activate distant g7"
+    ],
+    "expected": "Invalid move destination publishes a live correction: The invalid-move explanation is live and tells the user to choose a highlighted destination, without replacing the piece selection or committing.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A116",
+    "category": "expiry-live-status",
+    "persona": "Novice planning a final-lived piece",
+    "sequence": [
+      "Summon Bastion for one turn",
+      "Black passes",
+      "Inspect the Bastion"
+    ],
+    "expected": "One-turn owned piece explains exact expiry in live summary: The visible live explanation says this White turn-end expiry and retains numeric life one rather than requiring badge colour.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A117",
+    "category": "target-live-status",
+    "persona": "Nonvisual destination learner",
+    "sequence": [
+      "Select Link",
+      "Preview b3 placement"
+    ],
+    "expected": "Placement legend names target count and unconfirmed coordinate: Atomic live legend names summon destinations and the chosen b3 coordinate as unconfirmed, with no colour dependence.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A118",
+    "category": "result-live-status",
+    "persona": "Nonvisual endgame reader",
+    "sequence": [
+      "Confirm six alternating passes"
+    ],
+    "expected": "Six-pass draw is live and has a reachable next action: Live heading says draw, explanation specifies six passes, active play controls are disabled and Rematch is visible.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A119",
+    "category": "disabled-busy-actions",
+    "persona": "Impatient solo keyboard player",
+    "sequence": [
+      "Start CPU",
+      "Confirm pass before worker reply"
+    ],
+    "expected": "CPU wait disables human actions without disabling inspection: Summon/pass cannot be activated during CPU turn; board squares stay native enabled controls for read-only exploration.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A120",
+    "category": "friend-error-announcement",
+    "persona": "Nonvisual room creator with failure",
+    "sequence": [
+      "Open friend setup",
+      "Create room using local failing response"
+    ],
+    "expected": "Room creation failure publishes an accessible status: The error is visible, exposes a live or status role, preserves the dialog, and re-enables retry without a real network request.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A121",
+    "category": "display-setting-state",
+    "persona": "User with saved display needs",
+    "sequence": [
+      "Persist explicit two-flag display fixture",
+      "Boot home",
+      "Start local"
+    ],
+    "expected": "Saved quality=false motion=false remains independently named: Native pressed states and body classes match each independent saved preference, and no game state is persisted.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A122",
+    "category": "display-setting-state",
+    "persona": "User with saved display needs",
+    "sequence": [
+      "Persist explicit two-flag display fixture",
+      "Boot home",
+      "Start local"
+    ],
+    "expected": "Saved quality=false motion=true remains independently named: Native pressed states and body classes match each independent saved preference, and no game state is persisted.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A123",
+    "category": "display-setting-state",
+    "persona": "User with saved display needs",
+    "sequence": [
+      "Persist explicit two-flag display fixture",
+      "Boot home",
+      "Start local"
+    ],
+    "expected": "Saved quality=true motion=false remains independently named: Native pressed states and body classes match each independent saved preference, and no game state is persisted.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A124",
+    "category": "display-setting-state",
+    "persona": "User with saved display needs",
+    "sequence": [
+      "Persist explicit two-flag display fixture",
+      "Boot home",
+      "Start local"
+    ],
+    "expected": "Saved quality=true motion=true remains independently named: Native pressed states and body classes match each independent saved preference, and no game state is persisted.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A125",
+    "category": "system-reduced-motion",
+    "persona": "Vestibular-sensitive OS preference user",
+    "sequence": [
+      "Enable system reduced motion",
+      "Persist app motion=false",
+      "Confirm summon"
+    ],
+    "expected": "OS reduced motion overrides saved app motion=false: No moving piece or hidden authoritative piece appears; static piece name/lifetime and reduced effect layer remain available.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A126",
+    "category": "motion-interruption",
+    "persona": "User turning movement off mid-effect",
+    "sequence": [
+      "Confirm animated summon",
+      "Activate Reduce motion"
+    ],
+    "expected": "Enabling reduced motion cancels an active transition immediately: Animated overlays and hidden-static classes clear, readable static piece remains, and action history is not lost.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A127",
+    "category": "motion-interruption",
+    "persona": "Motion-sensitive interrupted player",
+    "sequence": [
+      "Confirm animated summon",
+      "Go Home during animation",
+      "Resume"
+    ],
+    "expected": "Home cancels motion without losing final state on resume: Hidden-arena motion is removed, resuming shows final lifetime and turn exactly once with usable focus.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A128",
+    "category": "reduced-motion-static-result",
+    "persona": "Motion-sensitive tactical player",
+    "sequence": [
+      "Set reduced motion",
+      "Apply legal summon transition",
+      "Inspect resulting square"
+    ],
+    "expected": "Reduced summon retains final names and life: No movement overlay obscures the result; authoritative static square name and numeric life match committed state and effect layer is decorative.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A129",
+    "category": "reduced-motion-static-result",
+    "persona": "Motion-sensitive tactical player",
+    "sequence": [
+      "Set reduced motion",
+      "Apply legal move transition",
+      "Inspect resulting square"
+    ],
+    "expected": "Reduced move retains final names and life: No movement overlay obscures the result; authoritative static square name and numeric life match committed state and effect layer is decorative.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A130",
+    "category": "reduced-motion-static-result",
+    "persona": "Motion-sensitive tactical player",
+    "sequence": [
+      "Set reduced motion",
+      "Apply legal swap transition",
+      "Inspect resulting square"
+    ],
+    "expected": "Reduced swap retains final names and life: No movement overlay obscures the result; authoritative static square name and numeric life match committed state and effect layer is decorative.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A131",
+    "category": "reduced-motion-static-result",
+    "persona": "Motion-sensitive tactical player",
+    "sequence": [
+      "Set reduced motion",
+      "Apply legal capture transition",
+      "Inspect resulting square"
+    ],
+    "expected": "Reduced capture retains final names and life: No movement overlay obscures the result; authoritative static square name and numeric life match committed state and effect layer is decorative.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A132",
+    "category": "system-motion-change",
+    "persona": "User changing OS accessibility mid-game",
+    "sequence": [
+      "Start unreduced legal move",
+      "Fire prefers-reduced-motion change"
+    ],
+    "expected": "Live OS reduction cancels in-progress movement: Current movement and hiding classes disappear without changing final square labels or roving focus.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A133",
+    "category": "lobby-focus",
+    "persona": "Keyboard participant returning to waiting room",
+    "sequence": [
+      "Restore waiting room as white",
+      "Home",
+      "Resume",
+      "Keep Ready focused",
+      "Receive local fixture remote-start poll"
+    ],
+    "expected": "white not-ready lobby resumes on Ready: Focus lands on enabled Ready instead of the CSS-hidden board; the user's textual seat remains clear. A subsequent remote start transfers focus only from lobby; it does not steal focus from Home. When waiting on Home, a no-op room poll does not rewrite unchanged home guidance.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A134",
+    "category": "lobby-focus",
+    "persona": "Keyboard participant returning to waiting room",
+    "sequence": [
+      "Restore waiting room as black",
+      "Home",
+      "Resume",
+      "Return Home before remote start",
+      "Receive local fixture remote-start poll"
+    ],
+    "expected": "black not-ready lobby resumes on Ready: Focus lands on enabled Ready instead of the CSS-hidden board; the user's textual seat remains clear. A subsequent remote start transfers focus only from lobby; it does not steal focus from Home. When waiting on Home, a no-op room poll does not rewrite unchanged home guidance.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A135",
+    "category": "lobby-disabled-focus",
+    "persona": "Already-ready keyboard participant",
+    "sequence": [
+      "Restore white already-ready room",
+      "Home",
+      "Resume"
+    ],
+    "expected": "white ready lobby resumes on usable fallback: Ready is natively disabled and labelled complete; focus lands on Copy for host or Home for guest, never a disabled or hidden control. If the opponent starts play while the guest is reading the menu, focus remains in that menu.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A136",
+    "category": "lobby-disabled-focus",
+    "persona": "Already-ready keyboard participant",
+    "sequence": [
+      "Restore black already-ready room",
+      "Home",
+      "Resume",
+      "Open menu and focus its close button",
+      "Receive local fixture remote-start poll"
+    ],
+    "expected": "black ready lobby resumes on usable fallback: Ready is natively disabled and labelled complete; focus lands on Copy for host or Home for guest, never a disabled or hidden control. If the opponent starts play while the guest is reading the menu, focus remains in that menu.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A137",
+    "category": "lobby-live-status",
+    "persona": "Nonvisual host waiting for friend",
+    "sequence": [
+      "Restore host alone",
+      "Poll local fixture where friend joined",
+      "Poll unchanged lobby",
+      "Continue into playing",
+      "Select Carver purchase",
+      "Poll unchanged selected purchase"
+    ],
+    "expected": "Remote join publishes a live lobby update: The joined-state text updates and at least one changed lobby title, hint, or seat is exposed as a live/status update; a subsequent unchanged poll produces no mutations in the live seat status or turn heading. Continuing into play with an unchanged purchase does not rewrite the visible live network banner, summary, or purchase facts.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A138",
+    "category": "lobby-live-status",
+    "persona": "Nonvisual guest waiting for host readiness",
+    "sequence": [
+      "Restore joined guest lobby",
+      "Poll local fixture where host becomes ready",
+      "Poll unchanged lobby",
+      "Continue into playing with an unchanged threat to the current player core",
+      "Fail a local-fixture poll",
+      "Repeat the same local-fixture polling failure"
+    ],
+    "expected": "Remote readiness publishes a live seat update: Host's textual readiness updates without falsely enabling play and its changed status is exposed to assistive technology; unchanged polling does not rewrite this live seat status or turn heading. After a connection failure during play, unchanged error, connection-status and still-relevant core-threat content is not rewritten by another identical failed poll.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A139",
+    "category": "lobby-copy-recovery",
+    "persona": "Keyboard host with clipboard denial",
+    "sequence": [
+      "Restore host lobby",
+      "Fail local clipboard write",
+      "Activate Copy"
+    ],
+    "expected": "Copy failure exposes a labelled selectable link field: Fallback link field is read-only, visible, named, selected and focused; the copy control explains manual recovery.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  },
+  {
+    "id": "A140",
+    "category": "lobby-readiness-warning",
+    "persona": "Cautious novice friend participant",
+    "sequence": [
+      "Restore guest lobby with host ready",
+      "Inspect Ready description",
+      "Focus Ready",
+      "Complete Ready against local playing-state fixture"
+    ],
+    "expected": "Ready explains irreversibility and hands focus to the started game: Ready describes irreversibility and immediate start, does not submit on restoration, and transfers focus from the hidden disabled Ready button to a visible board square when play starts.",
+    "limitations": "Local automated jsdom/DOM evidence only; no real screen reader, native Tab/Enter default behavior, phone, visual contrast, GPU, or native dialog focus validation. Network responses are local fixtures; no external requests."
+  }
+]

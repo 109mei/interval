@@ -83,7 +83,8 @@ it.each([0, 140, 300, 420, 550])(
     expect(
       host.querySelectorAll("[data-moving-piece],[data-effect],.motion-hidden"),
     ).toHaveLength(0);
-    expect(host.querySelectorAll(".square .piece:not(.core)")).toHaveLength(2);
+    expect(host.querySelectorAll(".square .piece:not(.core)")).toHaveLength(0);
+    expect(host.querySelectorAll(".square .piece.core")).toHaveLength(2);
   },
 );
 it("new CPU-speed commit supersedes the old generation without later cleanup removing new state", () => {
@@ -113,7 +114,13 @@ it("new CPU-speed commit supersedes the old generation without later cleanup rem
   vi.runAllTimers();
   board.render(black, sel, null);
   expect(frames.size).toBe(0);
-  expect(host.querySelectorAll(".square .piece:not(.core)")).toHaveLength(4);
+  expect(host.querySelectorAll(".square .piece:not(.core)")).toHaveLength(2);
+  expect(
+    host.querySelector('[data-square="9"] [data-piece-id="white-0-9"]'),
+  ).not.toBeNull();
+  expect(
+    host.querySelector('[data-square="39"] [data-piece-id="black-1-39"]'),
+  ).not.toBeNull();
 });
 it("enabling in-game reduced motion mid-travel immediately restores final pieces", async () => {
   const s = createGame();

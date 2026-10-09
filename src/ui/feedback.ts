@@ -17,7 +17,11 @@ export function actionLabel(s: GameState, a: Action): string {
   const ally = s.pieces.find((p) => p.id === a.allyId)!;
   return `${squareName(p.square)}と${squareName(ally.square)}を交換`;
 }
-export function transitionText(previous: GameState, next: GameState): string {
+export function transitionText(
+  previous: GameState,
+  next: GameState,
+  transition?: ReturnType<typeof recoverTransition>,
+): string {
   if (previous.ply === next.ply) return "";
   if (next.ply !== previous.ply + 1)
     return `${next.ply}手目の盤面に更新しました。`;
@@ -35,7 +39,8 @@ export function transitionText(previous: GameState, next: GameState): string {
     .filter((p) => p.side !== side)
     .reduce((n, p) => n + PRICES[p.kind] * p.remaining, 0);
   const expired = lost.filter((p) => p.side === side).length;
-  const recovered = recoverTransition(previous, next);
+  const recovered =
+    transition === undefined ? recoverTransition(previous, next) : transition;
   let label = recovered?.events.some((e) => e.type === "swap")
     ? "位置交換"
     : added

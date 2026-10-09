@@ -11,6 +11,8 @@ export type Controller = {
   getLastEvents(): readonly GameEvent[];
   submit(a: Action, t: Token): Promise<boolean>;
   restart(m: "local" | "cpu"): void;
+  pause(): void;
+  resume(): void;
   dispose(): void;
 };
 export function createController(onChange: (s: GameState) => void): Controller {
@@ -19,6 +21,7 @@ export function createController(onChange: (s: GameState) => void): Controller {
     revision = 0,
     busy = false,
     dead = false,
+    paused = false,
     mode: "local" | "cpu" = "local",
     events: readonly GameEvent[] = [];
   let timer: ReturnType<typeof setTimeout> | undefined;
@@ -34,14 +37,20 @@ export function createController(onChange: (s: GameState) => void): Controller {
     timer = undefined;
   };
   function schedule() {
-    if (dead || mode !== "cpu" || state.turn !== "black" || state.outcome)
+    if (
+      dead ||
+      paused ||
+      mode !== "cpu" ||
+      state.turn !== "black" ||
+      state.outcome
+    )
       return;
     const t = token();
     timer = setTimeout(() => {
       timer = undefined;
-      if (dead || !matches(t) || mode !== "cpu") return;
+      if (dead || paused || !matches(t) || mode !== "cpu") return;
       const finish = (a: unknown) => {
-        if (dead || !matches(t) || mode !== "cpu") return;
+        if (dead || paused || !matches(t) || mode !== "cpu") return;
         worker?.terminate();
         worker = undefined;
         if (searchTimeout !== undefined) clearTimeout(searchTimeout);
@@ -54,7 +63,7 @@ export function createController(onChange: (s: GameState) => void): Controller {
         if (action) void perform(action, t, true);
       };
       const fallback = () => {
-        if (dead || !matches(t) || mode !== "cpu") return;
+        if (dead || paused || !matches(t) || mode !== "cpu") return;
         finish(null);
       };
       if (typeof Worker === "undefined") return fallback();
@@ -79,6 +88,7 @@ export function createController(onChange: (s: GameState) => void): Controller {
   ): Promise<boolean> {
     if (
       dead ||
+      paused ||
       busy ||
       state.outcome ||
       !matches(t) ||
@@ -91,12 +101,15 @@ export function createController(onChange: (s: GameState) => void): Controller {
     state = r.state;
     events = r.events;
     revision++;
-    onChange(state);
-    await Promise.resolve();
-    if (t.session === session && !dead) {
-      busy = false;
-      schedule();
+    try {
       onChange(state);
+      await Promise.resolve();
+    } finally {
+      if (t.session === session && !dead) {
+        busy = false;
+        schedule();
+        onChange(state);
+      }
     }
     return true;
   }
@@ -112,11 +125,25 @@ export function createController(onChange: (s: GameState) => void): Controller {
       if (dead) return;
       clearTimer();
       mode = m;
+      paused = false;
       session++;
       revision = 0;
       busy = false;
       state = createGame();
       events = [];
+      onChange(state);
+    },
+    pause() {
+      if (dead || paused) return;
+      paused = true;
+      clearTimer();
+      session++;
+      busy = false;
+    },
+    resume() {
+      if (dead || !paused) return;
+      paused = false;
+      schedule();
       onChange(state);
     },
     dispose() {

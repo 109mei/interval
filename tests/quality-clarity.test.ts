@@ -40,6 +40,7 @@ registerCase(
       requestedDisplay: "3D",
       failure: "WebGL creation unavailable",
       selectedSquare: 10,
+      setup: "Summon a white bastion, then inspect it on Black's turn",
     },
     assertions: [
       "Synchronous 3D fallback preserves its explanation instead of replacing it with a generic 2D label",
@@ -54,11 +55,13 @@ registerCase(
       },
     }));
     await boot();
-    click('[data-square="10"]');
+    await selectSummonedPiece();
     click("#menu");
     click("#view");
-    expect(el("board-status").textContent).toContain(
-      "立体表示を利用できないため",
+    await vi.waitFor(() =>
+      expect(el("board-status").textContent).toContain(
+        "立体表示を利用できないため",
+      ),
     );
     expect(el("view").textContent).toBe("3Dに切替");
     expect(document.querySelectorAll("[data-square]")).toHaveLength(49);
@@ -67,7 +70,8 @@ registerCase(
         .querySelector('[data-square="10"]')
         ?.getAttribute("aria-pressed"),
     ).toBe("true");
-    expect(el("ply").textContent).toBe("0 / 200 手");
+    expect(el("ply").textContent).toBe("1 / 200 手");
+    expect(el("white-grain").textContent).toBe("13");
   },
 );
 async function boot() {
@@ -75,6 +79,26 @@ async function boot() {
   document.body.innerHTML = '<div id="app"></div>';
   history.replaceState(null, "", "/?2d");
   await import("../src/main");
+  if (
+    !new URLSearchParams(location.search).has("room") &&
+    !history.state?.invite
+  ) {
+    click("#choose-local");
+    click("#start-game");
+  }
+}
+async function selectSummonedPiece() {
+  click("#summon");
+  click('[data-kind="bastion"]');
+  click('[data-square="10"]');
+  click("#confirm");
+  await Promise.resolve();
+  await Promise.resolve();
+  click('[data-square="10"]');
+  expect(el("hint").textContent).toContain("白のバスティオン · 残り3ターン");
+  expect(
+    document.querySelector('[data-square="10"]')?.getAttribute("aria-pressed"),
+  ).toBe("true");
 }
 
 registerCase(
@@ -86,6 +110,7 @@ registerCase(
       requestedDisplay: "3D",
       failure: "later renderer failure callback",
       selectedSquare: 10,
+      setup: "Summon a white bastion, then inspect it on Black's turn",
     },
     assertions: [
       "A later 3D failure preserves its reason and truthfully labels the next toggle as a 3D retry",
@@ -105,10 +130,11 @@ registerCase(
     );
     vi.doMock("../src/render/board3d", () => ({ createBoard3D: create }));
     await boot();
-    click('[data-square="10"]');
+    await selectSummonedPiece();
     click("#menu");
     click("#view");
     expect(el("view").textContent).toBe("2Dに切替");
+    await vi.waitFor(() => expect(create).toHaveBeenCalledTimes(1));
     fail();
     expect(el("board-status").textContent).toContain(
       "立体表示を利用できないため",
@@ -122,7 +148,8 @@ registerCase(
     click("#view");
     expect(create).toHaveBeenCalledTimes(2);
     expect(el("view").textContent).toBe("2Dに切替");
-    expect(el("ply").textContent).toBe("0 / 200 手");
+    expect(el("ply").textContent).toBe("1 / 200 手");
+    expect(el("white-grain").textContent).toBe("13");
   },
 );
 for (const [kind, price] of [
@@ -156,7 +183,7 @@ for (const [kind, price] of [
         ).not.toBeNull();
         expect(facts.closest(".duration-row")).not.toBeNull();
         expect(facts.textContent).toBe(
-          `${duration}回で${price * duration}糧 · 残り${16 - price * duration}糧`,
+          `${duration}ターンで${price * duration}糧 · 残り${16 - price * duration}糧`,
         );
         expect(facts.getAttribute("aria-live")).toBe("polite");
         expect(facts.getAttribute("aria-atomic")).toBe("true");
@@ -217,10 +244,10 @@ registerCase(
     await Promise.resolve();
     click("#summon");
     click('[data-kind="carver"]');
-    expect(el("purchase-facts").textContent).toBe("5回で15糧 · 10糧不足");
+    expect(el("purchase-facts").textContent).toBe("5ターンで15糧 · 10糧不足");
     expect(el("purchase-facts").textContent).not.toContain("残り-");
     for (let i = 0; i < 4; i++) click("#minus");
-    expect(el("purchase-facts").textContent).toBe("1回で3糧 · 残り2糧");
+    expect(el("purchase-facts").textContent).toBe("1ターンで3糧 · 残り2糧");
     click('[data-square="8"]');
     click("#cancel");
     expect(el("summon-details").hidden).toBe(true);

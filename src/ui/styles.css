@@ -234,9 +234,12 @@ main {
   position: absolute;
   left: 3px;
   bottom: 2px;
-  font-size: 8px;
-  opacity: 0.5;
+  font-size: 10px;
+  opacity: 1;
   pointer-events: none;
+}
+.square:focus-visible {
+  outline-color: #142629;
 }
 .underboard {
   display: flex;
@@ -1731,4 +1734,137 @@ dialog p {
 .three-keys .marker-swap svg {
   width: 20px;
   height: 10px;
+}
+
+/* A deliberate start, without a live board behind the welcome screen. */
+.home {
+  min-height: min(680px, calc(100svh - 112px));
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(36px, 8vw, 100px);
+  align-items: center;
+  padding: 28px 0 48px;
+}
+.home-intro h1 {
+  font-family: Georgia, "Yu Mincho", serif;
+  font-size: clamp(38px, 5vw, 66px);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  line-height: 1.2;
+  margin: 20px 0;
+}
+.home-intro p {
+  color: var(--muted);
+  line-height: 1.9;
+  font-size: 14px;
+}
+.home-emblem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 34px;
+  max-width: 330px;
+  height: 130px;
+  margin-top: 36px;
+  border-block: 1px solid #39464d;
+  font-size: 48px;
+  color: #dcc58d;
+}
+.home-emblem i {
+  width: 70px;
+  border-top: 1px solid #637365;
+  transform: rotate(-35deg);
+}
+.home-emblem span:last-child {
+  color: #81908c;
+}
+.home-choices h2 {
+  font-size: 24px;
+  margin: 8px 0 22px;
+}
+.mode-options {
+  display: grid;
+  gap: 10px;
+}
+.mode-choice {
+  display: flex;
+  gap: 16px;
+  text-align: left;
+  align-items: center;
+  min-height: 84px;
+  padding: 16px;
+  background: #18252a;
+  border: 1px solid #3e4b4f;
+  border-radius: 8px;
+}
+.mode-choice[aria-pressed="true"] {
+  border-color: #d8bc7e;
+  background: #33392d;
+  box-shadow: inset 3px 0 #d8bc7e;
+}
+.mode-choice b {
+  display: block;
+  font-size: 16px;
+}
+.mode-choice small {
+  display: block;
+  margin-top: 6px;
+  line-height: 1.55;
+  color: #b3bbb2;
+}
+.mode-symbol {
+  color: #dcc58d;
+  width: 28px;
+  flex: 0 0 28px;
+  font-size: 28px;
+  text-align: center;
+}
+.home-rule {
+  color: #b3bbb2;
+  font-size: 12px;
+  line-height: 1.65;
+  margin: 16px 0 8px;
+}
+#home-hint {
+  min-height: 38px;
+  margin: 16px 0 10px;
+}
+#resume-game {
+  margin-top: 8px;
+}
+#home-rules,
+#home-button {
+  min-height: 44px;
+}
+.duration-controls strong small {
+  font-size: 11px;
+}
+@media (max-width: 720px) {
+  .home {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    padding: 18px 0 28px;
+  }
+  .home-intro h1 {
+    margin: 10px 0 12px;
+    font-size: 38px;
+  }
+  .home-intro p {
+    margin: 0;
+    font-size: 13px;
+  }
+  .home-emblem {
+    display: none;
+  }
+  .home-choices h2 {
+    font-size: 21px;
+    margin-bottom: 14px;
+  }
+  .mode-choice {
+    min-height: 78px;
+    padding: 12px 14px;
+  }
+  .home-choices > .eyebrow {
+    display: none;
+  }
 }

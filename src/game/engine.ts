@@ -9,24 +9,7 @@ import type {
 import { isLegal, PRICES, opposite, movePaths } from "./rules";
 export function createGame(): GameState {
   return {
-    pieces: [
-      {
-        id: "guard-white",
-        side: "white",
-        kind: "bastion",
-        square: 10,
-        remaining: 3,
-        summonedPly: -1,
-      },
-      {
-        id: "guard-black",
-        side: "black",
-        kind: "bastion",
-        square: 38,
-        remaining: 3,
-        summonedPly: -1,
-      },
-    ],
+    pieces: [],
     cores: { white: 3, black: 45 },
     grain: { white: 16, black: 12 },
     turn: "white",
@@ -142,6 +125,10 @@ export function applyAction(s: GameState, a: Action): Transition {
   };
 }
 export function previewAction(s: GameState, a: Action): Preview | null {
+  return analyzeAction(s, a)?.preview ?? null;
+}
+/** Share the fully validated simulation between preview and tactical feedback. */
+export function analyzeAction(s: GameState, a: Action) {
   const r = applyAction(s, a);
   if (!r.ok) return null;
   const mover =
@@ -152,7 +139,7 @@ export function previewAction(s: GameState, a: Action): Preview | null {
     .reduce((n, e) => n + e.amount, 0);
   const paths =
     a.type === "move" && mover ? (movePaths(s, mover).get(a.to) ?? []) : [];
-  return {
+  const preview: Preview = {
     cost,
     reward,
     grainAfter: s.grain[s.turn] - cost + reward,
@@ -167,4 +154,5 @@ export function previewAction(s: GameState, a: Action): Preview | null {
           : [],
     paths,
   };
+  return { preview, transition: r };
 }

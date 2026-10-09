@@ -159,7 +159,7 @@ it("Ren verifies capture, expiry, support, inspection and terminal precedence", 
       leaper = s.pieces.find((x) => x.kind === "leaper")!;
     const swap: Action = { type: "swap", pieceId: link.id, allyId: leaper.id };
     const pv = previewAction(s, swap)!;
-    assert.deepEqual(pv.expires, ["guard-white"]);
+    assert.deepEqual(pv.expires, []);
     s = next(s, swap);
     assert.equal(s.pieces.find((x) => x.id === leaper.id)!.remaining, 1);
     assert.equal(s.pieces.find((x) => x.id === link.id)!.remaining, 1);

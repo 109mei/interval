@@ -1,0 +1,1802 @@
+[
+  {
+    "id": "R200-L001",
+    "persona": "Impatient first-time player",
+    "task": "Triple Start retains one live upgrade and the subsequent proposal",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L001: Triple Start retains one live upgrade and the subsequent proposal",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L002",
+    "persona": "Mode-comparing beginner",
+    "task": "CPU startup switched locally before the import completes uses the final mode",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L002: CPU startup switched locally before the import completes uses the final mode",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L003",
+    "persona": "Fast double-clicker",
+    "task": "Repeated confirmation during loading spends and commits the summon once",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L003: Repeated confirmation during loading spends and commits the summon once",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L004",
+    "persona": "Careful reviser",
+    "task": "Back then a different summon destination upgrades only the revised proposal",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L004: Back then a different summon destination upgrades only the revised proposal",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L005",
+    "persona": "Beginner abandoning a pass",
+    "task": "Pass preview changed to a bastion proposal is current at upgrade",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L005: Pass preview changed to a bastion proposal is current at upgrade",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L006",
+    "persona": "Player comparing pieces",
+    "task": "Rapid kind changes before placement retain the last kind and duration",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L006: Rapid kind changes before placement retain the last kind and duration",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L007",
+    "persona": "Player holding duration controls",
+    "task": "Repeated lower and upper duration bounds remain legal during upgrade",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L007: Repeated lower and upper duration bounds remain legal during upgrade",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L008",
+    "persona": "Two players ending quickly",
+    "task": "Six passes before import completion upgrade the draw rather than the opening",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L008: Six passes before import completion upgrade the draw rather than the opening",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L009",
+    "persona": "Two players rematching",
+    "task": "Rematch before deferred completion upgrades the replacement match",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L009: Rematch before deferred completion upgrades the replacement match",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L010",
+    "persona": "Player protecting a started match",
+    "task": "Declined restart during loading preserves the paid position",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L010: Declined restart during loading preserves the paid position",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L011",
+    "persona": "Player accepting a fresh start",
+    "task": "Accepted restart clears old pieces before a late upgrade",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L011: Accepted restart clears old pieces before a late upgrade",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L012",
+    "persona": "Solo player with slow graphics",
+    "task": "CPU reply received before graphics loading upgrades both committed turns",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L012: CPU reply received before graphics loading upgrades both committed turns",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L013",
+    "persona": "Frequently interrupted player",
+    "task": "Two home-resume cycles before completion mount only the current generation",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L013: Two home-resume cycles before completion mount only the current generation",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L014",
+    "persona": "Player choosing lighter graphics at home",
+    "task": "Home changes to 2D and resumes before the old import resolves",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L014: Home changes to 2D and resumes before the old import resolves",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L015",
+    "persona": "Player switching opponents at home",
+    "task": "A new CPU match at home supersedes a pending local match load",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L015: A new CPU match at home supersedes a pending local match load",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L016",
+    "persona": "Player declining a replacement match",
+    "task": "Declined home replacement followed by resume upgrades the preserved local match",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L016: Declined home replacement followed by resume upgrades the preserved local match",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L017",
+    "persona": "Rules reader changing the next mode",
+    "task": "Choosing local through home rules cannot mount a late renderer until Start",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L017: Choosing local through home rules cannot mount a late renderer until Start",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L018",
+    "persona": "Player testing display preferences",
+    "task": "Off-on preference changes at home cache loading without mounting hidden graphics",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L018: Off-on preference changes at home cache loading without mounting hidden graphics",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L019",
+    "persona": "Player rapidly comparing views",
+    "task": "Four in-flight display toggles preserve one current upgrade and candidate",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L019: Four in-flight display toggles preserve one current upgrade and candidate",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L020",
+    "persona": "Embedding host replacing its content",
+    "task": "Detached provisional host rejects the late renderer mount",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L020: Detached provisional host rejects the late renderer mount",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L021",
+    "persona": "Embedding shell refreshing a board slot",
+    "task": "Same-id replacement host cannot be targeted by the old import callback",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L021: Same-id replacement host cannot be targeted by the old import callback",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L022",
+    "persona": "Player browsing friend setup",
+    "task": "A late result at home cannot mount under the unopened friend match",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L022: A late result at home cannot mount under the unopened friend match",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L023",
+    "persona": "Solo player interrupted before CPU search",
+    "task": "Home pauses CPU timing while the module resolves then resume starts one search",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L023: Home pauses CPU timing while the module resolves then resume starts one search",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L024",
+    "persona": "Solo player changing games during search",
+    "task": "Stale CPU completion cannot overwrite a replacement local session before upgrade",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L024: Stale CPU completion cannot overwrite a replacement local session before upgrade",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L025",
+    "persona": "Keyboard-only explorer",
+    "task": "Arrow navigation before upgrade preserves the new square and next arrow origin",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L025: Arrow navigation before upgrade preserves the new square and next arrow origin",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L026",
+    "persona": "Keyboard user returning from controls",
+    "task": "Inactive board tab stop survives upgrade without stealing a control's focus",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L026: Inactive board tab stop survives upgrade without stealing a control's focus",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L027",
+    "persona": "Keyboard user reviewing a purchase",
+    "task": "Upgrade leaves focused Confirm attached to the same pending purchase",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L027: Upgrade leaves focused Confirm attached to the same pending purchase",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L028",
+    "persona": "Keyboard user reading settings",
+    "task": "Upgrade while settings are open leaves focus on the chosen quality control",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L028: Upgrade while settings are open leaves focus on the chosen quality control",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L029",
+    "persona": "Keyboard user considering a friend",
+    "task": "Friend dialog focus remains in the dialog when a local board upgrades",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L029: Friend dialog focus remains in the dialog when a local board upgrades",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L030",
+    "persona": "Keyboard user declining navigation",
+    "task": "Declined Home keeps the focused square available for the late upgrade",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L030: Declined Home keeps the focused square available for the late upgrade",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L031",
+    "persona": "Keyboard user choosing placement",
+    "task": "Kind selection's placement focus and summon overlay survive upgrade",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L031: Kind selection's placement focus and summon overlay survive upgrade",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L032",
+    "persona": "Keyboard user cancelling a plan",
+    "task": "Cancelled purchase leaves focus on Summon and no ghost on late upgrade",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L032: Cancelled purchase leaves focus on Summon and no ghost on late upgrade",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L033",
+    "persona": "Keyboard user inspecting the opponent",
+    "task": "Opponent inspection survives upgrade with focus and non-actionable reference markers",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L033: Opponent inspection survives upgrade with focus and non-actionable reference markers",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L034",
+    "persona": "Keyboard user changing duration in place",
+    "task": "Changing duration clears a stale candidate without resetting board focus on upgrade",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L034: Changing duration clears a stale candidate without resetting board focus on upgrade",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L035",
+    "persona": "Motion-sensitive keyboard player",
+    "task": "Reducing motion mid-transition before upgrade keeps focus and clears transient effects",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L035: Reducing motion mid-transition before upgrade keeps focus and clears transient effects",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L036",
+    "persona": "Keyboard player without a GPU",
+    "task": "Construction failure at upgrade restores focus into the replacement 2D board",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L036: Construction failure at upgrade restores focus into the replacement 2D board",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L037",
+    "persona": "Player on a failing chunk connection",
+    "task": "Rejected chunk retains a pending purchase which can still be committed",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L037: Rejected chunk retains a pending purchase which can still be committed",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L038",
+    "persona": "Interrupted player on a failing connection",
+    "task": "Chunk rejection at home leaves the match resumable and retry failure truthful",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L038: Chunk rejection at home leaves the match resumable and retry failure truthful",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L039",
+    "persona": "Player who explicitly chose 2D",
+    "task": "Obsolete chunk rejection cannot replace explicit 2D status or selection",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L039: Obsolete chunk rejection cannot replace explicit 2D status or selection",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L040",
+    "persona": "Player retrying before failure arrives",
+    "task": "Only the latest of overlapping display requests reports the rejected chunk",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L040: Only the latest of overlapping display requests reports the rejected chunk",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L041",
+    "persona": "Persistent player on a broken connection",
+    "task": "Repeated manual retries of a rejected module preserve the paid board and input",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L041: Repeated manual retries of a rejected module preserve the paid board and input",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L042",
+    "persona": "Player with unavailable graphics hardware",
+    "task": "Constructor failure retains both committed state and the next-side proposal",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L042: Constructor failure retains both committed state and the next-side proposal",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L043",
+    "persona": "Player hitting the first draw failure",
+    "task": "First upgraded render exception disposes partial graphics and keeps the proposal",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L043: First upgraded render exception disposes partial graphics and keeps the proposal",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L044",
+    "persona": "Player whose GPU fails on a later turn",
+    "task": "Draw exception during a committed action falls back to the new state",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L044: Draw exception during a committed action falls back to the new state",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L045",
+    "persona": "Keyboard player during GPU context loss",
+    "task": "Runtime graphics loss preserves board focus or an external menu focus without duplicate disposal",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L045: Runtime graphics loss preserves board focus or an external menu focus without duplicate disposal",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L046",
+    "persona": "Player switching to the stable display",
+    "task": "Old graphics failure after switching to 2D cannot wipe the new candidate",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L046: Old graphics failure after switching to 2D cannot wipe the new candidate",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L047",
+    "persona": "Player who already returned home",
+    "task": "Delayed graphics failure at home cannot recreate a hidden board or change navigation",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L047: Delayed graphics failure at home cannot recreate a hidden board or change navigation",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L048",
+    "persona": "Player retrying recovered hardware",
+    "task": "A successful manual retry after constructor failure preserves the current preview",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L048: A successful manual retry after constructor failure preserves the current preview",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L049",
+    "persona": "Player resuming after a successful upgrade",
+    "task": "Home-resume after upgrade disposes the old view once and reuses the loaded module",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L049: Home-resume after upgrade disposes the old view once and reuses the loaded module",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L050",
+    "persona": "Player playing between display changes",
+    "task": "A move committed in 2D between loaded 3D sessions appears in the next 3D view",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L050: A move committed in 2D between loaded 3D sessions appears in the next 3D view",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L051",
+    "persona": "Player exiting during summon motion",
+    "task": "Home during provisional summon motion cleans resources before a late import resolves",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L051: Home during provisional summon motion cleans resources before a late import resolves",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L052",
+    "persona": "Player changing display during provisional motion",
+    "task": "Switching to explicit 2D during an animated summon cancels old effects before late resolution",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L052: Switching to explicit 2D during an animated summon cancels old effects before late resolution",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L053",
+    "persona": "Player changing two display preferences",
+    "task": "Quality and motion changes during loading do not start a second importer or replay the last move",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L053: Quality and motion changes during loading do not start a second importer or replay the last move",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L054",
+    "persona": "Players viewing an ended game later",
+    "task": "Draw then home before completion resumes only the final result after loading",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L054: Draw then home before completion resumes only the final result after loading",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L055",
+    "persona": "Solo player switching modes mid-search",
+    "task": "In-game local reset terminates pending CPU search before the graphics upgrade",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L055: In-game local reset terminates pending CPU search before the graphics upgrade",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L056",
+    "persona": "Player resuming after context loss",
+    "task": "Fallback preference persists through home and resume until an explicit GPU retry",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L056: Fallback preference persists through home and resume until an explicit GPU retry",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L057",
+    "persona": "Player recovering a failed frame",
+    "task": "Candidate chosen after draw failure is retained through immediate GPU retry",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L057: Candidate chosen after draw failure is retained through immediate GPU retry",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L058",
+    "persona": "Impatient solo player resuming twice",
+    "task": "Double Resume during a pending import restarts the paused CPU search only once",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L058: Double Resume during a pending import restarts the paused CPU search only once",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L059",
+    "persona": "Player repeatedly testing settings",
+    "task": "Settings churn while importing leaves one live board and fully releases it at home",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L059: Settings churn while importing leaves one live board and fully releases it at home",
+    "status": "passed"
+  },
+  {
+    "id": "R200-L060",
+    "persona": "Solo player continuing after persistent load failure",
+    "task": "Failed retry followed by a new 2D CPU game keeps failure callbacks out of the new session",
+    "caseLedger": "docs/review200/loading-cases.json",
+    "file": "tests/review200-loading.test.ts",
+    "testName": "R200-L060: Failed retry followed by a new 2D CPU game keeps failure callbacks out of the new session",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M001",
+    "persona": "Novice local player",
+    "task": "Refresh both cached swap identities across alternating selections",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M001 Refresh both cached swap identities across alternating selections",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M002",
+    "persona": "Small-screen mobile player",
+    "task": "Keep capture and remote expiry caches distinct during inspection",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M002 Keep capture and remote expiry caches distinct during inspection",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M003",
+    "persona": "Returning player",
+    "task": "Replace an in-flight identity with another role in a corrected snapshot",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M003 Replace an in-flight identity with another role in a corrected snapshot",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M004",
+    "persona": "Long-session player",
+    "task": "Bound moving DOM while twenty inspection renders replace target markup",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M004 Bound moving DOM while twenty inspection renders replace target markup",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M005",
+    "persona": "Motion-sensitive player",
+    "task": "Re-enable normal animation after completing a reduced entrance",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M005 Re-enable normal animation after completing a reduced entrance",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M006",
+    "persona": "Screen-reader player",
+    "task": "Settle motion on a grain-only authoritative correction",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M006 Settle motion on a grain-only authoritative correction",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M007",
+    "persona": "Returning player",
+    "task": "Reuse a square for a different ID while a former occupant is moving",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M007 Reuse a square for a different ID while a former occupant is moving",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M008",
+    "persona": "Novice restarting player",
+    "task": "Restart then summon the same generated ID without stale concealment",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M008 Restart then summon the same generated ID without stale concealment",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M009",
+    "persona": "Mobile returning player",
+    "task": "Retired frame cannot alter a new 2D owner of the same host",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M009 Retired frame cannot alter a new 2D owner of the same host",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M010",
+    "persona": "Long-session player",
+    "task": "Repeated old-board disposal must not erase the new host owner",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M010 Repeated old-board disposal must not erase the new host owner",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M011",
+    "persona": "Keyboard-only player",
+    "task": "Keep one tab stop during repeated swap cache replacement",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M011 Keep one tab stop during repeated swap cache replacement",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M012",
+    "persona": "Long-session player",
+    "task": "Mixed clear entrance expiry and cancellation cycles retain bounded 2D DOM",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M012 Mixed clear entrance expiry and cancellation cycles retain bounded 2D DOM",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M013",
+    "persona": "Long-session 3D player",
+    "task": "Post-disposal render must not allocate fresh scene models",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M013 Post-disposal render must not allocate fresh scene models",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M014",
+    "persona": "Mobile switching views",
+    "task": "Double disposal of retired 3D view preserves new 2D host owner",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M014 Double disposal of retired 3D view preserves new 2D host owner",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M015",
+    "persona": "Novice 3D player",
+    "task": "Project capture reward on a direct first-render transition",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M015 Project capture reward on a direct first-render transition",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M016",
+    "persona": "Small-screen novice",
+    "task": "Project simultaneous remote expiries on the first3D frame",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M016 Project simultaneous remote expiries on the first3D frame",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M017",
+    "persona": "Novice learning exchange",
+    "task": "Start first-frame swap with distinct cues and two authoritative origins",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M017 Start first-frame swap with distinct cues and two authoritative origins",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M018",
+    "persona": "Novice finishing game",
+    "task": "Project first-render victory without camera priming",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M018 Project first-render victory without camera priming",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M019",
+    "persona": "Novice balancing lifetimes",
+    "task": "Submit simultaneous first-render summon and expiry only once",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M019 Submit simultaneous first-render summon and expiry only once",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M020",
+    "persona": "Motion-sensitive novice",
+    "task": "Reduced first-render capture skips transient victim allocation",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M020 Reduced first-render capture skips transient victim allocation",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M021",
+    "persona": "Motion-sensitive finishing player",
+    "task": "Reduced first-render victory allocates only the surviving core",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M021 Reduced first-render victory allocates only the surviving core",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M022",
+    "persona": "Mobile background returner",
+    "task": "First render while hidden preserves committed state without cue allocation",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M022 First render while hidden preserves committed state without cue allocation",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M023",
+    "persona": "Rotating mobile player",
+    "task": "Resize oscillation during swap only resets buffers on changed widths",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M023 Resize oscillation during swap only resets buffers on changed widths",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M024",
+    "persona": "External-display player",
+    "task": "DPR changes during travel preserve cached pose without resizing CSS dimensions",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M024 DPR changes during travel preserve cached pose without resizing CSS dimensions",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M025",
+    "persona": "Battery-conscious mobile player",
+    "task": "Change quality and width together during capture with one submission",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M025 Change quality and width together during capture with one submission",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M026",
+    "persona": "Small-screen inspecting player",
+    "task": "Cached label updates target fresh nodes after multiple resize rebuilds",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M026 Cached label updates target fresh nodes after multiple resize rebuilds",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M027",
+    "persona": "Returning 3D player",
+    "task": "Inspect an already-faded victim without resurrecting its rebuilt labels",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M027 Inspect an already-faded victim without resurrecting its rebuilt labels",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M028",
+    "persona": "Mobile collapsed-panel player",
+    "task": "Recover from zero-width host during active entrance",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M028 Recover from zero-width host during active entrance",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M029",
+    "persona": "Long-session strategist",
+    "task": "Repeated nonvisual passes require no timers while3D lifetimes update",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M029 Repeated nonvisual passes require no timers while3D lifetimes update",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M030",
+    "persona": "Long-session mixed-role player",
+    "task": "Retire reused IDs across role changes and expired captures exactly once",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M030 Retire reused IDs across role changes and expired captures exactly once",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M031",
+    "persona": "Mobile multi-session player",
+    "task": "Recreate3D boards after mid-motion disposal without observer growth",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M031 Recreate3D boards after mid-motion disposal without observer growth",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M032",
+    "persona": "Motion-sensitive preview user",
+    "task": "Cancel a reduced cue before rendering an unrelated summon proposal",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M032 Cancel a reduced cue before rendering an unrelated summon proposal",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M033",
+    "persona": "Small-screen long-session player",
+    "task": "Resize at every capture-expiry boundary without double resource retirement",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M033 Resize at every capture-expiry boundary without double resource retirement",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M034",
+    "persona": "Keyboard mobile player",
+    "task": "Keep focused3D destination stable across DPR size and selection changes",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M034 Keep focused3D destination stable across DPR size and selection changes",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M035",
+    "persona": "Fast local-match player",
+    "task": "Replace a plan reentrantly inside its frame-zero adapter",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M035 Replace a plan reentrantly inside its frame-zero adapter",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M036",
+    "persona": "Closing mid-frame player",
+    "task": "Dispose reentrantly from a nonzero animation adapter",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M036 Dispose reentrantly from a nonzero animation adapter",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M037",
+    "persona": "Fast opponent player",
+    "task": "Start successor state inside a sampled predecessor callback",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M037 Start successor state inside a sampled predecessor callback",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M038",
+    "persona": "Motion-sensitive returning player",
+    "task": "Retired media callback cannot settle a newly mounted independent player",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M038 Retired media callback cannot settle a newly mounted independent player",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M039",
+    "persona": "Motion-sensitive multi-board player",
+    "task": "Global preference cancels both players but only a new action restarts one",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M039 Global preference cancels both players but only a new action restarts one",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M040",
+    "persona": "Long-session multi-board player",
+    "task": "Dispose one independent board without cancelling the other timeline",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M040 Dispose one independent board without cancelling the other timeline",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M041",
+    "persona": "Throttled mobile multi-board player",
+    "task": "Earlier watchdog settlement cannot cancel a later independent entrance",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M041 Earlier watchdog settlement cannot cancel a later independent entrance",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M042",
+    "persona": "Battery-conscious player",
+    "task": "Unrelated body-class mutations do not interrupt active motion",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M042 Unrelated body-class mutations do not interrupt active motion",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M043",
+    "persona": "Mobile background returner",
+    "task": "Visibility churn allows a genuinely new action but never replays the old one",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M043 Visibility churn allows a genuinely new action but never replays the old one",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M044",
+    "persona": "Reduced-capability returning player",
+    "task": "RestoreRAF support for a later action after static fallback",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M044 RestoreRAF support for a later action after static fallback",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M045",
+    "persona": "Motion-sensitive strategist",
+    "task": "OS preference reversal starts next swap with original causal delays",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M045 OS preference reversal starts next swap with original causal delays",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M046",
+    "persona": "Fast restarting player",
+    "task": "A prior watchdog deadline cannot erase a successor after empty-pass optimization",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M046 A prior watchdog deadline cannot erase a successor after empty-pass optimization",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M047",
+    "persona": "Screen-reader novice",
+    "task": "First-frame hidden duplicate never changes authoritative control labels",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M047 First-frame hidden duplicate never changes authoritative control labels",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M048",
+    "persona": "Long-session keyboard player",
+    "task": "Fast snapshot corrections refresh3D life cache without retaining retired nodes",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M048 Fast snapshot corrections refresh3D life cache without retaining retired nodes",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M049",
+    "persona": "Long-session mixed-view player",
+    "task": "Repeated2D3D handover rejects every retired frame and resize callback",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M049 Repeated2D3D handover rejects every retired frame and resize callback",
+    "status": "passed"
+  },
+  {
+    "id": "R200-M050",
+    "persona": "Small-screen pointer player",
+    "task": "Ray picking stays aligned after DPR and width changes during motion",
+    "caseLedger": "docs/review200/motion-cases.json",
+    "file": "tests/review200-motion.test.ts",
+    "testName": "R200-M050 Ray picking stays aligned after DPR and width changes during motion",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N001",
+    "persona": "Snapshot-aware tactician",
+    "task": "Inspect a corrected same-version swap",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N001 Snapshot-aware tactician: Both positions update in one notification and the duplicate is silent",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N002",
+    "persona": "Lifetime-counting player",
+    "task": "Receive a repaired timer without a board move",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N002 Lifetime-counting player: Lifetime metadata reaches the UI once",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N003",
+    "persona": "Draw-reviewing player",
+    "task": "Observe an equal-version terminal correction",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N003 Draw-reviewing player: Draw becomes visible once and terminal state cancels scheduled polling",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N004",
+    "persona": "Expiry-checking player",
+    "task": "Remove expired pieces in a corrected snapshot",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N004 Expiry-checking player: All pieces disappear with exactly one notification",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N005",
+    "persona": "Player with two active views",
+    "task": "Isolate callbacks and polling between clients",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N005 Player with two active views: Each view notifies independently; disposing one preserves silent polling in the other",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N006",
+    "persona": "Two-view analyst",
+    "task": "Retain the previous immutable snapshot",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N006 Two-view analyst: Previous snapshot remains unchanged while new grain notifies once",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N007",
+    "persona": "Turn-indicator observer",
+    "task": "Handle repeated equal-version value reversals",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N007 Turn-indicator observer: Each real reversal notifies and each duplicate stays silent",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N008",
+    "persona": "Backgrounded commuter",
+    "task": "Restore corrected data and its new cadence",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N008 Backgrounded commuter: One update restores corrected data and uses opponent-turn 1200 ms cadence",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N009",
+    "persona": "Stale-proxy user",
+    "task": "Distinguish old and current corrected boards",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N009 Stale-proxy user: Older correction is ignored; equal-version correction updates once",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N010",
+    "persona": "Multi-server visitor",
+    "task": "Ignore JSON object property ordering",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N010 Multi-server visitor: Semantically identical object values do not cause a redundant UI callback",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N011",
+    "persona": "Long-session lobby host",
+    "task": "Keep a fifteen-minute wait quiet",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N011 Long-session lobby host: 601 state reads include setup; exactly five updates occur; stop halts all polling",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N012",
+    "persona": "Rate-limited traveler",
+    "task": "See changing recovery guidance without repetition",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N012 Rate-limited traveler: Only three distinct error transitions and one recovery notify",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N013",
+    "persona": "Captive-portal commuter",
+    "task": "Progress from transport failure to service recovery",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N013 Captive-portal commuter: Different guidance notifies, repeated guidance is silent, clean recovery notifies",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N014",
+    "persona": "Player awaiting action receipt",
+    "task": "See remote progress while a receipt stays uncertain",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N014 Player awaiting action receipt: New authoritative version notifies once; receipt and uncertainty guidance remain",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N015",
+    "persona": "Player receiving old acknowledgement",
+    "task": "Resolve receipt without rolling back latest board",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N015 Player receiving old acknowledgement: Receipt clears visibly through busy transitions while board remains v10",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N016",
+    "persona": "Leaving player behind proxy",
+    "task": "Recover from malformed leave acknowledgement",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N016 Leaving player behind proxy: Original leave receipt is reused and successful closure stops polling",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N017",
+    "persona": "Invitee on unstable Wi-Fi",
+    "task": "Retry one readiness decision through mixed failures",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N017 Invitee on unstable Wi-Fi: Four attempts retain exactly one command body and eventually clear the receipt",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N018",
+    "persona": "Storage-restricted player",
+    "task": "Recover same-page action without browser storage",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N018 Storage-restricted player: In-memory exact receipt still works and successful recovery clears pending",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N019",
+    "persona": "Backgrounded pending player",
+    "task": "Retry without unwanted hidden-tab polls",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N019 Backgrounded pending player: Mutation retry succeeds without hidden state reads; foreground refreshes once",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N020",
+    "persona": "Rate-limited invitee",
+    "task": "Distinguish reconnect from a new readiness decision",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N020 Rate-limited invitee: Reconnect never resends the rejected receipt; explicit ready uses a fresh ID at v8",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N021",
+    "persona": "Long-outage commuter",
+    "task": "Bound polling and notifications through recovery",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N021 Long-outage commuter: Backoff caps at 20 seconds while identical errors stay quiet; recovery resets cadence",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N022",
+    "persona": "Tunnel traveler returning to foreground",
+    "task": "Apply same-version correction after an abort",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N022 Tunnel traveler returning to foreground: Connection, error and corrected board recover in one notification",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N023",
+    "persona": "Player resetting during action",
+    "task": "Ignore a post-reset successful acknowledgement",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N023 Player resetting during action: No room resurrection or callbacks; stored uncertain receipt is retained",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N024",
+    "persona": "Player resetting during leave",
+    "task": "Ignore post-reset abort and avoid refresh",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N024 Player resetting during leave: Stopped state and error remain unchanged and no recovery fetch runs",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N025",
+    "persona": "Player switching active rooms",
+    "task": "Continue refreshing after replacing an in-flight poll",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N025 Player switching active rooms: Old snapshot is ignored and B can issue subsequent state reads",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N026",
+    "persona": "Player reconnecting same room",
+    "task": "Release obsolete refresh gate across resume",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N026 Player reconnecting same room: Old failure is ignored and the new generation keeps polling",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N027",
+    "persona": "Fast room switcher",
+    "task": "Keep current request gate isolated from old finalization",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N027 Fast room switcher: Finishing A cannot unlock B and create overlapping B state reads",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N028",
+    "persona": "Invitee choosing newest invitation",
+    "task": "Accept only the latest overlapping join",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N028 Invitee choosing newest invitation: B owns the client and late A produces no callback or busy-state regression",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N029",
+    "persona": "Host becoming an invitee",
+    "task": "Retain uncertain creation receipt after joining elsewhere",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N029 Host becoming an invitee: Room B remains current, late creation stays cancelled and its key is retained",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N030",
+    "persona": "Host retrying corrupt responses",
+    "task": "Keep creation identity across two uncertainty classes",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N030 Host retrying corrupt responses: All three attempts share a body; retry state remains visible and final success clears key",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N031",
+    "persona": "Player cancelling during UI update",
+    "task": "Cancel before dispatch after a synchronous reset",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N031 Player cancelling during UI update: Cancellation leaves home state and sends no action request",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N032",
+    "persona": "Player after transient renderer failure",
+    "task": "Retry accepted snapshot after callback exception",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N032 Player after transient renderer failure: Recovery flags notify once and duplicate healthy snapshot remains suppressed",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N033",
+    "persona": "Player closing a detached renderer",
+    "task": "Preserve nested stopped notification after outer failure",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N033 Player closing a detached renderer: Nested reset wins and subsequent identical stop emits no duplicate callback",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N034",
+    "persona": "Impatient tab-switcher",
+    "task": "Prevent retry storms during a slow read",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N034 Impatient tab-switcher: No overlapping requests occur and exactly one normal timer resumes",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N035",
+    "persona": "Player restoring a background tab",
+    "task": "Avoid timers and duplicate notification while initially hidden",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N035 Player restoring a background tab: Initial state is accepted without background reads and foreground fetch is UI-silent",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N036",
+    "persona": "Player leaving during an old poll",
+    "task": "Keep closure authoritative against late playing data",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N036 Player leaving during an old poll: Closure remains visible, older poll is UI-silent and terminal polling stays stopped",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N037",
+    "persona": "Player whose opponent progresses quickly",
+    "task": "Clear command receipt after a newer scheduled snapshot",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N037 Player whose opponent progresses quickly: Only pending/busy state changes notify and v10 is never rolled back",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N038",
+    "persona": "Frequent resetter",
+    "task": "Avoid polling/listener buildup across twenty restarts",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N038 Frequent resetter: Each cycle has one initial read, resumed timer fires once and disposal remains quiet",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N039",
+    "persona": "Player returning to an uncertain room",
+    "task": "Isolate saved receipts across rooms",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N039 Player returning to an uncertain room: B never replays A receipt; returning to A replays the original exact body",
+    "status": "passed"
+  },
+  {
+    "id": "R200-N040",
+    "persona": "Home-screen observer",
+    "task": "Resume a same-version board correction without losing home focus",
+    "caseLedger": "docs/review200/network-cases.json",
+    "file": "tests/review200-network.test.ts",
+    "testName": "R200-N040 Home-screen observer: Home stays visible/focused; resumed board reflects correction and no mutation is sent",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I001",
+    "persona": "Strategy player comparing alternatives",
+    "task": "new contract while an unrelated allied wall expires: replace pass and rebuild proposal",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I001: new contract while an unrelated allied wall expires: replace pass and rebuild proposal",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I002",
+    "persona": "Mobile player using reduced-motion controls",
+    "task": "new contract while an unrelated allied wall expires: keep preview through quality/motion changes",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I002: new contract while an unrelated allied wall expires: keep preview through quality/motion changes",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I003",
+    "persona": "Strategy player comparing alternatives",
+    "task": "last-turn defender replaced by a paid blocking wall: replace pass and rebuild proposal",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I003: last-turn defender replaced by a paid blocking wall: replace pass and rebuild proposal",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I004",
+    "persona": "Mobile player using reduced-motion controls",
+    "task": "last-turn defender replaced by a paid blocking wall: keep preview through quality/motion changes",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I004: last-turn defender replaced by a paid blocking wall: keep preview through quality/motion changes",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I005",
+    "persona": "Strategy player comparing alternatives",
+    "task": "cheap summon leaves a two-path core attack visible: replace pass and rebuild proposal",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I005: cheap summon leaves a two-path core attack visible: replace pass and rebuild proposal",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I006",
+    "persona": "Mobile player using reduced-motion controls",
+    "task": "cheap summon leaves a two-path core attack visible: keep preview through quality/motion changes",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I006: cheap summon leaves a two-path core attack visible: keep preview through quality/motion changes",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I007",
+    "persona": "Strategy player comparing alternatives",
+    "task": "capture reward survives the mover's own expiry: replace pass and rebuild proposal",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I007: capture reward survives the mover's own expiry: replace pass and rebuild proposal",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I008",
+    "persona": "Mobile player using reduced-motion controls",
+    "task": "capture reward survives the mover's own expiry: keep preview through quality/motion changes",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I008: capture reward survives the mover's own expiry: keep preview through quality/motion changes",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I009",
+    "persona": "Strategy player comparing alternatives",
+    "task": "capture preserves a two-turn moving contract: replace pass and rebuild proposal",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I009: capture preserves a two-turn moving contract: replace pass and rebuild proposal",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I010",
+    "persona": "Mobile player using reduced-motion controls",
+    "task": "capture preserves a two-turn moving contract: keep preview through quality/motion changes",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I010: capture preserves a two-turn moving contract: keep preview through quality/motion changes",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I011",
+    "persona": "Strategy player comparing alternatives",
+    "task": "enemy bridge leap captures only the destination: replace pass and rebuild proposal",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I011: enemy bridge leap captures only the destination: replace pass and rebuild proposal",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I012",
+    "persona": "Mobile player using reduced-motion controls",
+    "task": "enemy bridge leap captures only the destination: keep preview through quality/motion changes",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I012: enemy bridge leap captures only the destination: keep preview through quality/motion changes",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I013",
+    "persona": "Strategy player comparing alternatives",
+    "task": "swap moves a last-turn link before retiring it: replace pass and rebuild proposal",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I013: swap moves a last-turn link before retiring it: replace pass and rebuild proposal",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I014",
+    "persona": "Mobile player using reduced-motion controls",
+    "task": "swap moves a last-turn link before retiring it: keep preview through quality/motion changes",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I014: swap moves a last-turn link before retiring it: keep preview through quality/motion changes",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I015",
+    "persona": "Strategy player comparing alternatives",
+    "task": "swap partner retires at its relocated square: replace pass and rebuild proposal",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I015: swap partner retires at its relocated square: replace pass and rebuild proposal",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I016",
+    "persona": "Mobile player using reduced-motion controls",
+    "task": "swap partner retires at its relocated square: keep preview through quality/motion changes",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I016: swap partner retires at its relocated square: keep preview through quality/motion changes",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I017",
+    "persona": "Strategy player comparing alternatives",
+    "task": "last-turn capture of the core takes precedence over expiry: replace pass and rebuild proposal",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I017: last-turn capture of the core takes precedence over expiry: replace pass and rebuild proposal",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I018",
+    "persona": "Mobile player using reduced-motion controls",
+    "task": "last-turn capture of the core takes precedence over expiry: keep preview through quality/motion changes",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I018: last-turn capture of the core takes precedence over expiry: keep preview through quality/motion changes",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I019",
+    "persona": "Strategy player comparing alternatives",
+    "task": "pass expires both own contracts but not the enemy: replace pass and rebuild proposal",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I019: pass expires both own contracts but not the enemy: replace pass and rebuild proposal",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I020",
+    "persona": "Mobile player using reduced-motion controls",
+    "task": "pass expires both own contracts but not the enemy: keep preview through quality/motion changes",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I020: pass expires both own contracts but not the enemy: keep preview through quality/motion changes",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I021",
+    "persona": "Strategy player comparing alternatives",
+    "task": "sixth pass draw includes same-turn expiry: replace pass and rebuild proposal",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I021: sixth pass draw includes same-turn expiry: replace pass and rebuild proposal",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I022",
+    "persona": "Mobile player using reduced-motion controls",
+    "task": "sixth pass draw includes same-turn expiry: keep preview through quality/motion changes",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I022: sixth pass draw includes same-turn expiry: keep preview through quality/motion changes",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I023",
+    "persona": "Strategy player comparing alternatives",
+    "task": "limit draw retains capture proceeds and expiry: replace pass and rebuild proposal",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I023: limit draw retains capture proceeds and expiry: replace pass and rebuild proposal",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I024",
+    "persona": "Mobile player using reduced-motion controls",
+    "task": "limit draw retains capture proceeds and expiry: keep preview through quality/motion changes",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I024: limit draw retains capture proceeds and expiry: keep preview through quality/motion changes",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I025",
+    "persona": "Strategy player comparing alternatives",
+    "task": "last legal summon purchases its exact contract at the limit: replace pass and rebuild proposal",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I025: last legal summon purchases its exact contract at the limit: replace pass and rebuild proposal",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I026",
+    "persona": "Mobile player using reduced-motion controls",
+    "task": "last legal summon purchases its exact contract at the limit: keep preview through quality/motion changes",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I026: last legal summon purchases its exact contract at the limit: keep preview through quality/motion changes",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I027",
+    "persona": "Strategy player comparing alternatives",
+    "task": "moving a defender exposes the core after shared simulation: replace pass and rebuild proposal",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I027: moving a defender exposes the core after shared simulation: replace pass and rebuild proposal",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I028",
+    "persona": "Mobile player using reduced-motion controls",
+    "task": "moving a defender exposes the core after shared simulation: keep preview through quality/motion changes",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I028: moving a defender exposes the core after shared simulation: keep preview through quality/motion changes",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I029",
+    "persona": "Strategy player comparing alternatives",
+    "task": "capturing the only attacker clears the tactical warning: replace pass and rebuild proposal",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I029: capturing the only attacker clears the tactical warning: replace pass and rebuild proposal",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I030",
+    "persona": "Mobile player using reduced-motion controls",
+    "task": "capturing the only attacker clears the tactical warning: keep preview through quality/motion changes",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I030: capturing the only attacker clears the tactical warning: keep preview through quality/motion changes",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I031",
+    "persona": "Novice waiting for their first CPU reply",
+    "task": "Worker constructor denial while inspecting a one-turn human contract",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I031: Worker constructor denial while inspecting a one-turn human contract",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I032",
+    "persona": "Long-session player returning after a pause",
+    "task": "Worker constructor denial after pause/resume and a stale worker failure",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I032: Worker constructor denial after pause/resume and a stale worker failure",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I033",
+    "persona": "Novice waiting for their first CPU reply",
+    "task": "Worker postMessage structured-clone failure while inspecting a one-turn human contract",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I033: Worker postMessage structured-clone failure while inspecting a one-turn human contract",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I034",
+    "persona": "Long-session player returning after a pause",
+    "task": "Worker postMessage structured-clone failure after pause/resume and a stale worker failure",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I034: Worker postMessage structured-clone failure after pause/resume and a stale worker failure",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I035",
+    "persona": "Novice waiting for their first CPU reply",
+    "task": "missing message data while inspecting a one-turn human contract",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I035: missing message data while inspecting a one-turn human contract",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I036",
+    "persona": "Long-session player returning after a pause",
+    "task": "missing message data after pause/resume and a stale worker failure",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I036: missing message data after pause/resume and a stale worker failure",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I037",
+    "persona": "Novice waiting for their first CPU reply",
+    "task": "array instead of action while inspecting a one-turn human contract",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I037: array instead of action while inspecting a one-turn human contract",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I038",
+    "persona": "Long-session player returning after a pause",
+    "task": "array instead of action after pause/resume and a stale worker failure",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I038: array instead of action after pause/resume and a stale worker failure",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I039",
+    "persona": "Novice waiting for their first CPU reply",
+    "task": "unknown action discriminator while inspecting a one-turn human contract",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I039: unknown action discriminator while inspecting a one-turn human contract",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I040",
+    "persona": "Long-session player returning after a pause",
+    "task": "unknown action discriminator after pause/resume and a stale worker failure",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I040: unknown action discriminator after pause/resume and a stale worker failure",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I041",
+    "persona": "Novice waiting for their first CPU reply",
+    "task": "expired or absent mover identifier while inspecting a one-turn human contract",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I041: expired or absent mover identifier while inspecting a one-turn human contract",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I042",
+    "persona": "Long-session player returning after a pause",
+    "task": "expired or absent mover identifier after pause/resume and a stale worker failure",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I042: expired or absent mover identifier after pause/resume and a stale worker failure",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I043",
+    "persona": "Novice waiting for their first CPU reply",
+    "task": "attempt to move the human piece while inspecting a one-turn human contract",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I043: attempt to move the human piece while inspecting a one-turn human contract",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I044",
+    "persona": "Long-session player returning after a pause",
+    "task": "attempt to move the human piece after pause/resume and a stale worker failure",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I044: attempt to move the human piece after pause/resume and a stale worker failure",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I045",
+    "persona": "Novice waiting for their first CPU reply",
+    "task": "central-rank summon while inspecting a one-turn human contract",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I045: central-rank summon while inspecting a one-turn human contract",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I046",
+    "persona": "Long-session player returning after a pause",
+    "task": "central-rank summon after pause/resume and a stale worker failure",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I046: central-rank summon after pause/resume and a stale worker failure",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I047",
+    "persona": "Novice waiting for their first CPU reply",
+    "task": "out-of-contract duration while inspecting a one-turn human contract",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I047: out-of-contract duration while inspecting a one-turn human contract",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I048",
+    "persona": "Long-session player returning after a pause",
+    "task": "out-of-contract duration after pause/resume and a stale worker failure",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I048: out-of-contract duration after pause/resume and a stale worker failure",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I049",
+    "persona": "Novice waiting for their first CPU reply",
+    "task": "timeout followed by late error and legal reply while inspecting a one-turn human contract",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I049: timeout followed by late error and legal reply while inspecting a one-turn human contract",
+    "status": "passed"
+  },
+  {
+    "id": "R200-I050",
+    "persona": "Long-session player returning after a pause",
+    "task": "timeout followed by late error and legal reply after pause/resume and a stale worker failure",
+    "caseLedger": "docs/review200/interaction-cases.json",
+    "file": "tests/review200-interactions.test.ts",
+    "testName": "R200-I050: timeout followed by late error and legal reply after pause/resume and a stale worker failure",
+    "status": "passed"
+  }
+]

@@ -1,4 +1,5 @@
 import type { GameState, Side, Action } from "../game/types";
+import { KINDS, validSquare } from "../game/rules";
 export type RoomView = {
   id: string;
   seat: Side;
@@ -57,8 +58,74 @@ export async function api<T>(path: string, body?: unknown): Promise<T> {
   } catch {
     throw new NetworkError("SERVICE_UNAVAILABLE");
   }
-  if (!res.ok) throw new NetworkError(data.error ?? "SERVICE_UNAVAILABLE");
+  if (!res.ok)
+    throw new NetworkError(
+      typeof data?.error === "string" ? data.error : "SERVICE_UNAVAILABLE",
+    );
   return data as T;
+}
+// A successful HTTP status is not proof that the reply is a usable room.
+// Validate before accepting a board or consuming an uncertain command receipt.
+function roomResponse(value: unknown, expectedId?: string): RoomView {
+  const r = value as RoomView | null;
+  const s = r?.state;
+  const side = (value: unknown) => value === "white" || value === "black";
+  const whole = (value: unknown) =>
+    Number.isSafeInteger(value) && Number(value) >= 0;
+  const outcome = s?.outcome;
+  if (
+    !r ||
+    typeof r !== "object" ||
+    Array.isArray(r) ||
+    typeof r.id !== "string" ||
+    !/^[a-f0-9]{32}$/.test(r.id) ||
+    (expectedId !== undefined && r.id !== expectedId) ||
+    !side(r.seat) ||
+    !whole(r.version) ||
+    !["waiting", "playing", "finished", "closed"].includes(r.status) ||
+    !Number.isFinite(r.expiresAt) ||
+    r.expiresAt <= 0 ||
+    typeof r.joined !== "boolean" ||
+    typeof r.ready?.white !== "boolean" ||
+    typeof r.ready?.black !== "boolean" ||
+    (r.invite !== undefined &&
+      (typeof r.invite !== "string" || !/^[a-f0-9]{64}$/.test(r.invite))) ||
+    !s ||
+    typeof s !== "object" ||
+    !side(s.turn) ||
+    !whole(s.ply) ||
+    s.ply > 200 ||
+    !whole(s.consecutivePasses) ||
+    !whole(s.grain?.white) ||
+    !whole(s.grain?.black) ||
+    s.cores?.white !== 3 ||
+    s.cores?.black !== 45 ||
+    !(
+      outcome === null ||
+      (outcome?.kind === "win" && side(outcome.winner)) ||
+      (outcome?.kind === "draw" && ["passes", "limit"].includes(outcome.reason))
+    ) ||
+    !Array.isArray(s.pieces) ||
+    !s.pieces.every(
+      (p) =>
+        p &&
+        typeof p.id === "string" &&
+        p.id.length > 0 &&
+        side(p.side) &&
+        KINDS.includes(p.kind) &&
+        validSquare(p.square) &&
+        Number.isInteger(p.remaining) &&
+        p.remaining >= 1 &&
+        p.remaining <= 5 &&
+        Number.isInteger(p.summonedPly),
+    ) ||
+    new Set(s.pieces.map((p) => p.id)).size !== s.pieces.length ||
+    new Set(s.pieces.map((p) => p.square)).size !== s.pieces.length
+  )
+    throw new NetworkError("SERVICE_UNAVAILABLE");
+  // A terminal winner legitimately occupies the captured core. Do not apply
+  // active-position legality here or rewrite older persisted room positions.
+  return r;
 }
 export const commandId = () => crypto.randomUUID();
 export function createOnline(onChange: () => void) {
@@ -76,6 +143,44 @@ export function createOnline(onChange: () => void) {
   let unavailable = false;
   let creationId: string | null = null;
   let creationLoaded = false;
+  let lastNotification: string | undefined;
+  function notify() {
+    // Polling still accepts and validates every snapshot. Only skip the UI
+    // callback when all exposed values are identical, including recovery flags.
+    // HTTP JSON object-key order does not change the exposed room values.
+    const snapshot = JSON.stringify(
+      [room, busy, error, connected, !!pending, unavailable],
+      (_key, value) =>
+        value && typeof value === "object" && !Array.isArray(value)
+          ? Object.fromEntries(
+              Object.keys(value)
+                .sort()
+                .map((key) => [key, value[key]]),
+            )
+          : value,
+    );
+    if (snapshot === lastNotification) return;
+    const previous = lastNotification;
+    lastNotification = snapshot;
+    try {
+      onChange();
+    } catch (e) {
+      // A failed callback must remain retryable; do not erase a newer nested
+      // notification if the callback synchronously changed the client state.
+      if (lastNotification === snapshot) lastNotification = previous;
+      throw e;
+    }
+  }
+  function beginSession() {
+    // Retire the previous generation's poll lock and schedule before handover.
+    // Its late finally block must not own the replacement session's lock.
+    active = false;
+    connected = false;
+    inFlight = false;
+    if (timer) clearTimeout(timer);
+    timer = undefined;
+    return ++generation;
+  }
   function creationKey() {
     if (!creationLoaded) {
       creationLoaded = true;
@@ -129,7 +234,7 @@ export function createOnline(onChange: () => void) {
     connected = true;
     unavailable = false;
     failures = 0;
-    onChange();
+    notify();
   }
   function schedule() {
     if (timer) clearTimeout(timer);
@@ -164,7 +269,10 @@ export function createOnline(onChange: () => void) {
     const id = room.id,
       g = generation;
     try {
-      const next = await api<RoomView>(`/api/rooms/${id}/state`);
+      const next = roomResponse(
+        await api<unknown>(`/api/rooms/${id}/state`),
+        id,
+      );
       if (g !== generation) return;
       if (!pending && !preserveError) error = "";
       accept(next);
@@ -180,7 +288,7 @@ export function createOnline(onChange: () => void) {
         active = false;
         unavailable = true;
       }
-      onChange();
+      notify();
     } finally {
       if (g === generation) {
         inFlight = false;
@@ -189,16 +297,22 @@ export function createOnline(onChange: () => void) {
     }
   }
   async function run(op: string, b: unknown, retry = false) {
-    if (!room || busy || (pending && !retry)) return false;
+    if (!room || !active || busy || (pending && !retry)) return false;
     const g = generation,
       id = room.id;
     busy = true;
     pending = { op, body: b };
-    savePending(id);
     error = "";
-    onChange();
     try {
-      const next = await api<RoomView>(`/api/rooms/${id}/${op}`, b);
+      notify();
+      if (g !== generation) return false;
+      // Persist only when dispatch is imminent. A notification may cancel a
+      // new command; an older uncertain retry receipt is already retained.
+      savePending(id);
+      const next = roomResponse(
+        await api<unknown>(`/api/rooms/${id}/${op}`, b),
+        id,
+      );
       if (g !== generation) return false;
       pending = null;
       savePending(id);
@@ -226,8 +340,8 @@ export function createOnline(onChange: () => void) {
     } finally {
       if (g === generation) {
         busy = false;
-        onChange();
         schedule();
+        notify();
       }
     }
   }
@@ -257,15 +371,18 @@ export function createOnline(onChange: () => void) {
       return !!pending;
     },
     async create() {
-      const g = ++generation;
+      const g = beginSession();
       busy = true;
       error = "";
-      onChange();
       try {
+        notify();
+        if (g !== generation) throw new NetworkError("CANCELLED");
         await api("/api/session");
         if (g !== generation) throw new NetworkError("CANCELLED");
         const key = creationKey();
-        const next = await api<RoomView>("/api/rooms", { commandId: key });
+        const next = roomResponse(
+          await api<unknown>("/api/rooms", { commandId: key }),
+        );
         if (g !== generation) throw new NetworkError("CANCELLED");
         clearCreationKey();
         requestedId = next.id;
@@ -286,19 +403,23 @@ export function createOnline(onChange: () => void) {
       } finally {
         if (g === generation) {
           busy = false;
-          onChange();
+          notify();
         }
       }
     },
     async join(id: string, invite: string) {
-      const g = ++generation;
+      const g = beginSession();
       busy = true;
       error = "";
-      onChange();
       try {
+        notify();
+        if (g !== generation) throw new NetworkError("CANCELLED");
         await api("/api/session");
         if (g !== generation) throw new NetworkError("CANCELLED");
-        const next = await api<RoomView>(`/api/rooms/${id}/join`, { invite });
+        const next = roomResponse(
+          await api<unknown>(`/api/rooms/${id}/join`, { invite }),
+          id,
+        );
         if (g !== generation) throw new NetworkError("CANCELLED");
         requestedId = next.id;
         restorePending(next.id);
@@ -312,21 +433,26 @@ export function createOnline(onChange: () => void) {
       } finally {
         if (g === generation) {
           busy = false;
-          onChange();
+          notify();
         }
       }
     },
     async resume(id: string) {
-      const g = ++generation;
+      const g = beginSession();
       requestedId = id;
       busy = true;
       connected = false;
       error = "";
       restorePending(id);
-      onChange();
       try {
+        notify();
+        if (g !== generation) return;
         await api("/api/session");
-        const next = await api<RoomView>(`/api/rooms/${id}/state`);
+        if (g !== generation) return;
+        const next = roomResponse(
+          await api<unknown>(`/api/rooms/${id}/state`),
+          id,
+        );
         if (g !== generation) return;
         active = true;
         accept(next);
@@ -339,11 +465,11 @@ export function createOnline(onChange: () => void) {
         )
           unavailable = true;
         error = (e as Error).message;
-        onChange();
+        notify();
       } finally {
         if (g === generation) {
           busy = false;
-          onChange();
+          notify();
         }
       }
     },
@@ -367,7 +493,7 @@ export function createOnline(onChange: () => void) {
         : Promise.resolve();
     },
     retry() {
-      return !room && requestedId
+      return requestedId && (!room || !active || room.id !== requestedId)
         ? this.resume(requestedId)
         : pending
           ? run(pending.op, pending.body, true)
@@ -384,7 +510,7 @@ export function createOnline(onChange: () => void) {
       requestedId = null;
       unavailable = false;
       error = "";
-      onChange();
+      notify();
     },
     dispose() {
       active = false;

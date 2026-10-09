@@ -1,0 +1,677 @@
+[
+  {
+    "id": "R200-M001",
+    "persona": "Novice local player",
+    "task": "Refresh both cached swap identities across alternating selections",
+    "precondition": "Two surviving allies swap while destination selection can rewrite square markup",
+    "sequence": [
+      "Commit swap",
+      "Sample 140ms",
+      "Alternate selected ally twelve times",
+      "Cancel"
+    ],
+    "assertion": "Exactly two moving nodes persist; each fresh stationary node stays hidden until cancellation",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M002",
+    "persona": "Small-screen mobile player",
+    "task": "Keep capture and remote expiry caches distinct during inspection",
+    "precondition": "Capturing mover has an unrelated one-life ally",
+    "sequence": [
+      "Capture at18",
+      "Sample impact",
+      "Inspect surviving mover",
+      "Sample expiry"
+    ],
+    "assertion": "Three moving identities retain distinct life text after square cache rebuild",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M003",
+    "persona": "Returning player",
+    "task": "Replace an in-flight identity with another role in a corrected snapshot",
+    "precondition": "Same ID is reused by a restored snapshot with a different role",
+    "sequence": [
+      "Animate carver",
+      "Render corrected Link at24",
+      "Invoke retired frame"
+    ],
+    "assertion": "Old moving role and hidden-node cache cannot overwrite the replacement",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M004",
+    "persona": "Long-session player",
+    "task": "Bound moving DOM while twenty inspection renders replace target markup",
+    "precondition": "Capture animation is active at110ms",
+    "sequence": [
+      "Capture",
+      "Alternate selected and empty state twenty times",
+      "Sample again"
+    ],
+    "assertion": "Moving glyph identity remains stable and one RAF plus one watchdog remain",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M005",
+    "persona": "Motion-sensitive player",
+    "task": "Re-enable normal animation after completing a reduced entrance",
+    "precondition": "In-game no-motion mode is on for first summon",
+    "sequence": [
+      "Commit reduced summon",
+      "Expire static cue",
+      "Disable no-motion",
+      "Commit opponent summon"
+    ],
+    "assertion": "Second cue uses animated layer and has only one live schedule",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M006",
+    "persona": "Screen-reader player",
+    "task": "Settle motion on a grain-only authoritative correction",
+    "precondition": "Piece locations are unchanged but server grain differs",
+    "sequence": [
+      "Move",
+      "Sample140ms",
+      "Render corrected grain only",
+      "Invoke old frame"
+    ],
+    "assertion": "Motion ends despite identical piece positions; accessible destination life is authoritative",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M007",
+    "persona": "Returning player",
+    "task": "Reuse a square for a different ID while a former occupant is moving",
+    "precondition": "New snapshot replaces destination occupant",
+    "sequence": [
+      "Start move",
+      "Render new ID on18",
+      "Call retired RAF"
+    ],
+    "assertion": "Only replacement ID remains and its life is not taken from old cache",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M008",
+    "persona": "Novice restarting player",
+    "task": "Restart then summon the same generated ID without stale concealment",
+    "precondition": "A summon has a stable generated ID across restarted games",
+    "sequence": [
+      "Summon",
+      "Sample90ms",
+      "Render empty restart",
+      "Summon same kind and square again",
+      "Settle"
+    ],
+    "assertion": "New overlay has a fresh identity and final glyph is restored",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M009",
+    "persona": "Mobile returning player",
+    "task": "Retired frame cannot alter a new 2D owner of the same host",
+    "precondition": "Old animated board is disposed and host is reused",
+    "sequence": [
+      "Capture old callback",
+      "Dispose",
+      "Create second board on host",
+      "Call old callback"
+    ],
+    "assertion": "Replacement controls and state remain connected without old moving nodes",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M010",
+    "persona": "Long-session player",
+    "task": "Repeated old-board disposal must not erase the new host owner",
+    "precondition": "A disposed 2D view is cleaned up again after host reuse",
+    "sequence": [
+      "Dispose old board",
+      "Mount new 2D board on same host",
+      "Dispose old board again"
+    ],
+    "assertion": "New board keeps all49 controls and live square input",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M011",
+    "persona": "Keyboard-only player",
+    "task": "Keep one tab stop during repeated swap cache replacement",
+    "precondition": "Focused destination is retained during keyboard inspection",
+    "sequence": [
+      "Start swap",
+      "Focus24",
+      "Alternate thirty selections at same sample"
+    ],
+    "assertion": "Focus remains on same button and exactly one board control is tabbable",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M012",
+    "persona": "Long-session player",
+    "task": "Mixed clear entrance expiry and cancellation cycles retain bounded 2D DOM",
+    "precondition": "Twenty independent sessions reuse one board",
+    "sequence": [
+      "Reset each cycle",
+      "Alternate summon and last-life capture",
+      "Sample and cancel each"
+    ],
+    "assertion": "Each cycle ends with49 controls, zero moving nodes, zero timers, and one preference listener",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M013",
+    "persona": "Long-session 3D player",
+    "task": "Post-disposal render must not allocate fresh scene models",
+    "precondition": "Disposed real Three scene is retained for lifecycle inspection",
+    "sequence": [
+      "Render carver",
+      "Dispose",
+      "Render snapshot containing a new Link"
+    ],
+    "assertion": "Disposed scene must not gain a never-disposed replacement model",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M014",
+    "persona": "Mobile switching views",
+    "task": "Double disposal of retired 3D view preserves new 2D host owner",
+    "precondition": "Same host is handed from3D to2D",
+    "sequence": [
+      "Render3D",
+      "Dispose",
+      "Mount2D",
+      "Dispose3D again",
+      "Trigger old resize"
+    ],
+    "assertion": "2D retains49 controls and old renderer disposes exactly once",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M015",
+    "persona": "Novice 3D player",
+    "task": "Project capture reward on a direct first-render transition",
+    "precondition": "No initial static render primes the camera",
+    "sequence": [
+      "Construct3D",
+      "Render committed capture directly"
+    ],
+    "assertion": "Reward cue matches independent camera projection of18 and scene submits once",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M016",
+    "persona": "Small-screen novice",
+    "task": "Project simultaneous remote expiries on the first3D frame",
+    "precondition": "Three allied last-life pieces pass on first render",
+    "sequence": [
+      "Create board",
+      "Commit pass without prior render"
+    ],
+    "assertion": "All three independently projected cues exist at their own squares with one submission",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M017",
+    "persona": "Novice learning exchange",
+    "task": "Start first-frame swap with distinct cues and two authoritative origins",
+    "precondition": "Link and Bastion swap before any prior3D draw",
+    "sequence": [
+      "Commit swap directly",
+      "Read projected cues and model origins"
+    ],
+    "assertion": "Cue anchors are distinct and models start at23 and24 rather than final swapped cells",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M018",
+    "persona": "Novice finishing game",
+    "task": "Project first-render victory without camera priming",
+    "precondition": "White moves from36 to black core45 on first render",
+    "sequence": [
+      "Commit winning move directly",
+      "Inspect win cue and both cores before impact"
+    ],
+    "assertion": "Victory cue projects45 independently and losing core remains visible before arrival",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M019",
+    "persona": "Novice balancing lifetimes",
+    "task": "Submit simultaneous first-render summon and expiry only once",
+    "precondition": "Newborn enters while unrelated ally expires",
+    "sequence": [
+      "Commit summon directly with old ally at11",
+      "Read two cue anchors"
+    ],
+    "assertion": "One scene submission contains both independent cues and both model identities",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M020",
+    "persona": "Motion-sensitive novice",
+    "task": "Reduced first-render capture skips transient victim allocation",
+    "precondition": "OS reduced motion is already enabled before3D construction",
+    "sequence": [
+      "Enable preference",
+      "Directly render committed capture"
+    ],
+    "assertion": "Victim has no model or badge while static reward cue remains",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M021",
+    "persona": "Motion-sensitive finishing player",
+    "task": "Reduced first-render victory allocates only the surviving core",
+    "precondition": "No-motion is enabled before direct win rendering",
+    "sequence": [
+      "Enable no-motion",
+      "Render first winning move"
+    ],
+    "assertion": "White core and winner exist, defeated core never appears, win cue is finite",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M022",
+    "persona": "Mobile background returner",
+    "task": "First render while hidden preserves committed state without cue allocation",
+    "precondition": "Document is hidden when first3D move result arrives",
+    "sequence": [
+      "Hide document",
+      "Commit direct move",
+      "Return to visibility and rerender same snapshot"
+    ],
+    "assertion": "No cue or RAF is created and model remains at final18 without replay",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M023",
+    "persona": "Rotating mobile player",
+    "task": "Resize oscillation during swap only resets buffers on changed widths",
+    "precondition": "Two-track exchange sampled at140ms",
+    "sequence": [
+      "Swap",
+      "Send widths320320480480240240",
+      "Inspect poses"
+    ],
+    "assertion": "Only480 and240 resize buffers, each observer call submits once, both poses remain unchanged",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M024",
+    "persona": "External-display player",
+    "task": "DPR changes during travel preserve cached pose without resizing CSS dimensions",
+    "precondition": "Moving3D piece sampled at90ms on320px board",
+    "sequence": [
+      "Change DPR to1.25",
+      "Resize observer",
+      "Repeat same DPR",
+      "Inspect label"
+    ],
+    "assertion": "Pixel ratio changes once, size never resets, and life remains pre-arrival",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M025",
+    "persona": "Battery-conscious mobile player",
+    "task": "Change quality and width together during capture with one submission",
+    "precondition": "Capture halfway through victim fade",
+    "sequence": [
+      "Sample330ms",
+      "Enable low quality and resize196",
+      "Check surviving and victim poses"
+    ],
+    "assertion": "One renderer submission, one ratio change, one resize, and victim opacity is retained",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M026",
+    "persona": "Small-screen inspecting player",
+    "task": "Cached label updates target fresh nodes after multiple resize rebuilds",
+    "precondition": "Old projected labels are retained as detached references",
+    "sequence": [
+      "Move",
+      "Sample100ms",
+      "Resize280 then400",
+      "Sample300ms"
+    ],
+    "assertion": "Detached label remains unchanged while latest live label reaches new lifetime",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M027",
+    "persona": "Returning 3D player",
+    "task": "Inspect an already-faded victim without resurrecting its rebuilt labels",
+    "precondition": "Capture is sampled after victim disappearance but before cue cleanup",
+    "sequence": [
+      "Sample400ms",
+      "Render selected mover",
+      "Resize260",
+      "Sample450ms"
+    ],
+    "assertion": "Each regenerated victim life and role badge stays transparent and victim model hidden",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M028",
+    "persona": "Mobile collapsed-panel player",
+    "task": "Recover from zero-width host during active entrance",
+    "precondition": "Newborn animation is sampled while host collapses",
+    "sequence": [
+      "Summon",
+      "Sample130ms",
+      "Resize0",
+      "Resize320"
+    ],
+    "assertion": "Drawing buffer clamps to1 then restores320, projected labels stay finite and pose stays sampled",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M029",
+    "persona": "Long-session strategist",
+    "task": "Repeated nonvisual passes require no timers while3D lifetimes update",
+    "precondition": "Twenty-five valid new sessions each contain one five-life piece",
+    "sequence": [
+      "Render fresh session",
+      "Execute four legal non-expiring passes",
+      "Repeat twenty-five sessions and inspect scheduling"
+    ],
+    "assertion": "Each pass submits once without RAF or watchdog; every session ends with three life because only its own two turns decrement it",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M030",
+    "persona": "Long-session mixed-role player",
+    "task": "Retire reused IDs across role changes and expired captures exactly once",
+    "precondition": "Twelve sessions reuse ID m with alternating carver and Link snapshots",
+    "sequence": [
+      "Start last-life capture",
+      "Track all model resources",
+      "Settle",
+      "Render same ID as Link",
+      "Reset"
+    ],
+    "assertion": "Every retired geometry/material emits one disposal and active model population stays bounded",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M031",
+    "persona": "Mobile multi-session player",
+    "task": "Recreate3D boards after mid-motion disposal without observer growth",
+    "precondition": "Twelve distinct boards alternate move and summon teardown",
+    "sequence": [
+      "Create board",
+      "Start motion",
+      "Dispose mid-frame",
+      "Invoke saved observer",
+      "Repeat"
+    ],
+    "assertion": "Each resize observer disconnects once, renderer disposes once per board, listeners and work return to zero",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M032",
+    "persona": "Motion-sensitive preview user",
+    "task": "Cancel a reduced cue before rendering an unrelated summon proposal",
+    "precondition": "Static capture cue has pending watchdog",
+    "sequence": [
+      "Commit reduced capture",
+      "Cancel",
+      "Render summon proposal on new state"
+    ],
+    "assertion": "Only proposal ghost remains and old capture watchdog cannot remove it",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M033",
+    "persona": "Small-screen long-session player",
+    "task": "Resize at every capture-expiry boundary without double resource retirement",
+    "precondition": "One-life capturing mover and victim both depart",
+    "sequence": [
+      "Sample279280330380460540580ms",
+      "Resize after each sample",
+      "Dispose"
+    ],
+    "assertion": "Labels never exceed four nodes; both models retire once and only two cores remain",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M034",
+    "persona": "Keyboard mobile player",
+    "task": "Keep focused3D destination stable across DPR size and selection changes",
+    "precondition": "Focused destination belongs to moving piece",
+    "sequence": [
+      "Move",
+      "Focus18",
+      "Change DPR and width",
+      "Select moved piece",
+      "UseArrowLeft"
+    ],
+    "assertion": "Focus reaches17 with one tab stop and scene retains sampled moving pose",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M035",
+    "persona": "Fast local-match player",
+    "task": "Replace a plan reentrantly inside its frame-zero adapter",
+    "precondition": "Adapter receives first move plan and immediately starts opponent summon",
+    "sequence": [
+      "Install one-shot nested update",
+      "Commit move",
+      "Inspect current schedule"
+    ],
+    "assertion": "Only successor summon cue survives with oneRAF and one watchdog",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M036",
+    "persona": "Closing mid-frame player",
+    "task": "Dispose reentrantly from a nonzero animation adapter",
+    "precondition": "A live frame at100ms disposes its own player",
+    "sequence": [
+      "Start move",
+      "Dispose from sampled callback",
+      "Invoke captured callback again"
+    ],
+    "assertion": "Adapter cannot recreate layer schedule or timeout after disposal",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M037",
+    "persona": "Fast opponent player",
+    "task": "Start successor state inside a sampled predecessor callback",
+    "precondition": "Move adapter commits a summon while processing100ms frame",
+    "sequence": [
+      "Start move",
+      "Nested update at100ms",
+      "Sample successor at150ms"
+    ],
+    "assertion": "Successor elapsed is50ms and only its scheduling survives",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M038",
+    "persona": "Motion-sensitive returning player",
+    "task": "Retired media callback cannot settle a newly mounted independent player",
+    "precondition": "A saved listener from disposed player shares same global preference object",
+    "sequence": [
+      "Capture old listener",
+      "Dispose old player",
+      "Start new player",
+      "Invoke retired listener"
+    ],
+    "assertion": "New player keeps its layer and currentRAF untouched",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M039",
+    "persona": "Motion-sensitive multi-board player",
+    "task": "Global preference cancels both players but only a new action restarts one",
+    "precondition": "Two independent boards are animating",
+    "sequence": [
+      "Start move and summon",
+      "EnableOS reduction",
+      "DisableOS reduction",
+      "Start one new action"
+    ],
+    "assertion": "Both initial schedules cancel and only one new schedule exists",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M040",
+    "persona": "Long-session multi-board player",
+    "task": "Dispose one independent board without cancelling the other timeline",
+    "precondition": "Two players own separateRAF and watchdog handles",
+    "sequence": [
+      "Start two players",
+      "Dispose first",
+      "Sample second"
+    ],
+    "assertion": "Second receives140ms sample with one listener oneRAF and one timer",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M041",
+    "persona": "Throttled mobile multi-board player",
+    "task": "Earlier watchdog settlement cannot cancel a later independent entrance",
+    "precondition": "Second player starts200ms after first with no RAF delivery",
+    "sequence": [
+      "Start first",
+      "Advance timer200ms",
+      "Start second",
+      "Advance430ms"
+    ],
+    "assertion": "First times out while second still owns its cueRAF and later deadline",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M042",
+    "persona": "Battery-conscious player",
+    "task": "Unrelated body-class mutations do not interrupt active motion",
+    "precondition": "MutationObserver sees theme and quality preferences without no-motion",
+    "sequence": [
+      "Start motion",
+      "Add low-quality",
+      "Await observer",
+      "Add unrelated theme",
+      "Sample"
+    ],
+    "assertion": "Same motion generation continues without null settlement",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M043",
+    "persona": "Mobile background returner",
+    "task": "Visibility churn allows a genuinely new action but never replays the old one",
+    "precondition": "Old move is cancelled by hiding",
+    "sequence": [
+      "Hide/show three times",
+      "Render same result",
+      "Commit next summon"
+    ],
+    "assertion": "Old frame stays stale and new entrance starts at elapsed zero",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M044",
+    "persona": "Reduced-capability returning player",
+    "task": "RestoreRAF support for a later action after static fallback",
+    "precondition": "First action lacksrequestAnimationFrame",
+    "sequence": [
+      "RemoveRAF",
+      "Summon statically",
+      "RestoreRAF",
+      "Commit opponent summon"
+    ],
+    "assertion": "Successor switches out of reduced class and has exactly one callback chain",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M045",
+    "persona": "Motion-sensitive strategist",
+    "task": "OS preference reversal starts next swap with original causal delays",
+    "precondition": "A reduced summon is followed by normal two-unit exchange in another snapshot",
+    "sequence": [
+      "Reduced entrance",
+      "Turn preference off",
+      "Load swap prestate",
+      "Commit swap"
+    ],
+    "assertion": "Both cues restore280ms delay and plan resumes two animated tracks",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M046",
+    "persona": "Fast restarting player",
+    "task": "A prior watchdog deadline cannot erase a successor after empty-pass optimization",
+    "precondition": "Visible move is replaced by empty pass then later summon",
+    "sequence": [
+      "Move",
+      "Advance timer200ms",
+      "Empty pass",
+      "Summon",
+      "Cross original630ms deadline"
+    ],
+    "assertion": "Original schedule is gone; newer summon survives until its own deadline",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M047",
+    "persona": "Screen-reader novice",
+    "task": "First-frame hidden duplicate never changes authoritative control labels",
+    "precondition": "Capture-expiry has transient visual pieces but zero authoritative units",
+    "sequence": [
+      "Commit last-life capture in2D",
+      "Read origin and landing labels before firstRAF",
+      "Sample capture then expiry"
+    ],
+    "assertion": "Controls describe final empty squares throughout while effect layer staysaria-hidden",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M048",
+    "persona": "Long-session keyboard player",
+    "task": "Fast snapshot corrections refresh3D life cache without retaining retired nodes",
+    "precondition": "Twenty grain-corrected snapshots each rebuild labels",
+    "sequence": [
+      "Render one mover",
+      "Correct grain twenty times",
+      "Start move",
+      "Sample arrival"
+    ],
+    "assertion": "Only current label updates, old detached labels stay at original life, and live label count remains two",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M049",
+    "persona": "Long-session mixed-view player",
+    "task": "Repeated2D3D handover rejects every retired frame and resize callback",
+    "precondition": "Twelve mode switches reuse a single host with active capture each time",
+    "sequence": [
+      "Alternate2D and3D",
+      "Capture and save pending callbacks",
+      "Dispose",
+      "Mount next owner",
+      "Invoke all retired callbacks"
+    ],
+    "assertion": "One current board has49 controls; old work cannot change population and end-of-run listeners/resources clear",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  },
+  {
+    "id": "R200-M050",
+    "persona": "Small-screen pointer player",
+    "task": "Ray picking stays aligned after DPR and width changes during motion",
+    "precondition": "Real CPU raycaster uses the resized canvas rectangle during a move",
+    "sequence": [
+      "Move and sample140ms",
+      "Resize from320to196 and changeDPR",
+      "Project landing square to resized client coordinates",
+      "Dispatch pointerup"
+    ],
+    "assertion": "Tile18 is delivered exactly once despite in-flight piece and resized labels",
+    "limitations": "jsdom DOM and real Three.js CPU scene/camera/geometry; WebGLRenderer replaced by instrumentation. No browser pixels, physical mobile input, GPU allocations, FPS, or screen-reader speech verified."
+  }
+]

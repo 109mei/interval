@@ -158,7 +158,7 @@ function oracleActions(s: GameState): Action[] {
   const actions: Action[] = s.pieces.flatMap((p) => oraclePieceActions(s, p));
   for (const to of SQUARES) {
     const home =
-      s.turn === "white" ? Math.floor(to / 7) <= 1 : Math.floor(to / 7) >= 5;
+      s.turn === "white" ? Math.floor(to / 7) <= 2 : Math.floor(to / 7) >= 4;
     if (occupied.has(to) || !home) continue;
     for (const kind of KINDS)
       for (let duration = 1; duration <= 5; duration++)
@@ -435,14 +435,14 @@ for (const side of SIDES)
       );
       const action: Action = freeze({ type: "summon", kind, duration, to });
       const expected =
-        to !== 3 && to !== 45 && (side === "white" ? to < 14 : to >= 35);
+        to !== 3 && to !== 45 && (side === "white" ? to < 21 : to >= 28);
       registerCase(
         {
           id: `rules.summon-board.${side}.${kind}.${to}`,
           category: "summon-board-boundaries",
           inputs: { state: s, action },
           assertions: [
-            "All and only unoccupied home-two-row destinations are legal",
+            "All and only unoccupied own-half three-rank destinations are legal; the central rank is excluded",
             "Exact purchase cost, newborn protection, next-turn income, preview and immutability agree",
           ],
         },
@@ -893,13 +893,8 @@ for (const seed of sequenceSeeds)
         let current = createGame();
         assert.deepEqual(current.grain, { white: 16, black: 12 });
         assert.equal(current.turn, "white");
-        assert.deepEqual(
-          current.pieces.map((p) => [p.kind, p.square, p.remaining]),
-          [
-            ["bastion", 10, 3],
-            ["bastion", 38, 3],
-          ],
-        );
+        assert.deepEqual(current.pieces, []);
+        assert.deepEqual(current.cores, { white: 3, black: 45 });
         const random = randomGenerator(seed),
           seen = new Set<string>();
         for (let step = 0; step < 80 && !current.outcome; step++) {

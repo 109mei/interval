@@ -1,0 +1,36 @@
+{
+  "dateUtc": "2026-10-09",
+  "newScenarios": {
+    "uniqueIds": 200,
+    "groups": {
+      "loading": 60,
+      "motion": 50,
+      "network": 40,
+      "interaction": 50
+    },
+    "rerunsCounted": false
+  },
+  "verification": {
+    "command": "npm test",
+    "tests": 4258,
+    "files": 46,
+    "result": "passed"
+  },
+  "build": {
+    "command": "npm run build",
+    "result": "passed",
+    "includes": [
+      "TypeScript",
+      "client",
+      "Worker",
+      "packaged assets"
+    ]
+  },
+  "limits": [
+    "Physical-phone freeze and touch behavior have not been verified.",
+    "Real WebGL/GPU rendering and frame rate have not been verified.",
+    "Simultaneous independent production friend sessions have not been verified.",
+    "DOM and mocked-network scenarios are automated checks, not human research."
+  ],
+  "warning": "The optional 3D bundle remains larger than 500 kB."
+}

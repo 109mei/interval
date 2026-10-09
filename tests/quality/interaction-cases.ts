@@ -73,7 +73,7 @@ for (const side of sides)
             flow,
           },
           [
-            "Initial candidate names exact type, square, cost and lifetime without spending",
+            "A candidate on the third home rank names exact type, square, cost and lifetime in turns without spending",
             flow === "commit"
               ? "A repeated hidden confirmation cannot submit the purchase twice"
               : flow === "rules-interruption"
@@ -101,6 +101,11 @@ for (const side of sides)
             invalid,
           },
           [
+            invalid === "occupied-wall"
+              ? "An occupied target contains a wall created by a real purchase before rejection is tested"
+              : invalid === "outside-home"
+                ? "The neutral central rank remains illegal beside the three legal home ranks"
+                : "The player's core square remains unavailable for summoning",
             "Invalid retap removes old confirmation and ghost without spending",
             "Chosen kind and duration survive the rejected target",
             "One new legal destination recovers a purchasable candidate with the exact cost",
@@ -181,8 +186,8 @@ const routes: [string, number, string[], number][] = [
   ["upper-right-no-wrap", 48, ["ArrowRight", "ArrowUp"], 48],
   ["bottom-row-to-core", 0, ["ArrowRight", "ArrowRight", "ArrowRight"], 3],
   ["top-row-to-core", 48, ["ArrowLeft", "ArrowLeft", "ArrowLeft"], 45],
-  ["white-wall", 3, ["ArrowUp"], 10],
-  ["black-wall", 45, ["ArrowDown"], 38],
+  ["white-core-to-empty-second-rank", 3, ["ArrowUp"], 10],
+  ["black-core-to-empty-second-rank", 45, ["ArrowDown"], 38],
   ["center-up", 24, ["ArrowUp"], 31],
   ["center-down", 24, ["ArrowDown"], 17],
   ["center-left", 24, ["ArrowLeft"], 23],

@@ -158,3 +158,54 @@ it("worker failure falls back to a legal CPU action instead of leaving the turn 
   vi.unstubAllGlobals();
   vi.useRealTimers();
 });
+it("render callback exceptions cannot leave a committed local turn permanently busy", async () => {
+  let throwOnce = true;
+  const c = createController(() => {
+    if (throwOnce) {
+      throwOnce = false;
+      throw Error("render failed");
+    }
+  });
+  await expect(c.submit({ type: "pass" }, c.getToken())).rejects.toThrow(
+    "render failed",
+  );
+  expect(c.getBusy()).toBe(false);
+  expect(await c.submit({ type: "pass" }, c.getToken())).toBe(true);
+  expect(c.getState().ply).toBe(2);
+  c.dispose();
+});
+it("pausing CPU preserves a turn and rejects late worker replies until resumed", async () => {
+  const { vi } = await import("vitest");
+  vi.useFakeTimers();
+  const workers: any[] = [];
+  class W {
+    onmessage: any;
+    onerror: any;
+    postMessage = vi.fn();
+    terminate = vi.fn();
+    constructor() {
+      workers.push(this);
+    }
+  }
+  vi.stubGlobal("Worker", W);
+  const c = createController(() => {});
+  c.restart("cpu");
+  await c.submit({ type: "pass" }, c.getToken());
+  await vi.advanceTimersByTimeAsync(350);
+  const old = workers[0];
+  const s = c.getState();
+  c.pause();
+  old.onmessage({ data: { type: "pass" } });
+  await Promise.resolve();
+  await vi.advanceTimersByTimeAsync(8000);
+  expect(c.getState()).toBe(s);
+  expect(await c.submit({ type: "pass" }, c.getToken())).toBe(false);
+  c.resume();
+  await vi.advanceTimersByTimeAsync(350);
+  workers[1].onmessage({ data: { type: "pass" } });
+  await Promise.resolve();
+  expect(c.getState().ply).toBe(2);
+  c.dispose();
+  vi.useRealTimers();
+  vi.unstubAllGlobals();
+});

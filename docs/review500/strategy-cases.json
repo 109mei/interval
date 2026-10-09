@@ -1,0 +1,621 @@
+[
+  {
+    "id": "S001",
+    "category": "opening",
+    "persona": "First-time player",
+    "sequence": [
+      "Create a new game",
+      "white passes once"
+    ],
+    "expected": "Only two fixed cores exist; opening grain is 16/12, then 16/16 without a free wall",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S002",
+    "category": "summon-zone",
+    "persona": "White attacker",
+    "sequence": [
+      "Enumerate one-turn Bastion purchases",
+      "summon at square20"
+    ],
+    "expected": "White may pay for exactly 20 empty cells in ranks1–3, including square20",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S003",
+    "category": "summon-zone",
+    "persona": "Black attacker",
+    "sequence": [
+      "White passes",
+      "enumerate one-turn Link purchases",
+      "summon at square28"
+    ],
+    "expected": "Black may pay for exactly 20 empty cells in ranks5–7, including square28",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S004",
+    "category": "summon-zone",
+    "persona": "Boundary explorer",
+    "sequence": [
+      "For each side attempt one-turn Bastion on every square21–27"
+    ],
+    "expected": "The entire central rank is rejected for both sides without mutation",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S005",
+    "category": "summon-zone",
+    "persona": "Crowded-board planner",
+    "sequence": [
+      "Attempt purchases on own fixed cores and on an existing paid wall"
+    ],
+    "expected": "Occupied cells and both own cores cannot receive a summon",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S006",
+    "category": "economy",
+    "persona": "Defensive saver",
+    "sequence": [
+      "Preview then buy Bastion duration5 at14 from16 grain"
+    ],
+    "expected": "Bastion duration5 costs5, leaves11, and starts with5 remaining",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S007",
+    "category": "economy",
+    "persona": "Carver planner",
+    "sequence": [
+      "Preview then buy Carver duration4 at14 from16 grain"
+    ],
+    "expected": "Carver duration4 costs12, leaves4, and starts with4 remaining",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S008",
+    "category": "economy",
+    "persona": "Leaper planner",
+    "sequence": [
+      "Preview then buy Leaper duration3 at14 from16 grain"
+    ],
+    "expected": "Leaper duration3 costs6, leaves10, and starts with3 remaining",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S009",
+    "category": "economy",
+    "persona": "Support planner",
+    "sequence": [
+      "Preview then buy Link duration2 at14 from16 grain"
+    ],
+    "expected": "Link duration2 costs2, leaves14, and starts with2 remaining",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S010",
+    "category": "economy",
+    "persona": "Cash-constrained buyer",
+    "sequence": [
+      "Attempt Carver duration5 with14 grain"
+    ],
+    "expected": "A purchase one grain short is rejected atomically",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S011",
+    "category": "economy",
+    "persona": "Exact-budget buyer",
+    "sequence": [
+      "Buy Carver duration5 with15 grain"
+    ],
+    "expected": "Exact funds are accepted and leave zero without affecting the opponent except its4 income",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S012",
+    "category": "economy",
+    "persona": "Long-session hoarder",
+    "sequence": [
+      "Black passes while white holds999999 grain"
+    ],
+    "expected": "Income crosses one million without a cap: white becomes1000003",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification. High-grain state is deliberately synthetic to check removal of caps; it is not claimed reachable from the standard opening within 200 plies."
+  },
+  {
+    "id": "S013",
+    "category": "economy",
+    "persona": "Capture hoarder",
+    "sequence": [
+      "Leaper23 jumps enemy pad24 and captures enemy Carver25 with5 life from995 grain"
+    ],
+    "expected": "Capture adds15 above999, yielding1010 with the middle enemy preserved",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification. High-grain state is deliberately synthetic to check removal of caps; it is not claimed reachable from the standard opening within 200 plies."
+  },
+  {
+    "id": "S014",
+    "category": "lifetime",
+    "persona": "Army manager",
+    "sequence": [
+      "White owns old life1/2/5 pieces",
+      "summon a life1 Leaper"
+    ],
+    "expected": "All old own pieces age, life1 expires, and only the newborn is exempt",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S015",
+    "category": "lifetime",
+    "persona": "Opponent observer",
+    "sequence": [
+      "White summons while black has life1 and life5 attackers"
+    ],
+    "expected": "Opponent pieces do not age; the newly active black life1 warning says this black turn",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S016",
+    "category": "lifetime",
+    "persona": "One-turn contract buyer",
+    "sequence": [
+      "Summon white life1 wall",
+      "black passes",
+      "white passes"
+    ],
+    "expected": "Life1 survives summon and opponent turn, then expires on the next own end",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S017",
+    "category": "lifetime",
+    "persona": "Five-turn contract buyer",
+    "sequence": [
+      "Summon white Link5",
+      "alternate black fresh walls and white passes five times"
+    ],
+    "expected": "Five paid lifetime units survive exactly five subsequent own-turn ends",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S018",
+    "category": "lifetime",
+    "persona": "State-history reviewer",
+    "sequence": [
+      "An old life1 Link has summonedPly equal to current ply",
+      "buy a different piece"
+    ],
+    "expected": "Only the actual new piece is exempt; matching historical stamp does not renew old life",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification. The matching summonedPly is a synthetic historical-metadata fixture, not a naturally generated move sequence."
+  },
+  {
+    "id": "S019",
+    "category": "lifetime",
+    "persona": "Natural-expiry observer",
+    "sequence": [
+      "White passes with a life1 Carver"
+    ],
+    "expected": "Natural expiry grants no reward; narration says one retired and no capture",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S020",
+    "category": "lifetime",
+    "persona": "Pass planner",
+    "sequence": [
+      "Pass with four different own life1 pieces"
+    ],
+    "expected": "A pass expires every old own piece in one event and preview names all four",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S021",
+    "category": "lifetime",
+    "persona": "Link support player",
+    "sequence": [
+      "Swap life1 Link14 with life3 wall15"
+    ],
+    "expected": "Exchange changes squares without renewal; Link expires and wall ends at14 with2",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S022",
+    "category": "immutability",
+    "persona": "Replay reviewer",
+    "sequence": [
+      "Freeze state and nested pieces",
+      "execute last-life Leaper capture over last-life pad"
+    ],
+    "expected": "Successful capture and expiry return new data without mutating frozen input",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S023",
+    "category": "rejection",
+    "persona": "Opponent inspector",
+    "sequence": [
+      "Attempt to move black Carver24 during white turn"
+    ],
+    "expected": "An enemy move is rejected and does not alter state or preview",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S024",
+    "category": "rejection",
+    "persona": "Contract-boundary tester",
+    "sequence": [
+      "Attempt durations0,6,1.5,-1,NaN,Infinity"
+    ],
+    "expected": "Noninteger, nonfinite, and out-of-range contract durations reject atomically",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S025",
+    "category": "rejection",
+    "persona": "Blocked-route player",
+    "sequence": [
+      "Carver24 targets32 while both25 and31 are occupied"
+    ],
+    "expected": "Two blocked bend alternatives reject a diagonal Carver move",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S026",
+    "category": "rejection",
+    "persona": "Off-board input tester",
+    "sequence": [
+      "Attempt summons to-1,49,7.5,NaN,Infinity"
+    ],
+    "expected": "Out-of-board, fractional, and nonfinite destinations reject atomically",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S027",
+    "category": "terminal",
+    "persona": "Post-draw clicker",
+    "sequence": [
+      "Attempt pass and summon after a200-ply draw"
+    ],
+    "expected": "Terminal actions reject without income, mutation, or legal targets",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S028",
+    "category": "capture-order",
+    "persona": "Last-life tactician",
+    "sequence": [
+      "Leaper23 life1 jumps own pad24 life1 to Carver25 life3"
+    ],
+    "expected": "Reward9 happens before both own expiries; event order capture/move/expire/income matches visible narration",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S029",
+    "category": "terminal-order",
+    "persona": "Last-life winner",
+    "sequence": [
+      "Carver36 life1 captures core45 alongside another own life1 wall"
+    ],
+    "expected": "White wins before any expiry or income; preview and notice show victory",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S030",
+    "category": "terminal-order",
+    "persona": "Black limit-turn winner",
+    "sequence": [
+      "Black Carver12 life1 captures core3 at ply199 after five passes"
+    ],
+    "expected": "Black core win at ply200 takes precedence over expiry and either draw condition",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S031",
+    "category": "capture-reward",
+    "persona": "Carver hunter",
+    "sequence": [
+      "White Carver24 captures enemy Carver32 remaining3"
+    ],
+    "expected": "Carver victim rewards9 and survivor has2 remaining",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S032",
+    "category": "capture-reward",
+    "persona": "Leaper hunter",
+    "sequence": [
+      "White Carver24 captures enemy Leaper32 remaining5"
+    ],
+    "expected": "Leaper victim rewards10 and survivor has2 remaining",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S033",
+    "category": "capture-reward",
+    "persona": "Wall hunter",
+    "sequence": [
+      "White Carver24 captures enemy Bastion32 remaining1"
+    ],
+    "expected": "Bastion victim rewards1 rather than a minimum or original-contract value",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S034",
+    "category": "capture-reward",
+    "persona": "Link hunter",
+    "sequence": [
+      "White Carver24 captures enemy Link32 remaining4"
+    ],
+    "expected": "Link victim rewards4 and survivor has2 remaining",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S035",
+    "category": "movement-oracle",
+    "persona": "Edge and corner tactician",
+    "sequence": [
+      "Compare Carver destinations at all corners, four edge cells, and center against coordinate-based routes"
+    ],
+    "expected": "Carver geometry has no row wrap, off-board target, own-core capture, or missing legal bend",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S036",
+    "category": "movement-oracle",
+    "persona": "Alternate-route tactician",
+    "sequence": [
+      "Block east of Carver24 at25",
+      "target32 through31"
+    ],
+    "expected": "One blocked bend still leaves the independent alternate route legal",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S037",
+    "category": "movement-oracle",
+    "persona": "Long-arm tactician",
+    "sequence": [
+      "Block second step32 of Carver24→39",
+      "then remove blocker"
+    ],
+    "expected": "Two-step bent arm cannot jump an intermediate piece and works when cleared",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S038",
+    "category": "movement-oracle",
+    "persona": "Friendly-pad Leaper",
+    "sequence": [
+      "Leaper23 jumps friendly wall24 to25"
+    ],
+    "expected": "Friendly jump pad stays at24 and ages once rather than being captured",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S039",
+    "category": "movement-oracle",
+    "persona": "Enemy-pad Leaper",
+    "sequence": [
+      "Leaper23 jumps enemy Carver24 life5 to empty25"
+    ],
+    "expected": "Enemy jump pad stays unaged and grants zero reward",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S040",
+    "category": "movement-oracle",
+    "persona": "Core-pad Leaper",
+    "sequence": [
+      "White Leaper2 jumps over own fixed core3 to4"
+    ],
+    "expected": "A fixed core can support a jump without moving or ending the game",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S041",
+    "category": "movement-oracle",
+    "persona": "Unsupported Leaper",
+    "sequence": [
+      "Leaper23 attempts to land25 without a middle piece"
+    ],
+    "expected": "Leaper cannot move without a supporting adjacent occupied cell",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S042",
+    "category": "movement-oracle",
+    "persona": "Link adjacency planner",
+    "sequence": [
+      "Link10 has ally11, diagonal ally18, enemy9 and adjacent core3"
+    ],
+    "expected": "Only orthogonal allied piece11 is exchangeable; diagonals, enemies and core movement reject",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S043",
+    "category": "cpu",
+    "persona": "Winning CPU",
+    "sequence": [
+      "Give white Carver36 life1, enemy valuable target28 life5, and200 grain"
+    ],
+    "expected": "CPU takes core45 immediately instead of buying or collecting a15-grain victim",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S044",
+    "category": "cpu",
+    "persona": "Black winning CPU",
+    "sequence": [
+      "Black Leaper17 life1 can jump white pad10 to core3"
+    ],
+    "expected": "CPU executes the last-life black core jump immediately",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S045",
+    "category": "cpu",
+    "persona": "Broke CPU",
+    "sequence": [
+      "Empty board with both grain balances0"
+    ],
+    "expected": "CPU returns the only affordable legal action, pass, then credits opponent4",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S046",
+    "category": "cpu",
+    "persona": "Finished-game CPU",
+    "sequence": [
+      "Call CPU on win, six-pass draw, and limit draw states"
+    ],
+    "expected": "CPU returns null for all terminal outcome kinds",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S047",
+    "category": "cpu",
+    "persona": "Repeat-search observer",
+    "sequence": [
+      "Search the same constrained black Leaper state three times"
+    ],
+    "expected": "CPU returns the same independently legal action without mutation within a generous local5-second guard",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S048",
+    "category": "cpu",
+    "persona": "One-grain defender",
+    "sequence": [
+      "Black has1 grain and faces white Carver36 threatening core45"
+    ],
+    "expected": "CPU spends at most1 on square43 to block the only immediate core route",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S049",
+    "category": "cpu",
+    "persona": "Expiry-aware defender",
+    "sequence": [
+      "White has0 grain, own pad10 life1, and enemy Leaper17 threat"
+    ],
+    "expected": "CPU safely passes because its own doomed pad expires before the opponent can jump",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S050",
+    "category": "cpu",
+    "persona": "Draw-saving defender",
+    "sequence": [
+      "White has 100 grain and numerous affordable summons but faces enemy Carver 9 after five consecutive passes",
+      "Compare choosing the terminal pass against every summon leaving an immediate core route"
+    ],
+    "expected": "CPU takes the sixth pass draw rather than waiting to lose",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S051",
+    "category": "cpu",
+    "persona": "Tiny-budget player",
+    "sequence": [
+      "Search black opening with1 grain and no pieces"
+    ],
+    "expected": "CPU is legal, never overspends, and cannot buy an attacker or a multi-turn contract",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S052",
+    "category": "cpu",
+    "persona": "Forced-win planner",
+    "sequence": [
+      "White Carver31 life2 advances with no grain",
+      "enumerate every black reply"
+    ],
+    "expected": "CPU advances to37 or39 and retains a next-turn core capture after every affordable reply",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S053",
+    "category": "long-session",
+    "persona": "Patient defender",
+    "sequence": [
+      "Play200 alternating one-turn wall purchases",
+      "account independently for all spending and incomes"
+    ],
+    "expected": "Exactly200 actions end by limit, with two life1 pieces and312 grain per side; no duplicated income",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S054",
+    "category": "long-session",
+    "persona": "Mixed-contract accountant",
+    "sequence": [
+      "Play200 purchases cycling Bastion1,Link2,Leaper1,Carver1,Bastion5",
+      "maintain independent contract ledger"
+    ],
+    "expected": "Every lifetime and balance matches the ledger; limit draw ends with152 grain per side",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S055",
+    "category": "repetition",
+    "persona": "Reversible-move player",
+    "sequence": [
+      "Both sides exchange a life5 Link and wall four times each"
+    ],
+    "expected": "Returning geometry does not invent repetition draw or extend life; all four contracts end at1",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S056",
+    "category": "draw",
+    "persona": "Pass-and-resume player",
+    "sequence": [
+      "Pass five times",
+      "summon once",
+      "pass five more times then once"
+    ],
+    "expected": "A real action resets pass count; only the new sixth consecutive pass draws and gives no income",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S057",
+    "category": "terminal-order",
+    "persona": "Limit-turn observer",
+    "sequence": [
+      "At ply199 black passes with an own life1 Carver"
+    ],
+    "expected": "At200 the expiry occurs before limit finish and no next-turn income is credited",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S058",
+    "category": "terminal-order",
+    "persona": "Coincident-draw observer",
+    "sequence": [
+      "At ply199 after five consecutive passes, black passes"
+    ],
+    "expected": "The simultaneous six-pass and200-ply boundary reports passes deterministically",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S059",
+    "category": "preview",
+    "persona": "Indecisive buyer",
+    "sequence": [
+      "Preview the same duration3 Carver purchase100 times, then commit once"
+    ],
+    "expected": "Preview never spends or earns income; one commit leaves7/16 grain at ply1",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification."
+  },
+  {
+    "id": "S060",
+    "category": "long-session",
+    "persona": "Novice versus CPU",
+    "sequence": [
+      "White only passes",
+      "black CPU plays up to60 actions with independent economy accounting"
+    ],
+    "expected": "CPU converts purchases into moves and captures black victory before60 actions without duplicated income",
+    "limitations": "Local deterministic TypeScript rules/CPU evidence only; no real browser rendering, network/P2P, mobile timing, or player study. CPU timings are generous local regression guards, not hardware performance certification. Passing-opponent play proves conversion of this deterministic opening only; it does not establish expert strength or broad strategic optimality."
+  }
+]

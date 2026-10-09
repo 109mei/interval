@@ -1,5 +1,10 @@
 import type { GameState, Selection } from "../game/types";
-import { legalActions, pieceActions, opposite } from "../game/rules";
+import {
+  legalActions,
+  pieceActions,
+  opposite,
+  validState,
+} from "../game/rules";
 export type TargetKind = "move" | "capture" | "swap" | "summon";
 export const TARGET_NAMES: Record<TargetKind, string> = {
   move: "移動",
@@ -14,7 +19,11 @@ export function boardTargets(s: GameState, selection: Selection) {
     !!selected && (selection.inspectOnly || selected.side !== s.turn);
   const actions = inspectOnly
     ? pieceActions({ ...s, turn: selected.side }, selected)
-    : legalActions(s);
+    : selection.summon
+      ? legalActions(s)
+      : selected && !s.outcome && validState(s)
+        ? pieceActions(s, selected)
+        : [];
   const kinds = new Map<number, TargetKind>();
   for (const a of actions) {
     if (

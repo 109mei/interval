@@ -619,7 +619,15 @@ it("Sora returning invite participant can switch local carver directly to online
   await import("../src/main");
   const click = (s: string) =>
     document.querySelector<HTMLButtonElement>(s)!.click();
+  expect(document.getElementById("home")!.hidden).toBe(false);
+  expect(document.getElementById("arena")!.hidden).toBe(true);
+  expect(document.querySelector("[data-square]")).toBeNull();
+  const invitationState = { ...history.state };
   click("#close-friend");
+  click("#choose-local");
+  click("#start-game");
+  await vi.waitFor(() => expect(gpu.scene).not.toBeNull());
+  expect(history.state?.invite).toBeUndefined();
   click("#summon");
   click('[data-kind="carver"]');
   click('[data-square="9"]');
@@ -627,12 +635,16 @@ it("Sora returning invite participant can switch local carver directly to online
   for (let i = 0; i < 10; i++) await Promise.resolve();
   const old = model("piece:white-0-9");
   expect(old.getObjectByName("carver-foot")).toBeDefined();
+  // Restore the invitation entry as when the participant returns through history.
+  history.replaceState(invitationState, "", `/?room=${id}`);
   click("#friend");
+  expect(document.getElementById("join-room")!.hidden).toBe(false);
   click("#join-room");
   await vi.waitFor(() =>
     expect(document.getElementById("mode-label")?.textContent).toBe(
       "あなたは黒",
     ),
   );
+  expect(model("piece:white-0-9")).not.toBe(old);
   expect(model("piece:white-0-9").getObjectByName("leaper-foot")).toBeDefined();
 });

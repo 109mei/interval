@@ -12,6 +12,7 @@ export function createBoard2D(
   host: HTMLElement,
   onSquare: (q: number) => void,
 ): BoardView {
+  let disposed = false;
   const board = document.createElement("div");
   board.className = "board-grid";
   board.setAttribute("role", "group");
@@ -56,16 +57,22 @@ export function createBoard2D(
       board.append(b);
     }
   const animated = new Map<string, HTMLElement>();
+  const animatedLife = new Map<string, HTMLElement>();
+  const pieceElements = new Map<string, HTMLElement>();
+  const hiddenPieces = new Set<HTMLElement>();
+  function restoreHiddenPieces() {
+    hiddenPieces.forEach((el) => el.classList.remove("motion-hidden"));
+    hiddenPieces.clear();
+  }
   const motion = createMotionPlayer(
     host,
     (x, y) => ({ x: ((x + 0.5) / 7) * 100, y: ((6.5 - y) / 7) * 100 }),
     (plan, elapsed) => {
-      board
-        .querySelectorAll<HTMLElement>(".motion-hidden")
-        .forEach((el) => el.classList.remove("motion-hidden"));
       if (!plan) {
+        restoreHiddenPieces();
         animated.forEach((el) => el.remove());
         animated.clear();
+        animatedLife.clear();
         return;
       }
       const win = plan.cues.find((c) => c.kind === "win");
@@ -92,8 +99,12 @@ export function createBoard2D(
           el.innerHTML = `${icon(track.piece.kind)}<span class="piece-mark">${PIECE_MARK[track.piece.kind]}</span><span class="life"></span>`;
           motion.layer.append(el);
           animated.set(track.piece.id, el);
+          animatedLife.set(
+            track.piece.id,
+            el.querySelector<HTMLElement>(".life")!,
+          );
         }
-        const life = el.querySelector<HTMLElement>(".life")!;
+        const life = animatedLife.get(track.piece.id)!;
         const remaining =
           track.leave === "capture" ||
           elapsed < (track.leave === "expire" ? track.start : track.arrive)
@@ -106,16 +117,22 @@ export function createBoard2D(
         el.style.top = `${((6.5 - pose.y - pose.lift) / 7) * 100}%`;
         el.style.transform = `translate(-50%, -50%) scale(${pose.scale})`;
         el.style.opacity = String(pose.opacity);
-        board.querySelectorAll<HTMLElement>("[data-piece-id]").forEach((p) => {
-          if (p.dataset.pieceId === track.piece.id)
-            p.classList.add("motion-hidden");
-        });
+        const piece = pieceElements.get(track.piece.id);
+        if (piece && !hiddenPieces.has(piece)) {
+          piece.classList.add("motion-hidden");
+          hiddenPieces.add(piece);
+        }
       }
     },
   );
   return {
     cancelMotion: motion.cancel,
     render(s, selection, preview, transition) {
+      if (disposed) return;
+      // A selection marker can replace a square's HTML during a running move.
+      // Refresh cached nodes once per render, keeping frame updates query-free.
+      restoreHiddenPieces();
+      pieceElements.clear();
       const { kinds, inspectOnly } = boardTargets(s, selection);
       const expires = new Set(preview?.expires ?? []);
       for (const [q, b] of buttons) {
@@ -127,7 +144,7 @@ export function createBoard2D(
                 ? "black"
                 : null;
         const label = p
-          ? `${p.side === "white" ? "白" : "黒"} ${INFO[p.kind].name} 残り${p.remaining}回`
+          ? `${p.side === "white" ? "白" : "黒"} ${INFO[p.kind].name} 残り${p.remaining}ターン`
           : core
             ? `${core === "white" ? "白" : "黒"}のコア`
             : "空き";
@@ -160,13 +177,21 @@ export function createBoard2D(
           b.innerHTML = content;
           b.dataset.visual = content;
         }
+        if (p)
+          pieceElements.set(
+            p.id,
+            b.querySelector<HTMLElement>("[data-piece-id]")!,
+          );
       }
       motion.update(s, transition);
     },
     dispose() {
+      if (disposed) return;
+      disposed = true;
       motion.dispose();
       host.replaceChildren();
       buttons.clear();
+      pieceElements.clear();
     },
   };
 }

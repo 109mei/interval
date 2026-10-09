@@ -10,6 +10,13 @@ async function boot(path = "/?2d") {
   history.replaceState(null, "", path);
   vi.spyOn(window, "confirm").mockReturnValue(true);
   await import("../src/main");
+  if (
+    !new URLSearchParams(location.search).has("room") &&
+    !history.state?.invite
+  ) {
+    document.getElementById("choose-local")?.click();
+    document.getElementById("start-game")?.click();
+  }
 }
 afterEach(() => {
   vi.restoreAllMocks();
@@ -85,9 +92,7 @@ it("leaving an invited room restores the ability to create a different room", as
     expect(el("mode-label").textContent).toBe("あなたは黒"),
   );
   click("#leave");
-  await vi.waitFor(() =>
-    expect(el("mode-label").textContent).toBe("この端末で2人"),
-  );
+  await vi.waitFor(() => expect(el("home").hidden).toBe(false));
   expect(history.state).toBeNull();
   expect(location.search).toBe("");
   expect(location.hash).toBe("");
@@ -161,9 +166,7 @@ it("a new room clears the previous room's manually copied invite", async () => {
   click("#copy");
   await vi.waitFor(() => expect(el("invite-link").hidden).toBe(false));
   click("#leave");
-  await vi.waitFor(() =>
-    expect(el("mode-label").textContent).toBe("この端末で2人"),
-  );
+  await vi.waitFor(() => expect(el("home").hidden).toBe(false));
   click("#create-room");
   await vi.waitFor(() =>
     expect(el("mode-label").textContent).toBe("あなたは白"),
@@ -172,9 +175,7 @@ it("a new room clears the previous room's manually copied invite", async () => {
   expect((el("invite-link") as HTMLInputElement).value).toBe("");
   expect(el("copy").textContent).toBe("招待リンクをコピー");
   click("#leave");
-  await vi.waitFor(() =>
-    expect(el("mode-label").textContent).toBe("この端末で2人"),
-  );
+  await vi.waitFor(() => expect(el("home").hidden).toBe(false));
 });
 it("a late clipboard failure cannot display a departed room's invite", async () => {
   let rejectCopy!: (e: Error) => void;
@@ -219,9 +220,7 @@ it("a late clipboard failure cannot display a departed room's invite", async () 
   );
   click("#copy");
   click("#leave");
-  await vi.waitFor(() =>
-    expect(el("mode-label").textContent).toBe("この端末で2人"),
-  );
+  await vi.waitFor(() => expect(el("home").hidden).toBe(false));
   rejectCopy(new Error("blocked"));
   await new Promise((resolve) => setTimeout(resolve, 0));
   expect(el("invite-link").hidden).toBe(true);
@@ -279,9 +278,7 @@ it("failed recovery followed by a new room cannot expose the old room's pending 
   expect(writes).toHaveLength(0);
   expect(el("lobby").hidden).toBe(false);
   click("#leave");
-  await vi.waitFor(() =>
-    expect(el("mode-label").textContent).toBe("この端末で2人"),
-  );
+  await vi.waitFor(() => expect(el("home").hidden).toBe(false));
 });
 it.each(["pass", "summon"] as const)(
   "keyboard choosing again from %s restores a visible decision target",

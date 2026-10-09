@@ -9,6 +9,13 @@ async function boot() {
   history.replaceState(null, "", "/?2d");
   vi.spyOn(window, "confirm").mockReturnValue(true);
   await import("../src/main");
+  if (
+    !new URLSearchParams(location.search).has("room") &&
+    !history.state?.invite
+  ) {
+    document.getElementById("choose-local")?.click();
+    document.getElementById("start-game")?.click();
+  }
 }
 async function commit() {
   click("#confirm");
@@ -39,7 +46,7 @@ it("Mika invalid summon retap removes prior purchase without spending or losing 
   click("#minus");
   click('[data-square="9"]');
   expect(el("confirm-row").hidden).toBe(false);
-  click('[data-square="16"]');
+  click('[data-square="23"]');
   expect(el("confirm-row").hidden).toBe(true);
   expect(document.querySelector(".ghost-piece")).toBeNull();
   expect(el("duration").textContent).toBe("2");
@@ -81,7 +88,7 @@ it("Nao learns remaining one expires this own turn and the owner is named on the
 });
 it("Ren sees Link aging and every expiring piece before a support exchange", async () => {
   await boot();
-  await summon("link", 8, 3);
+  await summon("link", 8, 2);
   await pass();
   await summon("leaper", 9, 1);
   await pass();
@@ -91,7 +98,7 @@ it("Ren sees Link aging and every expiring piece before a support exchange", asy
   click('[data-square="9"]');
   expect(el("summary").textContent).toContain("2 体が退場");
   expect(el("summary").textContent).toContain("c2 リーパー");
-  expect(el("summary").textContent).toContain("d2 バスティオン");
+  expect(el("summary").textContent).toContain("b2 リンク");
 });
 it("Ren is warned of the sixth-pass draw and can choose again without ending the match", async () => {
   await boot();
@@ -155,9 +162,7 @@ it("Sora sees readiness consequences before committing and useful room limit rec
   expect(el("ready-note").textContent).toContain("取り消せません");
   expect(el("ready-note").textContent).toContain("すぐ始まります");
   click("#leave");
-  await vi.waitFor(() =>
-    expect(el("mode-label").textContent).toBe("この端末で2人"),
-  );
+  await vi.waitFor(() => expect(el("home").hidden).toBe(false));
   capped = true;
   click("#create-room");
   await vi.waitFor(() =>

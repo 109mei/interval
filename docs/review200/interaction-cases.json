@@ -1,0 +1,802 @@
+[
+  {
+    "id": "R200-I001",
+    "category": "shared simulation and interrupted decision",
+    "persona": "Strategy player comparing alternatives",
+    "task": "new contract while an unrelated allied wall expires: replace pass and rebuild proposal",
+    "precondition": "Fixture ply 20; [{\"id\":\"old\",\"kind\":\"bastion\",\"square\":7,\"remaining\":1,\"side\":\"white\",\"summonedPly\":0}]; grain20 each",
+    "sequence": [
+      "Start explicitly in local mode on the stated position",
+      "Propose {\"type\":\"summon\",\"kind\":\"carver\",\"to\":14,\"duration\":2}",
+      "Back, visibly cancel the current selection, prepare Pass, Back, rebuild the original action",
+      "Check exact preview/feedback without changing state",
+      "Confirm twice synchronously; settle microtasks"
+    ],
+    "assertion": "One action only; cost6, reward0, expires[\"old\"]; all rules and state preserved across preview",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I002",
+    "category": "shared simulation and interrupted decision",
+    "persona": "Mobile player using reduced-motion controls",
+    "task": "new contract while an unrelated allied wall expires: keep preview through quality/motion changes",
+    "precondition": "Fixture ply 20; [{\"id\":\"old\",\"kind\":\"bastion\",\"square\":7,\"remaining\":1,\"side\":\"white\",\"summonedPly\":0}]; grain20 each",
+    "sequence": [
+      "Start explicitly in local mode on the stated position",
+      "Propose {\"type\":\"summon\",\"kind\":\"carver\",\"to\":14,\"duration\":2}",
+      "Open menu, toggle quality and reduced motion, close menu",
+      "Check exact preview/feedback without changing state",
+      "Confirm twice synchronously; settle microtasks"
+    ],
+    "assertion": "One action only; cost6, reward0, expires[\"old\"]; all rules and state preserved across preview",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I003",
+    "category": "shared simulation and interrupted decision",
+    "persona": "Strategy player comparing alternatives",
+    "task": "last-turn defender replaced by a paid blocking wall: replace pass and rebuild proposal",
+    "precondition": "Fixture ply 20; [{\"id\":\"old\",\"kind\":\"bastion\",\"square\":0,\"remaining\":1,\"side\":\"white\",\"summonedPly\":0},{\"id\":\"enemy\",\"kind\":\"carver\",\"square\":11,\"remaining\":4,\"side\":\"black\",\"summonedPly\":0}]; grain20 each",
+    "sequence": [
+      "Start explicitly in local mode on the stated position",
+      "Propose {\"type\":\"summon\",\"kind\":\"bastion\",\"to\":4,\"duration\":3}",
+      "Back, visibly cancel the current selection, prepare Pass, Back, rebuild the original action",
+      "Check exact preview/feedback without changing state",
+      "Confirm twice synchronously; settle microtasks"
+    ],
+    "assertion": "One action only; cost3, reward0, expires[\"old\"]; all rules and state preserved across preview",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I004",
+    "category": "shared simulation and interrupted decision",
+    "persona": "Mobile player using reduced-motion controls",
+    "task": "last-turn defender replaced by a paid blocking wall: keep preview through quality/motion changes",
+    "precondition": "Fixture ply 20; [{\"id\":\"old\",\"kind\":\"bastion\",\"square\":0,\"remaining\":1,\"side\":\"white\",\"summonedPly\":0},{\"id\":\"enemy\",\"kind\":\"carver\",\"square\":11,\"remaining\":4,\"side\":\"black\",\"summonedPly\":0}]; grain20 each",
+    "sequence": [
+      "Start explicitly in local mode on the stated position",
+      "Propose {\"type\":\"summon\",\"kind\":\"bastion\",\"to\":4,\"duration\":3}",
+      "Open menu, toggle quality and reduced motion, close menu",
+      "Check exact preview/feedback without changing state",
+      "Confirm twice synchronously; settle microtasks"
+    ],
+    "assertion": "One action only; cost3, reward0, expires[\"old\"]; all rules and state preserved across preview",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I005",
+    "category": "shared simulation and interrupted decision",
+    "persona": "Strategy player comparing alternatives",
+    "task": "cheap summon leaves a two-path core attack visible: replace pass and rebuild proposal",
+    "precondition": "Fixture ply 20; [{\"id\":\"enemy\",\"kind\":\"carver\",\"square\":11,\"remaining\":4,\"side\":\"black\",\"summonedPly\":0}]; grain20 each",
+    "sequence": [
+      "Start explicitly in local mode on the stated position",
+      "Propose {\"type\":\"summon\",\"kind\":\"link\",\"to\":14,\"duration\":2}",
+      "Back, visibly cancel the current selection, prepare Pass, Back, rebuild the original action",
+      "Check exact preview/feedback without changing state",
+      "Confirm twice synchronously; settle microtasks"
+    ],
+    "assertion": "One action only; cost2, reward0, expires[]; all rules and state preserved across preview",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I006",
+    "category": "shared simulation and interrupted decision",
+    "persona": "Mobile player using reduced-motion controls",
+    "task": "cheap summon leaves a two-path core attack visible: keep preview through quality/motion changes",
+    "precondition": "Fixture ply 20; [{\"id\":\"enemy\",\"kind\":\"carver\",\"square\":11,\"remaining\":4,\"side\":\"black\",\"summonedPly\":0}]; grain20 each",
+    "sequence": [
+      "Start explicitly in local mode on the stated position",
+      "Propose {\"type\":\"summon\",\"kind\":\"link\",\"to\":14,\"duration\":2}",
+      "Open menu, toggle quality and reduced motion, close menu",
+      "Check exact preview/feedback without changing state",
+      "Confirm twice synchronously; settle microtasks"
+    ],
+    "assertion": "One action only; cost2, reward0, expires[]; all rules and state preserved across preview",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I007",
+    "category": "shared simulation and interrupted decision",
+    "persona": "Strategy player comparing alternatives",
+    "task": "capture reward survives the mover's own expiry: replace pass and rebuild proposal",
+    "precondition": "Fixture ply 20; [{\"id\":\"m\",\"kind\":\"carver\",\"square\":9,\"remaining\":1,\"side\":\"white\",\"summonedPly\":0},{\"id\":\"v\",\"kind\":\"leaper\",\"square\":17,\"remaining\":4,\"side\":\"black\",\"summonedPly\":0}]; grain20 each",
+    "sequence": [
+      "Start explicitly in local mode on the stated position",
+      "Propose {\"type\":\"move\",\"pieceId\":\"m\",\"to\":17}",
+      "Back, visibly cancel the current selection, prepare Pass, Back, rebuild the original action",
+      "Check exact preview/feedback without changing state",
+      "Confirm twice synchronously; settle microtasks"
+    ],
+    "assertion": "One action only; cost0, reward8, expires[\"m\"]; all rules and state preserved across preview",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I008",
+    "category": "shared simulation and interrupted decision",
+    "persona": "Mobile player using reduced-motion controls",
+    "task": "capture reward survives the mover's own expiry: keep preview through quality/motion changes",
+    "precondition": "Fixture ply 20; [{\"id\":\"m\",\"kind\":\"carver\",\"square\":9,\"remaining\":1,\"side\":\"white\",\"summonedPly\":0},{\"id\":\"v\",\"kind\":\"leaper\",\"square\":17,\"remaining\":4,\"side\":\"black\",\"summonedPly\":0}]; grain20 each",
+    "sequence": [
+      "Start explicitly in local mode on the stated position",
+      "Propose {\"type\":\"move\",\"pieceId\":\"m\",\"to\":17}",
+      "Open menu, toggle quality and reduced motion, close menu",
+      "Check exact preview/feedback without changing state",
+      "Confirm twice synchronously; settle microtasks"
+    ],
+    "assertion": "One action only; cost0, reward8, expires[\"m\"]; all rules and state preserved across preview",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I009",
+    "category": "shared simulation and interrupted decision",
+    "persona": "Strategy player comparing alternatives",
+    "task": "capture preserves a two-turn moving contract: replace pass and rebuild proposal",
+    "precondition": "Fixture ply 20; [{\"id\":\"m\",\"kind\":\"carver\",\"square\":9,\"remaining\":3,\"side\":\"white\",\"summonedPly\":0},{\"id\":\"v\",\"kind\":\"link\",\"square\":17,\"remaining\":5,\"side\":\"black\",\"summonedPly\":0}]; grain20 each",
+    "sequence": [
+      "Start explicitly in local mode on the stated position",
+      "Propose {\"type\":\"move\",\"pieceId\":\"m\",\"to\":17}",
+      "Back, visibly cancel the current selection, prepare Pass, Back, rebuild the original action",
+      "Check exact preview/feedback without changing state",
+      "Confirm twice synchronously; settle microtasks"
+    ],
+    "assertion": "One action only; cost0, reward5, expires[]; all rules and state preserved across preview",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I010",
+    "category": "shared simulation and interrupted decision",
+    "persona": "Mobile player using reduced-motion controls",
+    "task": "capture preserves a two-turn moving contract: keep preview through quality/motion changes",
+    "precondition": "Fixture ply 20; [{\"id\":\"m\",\"kind\":\"carver\",\"square\":9,\"remaining\":3,\"side\":\"white\",\"summonedPly\":0},{\"id\":\"v\",\"kind\":\"link\",\"square\":17,\"remaining\":5,\"side\":\"black\",\"summonedPly\":0}]; grain20 each",
+    "sequence": [
+      "Start explicitly in local mode on the stated position",
+      "Propose {\"type\":\"move\",\"pieceId\":\"m\",\"to\":17}",
+      "Open menu, toggle quality and reduced motion, close menu",
+      "Check exact preview/feedback without changing state",
+      "Confirm twice synchronously; settle microtasks"
+    ],
+    "assertion": "One action only; cost0, reward5, expires[]; all rules and state preserved across preview",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I011",
+    "category": "shared simulation and interrupted decision",
+    "persona": "Strategy player comparing alternatives",
+    "task": "enemy bridge leap captures only the destination: replace pass and rebuild proposal",
+    "precondition": "Fixture ply 20; [{\"id\":\"m\",\"kind\":\"leaper\",\"square\":9,\"remaining\":3,\"side\":\"white\",\"summonedPly\":0},{\"id\":\"bridge\",\"kind\":\"bastion\",\"square\":16,\"remaining\":5,\"side\":\"black\",\"summonedPly\":0},{\"id\":\"v\",\"kind\":\"carver\",\"square\":23,\"remaining\":2,\"side\":\"black\",\"summonedPly\":0}]; grain20 each",
+    "sequence": [
+      "Start explicitly in local mode on the stated position",
+      "Propose {\"type\":\"move\",\"pieceId\":\"m\",\"to\":23}",
+      "Back, visibly cancel the current selection, prepare Pass, Back, rebuild the original action",
+      "Check exact preview/feedback without changing state",
+      "Confirm twice synchronously; settle microtasks"
+    ],
+    "assertion": "One action only; cost0, reward6, expires[]; all rules and state preserved across preview",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I012",
+    "category": "shared simulation and interrupted decision",
+    "persona": "Mobile player using reduced-motion controls",
+    "task": "enemy bridge leap captures only the destination: keep preview through quality/motion changes",
+    "precondition": "Fixture ply 20; [{\"id\":\"m\",\"kind\":\"leaper\",\"square\":9,\"remaining\":3,\"side\":\"white\",\"summonedPly\":0},{\"id\":\"bridge\",\"kind\":\"bastion\",\"square\":16,\"remaining\":5,\"side\":\"black\",\"summonedPly\":0},{\"id\":\"v\",\"kind\":\"carver\",\"square\":23,\"remaining\":2,\"side\":\"black\",\"summonedPly\":0}]; grain20 each",
+    "sequence": [
+      "Start explicitly in local mode on the stated position",
+      "Propose {\"type\":\"move\",\"pieceId\":\"m\",\"to\":23}",
+      "Open menu, toggle quality and reduced motion, close menu",
+      "Check exact preview/feedback without changing state",
+      "Confirm twice synchronously; settle microtasks"
+    ],
+    "assertion": "One action only; cost0, reward6, expires[]; all rules and state preserved across preview",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I013",
+    "category": "shared simulation and interrupted decision",
+    "persona": "Strategy player comparing alternatives",
+    "task": "swap moves a last-turn link before retiring it: replace pass and rebuild proposal",
+    "precondition": "Fixture ply 20; [{\"id\":\"m\",\"kind\":\"link\",\"square\":9,\"remaining\":1,\"side\":\"white\",\"summonedPly\":0},{\"id\":\"ally\",\"kind\":\"carver\",\"square\":10,\"remaining\":3,\"side\":\"white\",\"summonedPly\":0}]; grain20 each",
+    "sequence": [
+      "Start explicitly in local mode on the stated position",
+      "Propose {\"type\":\"swap\",\"pieceId\":\"m\",\"allyId\":\"ally\"}",
+      "Back, visibly cancel the current selection, prepare Pass, Back, rebuild the original action",
+      "Check exact preview/feedback without changing state",
+      "Confirm twice synchronously; settle microtasks"
+    ],
+    "assertion": "One action only; cost0, reward0, expires[\"m\"]; all rules and state preserved across preview",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I014",
+    "category": "shared simulation and interrupted decision",
+    "persona": "Mobile player using reduced-motion controls",
+    "task": "swap moves a last-turn link before retiring it: keep preview through quality/motion changes",
+    "precondition": "Fixture ply 20; [{\"id\":\"m\",\"kind\":\"link\",\"square\":9,\"remaining\":1,\"side\":\"white\",\"summonedPly\":0},{\"id\":\"ally\",\"kind\":\"carver\",\"square\":10,\"remaining\":3,\"side\":\"white\",\"summonedPly\":0}]; grain20 each",
+    "sequence": [
+      "Start explicitly in local mode on the stated position",
+      "Propose {\"type\":\"swap\",\"pieceId\":\"m\",\"allyId\":\"ally\"}",
+      "Open menu, toggle quality and reduced motion, close menu",
+      "Check exact preview/feedback without changing state",
+      "Confirm twice synchronously; settle microtasks"
+    ],
+    "assertion": "One action only; cost0, reward0, expires[\"m\"]; all rules and state preserved across preview",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I015",
+    "category": "shared simulation and interrupted decision",
+    "persona": "Strategy player comparing alternatives",
+    "task": "swap partner retires at its relocated square: replace pass and rebuild proposal",
+    "precondition": "Fixture ply 20; [{\"id\":\"m\",\"kind\":\"link\",\"square\":9,\"remaining\":3,\"side\":\"white\",\"summonedPly\":0},{\"id\":\"ally\",\"kind\":\"bastion\",\"square\":10,\"remaining\":1,\"side\":\"white\",\"summonedPly\":0}]; grain20 each",
+    "sequence": [
+      "Start explicitly in local mode on the stated position",
+      "Propose {\"type\":\"swap\",\"pieceId\":\"m\",\"allyId\":\"ally\"}",
+      "Back, visibly cancel the current selection, prepare Pass, Back, rebuild the original action",
+      "Check exact preview/feedback without changing state",
+      "Confirm twice synchronously; settle microtasks"
+    ],
+    "assertion": "One action only; cost0, reward0, expires[\"ally\"]; all rules and state preserved across preview",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I016",
+    "category": "shared simulation and interrupted decision",
+    "persona": "Mobile player using reduced-motion controls",
+    "task": "swap partner retires at its relocated square: keep preview through quality/motion changes",
+    "precondition": "Fixture ply 20; [{\"id\":\"m\",\"kind\":\"link\",\"square\":9,\"remaining\":3,\"side\":\"white\",\"summonedPly\":0},{\"id\":\"ally\",\"kind\":\"bastion\",\"square\":10,\"remaining\":1,\"side\":\"white\",\"summonedPly\":0}]; grain20 each",
+    "sequence": [
+      "Start explicitly in local mode on the stated position",
+      "Propose {\"type\":\"swap\",\"pieceId\":\"m\",\"allyId\":\"ally\"}",
+      "Open menu, toggle quality and reduced motion, close menu",
+      "Check exact preview/feedback without changing state",
+      "Confirm twice synchronously; settle microtasks"
+    ],
+    "assertion": "One action only; cost0, reward0, expires[\"ally\"]; all rules and state preserved across preview",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I017",
+    "category": "shared simulation and interrupted decision",
+    "persona": "Strategy player comparing alternatives",
+    "task": "last-turn capture of the core takes precedence over expiry: replace pass and rebuild proposal",
+    "precondition": "Fixture ply 20; [{\"id\":\"m\",\"kind\":\"carver\",\"square\":37,\"remaining\":1,\"side\":\"white\",\"summonedPly\":0}]; grain20 each",
+    "sequence": [
+      "Start explicitly in local mode on the stated position",
+      "Propose {\"type\":\"move\",\"pieceId\":\"m\",\"to\":45}",
+      "Back, visibly cancel the current selection, prepare Pass, Back, rebuild the original action",
+      "Check exact preview/feedback without changing state",
+      "Confirm twice synchronously; settle microtasks"
+    ],
+    "assertion": "One action only; cost0, reward0, expires[]; all rules and state preserved across preview",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I018",
+    "category": "shared simulation and interrupted decision",
+    "persona": "Mobile player using reduced-motion controls",
+    "task": "last-turn capture of the core takes precedence over expiry: keep preview through quality/motion changes",
+    "precondition": "Fixture ply 20; [{\"id\":\"m\",\"kind\":\"carver\",\"square\":37,\"remaining\":1,\"side\":\"white\",\"summonedPly\":0}]; grain20 each",
+    "sequence": [
+      "Start explicitly in local mode on the stated position",
+      "Propose {\"type\":\"move\",\"pieceId\":\"m\",\"to\":45}",
+      "Open menu, toggle quality and reduced motion, close menu",
+      "Check exact preview/feedback without changing state",
+      "Confirm twice synchronously; settle microtasks"
+    ],
+    "assertion": "One action only; cost0, reward0, expires[]; all rules and state preserved across preview",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I019",
+    "category": "shared simulation and interrupted decision",
+    "persona": "Strategy player comparing alternatives",
+    "task": "pass expires both own contracts but not the enemy: replace pass and rebuild proposal",
+    "precondition": "Fixture ply 20; [{\"id\":\"a\",\"kind\":\"bastion\",\"square\":7,\"remaining\":1,\"side\":\"white\",\"summonedPly\":0},{\"id\":\"b\",\"kind\":\"link\",\"square\":8,\"remaining\":1,\"side\":\"white\",\"summonedPly\":0},{\"id\":\"enemy\",\"kind\":\"carver\",\"square\":39,\"remaining\":1,\"side\":\"black\",\"summonedPly\":0}]; grain20 each",
+    "sequence": [
+      "Start explicitly in local mode on the stated position",
+      "Propose {\"type\":\"pass\"}",
+      "Back, visibly cancel the current selection, prepare Pass, Back, rebuild the original action",
+      "Check exact preview/feedback without changing state",
+      "Confirm twice synchronously; settle microtasks"
+    ],
+    "assertion": "One action only; cost0, reward0, expires[\"a\",\"b\"]; all rules and state preserved across preview",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I020",
+    "category": "shared simulation and interrupted decision",
+    "persona": "Mobile player using reduced-motion controls",
+    "task": "pass expires both own contracts but not the enemy: keep preview through quality/motion changes",
+    "precondition": "Fixture ply 20; [{\"id\":\"a\",\"kind\":\"bastion\",\"square\":7,\"remaining\":1,\"side\":\"white\",\"summonedPly\":0},{\"id\":\"b\",\"kind\":\"link\",\"square\":8,\"remaining\":1,\"side\":\"white\",\"summonedPly\":0},{\"id\":\"enemy\",\"kind\":\"carver\",\"square\":39,\"remaining\":1,\"side\":\"black\",\"summonedPly\":0}]; grain20 each",
+    "sequence": [
+      "Start explicitly in local mode on the stated position",
+      "Propose {\"type\":\"pass\"}",
+      "Open menu, toggle quality and reduced motion, close menu",
+      "Check exact preview/feedback without changing state",
+      "Confirm twice synchronously; settle microtasks"
+    ],
+    "assertion": "One action only; cost0, reward0, expires[\"a\",\"b\"]; all rules and state preserved across preview",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I021",
+    "category": "shared simulation and interrupted decision",
+    "persona": "Strategy player comparing alternatives",
+    "task": "sixth pass draw includes same-turn expiry: replace pass and rebuild proposal",
+    "precondition": "Fixture ply 20; [{\"id\":\"a\",\"kind\":\"leaper\",\"square\":7,\"remaining\":1,\"side\":\"white\",\"summonedPly\":0}]; grain20 each",
+    "sequence": [
+      "Start explicitly in local mode on the stated position",
+      "Propose {\"type\":\"pass\"}",
+      "Back, visibly cancel the current selection, prepare Pass, Back, rebuild the original action",
+      "Check exact preview/feedback without changing state",
+      "Confirm twice synchronously; settle microtasks"
+    ],
+    "assertion": "One action only; cost0, reward0, expires[\"a\"]; all rules and state preserved across preview",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I022",
+    "category": "shared simulation and interrupted decision",
+    "persona": "Mobile player using reduced-motion controls",
+    "task": "sixth pass draw includes same-turn expiry: keep preview through quality/motion changes",
+    "precondition": "Fixture ply 20; [{\"id\":\"a\",\"kind\":\"leaper\",\"square\":7,\"remaining\":1,\"side\":\"white\",\"summonedPly\":0}]; grain20 each",
+    "sequence": [
+      "Start explicitly in local mode on the stated position",
+      "Propose {\"type\":\"pass\"}",
+      "Open menu, toggle quality and reduced motion, close menu",
+      "Check exact preview/feedback without changing state",
+      "Confirm twice synchronously; settle microtasks"
+    ],
+    "assertion": "One action only; cost0, reward0, expires[\"a\"]; all rules and state preserved across preview",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I023",
+    "category": "shared simulation and interrupted decision",
+    "persona": "Strategy player comparing alternatives",
+    "task": "limit draw retains capture proceeds and expiry: replace pass and rebuild proposal",
+    "precondition": "Fixture ply 199; [{\"id\":\"m\",\"kind\":\"carver\",\"square\":9,\"remaining\":1,\"side\":\"white\",\"summonedPly\":0},{\"id\":\"v\",\"kind\":\"bastion\",\"square\":17,\"remaining\":5,\"side\":\"black\",\"summonedPly\":0}]; grain20 each",
+    "sequence": [
+      "Start explicitly in local mode on the stated position",
+      "Propose {\"type\":\"move\",\"pieceId\":\"m\",\"to\":17}",
+      "Back, visibly cancel the current selection, prepare Pass, Back, rebuild the original action",
+      "Check exact preview/feedback without changing state",
+      "Confirm twice synchronously; settle microtasks"
+    ],
+    "assertion": "One action only; cost0, reward5, expires[\"m\"]; all rules and state preserved across preview",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I024",
+    "category": "shared simulation and interrupted decision",
+    "persona": "Mobile player using reduced-motion controls",
+    "task": "limit draw retains capture proceeds and expiry: keep preview through quality/motion changes",
+    "precondition": "Fixture ply 199; [{\"id\":\"m\",\"kind\":\"carver\",\"square\":9,\"remaining\":1,\"side\":\"white\",\"summonedPly\":0},{\"id\":\"v\",\"kind\":\"bastion\",\"square\":17,\"remaining\":5,\"side\":\"black\",\"summonedPly\":0}]; grain20 each",
+    "sequence": [
+      "Start explicitly in local mode on the stated position",
+      "Propose {\"type\":\"move\",\"pieceId\":\"m\",\"to\":17}",
+      "Open menu, toggle quality and reduced motion, close menu",
+      "Check exact preview/feedback without changing state",
+      "Confirm twice synchronously; settle microtasks"
+    ],
+    "assertion": "One action only; cost0, reward5, expires[\"m\"]; all rules and state preserved across preview",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I025",
+    "category": "shared simulation and interrupted decision",
+    "persona": "Strategy player comparing alternatives",
+    "task": "last legal summon purchases its exact contract at the limit: replace pass and rebuild proposal",
+    "precondition": "Fixture ply 199; [{\"id\":\"old\",\"kind\":\"link\",\"square\":9,\"remaining\":1,\"side\":\"white\",\"summonedPly\":0}]; grain20 each",
+    "sequence": [
+      "Start explicitly in local mode on the stated position",
+      "Propose {\"type\":\"summon\",\"kind\":\"leaper\",\"to\":14,\"duration\":5}",
+      "Back, visibly cancel the current selection, prepare Pass, Back, rebuild the original action",
+      "Check exact preview/feedback without changing state",
+      "Confirm twice synchronously; settle microtasks"
+    ],
+    "assertion": "One action only; cost10, reward0, expires[\"old\"]; all rules and state preserved across preview",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I026",
+    "category": "shared simulation and interrupted decision",
+    "persona": "Mobile player using reduced-motion controls",
+    "task": "last legal summon purchases its exact contract at the limit: keep preview through quality/motion changes",
+    "precondition": "Fixture ply 199; [{\"id\":\"old\",\"kind\":\"link\",\"square\":9,\"remaining\":1,\"side\":\"white\",\"summonedPly\":0}]; grain20 each",
+    "sequence": [
+      "Start explicitly in local mode on the stated position",
+      "Propose {\"type\":\"summon\",\"kind\":\"leaper\",\"to\":14,\"duration\":5}",
+      "Open menu, toggle quality and reduced motion, close menu",
+      "Check exact preview/feedback without changing state",
+      "Confirm twice synchronously; settle microtasks"
+    ],
+    "assertion": "One action only; cost10, reward0, expires[\"old\"]; all rules and state preserved across preview",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I027",
+    "category": "shared simulation and interrupted decision",
+    "persona": "Strategy player comparing alternatives",
+    "task": "moving a defender exposes the core after shared simulation: replace pass and rebuild proposal",
+    "precondition": "Fixture ply 20; [{\"id\":\"m\",\"kind\":\"carver\",\"square\":4,\"remaining\":3,\"side\":\"white\",\"summonedPly\":0},{\"id\":\"block\",\"kind\":\"bastion\",\"square\":10,\"remaining\":4,\"side\":\"white\",\"summonedPly\":0},{\"id\":\"enemy\",\"kind\":\"carver\",\"square\":11,\"remaining\":3,\"side\":\"black\",\"summonedPly\":0}]; grain20 each",
+    "sequence": [
+      "Start explicitly in local mode on the stated position",
+      "Propose {\"type\":\"move\",\"pieceId\":\"m\",\"to\":12}",
+      "Back, visibly cancel the current selection, prepare Pass, Back, rebuild the original action",
+      "Check exact preview/feedback without changing state",
+      "Confirm twice synchronously; settle microtasks"
+    ],
+    "assertion": "One action only; cost0, reward0, expires[]; all rules and state preserved across preview",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I028",
+    "category": "shared simulation and interrupted decision",
+    "persona": "Mobile player using reduced-motion controls",
+    "task": "moving a defender exposes the core after shared simulation: keep preview through quality/motion changes",
+    "precondition": "Fixture ply 20; [{\"id\":\"m\",\"kind\":\"carver\",\"square\":4,\"remaining\":3,\"side\":\"white\",\"summonedPly\":0},{\"id\":\"block\",\"kind\":\"bastion\",\"square\":10,\"remaining\":4,\"side\":\"white\",\"summonedPly\":0},{\"id\":\"enemy\",\"kind\":\"carver\",\"square\":11,\"remaining\":3,\"side\":\"black\",\"summonedPly\":0}]; grain20 each",
+    "sequence": [
+      "Start explicitly in local mode on the stated position",
+      "Propose {\"type\":\"move\",\"pieceId\":\"m\",\"to\":12}",
+      "Open menu, toggle quality and reduced motion, close menu",
+      "Check exact preview/feedback without changing state",
+      "Confirm twice synchronously; settle microtasks"
+    ],
+    "assertion": "One action only; cost0, reward0, expires[]; all rules and state preserved across preview",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I029",
+    "category": "shared simulation and interrupted decision",
+    "persona": "Strategy player comparing alternatives",
+    "task": "capturing the only attacker clears the tactical warning: replace pass and rebuild proposal",
+    "precondition": "Fixture ply 20; [{\"id\":\"m\",\"kind\":\"carver\",\"square\":19,\"remaining\":4,\"side\":\"white\",\"summonedPly\":0},{\"id\":\"enemy\",\"kind\":\"carver\",\"square\":11,\"remaining\":4,\"side\":\"black\",\"summonedPly\":0}]; grain20 each",
+    "sequence": [
+      "Start explicitly in local mode on the stated position",
+      "Propose {\"type\":\"move\",\"pieceId\":\"m\",\"to\":11}",
+      "Back, visibly cancel the current selection, prepare Pass, Back, rebuild the original action",
+      "Check exact preview/feedback without changing state",
+      "Confirm twice synchronously; settle microtasks"
+    ],
+    "assertion": "One action only; cost0, reward12, expires[]; all rules and state preserved across preview",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I030",
+    "category": "shared simulation and interrupted decision",
+    "persona": "Mobile player using reduced-motion controls",
+    "task": "capturing the only attacker clears the tactical warning: keep preview through quality/motion changes",
+    "precondition": "Fixture ply 20; [{\"id\":\"m\",\"kind\":\"carver\",\"square\":19,\"remaining\":4,\"side\":\"white\",\"summonedPly\":0},{\"id\":\"enemy\",\"kind\":\"carver\",\"square\":11,\"remaining\":4,\"side\":\"black\",\"summonedPly\":0}]; grain20 each",
+    "sequence": [
+      "Start explicitly in local mode on the stated position",
+      "Propose {\"type\":\"move\",\"pieceId\":\"m\",\"to\":11}",
+      "Open menu, toggle quality and reduced motion, close menu",
+      "Check exact preview/feedback without changing state",
+      "Confirm twice synchronously; settle microtasks"
+    ],
+    "assertion": "One action only; cost0, reward12, expires[]; all rules and state preserved across preview",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I031",
+    "category": "CPU failure and state generations",
+    "persona": "Novice waiting for their first CPU reply",
+    "task": "Worker constructor denial while inspecting a one-turn human contract",
+    "precondition": "Fresh explicit CPU match; human Carver1 on square14",
+    "sequence": [
+      "Start CPU and purchase Carver1",
+      "Inspect human piece before worker reply",
+      "Deliver Worker constructor denial",
+      "After recovery inject extra old error/reply; wait past timeout",
+      "Human Pass and verify normal next turn"
+    ],
+    "assertion": "One current CPU action completes, old messages cannot advance it again, UI unlocks and no timer/Worker accumulation survives Home",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I032",
+    "category": "CPU failure and state generations",
+    "persona": "Long-session player returning after a pause",
+    "task": "Worker constructor denial after pause/resume and a stale worker failure",
+    "precondition": "Fresh explicit CPU match; human Carver1 on square14",
+    "sequence": [
+      "Start CPU and purchase Carver1",
+      "Create worker; Home; stale error/reply; Resume",
+      "Deliver Worker constructor denial",
+      "After recovery inject extra old error/reply; wait past timeout",
+      "Human Pass and verify normal next turn"
+    ],
+    "assertion": "One current CPU action completes, old messages cannot advance it again, UI unlocks and no timer/Worker accumulation survives Home",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I033",
+    "category": "CPU failure and state generations",
+    "persona": "Novice waiting for their first CPU reply",
+    "task": "Worker postMessage structured-clone failure while inspecting a one-turn human contract",
+    "precondition": "Fresh explicit CPU match; human Carver1 on square14",
+    "sequence": [
+      "Start CPU and purchase Carver1",
+      "Inspect human piece before worker reply",
+      "Deliver Worker postMessage structured-clone failure",
+      "After recovery inject extra old error/reply; wait past timeout",
+      "Human Pass and verify normal next turn"
+    ],
+    "assertion": "One current CPU action completes, old messages cannot advance it again, UI unlocks and no timer/Worker accumulation survives Home",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I034",
+    "category": "CPU failure and state generations",
+    "persona": "Long-session player returning after a pause",
+    "task": "Worker postMessage structured-clone failure after pause/resume and a stale worker failure",
+    "precondition": "Fresh explicit CPU match; human Carver1 on square14",
+    "sequence": [
+      "Start CPU and purchase Carver1",
+      "Create worker; Home; stale error/reply; Resume",
+      "Deliver Worker postMessage structured-clone failure",
+      "After recovery inject extra old error/reply; wait past timeout",
+      "Human Pass and verify normal next turn"
+    ],
+    "assertion": "One current CPU action completes, old messages cannot advance it again, UI unlocks and no timer/Worker accumulation survives Home",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I035",
+    "category": "CPU failure and state generations",
+    "persona": "Novice waiting for their first CPU reply",
+    "task": "missing message data while inspecting a one-turn human contract",
+    "precondition": "Fresh explicit CPU match; human Carver1 on square14",
+    "sequence": [
+      "Start CPU and purchase Carver1",
+      "Inspect human piece before worker reply",
+      "Deliver missing message data",
+      "After recovery inject extra old error/reply; wait past timeout",
+      "Human Pass and verify normal next turn"
+    ],
+    "assertion": "One current CPU action completes, old messages cannot advance it again, UI unlocks and no timer/Worker accumulation survives Home",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I036",
+    "category": "CPU failure and state generations",
+    "persona": "Long-session player returning after a pause",
+    "task": "missing message data after pause/resume and a stale worker failure",
+    "precondition": "Fresh explicit CPU match; human Carver1 on square14",
+    "sequence": [
+      "Start CPU and purchase Carver1",
+      "Create worker; Home; stale error/reply; Resume",
+      "Deliver missing message data",
+      "After recovery inject extra old error/reply; wait past timeout",
+      "Human Pass and verify normal next turn"
+    ],
+    "assertion": "One current CPU action completes, old messages cannot advance it again, UI unlocks and no timer/Worker accumulation survives Home",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I037",
+    "category": "CPU failure and state generations",
+    "persona": "Novice waiting for their first CPU reply",
+    "task": "array instead of action while inspecting a one-turn human contract",
+    "precondition": "Fresh explicit CPU match; human Carver1 on square14",
+    "sequence": [
+      "Start CPU and purchase Carver1",
+      "Inspect human piece before worker reply",
+      "Deliver array instead of action",
+      "After recovery inject extra old error/reply; wait past timeout",
+      "Human Pass and verify normal next turn"
+    ],
+    "assertion": "One current CPU action completes, old messages cannot advance it again, UI unlocks and no timer/Worker accumulation survives Home",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I038",
+    "category": "CPU failure and state generations",
+    "persona": "Long-session player returning after a pause",
+    "task": "array instead of action after pause/resume and a stale worker failure",
+    "precondition": "Fresh explicit CPU match; human Carver1 on square14",
+    "sequence": [
+      "Start CPU and purchase Carver1",
+      "Create worker; Home; stale error/reply; Resume",
+      "Deliver array instead of action",
+      "After recovery inject extra old error/reply; wait past timeout",
+      "Human Pass and verify normal next turn"
+    ],
+    "assertion": "One current CPU action completes, old messages cannot advance it again, UI unlocks and no timer/Worker accumulation survives Home",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I039",
+    "category": "CPU failure and state generations",
+    "persona": "Novice waiting for their first CPU reply",
+    "task": "unknown action discriminator while inspecting a one-turn human contract",
+    "precondition": "Fresh explicit CPU match; human Carver1 on square14",
+    "sequence": [
+      "Start CPU and purchase Carver1",
+      "Inspect human piece before worker reply",
+      "Deliver unknown action discriminator",
+      "After recovery inject extra old error/reply; wait past timeout",
+      "Human Pass and verify normal next turn"
+    ],
+    "assertion": "One current CPU action completes, old messages cannot advance it again, UI unlocks and no timer/Worker accumulation survives Home",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I040",
+    "category": "CPU failure and state generations",
+    "persona": "Long-session player returning after a pause",
+    "task": "unknown action discriminator after pause/resume and a stale worker failure",
+    "precondition": "Fresh explicit CPU match; human Carver1 on square14",
+    "sequence": [
+      "Start CPU and purchase Carver1",
+      "Create worker; Home; stale error/reply; Resume",
+      "Deliver unknown action discriminator",
+      "After recovery inject extra old error/reply; wait past timeout",
+      "Human Pass and verify normal next turn"
+    ],
+    "assertion": "One current CPU action completes, old messages cannot advance it again, UI unlocks and no timer/Worker accumulation survives Home",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I041",
+    "category": "CPU failure and state generations",
+    "persona": "Novice waiting for their first CPU reply",
+    "task": "expired or absent mover identifier while inspecting a one-turn human contract",
+    "precondition": "Fresh explicit CPU match; human Carver1 on square14",
+    "sequence": [
+      "Start CPU and purchase Carver1",
+      "Inspect human piece before worker reply",
+      "Deliver expired or absent mover identifier",
+      "After recovery inject extra old error/reply; wait past timeout",
+      "Human Pass and verify normal next turn"
+    ],
+    "assertion": "One current CPU action completes, old messages cannot advance it again, UI unlocks and no timer/Worker accumulation survives Home",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I042",
+    "category": "CPU failure and state generations",
+    "persona": "Long-session player returning after a pause",
+    "task": "expired or absent mover identifier after pause/resume and a stale worker failure",
+    "precondition": "Fresh explicit CPU match; human Carver1 on square14",
+    "sequence": [
+      "Start CPU and purchase Carver1",
+      "Create worker; Home; stale error/reply; Resume",
+      "Deliver expired or absent mover identifier",
+      "After recovery inject extra old error/reply; wait past timeout",
+      "Human Pass and verify normal next turn"
+    ],
+    "assertion": "One current CPU action completes, old messages cannot advance it again, UI unlocks and no timer/Worker accumulation survives Home",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I043",
+    "category": "CPU failure and state generations",
+    "persona": "Novice waiting for their first CPU reply",
+    "task": "attempt to move the human piece while inspecting a one-turn human contract",
+    "precondition": "Fresh explicit CPU match; human Carver1 on square14",
+    "sequence": [
+      "Start CPU and purchase Carver1",
+      "Inspect human piece before worker reply",
+      "Deliver attempt to move the human piece",
+      "After recovery inject extra old error/reply; wait past timeout",
+      "Human Pass and verify normal next turn"
+    ],
+    "assertion": "One current CPU action completes, old messages cannot advance it again, UI unlocks and no timer/Worker accumulation survives Home",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I044",
+    "category": "CPU failure and state generations",
+    "persona": "Long-session player returning after a pause",
+    "task": "attempt to move the human piece after pause/resume and a stale worker failure",
+    "precondition": "Fresh explicit CPU match; human Carver1 on square14",
+    "sequence": [
+      "Start CPU and purchase Carver1",
+      "Create worker; Home; stale error/reply; Resume",
+      "Deliver attempt to move the human piece",
+      "After recovery inject extra old error/reply; wait past timeout",
+      "Human Pass and verify normal next turn"
+    ],
+    "assertion": "One current CPU action completes, old messages cannot advance it again, UI unlocks and no timer/Worker accumulation survives Home",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I045",
+    "category": "CPU failure and state generations",
+    "persona": "Novice waiting for their first CPU reply",
+    "task": "central-rank summon while inspecting a one-turn human contract",
+    "precondition": "Fresh explicit CPU match; human Carver1 on square14",
+    "sequence": [
+      "Start CPU and purchase Carver1",
+      "Inspect human piece before worker reply",
+      "Deliver central-rank summon",
+      "After recovery inject extra old error/reply; wait past timeout",
+      "Human Pass and verify normal next turn"
+    ],
+    "assertion": "One current CPU action completes, old messages cannot advance it again, UI unlocks and no timer/Worker accumulation survives Home",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I046",
+    "category": "CPU failure and state generations",
+    "persona": "Long-session player returning after a pause",
+    "task": "central-rank summon after pause/resume and a stale worker failure",
+    "precondition": "Fresh explicit CPU match; human Carver1 on square14",
+    "sequence": [
+      "Start CPU and purchase Carver1",
+      "Create worker; Home; stale error/reply; Resume",
+      "Deliver central-rank summon",
+      "After recovery inject extra old error/reply; wait past timeout",
+      "Human Pass and verify normal next turn"
+    ],
+    "assertion": "One current CPU action completes, old messages cannot advance it again, UI unlocks and no timer/Worker accumulation survives Home",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I047",
+    "category": "CPU failure and state generations",
+    "persona": "Novice waiting for their first CPU reply",
+    "task": "out-of-contract duration while inspecting a one-turn human contract",
+    "precondition": "Fresh explicit CPU match; human Carver1 on square14",
+    "sequence": [
+      "Start CPU and purchase Carver1",
+      "Inspect human piece before worker reply",
+      "Deliver out-of-contract duration",
+      "After recovery inject extra old error/reply; wait past timeout",
+      "Human Pass and verify normal next turn"
+    ],
+    "assertion": "One current CPU action completes, old messages cannot advance it again, UI unlocks and no timer/Worker accumulation survives Home",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I048",
+    "category": "CPU failure and state generations",
+    "persona": "Long-session player returning after a pause",
+    "task": "out-of-contract duration after pause/resume and a stale worker failure",
+    "precondition": "Fresh explicit CPU match; human Carver1 on square14",
+    "sequence": [
+      "Start CPU and purchase Carver1",
+      "Create worker; Home; stale error/reply; Resume",
+      "Deliver out-of-contract duration",
+      "After recovery inject extra old error/reply; wait past timeout",
+      "Human Pass and verify normal next turn"
+    ],
+    "assertion": "One current CPU action completes, old messages cannot advance it again, UI unlocks and no timer/Worker accumulation survives Home",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I049",
+    "category": "CPU failure and state generations",
+    "persona": "Novice waiting for their first CPU reply",
+    "task": "timeout followed by late error and legal reply while inspecting a one-turn human contract",
+    "precondition": "Fresh explicit CPU match; human Carver1 on square14",
+    "sequence": [
+      "Start CPU and purchase Carver1",
+      "Inspect human piece before worker reply",
+      "Deliver timeout followed by late error and legal reply",
+      "After recovery inject extra old error/reply; wait past timeout",
+      "Human Pass and verify normal next turn"
+    ],
+    "assertion": "One current CPU action completes, old messages cannot advance it again, UI unlocks and no timer/Worker accumulation survives Home",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  },
+  {
+    "id": "R200-I050",
+    "category": "CPU failure and state generations",
+    "persona": "Long-session player returning after a pause",
+    "task": "timeout followed by late error and legal reply after pause/resume and a stale worker failure",
+    "precondition": "Fresh explicit CPU match; human Carver1 on square14",
+    "sequence": [
+      "Start CPU and purchase Carver1",
+      "Create worker; Home; stale error/reply; Resume",
+      "Deliver timeout followed by late error and legal reply",
+      "After recovery inject extra old error/reply; wait past timeout",
+      "Human Pass and verify normal next turn"
+    ],
+    "assertion": "One current CPU action completes, old messages cannot advance it again, UI unlocks and no timer/Worker accumulation survives Home",
+    "limitations": "Automated jsdom + real controller/engine; fixture initialization, Worker and time injected. No actual phone, screen reader, GPU, browser layout, or CPU device-performance evidence."
+  }
+]
